@@ -31,7 +31,6 @@ const clearBtn = document.querySelector<HTMLButtonElement>("[data-clear-text]");
 const downloadBtn = document.querySelector<HTMLButtonElement>("[data-download]");
 const uploadBtn = document.querySelector<HTMLButtonElement>("[data-upload-btn]");
 const sidebarUploadInput = document.querySelector<HTMLInputElement>("[data-sidebar-upload-input]");
-const randomBtn = document.querySelector<HTMLButtonElement>("[data-random-btn]");
 const sidebarGrid = document.querySelector<HTMLElement>("[data-sidebar-grid]");
 
 function loadImage(src: string): Promise<HTMLImageElement> {
@@ -283,7 +282,7 @@ const bottomHandleEl = document.querySelector<HTMLElement>('[data-handle="bottom
 if (topHandleEl) attachHandleDrag(topHandleEl, state.top);
 if (bottomHandleEl) attachHandleDrag(bottomHandleEl, state.bottom);
 
-// ---- Sidebar: template grid, upload, random ----
+// ---- Sidebar: template grid, upload ----
 
 sidebarGrid?.addEventListener("click", (e) => {
 	const btn = (e.target as HTMLElement).closest<HTMLButtonElement>("[data-template-id]");
@@ -305,12 +304,6 @@ function handleUploadedFile(file: File | undefined | null) {
 
 uploadBtn?.addEventListener("click", () => sidebarUploadInput?.click());
 sidebarUploadInput?.addEventListener("change", () => handleUploadedFile(sidebarUploadInput.files?.[0]));
-
-randomBtn?.addEventListener("click", () => {
-	const pool = TEMPLATES.filter((t) => t.id !== state.activeTemplateId);
-	const pick = shuffle(pool)[0] ?? TEMPLATES[0];
-	setImage(pick.src, pick.id);
-});
 
 // ---- Shuffle the sidebar grid order on load ----
 if (sidebarGrid) {
