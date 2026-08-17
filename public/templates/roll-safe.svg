@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="675" viewBox="0 0 900 675" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="900" height="675" fill="#fafafa"/>
+  <rect x="0" y="520" width="900" height="155" fill="#e5e5e5"/>
+
+  <!-- Character pointing to head -->
+  <g transform="translate(300, 140)">
+    <!-- Leather jacket body -->
+    <rect x="50" y="240" width="220" height="260" rx="40" fill="#171717"/>
+    <path d="M120,240 L160,340 L200,240" fill="#7928ca"/>
+
+    <!-- Head turned slightly, smiling knowingly -->
+    <circle cx="160" cy="150" r="85" fill="#ffffff" stroke="#171717" stroke-width="5"/>
+    <!-- Knowing smile -->
+    <path d="M135,175 Q165,200 195,170" fill="none" stroke="#171717" stroke-width="5" stroke-linecap="round"/>
+    <!-- Eyes squinting/wink -->
+    <path d="M130,135 Q145,125 160,135" fill="none" stroke="#171717" stroke-width="4" stroke-linecap="round"/>
+    <path d="M175,135 Q190,125 205,135" fill="none" stroke="#171717" stroke-width="4" stroke-linecap="round"/>
+
+    <!-- Arm coming up to tap temple -->
+    <path d="M70,360 Q10,240 75,150" fill="none" stroke="#171717" stroke-width="32" stroke-linecap="round"/>
+    <!-- Pointing finger touching temple -->
+    <circle cx="80" cy="145" r="22" fill="#ffffff" stroke="#171717" stroke-width="4"/>
+  </g>
+</svg>

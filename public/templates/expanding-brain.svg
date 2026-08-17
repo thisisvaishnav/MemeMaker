@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="675" viewBox="0 0 900 675" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="900" height="675" fill="#fafafa"/>
+  <line x1="0" y1="168" x2="900" y2="168" stroke="#171717" stroke-width="4"/>
+  <line x1="0" y1="337" x2="900" y2="337" stroke="#171717" stroke-width="4"/>
+  <line x1="0" y1="506" x2="900" y2="506" stroke="#171717" stroke-width="4"/>
+  <line x1="450" y1="0" x2="450" y2="675" stroke="#171717" stroke-width="4"/>
+
+  <!-- Tier 1: Small brain -->
+  <g transform="translate(675, 84)">
+    <circle cx="0" cy="0" r="40" fill="#ebebeb" stroke="#171717" stroke-width="3"/>
+    <circle cx="-12" cy="-6" r="14" fill="#a1a1a1"/>
+    <circle cx="12" cy="-6" r="14" fill="#a1a1a1"/>
+  </g>
+
+  <!-- Tier 2: Glowing brain -->
+  <g transform="translate(675, 252)">
+    <circle cx="0" cy="0" r="52" fill="#50e3c2" opacity="0.3"/>
+    <circle cx="0" cy="0" r="42" fill="#50e3c2" stroke="#171717" stroke-width="3"/>
+    <path d="M-20,-10 Q0,-30 20,-10 Q30,10 0,25 Q-30,10 -20,-10" fill="#29bc9b"/>
+  </g>
+
+  <!-- Tier 3: Cosmic brain -->
+  <g transform="translate(675, 421)">
+    <circle cx="0" cy="0" r="65" fill="#0070f3" opacity="0.25"/>
+    <circle cx="0" cy="0" r="46" fill="#0070f3" stroke="#171717" stroke-width="3"/>
+    <path d="M-30,-20 L30,20 M-30,20 L30,-20" stroke="#ffffff" stroke-width="3"/>
+    <circle cx="0" cy="0" r="16" fill="#ffffff"/>
+  </g>
+
+  <!-- Tier 4: Transcendent galaxy brain -->
+  <g transform="translate(675, 590)">
+    <circle cx="0" cy="0" r="75" fill="#ff0080" opacity="0.25"/>
+    <circle cx="0" cy="0" r="50" fill="#7928ca" stroke="#171717" stroke-width="3"/>
+    <circle cx="0" cy="0" r="28" fill="#ff0080"/>
+    <circle cx="0" cy="0" r="12" fill="#f9cb28"/>
+    <line x1="-60" y1="0" x2="60" y2="0" stroke="#f9cb28" stroke-width="3"/>
+    <line x1="0" y1="-60" x2="0" y2="60" stroke="#f9cb28" stroke-width="3"/>
+  </g>
+</svg>

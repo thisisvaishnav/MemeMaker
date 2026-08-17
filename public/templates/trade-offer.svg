@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="675" viewBox="0 0 900 675" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="900" height="675" fill="#171717"/>
+
+  <!-- Glowing banner header -->
+  <rect x="150" y="40" width="600" height="70" rx="35" fill="#ee0000"/>
+  <text x="450" y="85" font-family="'JetBrains Mono', monospace" font-weight="bold" font-size="32" fill="#ffffff" text-anchor="middle">TRADE OFFER</text>
+
+  <!-- Left: You Receive column -->
+  <rect x="60" y="140" width="360" height="480" rx="20" fill="#262626" stroke="#404040" stroke-width="2"/>
+  <text x="240" y="190" font-family="system-ui, sans-serif" font-weight="bold" font-size="24" fill="#50e3c2" text-anchor="middle">i receive:</text>
+
+  <!-- Right: I Receive column -->
+  <rect x="480" y="140" width="360" height="480" rx="20" fill="#262626" stroke="#404040" stroke-width="2"/>
+  <text x="660" y="190" font-family="system-ui, sans-serif" font-weight="bold" font-size="24" fill="#f9cb28" text-anchor="middle">you receive:</text>
+
+  <!-- Suit silhouette in center background -->
+  <g transform="translate(450, 420)" opacity="0.85">
+    <path d="M-60,150 L-40,0 L0,40 L40,0 L60,150 Z" fill="#ffffff"/>
+    <polygon points="0,40 -15,10 15,10" fill="#ee0000"/>
+    <polygon points="0,40 -12,120 0,140 12,120" fill="#ee0000"/>
+    <!-- Hands spread forward -->
+    <circle cx="-120" cy="80" r="30" fill="#f5f5f5" stroke="#171717" stroke-width="4"/>
+    <circle cx="120" cy="80" r="30" fill="#f5f5f5" stroke="#171717" stroke-width="4"/>
+  </g>
+</svg>

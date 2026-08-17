@@ -96,8 +96,60 @@ function initUploadDropzone() {
 	});
 }
 
+/** Dynamically ensures latest templates from /api/templates are rendered on the landing page. */
+async function fetchTemplatesForLanding() {
+	try {
+		const res = await fetch("/api/templates");
+		if (!res.ok) return;
+		const data = await res.json();
+		if (data.success && Array.isArray(data.templates) && data.templates.length > 0) {
+			const gridEl = document.querySelector<HTMLElement>("[data-template-grid]");
+			if (!gridEl) return;
+			const existingCards = gridEl.querySelectorAll("a[href^='/edit?template=']");
+			if (existingCards.length === data.templates.length) return;
+
+			gridEl.innerHTML = "";
+			data.templates.forEach((t: any) => {
+				const a = document.createElement("a");
+				a.href = `/edit?template=${encodeURIComponent(t.id)}`;
+				a.className =
+					"group relative flex flex-col overflow-hidden rounded-2xl border border-white/90 bg-white/70 p-1.5 shadow-2xs backdrop-blur-xs transition-all duration-200 hover:-translate-y-1 hover:scale-[1.03] hover:border-black/20 hover:bg-white hover:shadow-md focus-visible:ring-2 focus-visible:ring-link focus-visible:outline-none";
+				a.setAttribute("aria-label", `Use ${t.name} meme template`);
+
+				const wrap = document.createElement("div");
+				wrap.className = "relative aspect-4/3 w-full overflow-hidden rounded-xl bg-canvas-soft-2";
+
+				const img = document.createElement("img");
+				img.src = t.thumbnailUrl || t.originalUrl || t.src || "";
+				img.alt = t.name;
+				img.width = t.width || 900;
+				img.height = t.height || 675;
+				img.className = "h-full w-full object-cover transition-transform duration-300 group-hover:scale-105";
+				img.loading = "lazy";
+
+				const overlay = document.createElement("div");
+				overlay.className =
+					"absolute inset-0 flex items-center justify-center bg-ink/35 opacity-0 backdrop-blur-[1px] transition-opacity duration-200 group-hover:opacity-100";
+				overlay.innerHTML = `<span class="rounded-full bg-white px-2.5 py-1 text-[11px] font-bold text-ink shadow-sm">Use</span>`;
+
+				wrap.appendChild(img);
+				wrap.appendChild(overlay);
+
+				const titleDiv = document.createElement("div");
+				titleDiv.className = "px-1 pt-1.5 pb-0.5 text-center";
+				titleDiv.innerHTML = `<p class="truncate text-[11.5px] font-semibold text-ink/90 group-hover:text-ink">${t.name}</p>`;
+
+				a.appendChild(wrap);
+				a.appendChild(titleDiv);
+				gridEl.appendChild(a);
+			});
+		}
+	} catch (err) {
+		console.warn("Could not fetch /api/templates for landing page:", err);
+	}
+}
+
 shuffleHeroSlots();
 initTemplatesGrid();
 initUploadDropzone();
-
-
+fetchTemplatesForLanding();

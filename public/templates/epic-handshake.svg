@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="675" viewBox="0 0 900 675" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="900" height="675" fill="#fafafa"/>
+
+  <!-- Left Arm (Arnold) in red sleeve -->
+  <g transform="translate(100, 320)">
+    <rect x="-80" y="0" width="220" height="120" rx="30" fill="#ee0000" transform="rotate(25)"/>
+    <rect x="80" y="10" width="220" height="95" rx="35" fill="#f5d0b5" stroke="#171717" stroke-width="5" transform="rotate(15)"/>
+  </g>
+
+  <!-- Right Arm (Carl Weathers) in green sleeve -->
+  <g transform="translate(800, 320)">
+    <rect x="-140" y="0" width="220" height="120" rx="30" fill="#22c55e" transform="rotate(-25)"/>
+    <rect x="-300" y="10" width="220" height="95" rx="35" fill="#c48a60" stroke="#171717" stroke-width="5" transform="rotate(-15)"/>
+  </g>
+
+  <!-- Clasping muscular hands in center with sweat/gleam -->
+  <g transform="translate(450, 340)">
+    <!-- Interlocked fingers -->
+    <ellipse cx="0" cy="0" rx="65" ry="50" fill="#e0ab85" stroke="#171717" stroke-width="6"/>
+    <line x1="-30" y1="-20" x2="-30" y2="20" stroke="#171717" stroke-width="5" stroke-linecap="round"/>
+    <line x1="0" y1="-25" x2="0" y2="25" stroke="#171717" stroke-width="5" stroke-linecap="round"/>
+    <line x1="30" y1="-20" x2="30" y2="20" stroke="#171717" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- Impact gleam lines -->
+    <line x1="0" y1="-75" x2="0" y2="-60" stroke="#f9cb28" stroke-width="4" stroke-linecap="round"/>
+    <line x1="50" y1="-60" x2="40" y2="-50" stroke="#f9cb28" stroke-width="4" stroke-linecap="round"/>
+    <line x1="-50" y1="-60" x2="-40" y2="-50" stroke="#f9cb28" stroke-width="4" stroke-linecap="round"/>
+  </g>
+</svg>

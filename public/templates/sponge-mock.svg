@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="675" viewBox="0 0 900 675" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="900" height="675" fill="#fef08a"/>
+
+  <!-- Mocking Sponge posture -->
+  <g transform="translate(250, 120)">
+    <!-- Yellow sponge body bent over -->
+    <path d="M100,160 Q200,100 320,180 Q360,340 280,420 Q160,450 80,360 Q60,240 100,160 Z" fill="#fde047" stroke="#171717" stroke-width="6"/>
+
+    <!-- Pores / dots -->
+    <circle cx="140" cy="220" r="14" fill="#ca8a04" opacity="0.5"/>
+    <circle cx="280" cy="260" r="20" fill="#ca8a04" opacity="0.5"/>
+    <circle cx="200" cy="360" r="16" fill="#ca8a04" opacity="0.5"/>
+
+    <!-- Big cartoon eyes at weird angles -->
+    <circle cx="160" cy="190" r="42" fill="#ffffff" stroke="#171717" stroke-width="4"/>
+    <circle cx="160" cy="190" r="14" fill="#0070f3"/>
+    <circle cx="160" cy="190" r="6" fill="#171717"/>
+
+    <circle cx="250" cy="210" r="38" fill="#ffffff" stroke="#171717" stroke-width="4"/>
+    <circle cx="245" cy="210" r="12" fill="#0070f3"/>
+    <circle cx="245" cy="210" r="5" fill="#171717"/>
+
+    <!-- Buck teeth beak mocking face -->
+    <path d="M170,250 Q210,290 250,250" fill="#ffffff" stroke="#171717" stroke-width="4"/>
+    <rect x="195" y="258" width="14" height="20" fill="#ffffff" stroke="#171717" stroke-width="3"/>
+    <rect x="211" y="258" width="14" height="20" fill="#ffffff" stroke="#171717" stroke-width="3"/>
+
+    <!-- Clucking arms / wings folded back -->
+    <path d="M80,300 Q0,260 40,200" fill="none" stroke="#171717" stroke-width="20" stroke-linecap="round"/>
+    <path d="M300,320 Q380,280 340,220" fill="none" stroke="#171717" stroke-width="20" stroke-linecap="round"/>
+  </g>
+</svg>

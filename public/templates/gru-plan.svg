@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="675" viewBox="0 0 900 675" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="900" height="675" fill="#f5f5f5"/>
+  <line x1="0" y1="337.5" x2="900" y2="337.5" stroke="#171717" stroke-width="5"/>
+  <line x1="450" y1="0" x2="450" y2="675" stroke="#171717" stroke-width="5"/>
+
+  <!-- Presentation easel in each quadrant -->
+  <rect x="250" y="40" width="160" height="220" rx="10" fill="#ffffff" stroke="#171717" stroke-width="4"/>
+  <rect x="700" y="40" width="160" height="220" rx="10" fill="#ffffff" stroke="#171717" stroke-width="4"/>
+  <rect x="250" y="380" width="160" height="220" rx="10" fill="#ffffff" stroke="#171717" stroke-width="4"/>
+  <rect x="700" y="380" width="160" height="220" rx="10" fill="#ffffff" stroke="#171717" stroke-width="4"/>
+
+  <!-- Panel 1: Confident Gru -->
+  <g transform="translate(60, 60)">
+    <circle cx="100" cy="110" r="50" fill="#ffffff" stroke="#171717" stroke-width="4"/>
+    <polygon points="110,110 160,115 110,120" fill="#171717"/>
+    <rect x="50" y="160" width="100" height="110" rx="20" fill="#171717"/>
+    <path d="M120 180 L230 140" stroke="#171717" stroke-width="16" stroke-linecap="round"/>
+  </g>
+
+  <!-- Panel 2: Excited Gru -->
+  <g transform="translate(510, 60)">
+    <circle cx="100" cy="110" r="50" fill="#ffffff" stroke="#171717" stroke-width="4"/>
+    <polygon points="110,110 160,115 110,120" fill="#171717"/>
+    <rect x="50" y="160" width="100" height="110" rx="20" fill="#171717"/>
+    <path d="M120 170 L230 120" stroke="#171717" stroke-width="16" stroke-linecap="round"/>
+  </g>
+
+  <!-- Panel 3: Shocked realization -->
+  <g transform="translate(60, 400)">
+    <circle cx="100" cy="110" r="50" fill="#ffffff" stroke="#171717" stroke-width="4"/>
+    <polygon points="110,110 155,115 110,120" fill="#171717"/>
+    <circle cx="95" cy="100" r="8" fill="#171717"/>
+    <rect x="50" y="160" width="100" height="110" rx="20" fill="#171717"/>
+    <path d="M120 200 L210 180" stroke="#171717" stroke-width="16" stroke-linecap="round"/>
+  </g>
+
+  <!-- Panel 4: Looking back in disbelief -->
+  <g transform="translate(510, 400)">
+    <circle cx="100" cy="110" r="50" fill="#ffffff" stroke="#171717" stroke-width="4"/>
+    <polygon points="120,110 165,115 120,120" fill="#171717"/>
+    <circle cx="115" cy="100" r="8" fill="#171717"/>
+    <rect x="50" y="160" width="100" height="110" rx="20" fill="#171717"/>
+    <path d="M120 200 L210 180" stroke="#171717" stroke-width="16" stroke-linecap="round"/>
+  </g>
+</svg>
