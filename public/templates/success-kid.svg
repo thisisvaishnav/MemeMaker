@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="675" viewBox="0 0 900 675" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="900" height="675" fill="#bae6fd"/>
+  <!-- Beach sand -->
+  <path d="M0,480 Q450,420 900,480 L900,675 L0,675 Z" fill="#fde047"/>
+
+  <!-- Toddler with determined fist -->
+  <g transform="translate(320, 160)">
+    <!-- Green and white tee shirt -->
+    <rect x="40" y="240" width="180" height="200" rx="30" fill="#22c55e"/>
+    <rect x="40" y="240" width="180" height="50" rx="10" fill="#ffffff"/>
+
+    <!-- Determined face -->
+    <circle cx="130" cy="150" r="90" fill="#ffffff" stroke="#171717" stroke-width="5"/>
+    <!-- Determined squint eyes -->
+    <path d="M95,140 L115,148" stroke="#171717" stroke-width="5" stroke-linecap="round"/>
+    <path d="M165,140 L145,148" stroke="#171717" stroke-width="5" stroke-linecap="round"/>
+    <!-- Clenched mouth -->
+    <line x1="110" y1="185" x2="150" y2="185" stroke="#171717" stroke-width="6" stroke-linecap="round"/>
+
+    <!-- Clenched fist in foreground full of sand -->
+    <circle cx="60" cy="270" r="42" fill="#ffffff" stroke="#171717" stroke-width="5"/>
+    <circle cx="45" cy="255" r="10" fill="#fde047"/>
+    <circle cx="68" cy="265" r="8" fill="#fde047"/>
+    <circle cx="55" cy="285" r="9" fill="#fde047"/>
+  </g>
+</svg>

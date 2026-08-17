@@ -1,6 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { TEMPLATES } from "../lib/templates";
+import { getTemplates } from "../lib/template-service";
+
+export const prerender = false;
+
+const templates = await getTemplates({ allowFallback: true });
 ---
 
 <Layout title="Editor — MemeMaker">
@@ -189,18 +193,19 @@ import { TEMPLATES } from "../lib/templates";
                     class="grid grid-cols-4 gap-2 sm:grid-cols-3 lg:grid-cols-2"
                 >
                     {
-                        TEMPLATES.map((t) => (
+                        templates.map((t) => (
                             <button
                                 type="button"
                                 data-template-id={t.id}
-                                data-template-src={t.src}
+                                data-template-src={t.originalUrl || t.src}
+                                data-template-thumb={t.thumbnailUrl || t.src}
                                 data-template-width={t.width}
                                 data-template-height={t.height}
                                 class="template-thumb overflow-hidden rounded-md shadow-level-1 ring-2 ring-transparent transition-[box-shadow,transform] outline-none hover:shadow-level-2 focus-visible:ring-link"
                                 aria-label={`Use ${t.name} template`}
                             >
                                 <img
-                                    src={t.src}
+                                    src={t.thumbnailUrl || t.src}
                                     alt={t.name}
                                     width={t.width}
                                     height={t.height}

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="675" viewBox="0 0 900 675" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="900" height="675" fill="#fafafa"/>
+  <line x1="0" y1="168" x2="900" y2="168" stroke="#171717" stroke-width="4"/>
+  <line x1="0" y1="337" x2="900" y2="337" stroke="#171717" stroke-width="4"/>
+  <line x1="0" y1="506" x2="900" y2="506" stroke="#171717" stroke-width="4"/>
+  <line x1="450" y1="0" x2="450" y2="675" stroke="#171717" stroke-width="4"/>
+
+  <!-- Tier 1: Normal face -->
+  <g transform="translate(675, 84)">
+    <circle cx="0" cy="0" r="45" fill="#ffffff" stroke="#171717" stroke-width="3"/>
+    <circle cx="-14" cy="-5" r="5" fill="#171717"/>
+    <circle cx="14" cy="-5" r="5" fill="#171717"/>
+    <line x1="-12" y1="15" x2="12" y2="15" stroke="#171717" stroke-width="3"/>
+  </g>
+
+  <!-- Tier 2: White face paint -->
+  <g transform="translate(675, 252)">
+    <circle cx="0" cy="0" r="45" fill="#f0f9ff" stroke="#171717" stroke-width="3"/>
+    <circle cx="-14" cy="-5" r="5" fill="#171717"/>
+    <circle cx="14" cy="-5" r="5" fill="#171717"/>
+    <!-- Blue eye diamonds -->
+    <polygon points="-14,-15 -20,-5 -14,5 -8,-5" fill="#0070f3"/>
+    <polygon points="14,-15 8,-5 14,5 20,-5" fill="#0070f3"/>
+  </g>
+
+  <!-- Tier 3: Adding red nose and smile -->
+  <g transform="translate(675, 421)">
+    <circle cx="0" cy="0" r="45" fill="#f0f9ff" stroke="#171717" stroke-width="3"/>
+    <polygon points="-14,-15 -20,-5 -14,5 -8,-5" fill="#0070f3"/>
+    <polygon points="14,-15 8,-5 14,5 20,-5" fill="#0070f3"/>
+    <!-- Red Nose -->
+    <circle cx="0" cy="3" r="10" fill="#ee0000"/>
+    <!-- Red Smile -->
+    <path d="M-20,18 Q0,32 20,18" fill="none" stroke="#ee0000" stroke-width="4"/>
+  </g>
+
+  <!-- Tier 4: Full rainbow clown wig & makeup -->
+  <g transform="translate(675, 590)">
+    <!-- Rainbow Afro Wig -->
+    <circle cx="-35" cy="-25" r="22" fill="#ff0080"/>
+    <circle cx="0" cy="-42" r="22" fill="#f9cb28"/>
+    <circle cx="35" cy="-25" r="22" fill="#50e3c2"/>
+    <circle cx="0" cy="0" r="45" fill="#f0f9ff" stroke="#171717" stroke-width="3"/>
+    <polygon points="-14,-15 -20,-5 -14,5 -8,-5" fill="#0070f3"/>
+    <polygon points="14,-15 8,-5 14,5 20,-5" fill="#0070f3"/>
+    <circle cx="0" cy="3" r="12" fill="#ee0000"/>
+    <path d="M-22,18 Q0,35 22,18" fill="none" stroke="#ee0000" stroke-width="5"/>
+  </g>
+</svg>

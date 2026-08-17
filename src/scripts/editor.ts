@@ -1,4 +1,4 @@
-import { TEMPLATES, shuffle } from "../lib/templates";
+import { TEMPLATES, shuffle, type MemeTemplate } from "../lib/templates";
 
 const UPLOAD_STORAGE_KEY = "mememaker.upload";
 const MAX_CANVAS_DIMENSION = 1400;
@@ -18,6 +18,8 @@ const state = {
 	bottom: { text: "", yPercent: 92 } satisfies CaptionState,
 };
 
+let templatesList: MemeTemplate[] = [];
+
 const canvas = document.querySelector<HTMLCanvasElement>("[data-canvas]");
 const canvasWrap = document.querySelector<HTMLElement>("[data-canvas-wrap]");
 const ctx = canvas?.getContext("2d") ?? null;
@@ -34,36 +36,99 @@ const sidebarUploadInput = document.querySelector<HTMLInputElement>("[data-sideb
 const randomBtn = document.querySelector<HTMLButtonElement>("[data-random-btn]");
 const sidebarGrid = document.querySelector<HTMLElement>("[data-sidebar-grid]");
 
+function getTemplatesFromDOM(): MemeTemplate[] {
+	if (!sidebarGrid) return [];
+	const buttons = Array.from(sidebarGrid.querySelectorAll<HTMLButtonElement>("[data-template-id]"));
+	return buttons
+		.map((btn) => ({
+			id: btn.dataset.templateId || "",
+			name: btn.querySelector("img")?.alt || btn.dataset.templateId || "",
+			originalUrl: btn.dataset.templateSrc || "",
+			thumbnailUrl: btn.dataset.templateThumb || btn.dataset.templateSrc || "",
+			src: btn.dataset.templateSrc || "",
+			width: Number(btn.dataset.templateWidth) || 900,
+			height: Number(btn.dataset.templateHeight) || 675,
+		}))
+		.filter((t) => t.id && (t.originalUrl || t.src));
+}
+
+function renderSidebarTemplates(templates: MemeTemplate[]) {
+	if (!sidebarGrid) return;
+	const existingButtons = sidebarGrid.querySelectorAll<HTMLButtonElement>("[data-template-id]");
+	if (existingButtons.length === templates.length && existingButtons.length > 0) {
+		updateActiveThumb();
+		return;
+	}
+
+	sidebarGrid.innerHTML = "";
+	templates.forEach((t) => {
+		const btn = document.createElement("button");
+		btn.type = "button";
+		btn.dataset.templateId = t.id;
+		btn.dataset.templateSrc = t.originalUrl || t.src || "";
+		btn.dataset.templateThumb = t.thumbnailUrl || t.src || "";
+		btn.dataset.templateWidth = String(t.width || 900);
+		btn.dataset.templateHeight = String(t.height || 675);
+		btn.className =
+			"template-thumb overflow-hidden rounded-md shadow-level-1 ring-2 ring-transparent transition-[box-shadow,transform] outline-none hover:shadow-level-2 focus-visible:ring-link";
+		btn.setAttribute("aria-label", `Use ${t.name} template`);
+
+		const img = document.createElement("img");
+		img.src = t.thumbnailUrl || t.src || "";
+		img.alt = t.name;
+		img.width = t.width || 900;
+		img.height = t.height || 675;
+		img.className = "aspect-4/3 w-full object-cover";
+		img.loading = "lazy";
+
+		btn.appendChild(img);
+		sidebarGrid.appendChild(btn);
+	});
+
+	updateActiveThumb();
+}
+
 function loadImage(src: string): Promise<HTMLImageElement> {
 	return new Promise((resolve, reject) => {
 		const img = new Image();
+		img.crossOrigin = "anonymous";
 		img.onload = () => resolve(img);
-		img.onerror = reject;
+		img.onerror = () => {
+			// If crossOrigin fails, retry without crossOrigin
+			const fallbackImg = new Image();
+			fallbackImg.onload = () => resolve(fallbackImg);
+			fallbackImg.onerror = reject;
+			fallbackImg.src = src;
+		};
 		img.src = src;
 	});
 }
 
 async function setImage(src: string, templateId: string | null) {
-	const img = await loadImage(src);
-	state.image = img;
-	state.activeTemplateId = templateId;
+	try {
+		const img = await loadImage(src);
+		state.image = img;
+		state.activeTemplateId = templateId;
 
-	let width = img.naturalWidth;
-	let height = img.naturalHeight;
-	if (width > MAX_CANVAS_DIMENSION || height > MAX_CANVAS_DIMENSION) {
-		const scale = MAX_CANVAS_DIMENSION / Math.max(width, height);
-		width = Math.round(width * scale);
-		height = Math.round(height * scale);
+		let width = img.naturalWidth;
+		let height = img.naturalHeight;
+		if (width > MAX_CANVAS_DIMENSION || height > MAX_CANVAS_DIMENSION) {
+			const scale = MAX_CANVAS_DIMENSION / Math.max(width, height);
+			width = Math.round(width * scale);
+			height = Math.round(height * scale);
+		}
+
+		if (canvas) {
+			canvas.width = width;
+			canvas.height = height;
+		}
+
+		updateActiveThumb();
+		draw();
+		syncUrl();
+	} catch (err) {
+		console.error("Failed to load image into editor:", src, err);
 	}
-
-	if (canvas) {
-		canvas.width = width;
-		canvas.height = height;
-	}
-
-	updateActiveThumb();
-	draw();
-	syncUrl();
 }
 
 function syncUrl() {
@@ -307,20 +372,51 @@ uploadBtn?.addEventListener("click", () => sidebarUploadInput?.click());
 sidebarUploadInput?.addEventListener("change", () => handleUploadedFile(sidebarUploadInput.files?.[0]));
 
 randomBtn?.addEventListener("click", () => {
-	const pool = TEMPLATES.filter((t) => t.id !== state.activeTemplateId);
-	const pick = shuffle(pool)[0] ?? TEMPLATES[0];
-	setImage(pick.src, pick.id);
+	if (templatesList.length === 0) templatesList = getTemplatesFromDOM();
+	const pool = templatesList.filter((t) => t.id !== state.activeTemplateId);
+	const pick = shuffle(pool)[0] ?? templatesList[0] ?? TEMPLATES[0];
+	if (pick) {
+		setImage(pick.originalUrl || pick.src || "", pick.id);
+	}
 });
 
-// ---- Shuffle the sidebar grid order on load ----
-if (sidebarGrid) {
-	const cards = Array.from(sidebarGrid.children);
-	shuffle(cards).forEach((card) => sidebarGrid.appendChild(card));
+async function fetchTemplatesFromApi(requestedTemplateId?: string | null) {
+	try {
+		const res = await fetch("/api/templates");
+		if (!res.ok) return;
+		const data = await res.json();
+		if (data.success && Array.isArray(data.templates) && data.templates.length > 0) {
+			const previousCount = templatesList.length;
+			templatesList = data.templates;
+
+			if (previousCount !== templatesList.length || previousCount === 0) {
+				renderSidebarTemplates(templatesList);
+			}
+
+			if (requestedTemplateId && state.activeTemplateId !== requestedTemplateId) {
+				const match = templatesList.find((t) => t.id === requestedTemplateId);
+				if (match) {
+					await setImage(match.originalUrl || match.src || "", match.id);
+				}
+			} else if (!state.image && templatesList.length > 0) {
+				const first = templatesList[0];
+				await setImage(first.originalUrl || first.src || "", first.id);
+			}
+		}
+	} catch (err) {
+		console.warn("Could not fetch /api/templates:", err);
+	}
 }
 
 // ---- Initial load: from ?template=, ?upload=1, or default ----
 
 async function init() {
+	// First initialize templates from rendered DOM
+	templatesList = getTemplatesFromDOM();
+	if (templatesList.length === 0) {
+		templatesList = [...TEMPLATES];
+	}
+
 	const params = new URLSearchParams(window.location.search);
 	const templateId = params.get("template");
 	const isUpload = params.get("upload") === "1";
@@ -334,12 +430,25 @@ async function init() {
 		}
 		if (stored) {
 			await setImage(stored, null);
+			fetchTemplatesFromApi();
 			return;
 		}
 	}
 
-	const match = TEMPLATES.find((t) => t.id === templateId) ?? TEMPLATES[0];
-	await setImage(match.src, match.id);
+	// Shuffle the sidebar grid order on load if elements are already in DOM
+	if (sidebarGrid) {
+		const cards = Array.from(sidebarGrid.children);
+		shuffle(cards).forEach((card) => sidebarGrid.appendChild(card));
+	}
+
+	const match = (templateId ? templatesList.find((t) => t.id === templateId) : null) ?? templatesList[0];
+	if (match) {
+		await setImage(match.originalUrl || match.src || "", match.id);
+	}
+
+	// Asynchronously ensure fresh templates from Spaces/API
+	await fetchTemplatesFromApi(templateId);
 }
 
 init();
+

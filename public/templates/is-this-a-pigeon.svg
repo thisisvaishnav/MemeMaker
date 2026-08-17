@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="675" viewBox="0 0 900 675" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="900" height="675" fill="#e0f7f4"/>
+  <rect x="0" y="520" width="900" height="155" fill="#50e3c2" opacity="0.4"/>
+
+  <!-- Character on Left -->
+  <g transform="translate(180, 200)">
+    <!-- Body -->
+    <rect x="60" y="160" width="130" height="180" rx="30" fill="#0070f3"/>
+    <!-- Head -->
+    <circle cx="125" cy="110" r="55" fill="#ffffff" stroke="#171717" stroke-width="4"/>
+    <!-- Glasses -->
+    <rect x="100" y="95" width="28" height="24" rx="4" fill="none" stroke="#171717" stroke-width="4"/>
+    <rect x="135" y="95" width="28" height="24" rx="4" fill="none" stroke="#171717" stroke-width="4"/>
+    <line x1="128" y1="107" x2="135" y2="107" stroke="#171717" stroke-width="4"/>
+    <!-- Outstretched Arm pointing right -->
+    <path d="M190 220 Q280 180 340 160" fill="none" stroke="#171717" stroke-width="26" stroke-linecap="round"/>
+    <circle cx="345" cy="158" r="16" fill="#ffffff" stroke="#171717" stroke-width="4"/>
+  </g>
+
+  <!-- Butterfly / Pigeon on Right -->
+  <g transform="translate(680, 220)">
+    <circle cx="0" cy="0" r="12" fill="#171717"/>
+    <!-- Wings -->
+    <path d="M0,0 Q-40,-60 -20,-80 Q10,-70 0,0" fill="#ff0080" stroke="#171717" stroke-width="3"/>
+    <path d="M0,0 Q40,-60 20,-80 Q-10,-70 0,0" fill="#f9cb28" stroke="#171717" stroke-width="3"/>
+    <path d="M0,0 Q-35,45 -15,55 Q5,40 0,0" fill="#f9cb28" stroke="#171717" stroke-width="3"/>
+    <path d="M0,0 Q35,45 15,55 Q-5,40 0,0" fill="#ff0080" stroke="#171717" stroke-width="3"/>
+  </g>
+</svg>

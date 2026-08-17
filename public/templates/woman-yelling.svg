@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="675" viewBox="0 0 900 675" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="446" height="675" fill="#fdf2f8"/>
+  <rect x="454" y="0" width="446" height="675" fill="#f0fdf4"/>
+  <rect x="446" y="0" width="8" height="675" fill="#171717"/>
+
+  <!-- Left: Woman yelling and crying -->
+  <g transform="translate(60, 160)">
+    <!-- Body -->
+    <rect x="80" y="200" width="130" height="180" rx="30" fill="#ff0080"/>
+    <!-- Head -->
+    <circle cx="145" cy="140" r="60" fill="#ffffff" stroke="#171717" stroke-width="4"/>
+    <!-- Blonde hair -->
+    <path d="M75 140 Q145 60 215 140 Q225 240 200 280" fill="none" stroke="#f9cb28" stroke-width="24" stroke-linecap="round"/>
+    <!-- Mouth yelling open -->
+    <ellipse cx="150" cy="160" rx="22" ry="16" fill="#171717"/>
+    <!-- Eyes crying -->
+    <path d="M125 125 L140 135" stroke="#171717" stroke-width="4" stroke-linecap="round"/>
+    <path d="M175 125 L160 135" stroke="#171717" stroke-width="4" stroke-linecap="round"/>
+    <!-- Pointing finger -->
+    <path d="M190 260 L320 220" stroke="#171717" stroke-width="20" stroke-linecap="round"/>
+    <circle cx="330" cy="216" r="14" fill="#ffffff" stroke="#171717" stroke-width="4"/>
+  </g>
+
+  <!-- Right: Cat confused at dining table -->
+  <g transform="translate(520, 200)">
+    <!-- Table with salad -->
+    <rect x="20" y="320" width="300" height="24" rx="8" fill="#171717"/>
+    <ellipse cx="160" cy="315" rx="55" ry="16" fill="#50e3c2"/>
+    <!-- Cat head -->
+    <polygon points="110,170 85,100 145,135" fill="#ffffff" stroke="#171717" stroke-width="4"/>
+    <polygon points="210,170 235,100 175,135" fill="#ffffff" stroke="#171717" stroke-width="4"/>
+    <circle cx="160" cy="200" r="68" fill="#ffffff" stroke="#171717" stroke-width="4"/>
+    <!-- Cat face eyes wide confused -->
+    <ellipse cx="138" cy="190" rx="10" ry="14" fill="#171717"/>
+    <ellipse cx="182" cy="190" rx="10" ry="14" fill="#171717"/>
+    <polygon points="155,212 165,212 160,220" fill="#ff0080"/>
+    <path d="M148 226 Q160 232 172 226" fill="none" stroke="#171717" stroke-width="3"/>
+  </g>
+</svg>

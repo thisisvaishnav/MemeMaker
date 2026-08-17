@@ -1,30 +1,35 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { TEMPLATES } from "../lib/templates";
+import { getTemplates } from "../lib/template-service";
 
-// 7 floating template card positions matching the reference design:
-// 1. top-left card
-// 2. upper-left/mid card
-// 3. top-right card
-// 4. right-middle card
-// 5. bottom-left card
-// 6. bottom-right card
-// 7. lower-right card
+export const prerender = false;
+
+const templates = await getTemplates({ allowFallback: true });
+const first = templates[0] || {
+    id: "drake",
+    name: "Drake",
+    originalUrl: "/templates/drake.svg",
+    thumbnailUrl: "/templates/drake.svg",
+    width: 900,
+    height: 675,
+};
+
+// 7 floating template card positions matching the reference design (desktop perimeter):
 const heroSlots = [
     // 1. top-left card
-    { ...TEMPLATES[0], pos: "left-[3%] top-[8%] w-40 xl:w-46 -rotate-6" },
+    { ...(templates[0] || first), pos: "left-[3%] top-[8%] w-36 xl:w-44 -rotate-6" },
     // 2. upper-left/mid card
-    { ...TEMPLATES[1], pos: "left-[2%] top-[38%] w-38 xl:w-44 rotate-6" },
+    { ...(templates[1] || first), pos: "left-[2%] top-[34%] w-34 xl:w-42 rotate-6" },
     // 3. bottom-left card
-    { ...TEMPLATES[4], pos: "left-[3%] bottom-[8%] w-40 xl:w-46 -rotate-3" },
+    { ...(templates[4] || first), pos: "left-[2%] bottom-[12%] w-36 xl:w-44 -rotate-3" },
     // 4. top-right card
-    { ...TEMPLATES[2], pos: "right-[3%] top-[8%] w-40 xl:w-46 rotate-6" },
+    { ...(templates[2] || first), pos: "right-[3%] top-[8%] w-36 xl:w-44 rotate-6" },
     // 5. right-middle card
-    { ...TEMPLATES[3], pos: "right-[2%] top-[38%] w-38 xl:w-44 -rotate-6" },
+    { ...(templates[3] || first), pos: "right-[2%] top-[34%] w-34 xl:w-42 -rotate-6" },
     // 6. bottom-right card
-    { ...TEMPLATES[5], pos: "right-[3%] bottom-[8%] w-40 xl:w-46 rotate-3" },
+    { ...(templates[5] || first), pos: "right-[2%] bottom-[12%] w-36 xl:w-44 rotate-3" },
     // 7. lower-right card
-    { ...TEMPLATES[6], pos: "right-[16%] bottom-[4%] w-36 xl:w-40 -rotate-6" },
+    { ...(templates[6] || first), pos: "right-[14%] bottom-[4%] w-32 xl:w-38 -rotate-6" },
 ];
 ---
 
@@ -34,7 +39,7 @@ const heroSlots = [
     showFooter={false}
 >
     <main
-        class="relative flex min-h-screen w-full flex-col justify-between overflow-hidden px-4 pb-8 pt-[28px] sm:px-6"
+        class="relative flex min-h-screen w-full flex-col overflow-hidden px-4 pb-14 pt-[28px] sm:px-6"
     >
         <!-- Full-viewport pastel mesh gradient backdrop -->
         <div
@@ -76,7 +81,7 @@ const heroSlots = [
                 aria-label="Primary Navigation"
             >
                 <a
-                    href="/edit"
+                    href="#popular-templates"
                     class="text-sm font-medium text-body/90 transition-colors hover:text-ink"
                 >
                     Templates
@@ -98,7 +103,7 @@ const heroSlots = [
             </a>
         </header>
 
-        <!-- 8. FLOATING IMAGES: 7 scattered template cards around the hero (desktop) -->
+        <!-- FLOATING IMAGES: scattered template cards around the hero (desktop) -->
         <div
             class="pointer-events-none absolute inset-0 hidden lg:block"
             aria-hidden="false"
@@ -114,7 +119,7 @@ const heroSlots = [
                     >
                         <span class="relative block overflow-hidden rounded-2xl border border-white/80 bg-white/40 p-1 shadow-lg shadow-black/8 backdrop-blur-sm">
                             <img
-                                src={slot.src}
+                                src={slot.thumbnailUrl || slot.src}
                                 alt={slot.name}
                                 width={slot.width}
                                 height={slot.height}
@@ -132,48 +137,25 @@ const heroSlots = [
             }
         </div>
 
-        <!-- Mobile template preview strip (mobile only) -->
+        <!-- HERO HEADER CONTENT -->
         <div
-            class="-mx-4 flex gap-3 overflow-x-auto px-4 pb-2 pt-4 lg:hidden"
-            aria-label="Meme templates"
+            class="relative z-10 mx-auto flex w-full max-w-[640px] flex-col items-center pt-[42px] text-center sm:pt-[54px]"
         >
-            {
-                TEMPLATES.slice(0, 7).map((t) => (
-                    <a
-                        href={`/edit?template=${t.id}`}
-                        class="block shrink-0 overflow-hidden rounded-xl border border-white/70 bg-white/40 p-0.5 shadow-md backdrop-blur-sm"
-                    >
-                        <img
-                            src={t.src}
-                            alt={t.name}
-                            width={t.width}
-                            height={t.height}
-                            class="aspect-4/3 w-28 rounded-lg object-cover"
-                        />
-                    </a>
-                ))
-            }
-        </div>
-
-        <!-- 2. HERO POSITION: Centered hero content below header -->
-        <div
-            class="relative z-10 mx-auto my-auto flex w-full max-w-[640px] flex-col items-center pt-[50px] text-center sm:pt-[65px]"
-        >
-            <!-- 3. BADGE: ~70px below header -->
+            <!-- BADGE: ~70px below header -->
             <span
                 class="inline-flex items-center rounded-full border border-black/5 bg-white/75 px-4 py-1.5 font-mono text-xs font-medium text-body shadow-sm backdrop-blur-md"
             >
                 free · no sign-up · no watermark
             </span>
 
-            <!-- 4. TITLE: Large bold/black heading, ~48-52px on desktop -->
+            <!-- TITLE: Large bold/black heading -->
             <h1
-                class="mt-4 text-[40px] font-extrabold leading-[1.1] tracking-[-0.035em] text-ink sm:text-[48px] md:text-[52px]"
+                class="mt-4 text-[38px] font-extrabold leading-[1.1] tracking-[-0.035em] text-ink sm:text-[46px] md:text-[50px]"
             >
                 Make a meme in seconds.
             </h1>
 
-            <!-- 5. SUBTITLE: Center aligned, max-width ~600px, line-height ~1.5 -->
+            <!-- SUBTITLE: Center aligned -->
             <p
                 class="mt-3.5 max-w-[600px] text-base leading-[1.5] text-body sm:text-[17px]"
             >
@@ -182,9 +164,9 @@ const heroSlots = [
                 uploaded to a server.
             </p>
 
-            <!-- 6. BUTTONS: Horizontal & centered -->
-            <div class="mt-7 flex flex-wrap items-center justify-center gap-3.5">
-                <!-- Start Creating (black background, magic wand/sparkle icon) -->
+            <!-- BUTTONS: Horizontal & centered -->
+            <div class="mt-6 flex flex-wrap items-center justify-center gap-3 sm:mt-7">
+                <!-- Start Creating (black background, sparkle icon) -->
                 <a
                     href="/edit"
                     class="inline-flex h-12 items-center justify-center gap-2.5 rounded-full bg-ink px-7 text-sm font-semibold text-white shadow-md shadow-black/10 outline-none transition-all hover:scale-[1.02] hover:bg-black/85 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-link focus-visible:ring-offset-2 sm:text-base"
@@ -213,7 +195,7 @@ const heroSlots = [
 
                 <!-- Browse Templates (white background, grid icon) -->
                 <a
-                    href="/edit"
+                    href="#popular-templates"
                     class="inline-flex h-12 items-center justify-center gap-2.5 rounded-full border border-black/10 bg-white/90 px-7 text-sm font-semibold text-ink shadow-sm backdrop-blur-sm outline-none transition-all hover:scale-[1.02] hover:border-black/20 hover:bg-white active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-link sm:text-base"
                 >
                     <svg
@@ -235,47 +217,142 @@ const heroSlots = [
                     <span>Browse Templates</span>
                 </a>
             </div>
-
-            <!-- 7. UPLOAD BOX: ~570px wide, ~175px tall, dashed border, translucent glass -->
-            <div
-                data-dropzone
-                tabindex="0"
-                role="button"
-                aria-label="Upload an image to start editing"
-                class="group mt-8 flex h-[175px] w-full max-w-[570px] cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-black/15 bg-white/55 px-6 py-6 text-center shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-md outline-none transition-all hover:border-ink hover:bg-white/75 focus-visible:ring-2 focus-visible:ring-link sm:mt-9"
-            >
-                <svg
-                    width="28"
-                    height="28"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    class="text-mute transition-colors group-hover:text-ink"
-                    aria-hidden="true"
-                >
-                    <path
-                        d="M12 16V4M12 4L7 9M12 4L17 9M5 16v2a2 2 0 002 2h10a2 2 0 002-2v-2"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"></path>
-                </svg>
-                <p class="text-[15px] font-semibold text-ink">
-                    Drop an image, or click to upload
-                </p>
-                <p class="font-mono text-xs text-mute">
-                    PNG, JPG, WEBP – processed locally
-                </p>
-                <input
-                    data-dropzone-input
-                    type="file"
-                    accept="image/*"
-                    class="hidden"
-                />
-            </div>
         </div>
 
-        <!-- Spacer for balanced vertical layout -->
-        <div class="h-2 sm:h-4" aria-hidden="true"></div>
+        <!-- MAIN CREATION AREA (Expanded Upload Box + Popular Templates Grid) -->
+        <section
+            class="relative z-10 mx-auto mt-8 w-full max-w-[1040px] sm:mt-10"
+            aria-label="Create meme workspace"
+        >
+            <div
+                class="flex flex-col gap-7 rounded-3xl border border-white/80 bg-white/70 p-5 shadow-[0_12px_40px_rgb(0,0,0,0.06)] backdrop-blur-xl sm:p-7 md:p-8"
+            >
+                <!-- 1. EXPANDED UPLOAD BOX -->
+                <div
+                    data-dropzone
+                    tabindex="0"
+                    role="button"
+                    aria-label="Upload your own image to start editing"
+                    class="group relative flex min-h-[200px] w-full cursor-pointer flex-col items-center justify-center gap-3.5 rounded-2xl border-2 border-dashed border-black/15 bg-white/60 px-6 py-8 text-center shadow-sm backdrop-blur-md outline-none transition-all duration-200 hover:border-ink hover:bg-white/85 hover:shadow-md focus-visible:ring-2 focus-visible:ring-link sm:min-h-[230px] sm:py-10"
+                >
+                    <div
+                        class="flex h-13 w-13 items-center justify-center rounded-2xl border border-black/5 bg-white/90 text-ink shadow-sm transition-transform duration-200 group-hover:scale-110 group-hover:bg-ink group-hover:text-white"
+                    >
+                        <svg
+                            width="26"
+                            height="26"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            aria-hidden="true"
+                        >
+                            <path
+                                d="M12 16V4M12 4L7 9M12 4L17 9M5 16v2a2 2 0 002 2h10a2 2 0 002-2v-2"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            ></path>
+                        </svg>
+                    </div>
+
+                    <div class="space-y-1">
+                        <p class="text-[17px] font-bold tracking-tight text-ink sm:text-[19px]">
+                            Upload your own image / drag & drop
+                        </p>
+                        <p class="text-xs text-body sm:text-sm font-medium">
+                            Drop any picture here or click to browse from your device
+                        </p>
+                    </div>
+
+                    <div class="inline-flex items-center gap-1.5 rounded-full border border-black/5 bg-white/80 px-3.5 py-1 font-mono text-[11px] text-mute shadow-2xs">
+                        <span>PNG · JPG · WEBP · GIF</span>
+                        <span class="text-black/30">·</span>
+                        <span>processed locally</span>
+                    </div>
+
+                    <input
+                        data-dropzone-input
+                        type="file"
+                        accept="image/*"
+                        class="hidden"
+                    />
+                </div>
+
+                <!-- 2. POPULAR TEMPLATES SECTION -->
+                <div id="popular-templates" class="flex flex-col gap-3.5 scroll-mt-24">
+                    <!-- Section header -->
+                    <div class="flex items-center justify-between px-1">
+                        <div class="flex items-center gap-2.5">
+                            <h2 class="text-base font-bold tracking-tight text-ink sm:text-lg">
+                                Popular Templates
+                            </h2>
+                            <span
+                                class="inline-flex items-center rounded-full border border-black/5 bg-white px-2.5 py-0.5 font-mono text-[11px] font-semibold text-body shadow-2xs"
+                            >
+                                {templates.length} templates
+                            </span>
+                        </div>
+
+                        <a
+                            href="/edit"
+                            class="inline-flex items-center gap-1 text-xs font-semibold text-ink/80 transition-colors hover:text-ink sm:text-sm"
+                        >
+                            <span>Open in editor</span>
+                            <svg
+                                width="14"
+                                height="14"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path d="M5 12h14M12 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <!-- Dense Responsive Grid: Desktop 6-8 per row, Tablet 4-6, Mobile 2-3 -->
+                    <div
+                        data-template-grid
+                        class="grid grid-cols-2 gap-2.5 min-[480px]:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 sm:gap-3"
+                    >
+                        {
+                            templates.map((t) => (
+                                <a
+                                    href={`/edit?template=${t.id}`}
+                                    class="group relative flex flex-col overflow-hidden rounded-2xl border border-white/90 bg-white/70 p-1.5 shadow-2xs backdrop-blur-xs transition-all duration-200 hover:-translate-y-1 hover:scale-[1.03] hover:border-black/20 hover:bg-white hover:shadow-md focus-visible:ring-2 focus-visible:ring-link focus-visible:outline-none"
+                                    aria-label={`Use ${t.name} meme template`}
+                                >
+                                    <div class="relative aspect-4/3 w-full overflow-hidden rounded-xl bg-canvas-soft-2">
+                                        <img
+                                            src={t.thumbnailUrl || t.originalUrl || t.src}
+                                            alt={t.name}
+                                            width={t.width || 900}
+                                            height={t.height || 675}
+                                            class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                            loading="lazy"
+                                        />
+                                        <div class="absolute inset-0 flex items-center justify-center bg-ink/35 opacity-0 backdrop-blur-[1px] transition-opacity duration-200 group-hover:opacity-100">
+                                            <span class="rounded-full bg-white px-2.5 py-1 text-[11px] font-bold text-ink shadow-sm">
+                                                Use
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="px-1 pt-1.5 pb-0.5 text-center">
+                                        <p class="truncate text-[11.5px] font-semibold text-ink/90 group-hover:text-ink">
+                                            {t.name}
+                                        </p>
+                                    </div>
+                                </a>
+                            ))
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <script src="../scripts/landing.ts"></script>
