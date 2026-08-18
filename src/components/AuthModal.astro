@@ -1,0 +1,287 @@
+---
+// AuthModal.astro - Supabase Authentication Modal (Google & Email/Password)
+---
+
+<div
+    id="auth-modal"
+    class="fixed inset-0 z-100 hidden items-center justify-center p-4 backdrop-blur-md bg-black/60 transition-opacity duration-200"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="auth-modal-title"
+>
+    <div
+        class="relative w-full max-w-md rounded-2xl border border-white/10 bg-[#131316] p-6 shadow-2xl transition-all sm:p-8"
+    >
+        <!-- Close Button -->
+        <button
+            id="close-auth-modal"
+            type="button"
+            class="absolute right-4 top-4 rounded-full p-2 text-mute transition-colors hover:bg-white/5 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            aria-label="Close modal"
+        >
+            <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+
+        <!-- Header -->
+        <div class="mb-6 text-center">
+            <h2 id="auth-modal-title" class="text-xl font-bold tracking-tight text-ink">
+                Welcome to MemeMaker
+            </h2>
+            <p class="mt-1 text-sm text-body" id="auth-modal-subtitle">
+                Sign in to save, publish, and manage your custom memes
+            </p>
+        </div>
+
+        <!-- Mode Toggle (Sign In / Sign Up) -->
+        <div class="mb-5 flex rounded-lg bg-black/40 p-1 border border-white/5">
+            <button
+                type="button"
+                id="tab-signin"
+                class="flex-1 rounded-md py-1.5 text-xs font-semibold text-ink bg-white/10 shadow-sm transition-all"
+            >
+                Sign In
+            </button>
+            <button
+                type="button"
+                id="tab-signup"
+                class="flex-1 rounded-md py-1.5 text-xs font-semibold text-mute hover:text-ink transition-all"
+            >
+                Create Account
+            </button>
+        </div>
+
+        <!-- Google OAuth Button -->
+        <button
+            type="button"
+            id="btn-google-auth"
+            class="flex w-full items-center justify-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-medium text-ink transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        >
+            <svg class="h-4 w-4" viewBox="0 0 24 24">
+                <path
+                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                    fill="#4285F4"
+                ></path>
+                <path
+                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                    fill="#34A853"
+                ></path>
+                <path
+                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
+                    fill="#FBBC05"
+                ></path>
+                <path
+                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
+                    fill="#EA4335"
+                ></path>
+            </svg>
+            Continue with Google
+        </button>
+
+        <!-- Divider -->
+        <div class="my-5 flex items-center gap-3">
+            <div class="h-px flex-1 bg-white/10"></div>
+            <span class="font-mono text-xs text-mute uppercase">or with email</span>
+            <div class="h-px flex-1 bg-white/10"></div>
+        </div>
+
+        <!-- Form Message / Alert -->
+        <div
+            id="auth-alert"
+            class="mb-4 hidden rounded-lg border border-red-500/20 bg-red-500/10 px-3.5 py-2.5 text-xs text-red-300"
+        >
+        </div>
+
+        <!-- Email & Password Form -->
+        <form id="auth-form" class="space-y-3.5">
+            <div>
+                <label for="auth-email" class="mb-1 block text-xs font-medium text-body">
+                    Email address
+                </label>
+                <input
+                    type="email"
+                    id="auth-email"
+                    required
+                    placeholder="you@example.com"
+                    class="w-full rounded-xl border border-white/10 bg-black/40 px-3.5 py-2 text-sm text-ink placeholder:text-mute focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                />
+            </div>
+
+            <div>
+                <label for="auth-password" class="mb-1 block text-xs font-medium text-body">
+                    Password
+                </label>
+                <input
+                    type="password"
+                    id="auth-password"
+                    required
+                    minlength="6"
+                    placeholder="••••••••"
+                    class="w-full rounded-xl border border-white/10 bg-black/40 px-3.5 py-2 text-sm text-ink placeholder:text-mute focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                />
+            </div>
+
+            <button
+                type="submit"
+                id="btn-auth-submit"
+                class="mt-2 flex w-full items-center justify-center rounded-pill bg-primary py-2.5 text-sm font-semibold text-on-primary transition hover:opacity-90 disabled:opacity-50"
+            >
+                <span id="btn-auth-text">Sign In</span>
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+    import { supabase } from "../lib/supabase";
+
+    let currentMode: "signin" | "signup" = "signin";
+
+    const modal = document.getElementById("auth-modal");
+    const closeBtn = document.getElementById("close-auth-modal");
+    const tabSignIn = document.getElementById("tab-signin");
+    const tabSignUp = document.getElementById("tab-signup");
+    const form = document.getElementById("auth-form") as HTMLFormElement | null;
+    const emailInput = document.getElementById("auth-email") as HTMLInputElement | null;
+    const passwordInput = document.getElementById("auth-password") as HTMLInputElement | null;
+    const submitBtn = document.getElementById("btn-auth-submit") as HTMLButtonElement | null;
+    const submitText = document.getElementById("btn-auth-text");
+    const googleBtn = document.getElementById("btn-google-auth");
+    const alertBox = document.getElementById("auth-alert");
+
+    function showAlert(msg: string, isSuccess = false) {
+        if (!alertBox) return;
+        alertBox.textContent = msg;
+        alertBox.className = `mb-4 block rounded-lg px-3.5 py-2.5 text-xs ${
+            isSuccess
+                ? "border border-green-500/20 bg-green-500/10 text-green-300"
+                : "border border-red-500/20 bg-red-500/10 text-red-300"
+        }`;
+    }
+
+    function clearAlert() {
+        if (!alertBox) return;
+        alertBox.className = "hidden";
+        alertBox.textContent = "";
+    }
+
+    function setMode(mode: "signin" | "signup") {
+        currentMode = mode;
+        clearAlert();
+        if (mode === "signin") {
+            tabSignIn?.classList.add("bg-white/10", "text-ink", "shadow-sm");
+            tabSignIn?.classList.remove("text-mute");
+            tabSignUp?.classList.remove("bg-white/10", "text-ink", "shadow-sm");
+            tabSignUp?.classList.add("text-mute");
+            if (submitText) submitText.textContent = "Sign In";
+        } else {
+            tabSignUp?.classList.add("bg-white/10", "text-ink", "shadow-sm");
+            tabSignUp?.classList.remove("text-mute");
+            tabSignIn?.classList.remove("bg-white/10", "text-ink", "shadow-sm");
+            tabSignIn?.classList.add("text-mute");
+            if (submitText) submitText.textContent = "Create Account";
+        }
+    }
+
+    // Modal Visibility Functions
+    window.openAuthModal = (defaultMode = "signin") => {
+        setMode(defaultMode);
+        modal?.classList.remove("hidden");
+        modal?.classList.add("flex");
+        emailInput?.focus();
+    };
+
+    window.closeAuthModal = () => {
+        modal?.classList.add("hidden");
+        modal?.classList.remove("flex");
+        clearAlert();
+    };
+
+    closeBtn?.addEventListener("click", () => window.closeAuthModal());
+    modal?.addEventListener("click", (e) => {
+        if (e.target === modal) window.closeAuthModal();
+    });
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && !modal?.classList.contains("hidden")) {
+            window.closeAuthModal();
+        }
+    });
+
+    tabSignIn?.addEventListener("click", () => setMode("signin"));
+    tabSignUp?.addEventListener("click", () => setMode("signup"));
+
+    // Google OAuth Login
+    googleBtn?.addEventListener("click", async () => {
+        clearAlert();
+        try {
+            const { error } = await supabase.auth.signInWithOAuth({
+                provider: "google",
+                options: {
+                    redirectTo: window.location.origin,
+                },
+            });
+            if (error) throw error;
+        } catch (err: any) {
+            showAlert(err.message || "Failed to initiate Google sign-in.");
+        }
+    });
+
+    // Email / Password Submit
+    form?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        clearAlert();
+
+        const email = emailInput?.value.trim();
+        const password = passwordInput?.value;
+
+        if (!email || !password) return;
+
+        if (submitBtn) submitBtn.disabled = true;
+
+        try {
+            if (currentMode === "signin") {
+                const { error } = await supabase.auth.signInWithPassword({
+                    email,
+                    password,
+                });
+                if (error) throw error;
+                window.closeAuthModal();
+            } else {
+                const { error, data } = await supabase.auth.signUp({
+                    email,
+                    password,
+                });
+                if (error) throw error;
+                if (data.session) {
+                    window.closeAuthModal();
+                } else {
+                    showAlert("Check your email for the confirmation link!", true);
+                }
+            }
+        } catch (err: any) {
+            showAlert(err.message || "Authentication error.");
+        } finally {
+            if (submitBtn) submitBtn.disabled = false;
+        }
+    });
+
+    // Global TypeScript declaration for window
+    declare global {
+        interface Window {
+            openAuthModal: (defaultMode?: "signin" | "signup") => void;
+            closeAuthModal: () => void;
+        }
+    }
+</script>
