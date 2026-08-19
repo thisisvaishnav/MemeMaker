@@ -21,6 +21,28 @@ There's nothing special about `src/components/`, but that's where Astro/React/Vu
 
 Any static assets, like images, can be placed in the `public/` directory.
 
+## 🛠️ Tech Stack & Integrations
+
+- **Framework**: [Astro v5+](https://astro.build)
+- **UI & Components**: [React 19](https://react.dev) + [shadcn/ui](https://ui.shadcn.com/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com)
+- **Icons**: [Lucide React](https://lucide.dev)
+
+## 🧩 Using shadcn/ui Components
+
+shadcn components are located in `src/components/ui/`. 
+
+To use existing components in your React components or Astro pages:
+```tsx
+import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+```
+
+To add new shadcn components, run:
+```bash
+npx shadcn@latest add <component-name>
+```
+
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:
@@ -39,3 +61,4 @@ See `AGENTS.md` for development workflow notes (e.g. running the dev server in b
 ## 👀 Want to learn more?
 
 Feel free to check [the Astro documentation](https://docs.astro.build) or jump into their [Discord server](https://astro.build/chat).
+
