@@ -1,11 +1,334 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { ShadcnDemo } from "../components/ShadcnDemo";
+
+const templateSlots = Array.from({ length: 20 });
 ---
 
-<Layout title="MemeMaker" showFooter={false}>
-    <main class="mx-auto max-w-350 px-4 py-8 sm:px-6 sm:py-10">
-        <ShadcnDemo client:load />
+<Layout
+    title="MemeMaker — Make a meme in seconds"
+    description="Choose a meme template or upload your own image and start creating."
+    showFooter={false}
+>
+    <main
+        class="relative mx-auto min-h-[calc(100dvh-6.5rem)] max-w-350 overflow-hidden px-4 pb-12 pt-8 sm:px-6 lg:pb-8 lg:pt-6"
+    >
+        <section
+            class="relative isolate mx-auto flex min-h-[calc(100dvh-9rem)] max-w-7xl flex-col items-center lg:justify-center"
+            aria-labelledby="hero-title"
+        >
+            <div
+                id="templates"
+                class="order-2 mt-12 grid w-full grid-cols-2 gap-4 sm:grid-cols-3 lg:absolute lg:inset-0 lg:order-0 lg:mt-0 lg:block"
+                aria-label="Random meme templates"
+            >
+                {
+                    templateSlots.map((_, index) => (
+                        <button
+                            type="button"
+                            class="template-card group relative z-10 w-full overflow-hidden rounded-2xl border border-white/15 bg-[#202020] text-left shadow-2xl outline-none transition-[transform,box-shadow,border-color] duration-200 focus-visible:z-30 focus-visible:border-white focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-black lg:absolute"
+                            data-template-card
+                            data-slot={index + 1}
+                            aria-pressed="false"
+                            aria-label={`Preview meme template ${index + 1}`}
+                        >
+                            <img
+                                data-template-image
+                                class="block h-auto w-full"
+                                alt=""
+                                loading={index < 4 ? "eager" : "lazy"}
+                                decoding="async"
+                            />
+                            <span
+                                class="template-action absolute inset-0 flex items-end bg-linear-to-t from-black via-black/25 to-transparent p-3 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
+                                aria-hidden="true"
+                            >
+                                <span class="flex w-full items-center justify-between gap-2 rounded-full bg-white px-3 py-2 text-xs font-semibold text-black shadow-lg">
+                                    Use template
+                                    <span class="rounded-full bg-[#dedede] px-2 py-0.5 text-[9px] font-medium uppercase tracking-wide text-[#444]">
+                                        Editor soon
+                                    </span>
+                                </span>
+                            </span>
+                        </button>
+                    ))
+                }
+            </div>
+
+            <div
+                class="relative z-20 order-1 w-full max-w-md text-center lg:order-0"
+            >
+                <div
+                    class="upload-panel rounded-3xl border border-white/10 bg-black/80 px-4 py-6 shadow-[0_24px_80px_rgba(0,0,0,0.7)] backdrop-blur-xl transition-[border-color,background-color,transform] sm:px-7 sm:py-7"
+                    data-upload-drop-zone
+                >
+                    <p
+                        class="mb-2 font-mono text-[9px] uppercase tracking-[0.18em] text-[#929292]"
+                    >
+                        No watermark · No sign-up needed
+                    </p>
+                    <h1
+                        id="hero-title"
+                        class="text-balance text-3xl font-semibold tracking-[-0.055em] text-[#f1f1f1] sm:text-4xl sm:leading-[1.02]"
+                    >
+                        Make the meme<br />before it gets old.
+                    </h1>
+                    <p
+                        class="mx-auto mt-3 max-w-sm text-pretty text-xs leading-5 text-[#a8a8a8] sm:text-sm"
+                    >
+                        Pick a template around you or upload your own image.
+                        Your next group-chat masterpiece starts here.
+                    </p>
+
+                    <div class="mt-4 flex flex-col items-center gap-2">
+                        <label
+                            for="meme-upload"
+                            class="inline-flex min-h-10 cursor-pointer items-center justify-center gap-2 rounded-full bg-[#ededed] px-5 text-xs font-semibold text-black outline-none transition-colors hover:bg-white focus-within:ring-2 focus-within:ring-white focus-within:ring-offset-4 focus-within:ring-offset-black"
+                        >
+                            <svg
+                                class="h-4 w-4"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                aria-hidden="true"
+                            >
+                                <path d="M12 16V4m0 0L7 9m5-5 5 5"></path>
+                                <path d="M5 14v5h14v-5"></path>
+                            </svg>
+                            Upload your image
+                            <input
+                                id="meme-upload"
+                                class="sr-only"
+                                type="file"
+                                accept="image/png,image/jpeg,image/webp,image/gif"
+                            />
+                        </label>
+                        <p
+                            id="upload-status"
+                            class="min-h-4 max-w-full truncate px-3 text-[10px] text-[#858585]"
+                            aria-live="polite"
+                        >
+                            PNG, JPG, WEBP or GIF · drop anywhere
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 </Layout>
 
+<script>
+    const templateBaseUrl =
+        "https://mememaker-templates.nyc3.cdn.digitaloceanspaces.com/thumbnails";
+    const cards = Array.from(
+        document.querySelectorAll<HTMLButtonElement>("[data-template-card]"),
+    );
+
+    const templateIds = Array.from({ length: 20 }, (_, index) => index + 1);
+    const positionSlots = Array.from({ length: 20 }, (_, index) => index);
+
+    for (let index = templateIds.length - 1; index > 0; index -= 1) {
+        const randomIndex = Math.floor(Math.random() * (index + 1));
+        [templateIds[index], templateIds[randomIndex]] = [
+            templateIds[randomIndex],
+            templateIds[index],
+        ];
+        [positionSlots[index], positionSlots[randomIndex]] = [
+            positionSlots[randomIndex],
+            positionSlots[index],
+        ];
+    }
+
+    const randomBetween = (minimum: number, maximum: number) =>
+        minimum + Math.random() * (maximum - minimum);
+
+    cards.forEach((card, index) => {
+        const templateId = templateIds[index];
+        const position = positionSlots[index];
+        const column = position % 5;
+        const row = Math.floor(position / 5);
+
+        card.style.setProperty(
+            "--card-width",
+            `${randomBetween(14.85, 22.95).toFixed(2)}rem`,
+        );
+        card.style.setProperty(
+            "--card-left",
+            `${Math.max(-5, Math.min(72, column * 18 + randomBetween(-7, 7))).toFixed(2)}%`,
+        );
+        card.style.setProperty(
+            "--card-top",
+            `${Math.max(-8, Math.min(66, row * 23 + randomBetween(-8, 8))).toFixed(2)}%`,
+        );
+        card.style.setProperty(
+            "--rotation",
+            `${randomBetween(-16, 16).toFixed(2)}deg`,
+        );
+        const image = card.querySelector<HTMLImageElement>(
+            "[data-template-image]",
+        );
+
+        if (image) {
+            image.addEventListener(
+                "load",
+                () => {
+                    image.width = image.naturalWidth;
+                    image.height = image.naturalHeight;
+                },
+                { once: true },
+            );
+            image.src = `${templateBaseUrl}/${templateId}.webp`;
+            image.alt = `Meme template ${templateId}`;
+        }
+        card.setAttribute("aria-label", `Preview meme template ${templateId}`);
+    });
+
+    const closeTemplates = (except?: HTMLButtonElement) => {
+        cards.forEach((card) => {
+            if (card !== except) {
+                card.classList.remove("is-active");
+                card.setAttribute("aria-pressed", "false");
+            }
+        });
+    };
+
+    cards.forEach((card) => {
+        card.addEventListener("click", (event) => {
+            event.stopPropagation();
+
+            if (
+                !window.matchMedia("(hover: hover) and (pointer: fine)").matches
+            ) {
+                const willOpen = !card.classList.contains("is-active");
+                closeTemplates(card);
+                card.classList.toggle("is-active", willOpen);
+                card.setAttribute("aria-pressed", String(willOpen));
+            }
+
+            // Future editor navigation intentionally belongs here once the editor is ready.
+        });
+    });
+
+    document.addEventListener("click", () => closeTemplates());
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") closeTemplates();
+    });
+
+    const uploadInput =
+        document.querySelector<HTMLInputElement>("#meme-upload");
+    const uploadStatus = document.querySelector<HTMLElement>("#upload-status");
+    const uploadDropZone = document.querySelector<HTMLElement>(
+        "[data-upload-drop-zone]",
+    );
+    const defaultUploadStatus = "PNG, JPG, WEBP or GIF · drop anywhere";
+    const acceptedImageTypes = new Set([
+        "image/png",
+        "image/jpeg",
+        "image/webp",
+        "image/gif",
+    ]);
+
+    const showSelectedFile = (file?: File) => {
+        if (!uploadStatus) return;
+
+        if (!file) {
+            uploadStatus.textContent = defaultUploadStatus;
+            return;
+        }
+
+        if (!acceptedImageTypes.has(file.type)) {
+            uploadStatus.textContent =
+                "Please drop a PNG, JPG, WEBP or GIF image";
+            return;
+        }
+
+        if (uploadInput) {
+            const transfer = new DataTransfer();
+            transfer.items.add(file);
+            uploadInput.files = transfer.files;
+        }
+        uploadStatus.textContent = `Ready to use: ${file.name}`;
+    };
+
+    uploadInput?.addEventListener("change", () => {
+        showSelectedFile(uploadInput.files?.[0]);
+    });
+
+    let dragDepth = 0;
+    const hasDraggedFiles = (event: DragEvent) =>
+        event.dataTransfer?.types.includes("Files") ?? false;
+
+    document.addEventListener("dragenter", (event) => {
+        if (!hasDraggedFiles(event)) return;
+        event.preventDefault();
+        dragDepth += 1;
+        uploadDropZone?.classList.add("is-dragging");
+        if (uploadStatus) uploadStatus.textContent = "Drop your image here";
+    });
+
+    document.addEventListener("dragover", (event) => {
+        if (!hasDraggedFiles(event)) return;
+        event.preventDefault();
+        if (event.dataTransfer) event.dataTransfer.dropEffect = "copy";
+    });
+
+    document.addEventListener("dragleave", (event) => {
+        if (!hasDraggedFiles(event)) return;
+        dragDepth = Math.max(0, dragDepth - 1);
+        if (dragDepth === 0) {
+            uploadDropZone?.classList.remove("is-dragging");
+            if (uploadStatus) uploadStatus.textContent = defaultUploadStatus;
+        }
+    });
+
+    document.addEventListener("drop", (event) => {
+        if (!hasDraggedFiles(event)) return;
+        event.preventDefault();
+        dragDepth = 0;
+        uploadDropZone?.classList.remove("is-dragging");
+        showSelectedFile(event.dataTransfer?.files[0]);
+    });
+</script>
+
+<style>
+    .upload-panel.is-dragging {
+        border-color: white;
+        background-color: rgb(18 18 18 / 0.94);
+        transform: scale(1.03);
+    }
+
+    @media (min-width: 64rem) {
+        .template-card {
+            left: var(--card-left);
+            top: var(--card-top);
+            width: var(--card-width);
+            transform: rotate(var(--rotation));
+        }
+
+        .template-card:hover,
+        .template-card:focus-visible,
+        .template-card.is-active {
+            transform: rotate(0deg) scale(1.08);
+        }
+    }
+
+    .template-card.is-active {
+        z-index: 30;
+        transform: rotate(0deg) scale(1.06);
+        border-color: white;
+        box-shadow: 0 20px 50px rgb(0 0 0 / 0.65);
+    }
+
+    .template-card.is-active .template-action {
+        opacity: 1;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .template-card,
+        .template-card:hover,
+        .template-card:focus-visible,
+        .template-card.is-active {
+            transform: none;
+        }
+    }
+</style>
