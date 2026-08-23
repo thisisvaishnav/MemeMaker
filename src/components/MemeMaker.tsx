@@ -228,30 +228,6 @@ export default function MemeMaker() {
 
   return (
     <div className="meme-app">
-      {/* HEADER */}
-      <header className="topbar">
-        <div className="brand">
-          <div className="brand-icon">M</div>
-          <span>MemeForge</span>
-        </div>
-
-        <button className="create-btn">
-          Create <span>⌄</span>
-        </button>
-
-        <button className="header-search">⌕</button>
-
-        <div className="header-spacer" />
-
-        <button className="notification">◉</button>
-
-        <button className="profile">
-          <span className="avatar">V</span>
-          <span className="profile-name">Vaishnav</span>
-          <span>⌄</span>
-        </button>
-      </header>
-
       <main className="page">
         {/* PAGE TITLE */}
         <section className="page-heading">
