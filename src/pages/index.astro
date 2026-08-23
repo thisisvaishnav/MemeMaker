@@ -214,6 +214,8 @@ const templateSlots = Array.from({ length: 20 });
         if (event.key === "Escape") closeTemplates();
     });
 
+    import { saveImage } from "../lib/imageStore";
+
     const uploadInput =
         document.querySelector<HTMLInputElement>("#meme-upload");
     const uploadStatus = document.querySelector<HTMLElement>("#upload-status");
@@ -248,6 +250,20 @@ const templateSlots = Array.from({ length: 20 });
             uploadInput.files = transfer.files;
         }
         uploadStatus.textContent = `Ready to use: ${file.name}`;
+
+        const reader = new FileReader();
+        reader.onload = async () => {
+            try {
+                await saveImage(reader.result as string);
+                window.location.href = "/edit";
+            } catch (err) {
+                console.error("Failed to save image:", err);
+                if (uploadStatus) {
+                    uploadStatus.textContent = "Image too large or storage full. Try a smaller image.";
+                }
+            }
+        };
+        reader.readAsDataURL(file);
     };
 
     uploadInput?.addEventListener("change", () => {

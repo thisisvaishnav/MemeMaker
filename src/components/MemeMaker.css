@@ -202,12 +202,31 @@ button {
   justify-content: center;
 
   overflow: hidden;
+
+  position: relative;
 }
 
 .canvas-wrapper canvas {
   width: 100%;
   height: auto;
   display: block;
+}
+
+/* =========================
+   TEXT OVERLAYS (draggable)
+========================= */
+
+.text-overlay {
+  position: absolute;
+  pointer-events: auto;
+  user-select: none;
+  z-index: 5;
+  touch-action: none;
+}
+
+.text-overlay:hover {
+  outline: 1px dashed rgba(255, 255, 255, 0.4);
+  outline-offset: 4px;
 }
 
 .generated-actions {

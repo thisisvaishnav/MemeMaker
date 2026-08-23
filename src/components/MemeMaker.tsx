@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./MemeMaker.css";
+import { loadImage, clearImage } from "../lib/imageStore";
 
 type TextLayer = {
   id: number;
   text: string;
   color: string;
   fontSize: number;
+  x: number;
   y: number;
 };
 
@@ -42,7 +44,7 @@ export default function MemeMaker() {
 
   const [search, setSearch] = useState("");
 
-  const drawMeme = () => {
+  const drawMeme = (includeLayers = false) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -50,7 +52,9 @@ export default function MemeMaker() {
     if (!ctx) return;
 
     const img = new Image();
-    img.crossOrigin = "anonymous";
+    if (!image.startsWith("data:")) {
+      img.crossOrigin = "anonymous";
+    }
 
     img.onload = () => {
       const maxWidth = 1000;
@@ -66,26 +70,33 @@ export default function MemeMaker() {
 
       const drawText = (
         text: string,
+        x: number,
         y: number,
-        size: number = fontSize
+        size: number = fontSize,
+        color: string = textColor
       ) => {
         if (!text.trim()) return;
 
         ctx.font = `900 ${size}px Impact, Arial Black, sans-serif`;
-        ctx.fillStyle = textColor;
+        ctx.fillStyle = color;
         ctx.strokeStyle = "#000";
         ctx.lineWidth = Math.max(4, size / 10);
 
-        ctx.strokeText(text, canvas.width / 2, y);
-        ctx.fillText(text, canvas.width / 2, y);
+        const px = canvas.width * x;
+        const py = canvas.height * y;
+
+        ctx.strokeText(text, px, py);
+        ctx.fillText(text, px, py);
       };
 
-      drawText(topText, canvas.height * 0.12);
-      drawText(bottomText, canvas.height * 0.88);
+      drawText(topText, 0.5, 0.12, fontSize, textColor);
+      drawText(bottomText, 0.5, 0.88, fontSize, textColor);
 
-      layers.forEach((layer) => {
-        drawText(layer.text, canvas.height * layer.y, layer.fontSize);
-      });
+      if (includeLayers) {
+        layers.forEach((layer) => {
+          drawText(layer.text, layer.x, layer.y, layer.fontSize, layer.color);
+        });
+      }
 
       if (watermark) {
         ctx.font = "bold 14px Arial";
@@ -99,6 +110,15 @@ export default function MemeMaker() {
 
     img.src = image;
   };
+
+  useEffect(() => {
+    loadImage().then((pending) => {
+      if (pending) {
+        setImage(pending);
+        clearImage();
+      }
+    });
+  }, []);
 
   useEffect(() => {
     drawMeme();
@@ -124,7 +144,7 @@ export default function MemeMaker() {
   };
 
   const generateMeme = () => {
-    drawMeme();
+    drawMeme(true);
 
     setTimeout(() => {
       const canvas = canvasRef.current;
@@ -176,6 +196,10 @@ export default function MemeMaker() {
     }
   };
 
+  const triggerUpload = () => {
+    fileInputRef.current?.click();
+  };
+
   const reset = () => {
     setTopText("");
     setBottomText("");
@@ -189,6 +213,12 @@ export default function MemeMaker() {
     setImage(DEFAULT_IMAGE);
   };
 
+  const [dragging, setDragging] = useState<{
+    id: number;
+    offsetX: number;
+    offsetY: number;
+  } | null>(null);
+
   const addTextLayer = () => {
     setLayers((current) => [
       ...current,
@@ -197,6 +227,7 @@ export default function MemeMaker() {
         text: "New Text",
         color: "#ffffff",
         fontSize: 40,
+        x: 0.5,
         y: 0.5,
       },
     ]);
@@ -213,7 +244,7 @@ export default function MemeMaker() {
           ? {
               ...layer,
               [field]:
-                field === "fontSize" || field === "y"
+                field === "fontSize" || field === "y" || field === "x"
                   ? Number(value)
                   : value,
             }
@@ -224,6 +255,56 @@ export default function MemeMaker() {
 
   const removeLayer = (id: number) => {
     setLayers((current) => current.filter((layer) => layer.id !== id));
+  };
+
+  const handlePointerDown = (
+    e: React.PointerEvent,
+    layer: TextLayer
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    setDragging({
+      id: layer.id,
+      offsetX: e.clientX - rect.left,
+      offsetY: e.clientY - rect.top,
+    });
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+  };
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (!dragging) return;
+
+    const wrapper = canvasRef.current?.parentElement;
+    if (!wrapper) return;
+
+    const wrapperRect = wrapper.getBoundingClientRect();
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const canvasRect = canvas.getBoundingClientRect();
+
+    const relX =
+      (e.clientX - wrapperRect.left - dragging.offsetX) /
+      canvasRect.width;
+    const relY =
+      (e.clientY - wrapperRect.top - dragging.offsetY) /
+      canvasRect.height;
+
+    const clampedX = Math.max(0, Math.min(1, relX));
+    const clampedY = Math.max(0, Math.min(1, relY));
+
+    setLayers((current) =>
+      current.map((layer) =>
+        layer.id === dragging.id
+          ? { ...layer, x: clampedX, y: clampedY }
+          : layer
+      )
+    );
+  };
+
+  const handlePointerUp = () => {
+    setDragging(null);
   };
 
   return (
@@ -245,15 +326,60 @@ export default function MemeMaker() {
               <button>↶</button>
               <button>Spacing</button>
 
-              <button onClick={() => fileInputRef.current?.click()}>
+              <button onClick={triggerUpload}>
                 + Add Image
               </button>
 
               <button>Draw</button>
             </div>
 
-            <div className="canvas-wrapper">
+            <div
+              className="canvas-wrapper"
+              onPointerMove={handlePointerMove}
+              onPointerUp={handlePointerUp}
+            >
               <canvas ref={canvasRef} />
+
+              {layers.map((layer) => {
+                const canvas = canvasRef.current;
+                const canvasWidth = canvas?.width ?? 1000;
+                const canvasHeight = canvas?.height ?? 600;
+
+                const displayWidth =
+                  canvas?.getBoundingClientRect().width ?? canvasWidth;
+                const displayHeight =
+                  canvas?.getBoundingClientRect().height ?? canvasHeight;
+
+                const px = layer.x * displayWidth;
+                const py = layer.y * displayHeight;
+
+                const scaleFactor = displayWidth / canvasWidth;
+                const displayFontSize = layer.fontSize * scaleFactor;
+
+                return (
+                  <div
+                    key={layer.id}
+                    className="text-overlay"
+                    style={{
+                      left: px,
+                      top: py,
+                      color: layer.color,
+                      fontSize: displayFontSize,
+                      fontWeight: 900,
+                      fontFamily: 'Impact, "Arial Black", sans-serif',
+                      textShadow:
+                        "2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000",
+                      whiteSpace: "nowrap",
+                      transform: "translate(-50%, -50%)",
+                      cursor:
+                        dragging?.id === layer.id ? "grabbing" : "grab",
+                    }}
+                    onPointerDown={(e) => handlePointerDown(e, layer)}
+                  >
+                    {layer.text}
+                  </div>
+                );
+              })}
             </div>
 
             <input
@@ -281,7 +407,7 @@ export default function MemeMaker() {
           <aside className="controls">
             <div className="control-top">
               <button
-                onClick={() => fileInputRef.current?.click()}
+                onClick={triggerUpload}
                 className="upload-btn"
               >
                 Upload new template
