@@ -1,9 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import MemeMaker from "../components/MemeMaker";
 ---
 
 <Layout title="Editor — MemeMaker" showFooter={false}>
-    <main class="mx-auto max-w-350 px-4 py-8 sm:px-6 sm:py-10">
-        <!-- Content starting from scratch -->
-    </main>
+    <MemeMaker client:load />
 </Layout>
