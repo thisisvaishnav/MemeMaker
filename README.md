@@ -1,5 +1,3 @@
-arch
-
 # MemeMaker (Astro)
 
 Astro project scaffolded with the `minimal` template.
