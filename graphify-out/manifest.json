@@ -1,0 +1,146 @@
+{
+  ".agents/skills/tailwind-4-docs/references/docs-index.tsx": {
+    "mtime": 1788280656.3382993,
+    "seen": 1788370344.285544,
+    "ast_hash": "393ec85437390e8e3808f8bf14bac4f1",
+    "semantic_hash": "393ec85437390e8e3808f8bf14bac4f1"
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/utils/colors.ts": {
+    "mtime": 1788280656.381675,
+    "seen": 1788370344.285548,
+    "ast_hash": "aa008dd6f2287d3c57da048c5867f5f1",
+    "semantic_hash": "aa008dd6f2287d3c57da048c5867f5f1"
+  },
+  ".agents/skills/tailwind-4-docs/scripts/sync_tailwind_docs.py": {
+    "mtime": 1788280656.3826332,
+    "seen": 1788370344.2855492,
+    "ast_hash": "08e15d7a699c4af866061f298387deb9",
+    "semantic_hash": "08e15d7a699c4af866061f298387deb9"
+  },
+  ".vscode/extensions.json": {
+    "mtime": 1788280656.383028,
+    "seen": 1788370344.28555,
+    "ast_hash": "3adedb22d082dbd1ebb00b75d21403aa",
+    "semantic_hash": "3adedb22d082dbd1ebb00b75d21403aa"
+  },
+  ".vscode/launch.json": {
+    "mtime": 1788280656.3830886,
+    "seen": 1788370344.285551,
+    "ast_hash": "60493763dcbc2d109e57da86d997602a",
+    "semantic_hash": "60493763dcbc2d109e57da86d997602a"
+  },
+  "astro.config.mjs": {
+    "mtime": 1788280656.3835185,
+    "seen": 1788370344.285551,
+    "ast_hash": "49d332abf7e3296fc0aa6a14e1b30183",
+    "semantic_hash": "49d332abf7e3296fc0aa6a14e1b30183"
+  },
+  "components.json": {
+    "mtime": 1788280656.3835793,
+    "seen": 1788370344.285552,
+    "ast_hash": "47384a2c6e43af3dd8d920a44043a65d",
+    "semantic_hash": "47384a2c6e43af3dd8d920a44043a65d"
+  },
+  "package.json": {
+    "mtime": 1788370492.7271361,
+    "seen": 1788370528.567211,
+    "ast_hash": "8ee86c27595ed499734fbc9b479037f9",
+    "semantic_hash": "8ee86c27595ed499734fbc9b479037f9"
+  },
+  "skills-lock.json": {
+    "mtime": 1788280656.3858602,
+    "seen": 1788370344.285553,
+    "ast_hash": "bf29dcf356b810e0472e7cee28dc383c",
+    "semantic_hash": "bf29dcf356b810e0472e7cee28dc383c"
+  },
+  "src/components/AuthModal.astro": {
+    "mtime": 1788280656.386049,
+    "seen": 1788370344.285554,
+    "ast_hash": "9e090f88da25d696abe7757cfe5525f1",
+    "semantic_hash": "9e090f88da25d696abe7757cfe5525f1"
+  },
+  "src/components/Footer.astro": {
+    "mtime": 1788280656.3861086,
+    "seen": 1788370344.285554,
+    "ast_hash": "4912d25f9bc93edb176b95e0fa9ceca1",
+    "semantic_hash": "4912d25f9bc93edb176b95e0fa9ceca1"
+  },
+  "src/components/Header.astro": {
+    "mtime": 1788280656.3861997,
+    "seen": 1788370344.285555,
+    "ast_hash": "4a0389e221772f70caae92aac810bec9",
+    "semantic_hash": "4a0389e221772f70caae92aac810bec9"
+  },
+  "src/components/MemeMaker.tsx": {
+    "mtime": 1788280656.3864312,
+    "seen": 1788370344.285556,
+    "ast_hash": "d12bd3a18d825ae5f09958f1cf01de49",
+    "semantic_hash": "d12bd3a18d825ae5f09958f1cf01de49"
+  },
+  "src/components/ShadcnDemo.tsx": {
+    "mtime": 1788280656.3864913,
+    "seen": 1788370344.285556,
+    "ast_hash": "8ab50fa4a3a59c107508691ce7ec123c",
+    "semantic_hash": "8ab50fa4a3a59c107508691ce7ec123c"
+  },
+  "src/components/ui/button.tsx": {
+    "mtime": 1788280656.3865802,
+    "seen": 1788370344.285557,
+    "ast_hash": "4870ecf032591e7dc71cd4e3c36bb683",
+    "semantic_hash": "4870ecf032591e7dc71cd4e3c36bb683"
+  },
+  "src/components/ui/card.tsx": {
+    "mtime": 1788280656.3866348,
+    "seen": 1788370344.285558,
+    "ast_hash": "95a31ddfbb8d460f8b90409681856156",
+    "semantic_hash": "95a31ddfbb8d460f8b90409681856156"
+  },
+  "src/layouts/Layout.astro": {
+    "mtime": 1788280656.3867276,
+    "seen": 1788370344.285558,
+    "ast_hash": "006205dec099cce0e07903c886ab3897",
+    "semantic_hash": "006205dec099cce0e07903c886ab3897"
+  },
+  "src/lib/imageStore.ts": {
+    "mtime": 1788280656.386813,
+    "seen": 1788370344.285559,
+    "ast_hash": "42fe417a96c6e40135f7cdc7516bc9f3",
+    "semantic_hash": "42fe417a96c6e40135f7cdc7516bc9f3"
+  },
+  "src/lib/supabase.ts": {
+    "mtime": 1788280656.3868697,
+    "seen": 1788370344.2855601,
+    "ast_hash": "51642c3387bf3a4485159e3b6a77364c",
+    "semantic_hash": "51642c3387bf3a4485159e3b6a77364c"
+  },
+  "src/lib/utils.ts": {
+    "mtime": 1788280656.3869226,
+    "seen": 1788370344.2855601,
+    "ast_hash": "d9837f38cc05303254571985e3164050",
+    "semantic_hash": "d9837f38cc05303254571985e3164050"
+  },
+  "src/pages/edit.astro": {
+    "mtime": 1788280656.3870096,
+    "seen": 1788370344.285561,
+    "ast_hash": "3f8c0f1757350088ef15a8b704d594fb",
+    "semantic_hash": "3f8c0f1757350088ef15a8b704d594fb"
+  },
+  "src/pages/index.astro": {
+    "mtime": 1788280656.3871276,
+    "seen": 1788370344.285561,
+    "ast_hash": "ac792239fb3da48e82153530ba9a9220",
+    "semantic_hash": "ac792239fb3da48e82153530ba9a9220"
+  },
+  "test.ts": {
+    "mtime": 1788280656.387268,
+    "seen": 1788370344.285562,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "tsconfig.json": {
+    "mtime": 1788280656.3873386,
+    "seen": 1788370344.285563,
+    "ast_hash": "c12ac0ca1a343dd71efc3eb79d58d38f",
+    "semantic_hash": "c12ac0ca1a343dd71efc3eb79d58d38f"
+  }
+}

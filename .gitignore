@@ -22,3 +22,8 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# graphify cache & backups
+graphify-out/cache/
+graphify-out/[0-9]*/
+
