@@ -42,8 +42,8 @@
     "semantic_hash": "47384a2c6e43af3dd8d920a44043a65d"
   },
   "package.json": {
-    "mtime": 1788370492.7271361,
-    "seen": 1788370528.567211,
+    "mtime": 1788370603.4228392,
+    "seen": 1788371583.880875,
     "ast_hash": "8ee86c27595ed499734fbc9b479037f9",
     "semantic_hash": "8ee86c27595ed499734fbc9b479037f9"
   },
@@ -66,16 +66,16 @@
     "semantic_hash": "4912d25f9bc93edb176b95e0fa9ceca1"
   },
   "src/components/Header.astro": {
-    "mtime": 1788280656.3861997,
-    "seen": 1788370344.285555,
-    "ast_hash": "4a0389e221772f70caae92aac810bec9",
-    "semantic_hash": "4a0389e221772f70caae92aac810bec9"
+    "mtime": 1788377939.5199347,
+    "seen": 1788378524.982177,
+    "ast_hash": "fd0149d5cba1e6cc747c3c226aa1af0f",
+    "semantic_hash": ""
   },
   "src/components/MemeMaker.tsx": {
-    "mtime": 1788280656.3864312,
-    "seen": 1788370344.285556,
-    "ast_hash": "d12bd3a18d825ae5f09958f1cf01de49",
-    "semantic_hash": "d12bd3a18d825ae5f09958f1cf01de49"
+    "mtime": 1788376523.9198165,
+    "seen": 1788378524.982178,
+    "ast_hash": "e43e7e551f0526ab72c22201b9e862e7",
+    "semantic_hash": ""
   },
   "src/components/ShadcnDemo.tsx": {
     "mtime": 1788280656.3864913,
@@ -102,10 +102,10 @@
     "semantic_hash": "006205dec099cce0e07903c886ab3897"
   },
   "src/lib/imageStore.ts": {
-    "mtime": 1788280656.386813,
-    "seen": 1788370344.285559,
-    "ast_hash": "42fe417a96c6e40135f7cdc7516bc9f3",
-    "semantic_hash": "42fe417a96c6e40135f7cdc7516bc9f3"
+    "mtime": 1788376512.8049543,
+    "seen": 1788378524.982183,
+    "ast_hash": "d4b00cf5c7179bfcef2a711999ce27df",
+    "semantic_hash": ""
   },
   "src/lib/supabase.ts": {
     "mtime": 1788280656.3868697,
@@ -126,10 +126,10 @@
     "semantic_hash": "3f8c0f1757350088ef15a8b704d594fb"
   },
   "src/pages/index.astro": {
-    "mtime": 1788280656.3871276,
-    "seen": 1788370344.285561,
-    "ast_hash": "ac792239fb3da48e82153530ba9a9220",
-    "semantic_hash": "ac792239fb3da48e82153530ba9a9220"
+    "mtime": 1788378075.90687,
+    "seen": 1788378524.982186,
+    "ast_hash": "95e86adb3d479f15e60291bd4fef726e",
+    "semantic_hash": ""
   },
   "test.ts": {
     "mtime": 1788280656.387268,
@@ -142,5 +142,1547 @@
     "seen": 1788370344.285563,
     "ast_hash": "c12ac0ca1a343dd71efc3eb79d58d38f",
     "semantic_hash": "c12ac0ca1a343dd71efc3eb79d58d38f"
+  },
+  ".agents/rules/graphify.md": {
+    "mtime": 1788370603.4157846,
+    "seen": 1788371583.8808908,
+    "ast_hash": "f1e53ecc9194573d3c28fc116c743a2e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/SKILL.md": {
+    "mtime": 1788280656.3380978,
+    "seen": 1788371583.8808918,
+    "ast_hash": "523ea1f3d130374acf69b162e785e1f4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs-source.txt": {
+    "mtime": 1788280656.3383968,
+    "seen": 1788371583.880893,
+    "ast_hash": "620eeb3f0f023d9a979408ba25fff204",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/accent-color.mdx": {
+    "mtime": 1788280656.3385382,
+    "seen": 1788371583.880894,
+    "ast_hash": "5394e32117a89eb1c4ad29d61c6fd4ea",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/adding-custom-styles.mdx": {
+    "mtime": 1788280656.3390892,
+    "seen": 1788371583.880894,
+    "ast_hash": "accc3a306cddbef753920096a621b545",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/align-content.mdx": {
+    "mtime": 1788280656.3392432,
+    "seen": 1788371583.880895,
+    "ast_hash": "2d8450b78543136cf5b288ddc6f3ba16",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/align-items.mdx": {
+    "mtime": 1788280656.3393848,
+    "seen": 1788371583.880896,
+    "ast_hash": "3968687ef0a686d546e33b575f899d32",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/align-self.mdx": {
+    "mtime": 1788280656.3395066,
+    "seen": 1788371583.880896,
+    "ast_hash": "662420f3f3d23815c3a8bcf1ae960058",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/animation.mdx": {
+    "mtime": 1788280656.3396015,
+    "seen": 1788371583.880897,
+    "ast_hash": "df2dddf3293b55e953686ea9b77716cb",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/appearance.mdx": {
+    "mtime": 1788280656.3396924,
+    "seen": 1788371583.880898,
+    "ast_hash": "293b87150b4bb9edcae49ca415863f46",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/aspect-ratio.mdx": {
+    "mtime": 1788280656.3397694,
+    "seen": 1788371583.880898,
+    "ast_hash": "22602d51db9985d9bd90503e6c6e3942",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/backdrop-filter-blur.mdx": {
+    "mtime": 1788280656.3398757,
+    "seen": 1788371583.8808992,
+    "ast_hash": "e522e71af9cb706a627913ce79ee90f3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/backdrop-filter-brightness.mdx": {
+    "mtime": 1788280656.3399696,
+    "seen": 1788371583.8808992,
+    "ast_hash": "7a161e629750cf22dfd77df0f0883a7b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/backdrop-filter-contrast.mdx": {
+    "mtime": 1788280656.3400362,
+    "seen": 1788371583.8809001,
+    "ast_hash": "efb6d9fedc24acd349555aa31f36023b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/backdrop-filter-grayscale.mdx": {
+    "mtime": 1788280656.3401334,
+    "seen": 1788371583.880901,
+    "ast_hash": "9629a88d42969209bbe3fda4d7d5da2f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/backdrop-filter-hue-rotate.mdx": {
+    "mtime": 1788280656.3402426,
+    "seen": 1788371583.880901,
+    "ast_hash": "0313a213619434331b20ab69f3df2eb5",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/backdrop-filter-invert.mdx": {
+    "mtime": 1788280656.3403325,
+    "seen": 1788371583.8809018,
+    "ast_hash": "a63ca30d4597842cfde59eed88892418",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/backdrop-filter-opacity.mdx": {
+    "mtime": 1788280656.3404222,
+    "seen": 1788371583.880903,
+    "ast_hash": "ba24d74ce4a9908b81361b363ed87738",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/backdrop-filter-saturate.mdx": {
+    "mtime": 1788280656.3405223,
+    "seen": 1788371583.880903,
+    "ast_hash": "07bcee4f9ea391349bebf4fde65b21f7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/backdrop-filter-sepia.mdx": {
+    "mtime": 1788280656.3406045,
+    "seen": 1788371583.880904,
+    "ast_hash": "05d1a5f2db35968a182639356002102e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/backdrop-filter.mdx": {
+    "mtime": 1788280656.3407018,
+    "seen": 1788371583.880905,
+    "ast_hash": "fbd1bdae6ddc30ccbef0d31444a1b00c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/backface-visibility.mdx": {
+    "mtime": 1788280656.3407953,
+    "seen": 1788371583.880905,
+    "ast_hash": "d32bb87734354797c9d73cee47a7aa07",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/background-attachment.mdx": {
+    "mtime": 1788280656.340892,
+    "seen": 1788371583.8809059,
+    "ast_hash": "4a36afd7f6ff5c6a596ae786063c03e8",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/background-blend-mode.mdx": {
+    "mtime": 1788280656.3409774,
+    "seen": 1788371583.880907,
+    "ast_hash": "74f34d3ad8adfb317e14a3a7729ca6af",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/background-clip.mdx": {
+    "mtime": 1788280656.3410642,
+    "seen": 1788371583.880907,
+    "ast_hash": "2ea389fe0d32dabb31737d54890f2ab6",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/background-color.mdx": {
+    "mtime": 1788280656.3411696,
+    "seen": 1788371583.880908,
+    "ast_hash": "df855ddeea85f1f6b3002fdfefd562ee",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/background-image.mdx": {
+    "mtime": 1788280656.3415682,
+    "seen": 1788371583.880909,
+    "ast_hash": "543855953ecee11b376357eb7313f2cf",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/background-origin.mdx": {
+    "mtime": 1788280656.3416724,
+    "seen": 1788371583.880909,
+    "ast_hash": "fcfdbe0e590bcff9f81825673acbcf50",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/background-position.mdx": {
+    "mtime": 1788280656.3418047,
+    "seen": 1788371583.8809102,
+    "ast_hash": "d775cde853303619a327f9ff254b9719",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/background-repeat.mdx": {
+    "mtime": 1788280656.3418882,
+    "seen": 1788371583.880911,
+    "ast_hash": "1d9eccc98c0b1119834ca7ea65346192",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/background-size.mdx": {
+    "mtime": 1788280656.3419728,
+    "seen": 1788371583.880911,
+    "ast_hash": "ac4dd4672ae3fc5d19f8a48c4fe385a0",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/block-size.mdx": {
+    "mtime": 1788280656.3420854,
+    "seen": 1788371583.8809118,
+    "ast_hash": "c8bb68fd1edde09782d86abd69ef43ef",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/border-collapse.mdx": {
+    "mtime": 1788280656.3421953,
+    "seen": 1788371583.8809128,
+    "ast_hash": "2be37eab1424a188db4124b07cf88a00",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/border-color.mdx": {
+    "mtime": 1788280656.3423016,
+    "seen": 1788371583.8809128,
+    "ast_hash": "ce4f99dea6e51c8a69ede13a129d728f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/border-radius.mdx": {
+    "mtime": 1788280656.3424048,
+    "seen": 1788371583.880914,
+    "ast_hash": "c642525461dfee89e490e457cd413708",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/border-spacing.mdx": {
+    "mtime": 1788280656.3424797,
+    "seen": 1788371583.880914,
+    "ast_hash": "c5ffe516c50d3d882b1796f069911829",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/border-style.mdx": {
+    "mtime": 1788280656.3425562,
+    "seen": 1788371583.880915,
+    "ast_hash": "7984076730533893957d24ffd3e42f4d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/border-width.mdx": {
+    "mtime": 1788280656.3426743,
+    "seen": 1788371583.8809159,
+    "ast_hash": "27c0c8eaeba456ec3451109214f89d01",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/box-decoration-break.mdx": {
+    "mtime": 1788280656.3427455,
+    "seen": 1788371583.8809159,
+    "ast_hash": "f9bab40c1a97ec209d034b2a05012189",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/box-shadow.mdx": {
+    "mtime": 1788280656.3428771,
+    "seen": 1788371583.880917,
+    "ast_hash": "a843454be8dc6432ccb2dc35fb2f02b9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/box-sizing.mdx": {
+    "mtime": 1788280656.3429666,
+    "seen": 1788371583.880917,
+    "ast_hash": "a336edf5b49a0943d3e4b2dcec2438d3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/break-after.mdx": {
+    "mtime": 1788280656.3430336,
+    "seen": 1788371583.880918,
+    "ast_hash": "3a8eaf1bc5383e97861724a7ce794519",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/break-before.mdx": {
+    "mtime": 1788280656.3430996,
+    "seen": 1788371583.880919,
+    "ast_hash": "2ebb5303c89d4040e3a940f21e44750e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/break-inside.mdx": {
+    "mtime": 1788280656.3431647,
+    "seen": 1788371583.880919,
+    "ast_hash": "293d590eed779248fcfe713caf851ee5",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/caption-side.mdx": {
+    "mtime": 1788280656.3432467,
+    "seen": 1788371583.8809202,
+    "ast_hash": "c1c91a8ffeaa5d698c9873a5ba73a5b0",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/caret-color.mdx": {
+    "mtime": 1788280656.3433278,
+    "seen": 1788371583.8809211,
+    "ast_hash": "92c3c56f1f00a7b6f8884ea23fd659a9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/clear.mdx": {
+    "mtime": 1788280656.34342,
+    "seen": 1788371583.8809211,
+    "ast_hash": "f78820ff0fdd9cd53cf5c89eb45dccee",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/color-scheme.mdx": {
+    "mtime": 1788280656.3434923,
+    "seen": 1788371583.880922,
+    "ast_hash": "48ed7999d43354495c3e2dd933b1882b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/color.mdx": {
+    "mtime": 1788280656.3435683,
+    "seen": 1788371583.880922,
+    "ast_hash": "1a0189ec1ea77532816b21a69b7856b6",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/colors.mdx": {
+    "mtime": 1788280656.343773,
+    "seen": 1788371583.8809228,
+    "ast_hash": "16ba411dadbf946848914820cfee1896",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/columns.mdx": {
+    "mtime": 1788280656.34389,
+    "seen": 1788371583.880924,
+    "ast_hash": "869052ca2b609ce05300b34179006200",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/compatibility.mdx": {
+    "mtime": 1788280656.3439782,
+    "seen": 1788371583.880924,
+    "ast_hash": "d62f3afefabee7e8781342b8ddbf669b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/content.mdx": {
+    "mtime": 1788280656.3440573,
+    "seen": 1788371583.880925,
+    "ast_hash": "698177dd5d395abcb51589d0c2b9fb61",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/cursor.mdx": {
+    "mtime": 1788280656.3441482,
+    "seen": 1788371583.880926,
+    "ast_hash": "5f9dc7cd5bfa1d6604ade48215b4e890",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/dark-mode.mdx": {
+    "mtime": 1788280656.3442342,
+    "seen": 1788371583.880926,
+    "ast_hash": "c87d5f0a9bd922dc2af67e125a4ef88f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/detecting-classes-in-source-files.mdx": {
+    "mtime": 1788280656.344343,
+    "seen": 1788371583.880927,
+    "ast_hash": "3cec931e7e14017b8340756d6f1d017a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/display.mdx": {
+    "mtime": 1788280656.3444984,
+    "seen": 1788371583.880927,
+    "ast_hash": "d1f274aaf57d4cb71196f6c9371edd6b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/editor-setup.mdx": {
+    "mtime": 1788280656.3445861,
+    "seen": 1788371583.880928,
+    "ast_hash": "cc0cb5287128220e4d174a1ee9765441",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/field-sizing.mdx": {
+    "mtime": 1788280656.3446538,
+    "seen": 1788371583.880929,
+    "ast_hash": "c01dbe49e3921860eff7236bbe21d260",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/fill.mdx": {
+    "mtime": 1788280656.344752,
+    "seen": 1788371583.880929,
+    "ast_hash": "ce94217ee25b0f70c0317ef785843ab9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/filter-blur.mdx": {
+    "mtime": 1788280656.3448243,
+    "seen": 1788371583.88093,
+    "ast_hash": "3d1f3527306daee882bf4388e34b6f80",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/filter-brightness.mdx": {
+    "mtime": 1788280656.3449275,
+    "seen": 1788371583.8809311,
+    "ast_hash": "adfd7f0f79fd5c62bebea4193b953636",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/filter-contrast.mdx": {
+    "mtime": 1788280656.3450005,
+    "seen": 1788371583.880932,
+    "ast_hash": "bbc1677cfcae4d0bc120ac40462c4ea7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/filter-drop-shadow.mdx": {
+    "mtime": 1788280656.3450933,
+    "seen": 1788371583.880933,
+    "ast_hash": "58d86947ac2df04975f8bdddb2be4a94",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/filter-grayscale.mdx": {
+    "mtime": 1788280656.3451717,
+    "seen": 1788371583.880933,
+    "ast_hash": "4e3c2c8eca051274d6d47641c3ac9ee7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/filter-hue-rotate.mdx": {
+    "mtime": 1788280656.3452609,
+    "seen": 1788371583.880934,
+    "ast_hash": "b61c637a997095fcfd2685e6b69a8767",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/filter-invert.mdx": {
+    "mtime": 1788280656.3453283,
+    "seen": 1788371583.880935,
+    "ast_hash": "d2728f917a0abc19bcecca802d81694b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/filter-saturate.mdx": {
+    "mtime": 1788280656.3453977,
+    "seen": 1788371583.880935,
+    "ast_hash": "04198a7620f1976ee6b24464f829e691",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/filter-sepia.mdx": {
+    "mtime": 1788280656.3454764,
+    "seen": 1788371583.880936,
+    "ast_hash": "fc7510b04de2effce353545d5686fdae",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/filter.mdx": {
+    "mtime": 1788280656.3455448,
+    "seen": 1788371583.8809369,
+    "ast_hash": "d580c0431817375210df0735903dc59e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/flex-basis.mdx": {
+    "mtime": 1788280656.3456223,
+    "seen": 1788371583.8809369,
+    "ast_hash": "d049223b19464954d30d4e02db1b6915",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/flex-direction.mdx": {
+    "mtime": 1788280656.3456898,
+    "seen": 1788371583.880938,
+    "ast_hash": "d682fd681326c06b55dd98964f5509db",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/flex-grow.mdx": {
+    "mtime": 1788280656.3457658,
+    "seen": 1788371583.880939,
+    "ast_hash": "7a9ad8d74cea3ee6fc0ec0926bec2022",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/flex-shrink.mdx": {
+    "mtime": 1788280656.345844,
+    "seen": 1788371583.880939,
+    "ast_hash": "66a2882abefec8353f5c25658f9ea61c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/flex-wrap.mdx": {
+    "mtime": 1788280656.34625,
+    "seen": 1788371583.88094,
+    "ast_hash": "3bf44ccfb4e6198ffdd6c0af4e766f6f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/flex.mdx": {
+    "mtime": 1788280656.3463447,
+    "seen": 1788371583.8809412,
+    "ast_hash": "a98d80493e3526171a5c6181cb4d3d20",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/float.mdx": {
+    "mtime": 1788280656.3466518,
+    "seen": 1788371583.8809412,
+    "ast_hash": "2337f09c61a558973e02c67a34bcfe35",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/font-family.mdx": {
+    "mtime": 1788280656.346727,
+    "seen": 1788371583.880942,
+    "ast_hash": "ffd8dde36e762b7678e310643d1790ad",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/font-feature-settings.mdx": {
+    "mtime": 1788280656.3467999,
+    "seen": 1788371583.880943,
+    "ast_hash": "6d143afbf8b0ca2aa429dc3d778a8230",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/font-size.mdx": {
+    "mtime": 1788280656.3468807,
+    "seen": 1788371583.880943,
+    "ast_hash": "292befbab99e0108e94b5b3779b2e48e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/font-smoothing.mdx": {
+    "mtime": 1788280656.3469546,
+    "seen": 1788371583.880944,
+    "ast_hash": "00aa8e146eeeb3751051a53a0d529878",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/font-stretch.mdx": {
+    "mtime": 1788280656.3470314,
+    "seen": 1788371583.880945,
+    "ast_hash": "91064357d374e701c57521e89cd2464e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/font-style.mdx": {
+    "mtime": 1788280656.3471193,
+    "seen": 1788371583.880945,
+    "ast_hash": "0e3a28964de9e1f6fd3c75beafe2cd09",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/font-variant-numeric.mdx": {
+    "mtime": 1788280656.3472097,
+    "seen": 1788371583.880946,
+    "ast_hash": "e5b5ffccbeb534fd78f114268bf2225a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/font-weight.mdx": {
+    "mtime": 1788280656.347277,
+    "seen": 1788371583.880946,
+    "ast_hash": "3b81a6614ec28a771fc061434a36eced",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/forced-color-adjust.mdx": {
+    "mtime": 1788280656.3473682,
+    "seen": 1788371583.8809469,
+    "ast_hash": "b908849e31dd9f961a72cff8afb01d90",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/functions-and-directives.mdx": {
+    "mtime": 1788280656.3475862,
+    "seen": 1788371583.880948,
+    "ast_hash": "898b519ed7b843f5bae3703673e3a6cf",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/gap.mdx": {
+    "mtime": 1788280656.3477,
+    "seen": 1788371583.880948,
+    "ast_hash": "b11ae45dcbaa55496487c5dda1889926",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/grid-auto-columns.mdx": {
+    "mtime": 1788280656.347785,
+    "seen": 1788371583.880949,
+    "ast_hash": "f3e1a72e57da3725d1a3e101ba369cfe",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/grid-auto-flow.mdx": {
+    "mtime": 1788280656.3478608,
+    "seen": 1788371583.88095,
+    "ast_hash": "49716bb7874f95f18c630a5a7d58faa8",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/grid-auto-rows.mdx": {
+    "mtime": 1788280656.3479416,
+    "seen": 1788371583.880951,
+    "ast_hash": "6916614c3881d208b8fcfce3a7c66176",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/grid-column.mdx": {
+    "mtime": 1788280656.348036,
+    "seen": 1788371583.880951,
+    "ast_hash": "a82c7b843c529aaa58bb3d701b1eabbd",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/grid-row.mdx": {
+    "mtime": 1788280656.348121,
+    "seen": 1788371583.8809521,
+    "ast_hash": "70e9ffc5f10ced0f9c14e341c3a15321",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/grid-template-columns.mdx": {
+    "mtime": 1788280656.3482223,
+    "seen": 1788371583.880953,
+    "ast_hash": "27c7e0698798d538fc687a048748e045",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/grid-template-rows.mdx": {
+    "mtime": 1788280656.3483233,
+    "seen": 1788371583.880953,
+    "ast_hash": "d940c0fe3712d32f53838257a9b1abea",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/height.mdx": {
+    "mtime": 1788280656.3484213,
+    "seen": 1788371583.880954,
+    "ast_hash": "bd74fd9b688770ef9333a0b1dfe3c88c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/hover-focus-and-other-states.mdx": {
+    "mtime": 1788280656.3492506,
+    "seen": 1788371583.880954,
+    "ast_hash": "c27e985b7107f322617fff2e4906e768",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/hyphens.mdx": {
+    "mtime": 1788280656.3493562,
+    "seen": 1788371583.880955,
+    "ast_hash": "121380ee5c1011ce1057cf1c88d87432",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/inline-size.mdx": {
+    "mtime": 1788280656.3725567,
+    "seen": 1788371583.880956,
+    "ast_hash": "5920aca03536e6e172dff10d1b676bd9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/isolation.mdx": {
+    "mtime": 1788280656.3726256,
+    "seen": 1788371583.880956,
+    "ast_hash": "00776e0ed29b0bff60b3b4a14b938b4a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/justify-content.mdx": {
+    "mtime": 1788280656.3730338,
+    "seen": 1788371583.880957,
+    "ast_hash": "264e5cb7851e02c447c94f3d8fca62c8",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/justify-items.mdx": {
+    "mtime": 1788280656.373142,
+    "seen": 1788371583.8809578,
+    "ast_hash": "e71495c5f4d3b431a0060b6261b98fbe",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/justify-self.mdx": {
+    "mtime": 1788280656.3734381,
+    "seen": 1788371583.8809578,
+    "ast_hash": "33e995168809b6a029d7934b6bb7b468",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/letter-spacing.mdx": {
+    "mtime": 1788280656.3735044,
+    "seen": 1788371583.880959,
+    "ast_hash": "68bb8144b56413b68475ada2bd4b7b4e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/line-clamp.mdx": {
+    "mtime": 1788280656.3735723,
+    "seen": 1788371583.88096,
+    "ast_hash": "4d4c1b678e250099fbb5e1309e518251",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/line-height.mdx": {
+    "mtime": 1788280656.3736472,
+    "seen": 1788371583.88096,
+    "ast_hash": "44d1355e74d575cdff1809eab71a00e2",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/list-style-image.mdx": {
+    "mtime": 1788280656.373711,
+    "seen": 1788371583.880961,
+    "ast_hash": "78c31bbffba3f95de3258b9fdf4b9eae",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/list-style-position.mdx": {
+    "mtime": 1788280656.373769,
+    "seen": 1788371583.8809621,
+    "ast_hash": "673fd72ac96fd533e70e25b845b3f2c1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/list-style-type.mdx": {
+    "mtime": 1788280656.3738263,
+    "seen": 1788371583.8809621,
+    "ast_hash": "b08f8651199d24e02964ee7220a5df67",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/margin.mdx": {
+    "mtime": 1788280656.3739219,
+    "seen": 1788371583.880963,
+    "ast_hash": "77ae351b2b4759b52ae353643d1700ca",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/mask-clip.mdx": {
+    "mtime": 1788280656.3739805,
+    "seen": 1788371583.880963,
+    "ast_hash": "70d1250e5360cb378f736a7ab4af18ff",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/mask-composite.mdx": {
+    "mtime": 1788280656.3740468,
+    "seen": 1788371583.880964,
+    "ast_hash": "89adbc323dfed3a57e435cb6c0f0d868",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/mask-image.mdx": {
+    "mtime": 1788280656.3742466,
+    "seen": 1788371583.8809652,
+    "ast_hash": "684465557c294a61b679dc0a0442bd2f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/mask-mode.mdx": {
+    "mtime": 1788280656.3743384,
+    "seen": 1788371583.8809652,
+    "ast_hash": "e6f01593aacbf81ef1c942741d618591",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/mask-origin.mdx": {
+    "mtime": 1788280656.3743901,
+    "seen": 1788371583.880966,
+    "ast_hash": "5711cf7fdc5e65856c92405a3ad380dc",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/mask-position.mdx": {
+    "mtime": 1788280656.374459,
+    "seen": 1788371583.880967,
+    "ast_hash": "f29c263ce1cde8f6bf4b758e426afb7f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/mask-repeat.mdx": {
+    "mtime": 1788280656.3746617,
+    "seen": 1788371583.880967,
+    "ast_hash": "3b893a6faf35c99f13c5e8796ddc9352",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/mask-size.mdx": {
+    "mtime": 1788280656.3747232,
+    "seen": 1788371583.8809679,
+    "ast_hash": "bb52171fb485e9cfd00c66063b51ad17",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/mask-type.mdx": {
+    "mtime": 1788280656.3747904,
+    "seen": 1788371583.880969,
+    "ast_hash": "1c740ad7183ab2f45a9637f532f81147",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/max-block-size.mdx": {
+    "mtime": 1788280656.374896,
+    "seen": 1788371583.880969,
+    "ast_hash": "6fbface4e4f2f470250f653cd14d68f8",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/max-height.mdx": {
+    "mtime": 1788280656.3749886,
+    "seen": 1788371583.88097,
+    "ast_hash": "ff939850d0e7a188f65819da792e69e2",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/max-inline-size.mdx": {
+    "mtime": 1788280656.3750644,
+    "seen": 1788371583.880971,
+    "ast_hash": "536580d1b27dd2254baccc54312b29c9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/max-width.mdx": {
+    "mtime": 1788280656.3751276,
+    "seen": 1788371583.880971,
+    "ast_hash": "c317593d804806777298d6c0c11a11cb",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/min-block-size.mdx": {
+    "mtime": 1788280656.3751915,
+    "seen": 1788371583.8809721,
+    "ast_hash": "d8c48b3317970231d984e73db96e66ca",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/min-height.mdx": {
+    "mtime": 1788280656.3752735,
+    "seen": 1788371583.880973,
+    "ast_hash": "cfb31bb9f6228dd9789d47a2520e8095",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/min-inline-size.mdx": {
+    "mtime": 1788280656.3753502,
+    "seen": 1788371583.880973,
+    "ast_hash": "d578fe7e923819f6b87927ff63e09a1b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/min-width.mdx": {
+    "mtime": 1788280656.3754218,
+    "seen": 1788371583.880974,
+    "ast_hash": "813cc2cbaf4e8d3ea07b4c34c912fc30",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/mix-blend-mode.mdx": {
+    "mtime": 1788280656.3754847,
+    "seen": 1788371583.880975,
+    "ast_hash": "e87d7772f665c655485b0d55f551e1aa",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/object-fit.mdx": {
+    "mtime": 1788280656.3755405,
+    "seen": 1788371583.880975,
+    "ast_hash": "5589f22c03e1ce087741755001e19aa4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/object-position.mdx": {
+    "mtime": 1788280656.3759563,
+    "seen": 1788371583.880976,
+    "ast_hash": "4519e93fde13b1ae0374239793263670",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/opacity.mdx": {
+    "mtime": 1788280656.3760147,
+    "seen": 1788371583.880977,
+    "ast_hash": "354cde23fdf3fef25d95bcd643aee263",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/order.mdx": {
+    "mtime": 1788280656.376087,
+    "seen": 1788371583.880977,
+    "ast_hash": "50d668bfe330233953afe3fc91414146",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/outline-color.mdx": {
+    "mtime": 1788280656.3761451,
+    "seen": 1788371583.8809779,
+    "ast_hash": "eb813a79c2297034475d4565a38b214f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/outline-offset.mdx": {
+    "mtime": 1788280656.3762128,
+    "seen": 1788371583.880979,
+    "ast_hash": "b9e249397cdcde742f677861ce6875c6",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/outline-style.mdx": {
+    "mtime": 1788280656.3762803,
+    "seen": 1788371583.880979,
+    "ast_hash": "0385a04656ed20890d1b3e64e8af8b49",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/outline-width.mdx": {
+    "mtime": 1788280656.3763404,
+    "seen": 1788371583.88098,
+    "ast_hash": "adf84e34366972ad35942649a548fbf1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/overflow-wrap.mdx": {
+    "mtime": 1788280656.376413,
+    "seen": 1788371583.880981,
+    "ast_hash": "4673ebcde28d545ba88c76fe1b49ad07",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/overflow.mdx": {
+    "mtime": 1788280656.3765862,
+    "seen": 1788371583.880981,
+    "ast_hash": "a598d3e111ee8e75cb250fb8b3b272de",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/overscroll-behavior.mdx": {
+    "mtime": 1788280656.3766592,
+    "seen": 1788371583.880982,
+    "ast_hash": "1b30f9003277a8b8aa5131d827977466",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/padding.mdx": {
+    "mtime": 1788280656.3767283,
+    "seen": 1788371583.880983,
+    "ast_hash": "983de3e1d10346a1b3b9231f0bde811a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/perspective-origin.mdx": {
+    "mtime": 1788280656.3767972,
+    "seen": 1788371583.880983,
+    "ast_hash": "fcabcc1a79bc12cf02007dc0760c9db0",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/perspective.mdx": {
+    "mtime": 1788280656.3768797,
+    "seen": 1788371583.880984,
+    "ast_hash": "f607905e1866773fa635737dffc69916",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/place-content.mdx": {
+    "mtime": 1788280656.376958,
+    "seen": 1788371583.880985,
+    "ast_hash": "f139173b03200f7e08a38e632a2451d2",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/place-items.mdx": {
+    "mtime": 1788280656.3770463,
+    "seen": 1788371583.880985,
+    "ast_hash": "8050da8c53fd2cb9ecc21cfe2b3bbb71",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/place-self.mdx": {
+    "mtime": 1788280656.3771286,
+    "seen": 1788371583.8809862,
+    "ast_hash": "c43393d6ea2d2e465a94d154a1510a7f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/pointer-events.mdx": {
+    "mtime": 1788280656.3771873,
+    "seen": 1788371583.880987,
+    "ast_hash": "41c309e399047019321434b5d24b6633",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/position.mdx": {
+    "mtime": 1788280656.3773072,
+    "seen": 1788371583.880987,
+    "ast_hash": "b3411f73f69403eb831b52840e5f68c2",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/preflight.mdx": {
+    "mtime": 1788280656.3773854,
+    "seen": 1788371583.8809888,
+    "ast_hash": "6a2685872832daa529c496f037c1a3f6",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/resize.mdx": {
+    "mtime": 1788280656.3774421,
+    "seen": 1788371583.88099,
+    "ast_hash": "a200a430dc44ca9529acace9ba04d7fb",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/responsive-design.mdx": {
+    "mtime": 1788280656.377575,
+    "seen": 1788371583.88099,
+    "ast_hash": "602748c338fb928c81dcdfff7a6bfe79",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/rotate.mdx": {
+    "mtime": 1788280656.377661,
+    "seen": 1788371583.880991,
+    "ast_hash": "b517edbd048fcaa063363e480b2f1e03",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/scale.mdx": {
+    "mtime": 1788280656.3777711,
+    "seen": 1788371583.880992,
+    "ast_hash": "a19002fd426859a3d668253b2bec9afe",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/scroll-behavior.mdx": {
+    "mtime": 1788280656.3778293,
+    "seen": 1788371583.880992,
+    "ast_hash": "cf8d1f526569652aecdeefd24c84fc70",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/scroll-margin.mdx": {
+    "mtime": 1788280656.3779025,
+    "seen": 1788371583.8809931,
+    "ast_hash": "78c64214e7a340b8ae191b00e026449b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/scroll-padding.mdx": {
+    "mtime": 1788280656.3779724,
+    "seen": 1788371583.880994,
+    "ast_hash": "0cb77cd3b17018d93b429e84fd8b1006",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/scroll-snap-align.mdx": {
+    "mtime": 1788280656.3780622,
+    "seen": 1788371583.880994,
+    "ast_hash": "3fd483980c9b72bb25c7ee97530270b2",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/scroll-snap-stop.mdx": {
+    "mtime": 1788280656.3781536,
+    "seen": 1788371583.880995,
+    "ast_hash": "9d06fde442f1b28a9dd694b7107330c4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/scroll-snap-type.mdx": {
+    "mtime": 1788280656.378253,
+    "seen": 1788371583.880996,
+    "ast_hash": "9f90b0a3ae38879d78506d5ba8ccb5c9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/scrollbar-color.mdx": {
+    "mtime": 1788280656.3783333,
+    "seen": 1788371583.880996,
+    "ast_hash": "f1afd6b71b57d8303638de3583c9d3fa",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/scrollbar-gutter.mdx": {
+    "mtime": 1788280656.3783994,
+    "seen": 1788371583.8809972,
+    "ast_hash": "72f15a4fe7f4818115db5cdf00bd58f2",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/scrollbar-width.mdx": {
+    "mtime": 1788280656.3784702,
+    "seen": 1788371583.8809972,
+    "ast_hash": "0f5f081e683277d6a26df24d98f61e81",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/skew.mdx": {
+    "mtime": 1788280656.378587,
+    "seen": 1788371583.880998,
+    "ast_hash": "41e870ce8795e62a1f73f9b7e5031541",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/stroke-width.mdx": {
+    "mtime": 1788280656.378664,
+    "seen": 1788371583.8809988,
+    "ast_hash": "1fb7edc5f886fc3309a408208db2f3b2",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/stroke.mdx": {
+    "mtime": 1788280656.3787305,
+    "seen": 1788371583.8809988,
+    "ast_hash": "abfac48daf6a80072a835d6ff47d0d6e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/styling-with-utility-classes.mdx": {
+    "mtime": 1788280656.379202,
+    "seen": 1788371583.881,
+    "ast_hash": "2cf2e5cd3546cdf9d2157c64a6181251",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/tab-size.mdx": {
+    "mtime": 1788280656.3792937,
+    "seen": 1788371583.881001,
+    "ast_hash": "a7d24801280d8a6e54e7b8ff08c6c0f8",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/table-layout.mdx": {
+    "mtime": 1788280656.379388,
+    "seen": 1788371583.881001,
+    "ast_hash": "97d8d11663b90013f6634d5af9134be2",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/text-align.mdx": {
+    "mtime": 1788280656.3794699,
+    "seen": 1788371583.881002,
+    "ast_hash": "4f8fa57bde2b398410bd0cb44054067e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/text-decoration-color.mdx": {
+    "mtime": 1788280656.3795495,
+    "seen": 1788371583.881003,
+    "ast_hash": "ac6f667d07d3c22fd6cec99986b34964",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/text-decoration-line.mdx": {
+    "mtime": 1788280656.3796144,
+    "seen": 1788371583.881003,
+    "ast_hash": "e32a4be336fde041d60b7179f8534f76",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/text-decoration-style.mdx": {
+    "mtime": 1788280656.3796802,
+    "seen": 1788371583.881004,
+    "ast_hash": "13d96af440457c91880a042de82f1e46",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/text-decoration-thickness.mdx": {
+    "mtime": 1788280656.3797474,
+    "seen": 1788371583.881004,
+    "ast_hash": "fc2b977c3054130581e14e577363c5c1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/text-indent.mdx": {
+    "mtime": 1788280656.379813,
+    "seen": 1788371583.881005,
+    "ast_hash": "3945aee3c80ce2a250671c5494b100d7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/text-overflow.mdx": {
+    "mtime": 1788280656.3798785,
+    "seen": 1788371583.881006,
+    "ast_hash": "a034dd37be202690f7c2500da74f0e06",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/text-shadow.mdx": {
+    "mtime": 1788280656.379954,
+    "seen": 1788371583.881006,
+    "ast_hash": "08259685bab3384dffc6dabf347c4aa0",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/text-transform.mdx": {
+    "mtime": 1788280656.3800182,
+    "seen": 1788371583.8810072,
+    "ast_hash": "0a431aabd57b93dbf28cbd43a5c8b4e2",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/text-underline-offset.mdx": {
+    "mtime": 1788280656.3800926,
+    "seen": 1788371583.8810081,
+    "ast_hash": "e6312057397abd7bbc1ac682fadbbd53",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/text-wrap.mdx": {
+    "mtime": 1788280656.3801675,
+    "seen": 1788371583.8810081,
+    "ast_hash": "64d24b29b44330d2132b56dfb8884465",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/theme.mdx": {
+    "mtime": 1788280656.3803854,
+    "seen": 1788371583.8810089,
+    "ast_hash": "4c58f8267dae7d9fcfe4267d7db24ea4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/top-right-bottom-left.mdx": {
+    "mtime": 1788280656.3804846,
+    "seen": 1788371583.8810098,
+    "ast_hash": "c22207f56705737832d88b2a339a1288",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/touch-action.mdx": {
+    "mtime": 1788280656.380557,
+    "seen": 1788371583.8810098,
+    "ast_hash": "bec4411e9d1bc4501e7856e05fd45022",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/transform-origin.mdx": {
+    "mtime": 1788280656.3806353,
+    "seen": 1788371583.881011,
+    "ast_hash": "b5df4904463731c2a47b95b7d655b6f2",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/transform-style.mdx": {
+    "mtime": 1788280656.3807204,
+    "seen": 1788371583.881012,
+    "ast_hash": "dd2f939f8a96fd8ccf008602011eea1a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/transform.mdx": {
+    "mtime": 1788280656.3807948,
+    "seen": 1788371583.881012,
+    "ast_hash": "0db8ac420389771684a9b94ea5f842db",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/transition-behavior.mdx": {
+    "mtime": 1788280656.3808706,
+    "seen": 1788371583.881013,
+    "ast_hash": "29d085b7bdd4ecd236954c1be79a934c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/transition-delay.mdx": {
+    "mtime": 1788280656.3809466,
+    "seen": 1788371583.881014,
+    "ast_hash": "fe46caaf0d3a9af98b8c1dc39f4ed388",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/transition-duration.mdx": {
+    "mtime": 1788280656.381027,
+    "seen": 1788371583.881016,
+    "ast_hash": "b605cacceeb9560b9a357e930ba67a8c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/transition-property.mdx": {
+    "mtime": 1788280656.381103,
+    "seen": 1788371583.881017,
+    "ast_hash": "51105771a45b01aa7396931b95ba8915",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/transition-timing-function.mdx": {
+    "mtime": 1788280656.3811684,
+    "seen": 1788371583.8810182,
+    "ast_hash": "1e698e3b6fa89cc9b479b2b5efd28f41",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/translate.mdx": {
+    "mtime": 1788280656.3813107,
+    "seen": 1788371583.8810182,
+    "ast_hash": "b9ff164dfa5667bf318ed24dbb88cc6f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/upgrade-guide.mdx": {
+    "mtime": 1788280656.381503,
+    "seen": 1788371583.8810189,
+    "ast_hash": "69e5f9be248218a50531d453558a06c1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/user-select.mdx": {
+    "mtime": 1788280656.3815722,
+    "seen": 1788371583.8810198,
+    "ast_hash": "9401897416ee6029a968e4fca69275ce",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/vertical-align.mdx": {
+    "mtime": 1788280656.3817399,
+    "seen": 1788371583.8810198,
+    "ast_hash": "32e51c05699edb08521c7fc37cd529e3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/visibility.mdx": {
+    "mtime": 1788280656.3818364,
+    "seen": 1788371583.881021,
+    "ast_hash": "f2933b8ca57238e39c9c8f558ed495c5",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/white-space.mdx": {
+    "mtime": 1788280656.3819103,
+    "seen": 1788371583.881021,
+    "ast_hash": "da547a24fde4e0ddaf64a824b2c87a06",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/width.mdx": {
+    "mtime": 1788280656.3820465,
+    "seen": 1788371583.881022,
+    "ast_hash": "b2ebf1ee4eacd6c79a95efe6a49754b8",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/will-change.mdx": {
+    "mtime": 1788280656.3821266,
+    "seen": 1788371583.881023,
+    "ast_hash": "2efe5a1a989d56dcba0b7434a6f915bd",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/word-break.mdx": {
+    "mtime": 1788280656.3822124,
+    "seen": 1788371583.881023,
+    "ast_hash": "7a7305882e2ecab076135a18cc12fb7c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/z-index.mdx": {
+    "mtime": 1788280656.3822823,
+    "seen": 1788371583.881024,
+    "ast_hash": "4effa184a518707e72d0c2bbbaa618cc",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/zoom.mdx": {
+    "mtime": 1788280656.3823607,
+    "seen": 1788371583.881025,
+    "ast_hash": "af875951b2182adf699a2a4703394200",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/engineering-playbook.md": {
+    "mtime": 1788280656.3824584,
+    "seen": 1788371583.881025,
+    "ast_hash": "2475e1b8de2eaec8dea286f44c580d52",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/gotchas.md": {
+    "mtime": 1788280656.3825269,
+    "seen": 1788371583.881026,
+    "ast_hash": "f83064106c396a9bd2e98473d72e9ced",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design-guidelines/SKILL.md": {
+    "mtime": 1788280656.382737,
+    "seen": 1788371583.881027,
+    "ast_hash": "98087aedd18375666dbb093c859b2949",
+    "semantic_hash": ""
+  },
+  ".agents/workflows/graphify.md": {
+    "mtime": 1788370603.4161243,
+    "seen": 1788371583.881027,
+    "ast_hash": "6d73634a678cf1e1c71930adf80bd1f0",
+    "semantic_hash": ""
+  },
+  "AGENTS.md": {
+    "mtime": 1788280656.3831658,
+    "seen": 1788371583.8810282,
+    "ast_hash": "4d944a80d98bf8891d5b10081a86d3e1",
+    "semantic_hash": ""
+  },
+  "DESIGN.md": {
+    "mtime": 1788375243.0903254,
+    "seen": 1788378524.982372,
+    "ast_hash": "18db28e7e1f891267348b5c6c832668b",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1788370603.4169285,
+    "seen": 1788371583.8810291,
+    "ast_hash": "5017a80255a67ecdc815f748b65d7d73",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/clouds.svg": {
+    "mtime": 1788280656.3495011,
+    "seen": 1788371583.8810298,
+    "ast_hash": "bafdb71bb47eaee7a67889539ff0a2f4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/cursor-intellisense.png": {
+    "mtime": 1788280656.3542092,
+    "seen": 1788371583.8810308,
+    "ast_hash": "6cf9ff2a5e5efaf207222e6692cdcc0d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/erin-lindford.jpg": {
+    "mtime": 1788280656.3548841,
+    "seen": 1788371583.8810308,
+    "ast_hash": "981dfff716f07035ea83c22c810f18bc",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/guides/adonis-white.react.svg": {
+    "mtime": 1788280656.3550036,
+    "seen": 1788371583.881032,
+    "ast_hash": "4ec1a318ead8a5e6a13784034be1ecde",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/guides/adonis.react.svg": {
+    "mtime": 1788280656.3550732,
+    "seen": 1788371583.881033,
+    "ast_hash": "1c5514a8c0b37068b434d16dca60719b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/guides/angular-white.react.svg": {
+    "mtime": 1788280656.3551362,
+    "seen": 1788371583.881033,
+    "ast_hash": "aecbfaf48b39407292f197265d0911ac",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/guides/angular.react.svg": {
+    "mtime": 1788280656.3551974,
+    "seen": 1788371583.881034,
+    "ast_hash": "9dcdf88830537035e077dfb8a50d08af",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/guides/astro-white.react.svg": {
+    "mtime": 1788280656.3552644,
+    "seen": 1788371583.881035,
+    "ast_hash": "3af7933d339f4af85fd578cba2353630",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/guides/astro.react.svg": {
+    "mtime": 1788280656.35533,
+    "seen": 1788371583.881035,
+    "ast_hash": "5e25020d26d1e2fca778e5d3868f980c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/guides/ember.react.svg": {
+    "mtime": 1788280656.355395,
+    "seen": 1788371583.881036,
+    "ast_hash": "d05a5a9d162d26c3191381928007acb0",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/guides/gatsby.react.svg": {
+    "mtime": 1788280656.355459,
+    "seen": 1788371583.881037,
+    "ast_hash": "4110aea110779ae5eae362f52cc84fcc",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/guides/laravel.react.svg": {
+    "mtime": 1788280656.3555274,
+    "seen": 1788371583.881037,
+    "ast_hash": "10f70b4e8fd838a7c18b94f6839832e1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/guides/meteor.react.svg": {
+    "mtime": 1788280656.3555932,
+    "seen": 1788371583.8810382,
+    "ast_hash": "8ed29328febdb041e5ae18d1b4e8a2e1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/guides/nextjs-white.react.svg": {
+    "mtime": 1788280656.3556745,
+    "seen": 1788371583.8810391,
+    "ast_hash": "c48f5ad1c8747940a95bdb87b6b92c7e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/guides/nextjs.react.svg": {
+    "mtime": 1788280656.3557365,
+    "seen": 1788371583.8810391,
+    "ast_hash": "f950f6ae09f579b9fddd4f3c620c5d5b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/guides/nuxtjs.react.svg": {
+    "mtime": 1788280656.3557968,
+    "seen": 1788371583.8810399,
+    "ast_hash": "2bba877ea511a07b220efd92ae834a25",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/guides/parcel.react.svg": {
+    "mtime": 1788280656.3559182,
+    "seen": 1788371583.8810408,
+    "ast_hash": "48224433acfb0c11f4e685aa6f481951",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/guides/phoenix.react.svg": {
+    "mtime": 1788280656.3560023,
+    "seen": 1788371583.881042,
+    "ast_hash": "edf6c3629dbc1a1219521d6a92c77d98",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/guides/qwik.react.svg": {
+    "mtime": 1788280656.3560684,
+    "seen": 1788371583.881042,
+    "ast_hash": "13e959b64d2427769b45afe2d4a4904e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/guides/rails-white.react.svg": {
+    "mtime": 1788280656.3561437,
+    "seen": 1788371583.881043,
+    "ast_hash": "b62315a7b3a023ba70ab2d22c12773b8",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/guides/rails.react.svg": {
+    "mtime": 1788280656.356215,
+    "seen": 1788371583.881044,
+    "ast_hash": "eb76d6a7ba36e24ea9eb9cee68901b97",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/guides/react-router-white.react.svg": {
+    "mtime": 1788280656.3562768,
+    "seen": 1788371583.881044,
+    "ast_hash": "0dcbe9078c6518b26ace53c6edec33c9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/guides/react-router.react.svg": {
+    "mtime": 1788280656.3563404,
+    "seen": 1788371583.881045,
+    "ast_hash": "9a945b1f917b65e5efe640f38e0f9eb3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/guides/rspack.react.svg": {
+    "mtime": 1788280656.3565788,
+    "seen": 1788371583.881046,
+    "ast_hash": "6dbe0af4fe7a03cffbbd959e5f52a414",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/guides/solidjs.react.svg": {
+    "mtime": 1788280656.3566463,
+    "seen": 1788371583.881046,
+    "ast_hash": "9a5f9cfd639cbb8440e2161774f31c02",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/guides/svelte.react.svg": {
+    "mtime": 1788280656.3567133,
+    "seen": 1788371583.881047,
+    "ast_hash": "385f2429dc96b47d9d347e4ab564352b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/guides/symfony-white.react.svg": {
+    "mtime": 1788280656.3567803,
+    "seen": 1788371583.881048,
+    "ast_hash": "fc1872e4b28b878abbcbd09f3db2dabf",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/guides/symfony.react.svg": {
+    "mtime": 1788280656.3568482,
+    "seen": 1788371583.881048,
+    "ast_hash": "3c7b1ccfda16e3a609a8f3c8a38594f7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/guides/tanstack-white.react.svg": {
+    "mtime": 1788280656.3571324,
+    "seen": 1788371583.8810492,
+    "ast_hash": "6727745e880943c1054520a9aff12281",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/guides/tanstack.react.svg": {
+    "mtime": 1788280656.3574855,
+    "seen": 1788371583.88105,
+    "ast_hash": "a470e701c0fce3ed9a097d0f71fcccf7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/guides/vite.react.svg": {
+    "mtime": 1788280656.357552,
+    "seen": 1788371583.88105,
+    "ast_hash": "a2e3ffdf90d20dbbbe6438924d775964",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/intellisense.png": {
+    "mtime": 1788280656.3583038,
+    "seen": 1788371583.8810508,
+    "ast_hash": "70463eb9068c46c061f4c5edc9159a2e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/keyboard-dark.png": {
+    "mtime": 1788280656.3599837,
+    "seen": 1788371583.881052,
+    "ast_hash": "dc32638cd4fd0c80aacc6124c7277210",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/keyboard-light.png": {
+    "mtime": 1788280656.3611672,
+    "seen": 1788371583.881052,
+    "ast_hash": "36b2c9c703bb5cc725383a45347bc5e6",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/mask.png": {
+    "mtime": 1788280656.3614745,
+    "seen": 1788371583.881053,
+    "ast_hash": "64c1ad89875993a71aa21280e02df68a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/prettier-banner.jpg": {
+    "mtime": 1788280656.3619094,
+    "seen": 1788371583.881053,
+    "ast_hash": "b408feedfb86df318fe7351109cba5d9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/t-shirt.jpg": {
+    "mtime": 1788280656.3621218,
+    "seen": 1788371583.881054,
+    "ast_hash": "d6ff4458f63782288b81fc6ba48fc288",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-4-docs/references/docs/img/zed-intellisense.png": {
+    "mtime": 1788280656.372124,
+    "seen": 1788371583.8810549,
+    "ast_hash": "03bf5612ea09962fcddd3de8cc738e50",
+    "semantic_hash": ""
+  },
+  "public/favicon.svg": {
+    "mtime": 1788280656.3852298,
+    "seen": 1788371583.881056,
+    "ast_hash": "8c13f40658976ea1dfb8ba37a8be0e8d",
+    "semantic_hash": ""
+  },
+  "public/templates/buff-doge.svg": {
+    "mtime": 1788280656.3853304,
+    "seen": 1788371583.881056,
+    "ast_hash": "52b98aca3331fc92c97c35d4389d0800",
+    "semantic_hash": ""
+  },
+  "public/templates/cat-at-table.svg": {
+    "mtime": 1788280656.3853896,
+    "seen": 1788371583.881057,
+    "ast_hash": "df2fed70201c905fd727e5a7dfdc04e7",
+    "semantic_hash": ""
+  },
+  "public/templates/change-my-mind.svg": {
+    "mtime": 1788280656.3854547,
+    "seen": 1788371583.881057,
+    "ast_hash": "6e04bc41879d5dcbedef6b0b6564357f",
+    "semantic_hash": ""
+  },
+  "public/templates/distracted-boyfriend.svg": {
+    "mtime": 1788280656.385527,
+    "seen": 1788371583.881058,
+    "ast_hash": "f047e18b9a56a8cbc4cc37e42af2f83d",
+    "semantic_hash": ""
+  },
+  "public/templates/doge.svg": {
+    "mtime": 1788280656.38558,
+    "seen": 1788371583.8810592,
+    "ast_hash": "691ff0b3245d190d6c6dd6f5860aa8fd",
+    "semantic_hash": ""
+  },
+  "public/templates/drake.svg": {
+    "mtime": 1788280656.3856342,
+    "seen": 1788371583.8810592,
+    "ast_hash": "ae0388ab1ea2c20bbbfc156ecd30e44b",
+    "semantic_hash": ""
+  },
+  "public/templates/this-is-fine.svg": {
+    "mtime": 1788280656.3856916,
+    "seen": 1788371583.8810601,
+    "ast_hash": "5baf69173ea41589481104e9ab51adfd",
+    "semantic_hash": ""
+  },
+  "public/templates/trollface.svg": {
+    "mtime": 1788280656.3857472,
+    "seen": 1788371583.881061,
+    "ast_hash": "4d42e9a39bf0e4a6252194a223d8c978",
+    "semantic_hash": ""
+  },
+  "public/templates/two-buttons.svg": {
+    "mtime": 1788280656.3858056,
+    "seen": 1788371583.8810618,
+    "ast_hash": "e121380f414abef23f3a753d04582737",
+    "semantic_hash": ""
+  },
+  "src/lib/avatar.ts": {
+    "mtime": 1788375810.6273117,
+    "seen": 1788378524.9821818,
+    "ast_hash": "fe96ca3e3c1308ce1f36bcbb6eb28213",
+    "semantic_hash": ""
+  },
+  "src/pages/templates.astro": {
+    "mtime": 1788378342.841211,
+    "seen": 1788378524.982187,
+    "ast_hash": "d74ef3e779f6d13fb7ca0f46671dd18b",
+    "semantic_hash": ""
   }
 }

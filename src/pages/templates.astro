@@ -1,0 +1,244 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const categories = [
+    { id: "trending",  label: "🔥 Trending",  ids: [1,2,3,4,5,6,7,8,9,10] },
+    { id: "newest",    label: "✨ Newest",     ids: [11,12,13,14,15,16,17,18,19,20] },
+    { id: "reactions", label: "😂 Reactions",  ids: [3,5,7,9,11,13,15,17,19,1] },
+];
+
+const allIds = Array.from({ length: 20 }, (_, i) => i + 1);
+---
+
+<Layout title="Templates — MemeMaker" description="Browse meme templates by category, upload your own, and start editing in seconds.">
+    <main class="mx-auto max-w-350 px-4 py-10 sm:px-6">
+
+        <!-- Page header -->
+        <div class="mb-8">
+            <p class="mb-1 font-mono text-[9px] uppercase tracking-[0.18em] text-[#929292]">Browse &amp; remix</p>
+            <h1 class="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">Meme Templates</h1>
+        </div>
+
+        <!-- Category tabs -->
+        <div class="mb-6 flex items-center gap-1 overflow-x-auto pb-1" role="tablist" aria-label="Template categories" id="tab-bar">
+            {categories.map((cat, idx) => (
+                <button
+                    type="button"
+                    role="tab"
+                    data-category={cat.id}
+                    data-ids={JSON.stringify(cat.ids)}
+                    aria-selected={idx === 0 ? "true" : "false"}
+                    class={`tab-btn shrink-0 rounded-full px-4 py-2 text-xs font-medium transition-colors whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-white ${idx === 0 ? "bg-primary text-on-primary" : "bg-white/8 text-[#9b9b9b] hover:text-white hover:bg-white/12"}`}
+                >
+                    {cat.label}
+                </button>
+            ))}
+        </div>
+
+        <!-- Upload your own template -->
+        <div
+            id="upload-zone"
+            class="upload-zone mb-8 flex cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed border-white/15 px-6 py-8 text-center transition-[border-color,background-color] hover:border-white/30 hover:bg-white/[0.02]"
+            role="button"
+            tabindex="0"
+            aria-label="Upload your own template"
+        >
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-white/8">
+                <svg class="h-5 w-5 text-[#9b9b9b]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M12 16V4m0 0L7 9m5-5 5 5"/><path d="M5 14v5h14v-5"/>
+                </svg>
+            </div>
+            <div>
+                <p class="text-sm font-medium text-ink">Upload your own template</p>
+                <p class="mt-0.5 text-xs text-[#777]">PNG, JPG, WEBP or GIF · click or drag &amp; drop</p>
+            </div>
+            <input id="tpl-upload" type="file" accept="image/png,image/jpeg,image/webp,image/gif" class="sr-only" />
+        </div>
+
+        <!-- Template grid -->
+        <div
+            id="template-grid"
+            class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+            role="tabpanel"
+            aria-live="polite"
+        >
+            <!-- Uploaded template card slot (hidden by default) -->
+            <div id="uploaded-card" class="hidden">
+                <button
+                    type="button"
+                    id="uploaded-card-btn"
+                    class="group relative w-full overflow-hidden rounded-xl border border-primary/40 bg-[#202020] outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                    aria-label="Edit your uploaded template"
+                >
+                    <img id="uploaded-preview" class="block h-auto w-full transition-[filter] duration-300 group-hover:blur-[3px]" alt="Your uploaded template" />
+                    <span class="absolute right-2 top-2 rounded-full bg-primary px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-on-primary">Your template</span>
+                    <span class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/60 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100" aria-hidden="true">
+                        <span class="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-[11px] font-semibold text-black shadow">
+                            <svg class="h-3 w-3" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 14l1.5-4.5L11 2l3 3-7.5 7.5L2 14z"/></svg>
+                            Edit template
+                        </span>
+                    </span>
+                </button>
+            </div>
+
+            <!-- CDN template cards -->
+            {allIds.map((id) => (
+                <div class="tpl-card-wrap" data-id={id}>
+                    <a
+                        href={`/edit?template=${id}`}
+                        class="tpl-card group relative block overflow-hidden rounded-xl border border-white/10 bg-[#202020] outline-none focus-visible:ring-2 focus-visible:ring-white"
+                        aria-label={`Use meme template ${id}`}
+                    >
+                        <img
+                            data-tpl-img
+                            class="block h-auto w-full transition-[filter] duration-300 group-hover:blur-[3px]"
+                            alt={`Meme template ${id}`}
+                            loading="lazy"
+                            decoding="async"
+                        />
+                        <span class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/60 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100" aria-hidden="true">
+                            <span class="user-count rounded-full bg-white/15 px-2.5 py-1 text-[10px] font-medium text-white backdrop-blur-sm"></span>
+                            <span class="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-[11px] font-semibold text-black shadow">
+                                <svg class="h-3 w-3" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 14l1.5-4.5L11 2l3 3-7.5 7.5L2 14z"/></svg>
+                                Edit template
+                            </span>
+                        </span>
+                    </a>
+                </div>
+            ))}
+        </div>
+    </main>
+</Layout>
+
+<script>
+    import { saveImage } from "../lib/imageStore";
+
+    const templateBase =
+        "https://mememaker-templates.nyc3.cdn.digitaloceanspaces.com/thumbnails";
+
+    // Load CDN images + random user counts
+    const cardWraps = Array.from(
+        document.querySelectorAll<HTMLElement>(".tpl-card-wrap"),
+    );
+
+    cardWraps.forEach((wrap) => {
+        const id    = wrap.getAttribute("data-id");
+        const img   = wrap.querySelector<HTMLImageElement>("[data-tpl-img]");
+        const count = wrap.querySelector<HTMLElement>(".user-count");
+        if (img && id) {
+            img.src = `${templateBase}/${id}.webp`;
+        }
+        if (count) {
+            const n = Math.floor(Math.random() * 49000) + 1000;
+            const label = n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(n);
+            count.textContent = `\u2764\ufe0f ${label} used this`;
+        }
+    });
+
+    // Category tabs
+    const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>(".tab-btn"));
+    const grid = document.getElementById("template-grid")!;
+
+    function activateTab(btn: HTMLButtonElement) {
+        tabs.forEach((t) => {
+            const active = t === btn;
+            t.setAttribute("aria-selected", String(active));
+            t.classList.toggle("bg-primary",     active);
+            t.classList.toggle("text-on-primary", active);
+            t.classList.toggle("bg-white/8",      !active);
+            t.classList.toggle("text-[#9b9b9b]",  !active);
+            if (!active) t.classList.remove("hover:bg-white/12");
+        });
+
+        const ids: number[] = JSON.parse(btn.getAttribute("data-ids") || "[]");
+        const idSet = new Set(ids);
+
+        cardWraps.forEach((wrap) => {
+            const id = Number(wrap.getAttribute("data-id"));
+            (wrap as HTMLElement).style.display = idSet.has(id) ? "" : "none";
+        });
+    }
+
+    tabs.forEach((btn) => btn.addEventListener("click", () => activateTab(btn)));
+    if (tabs[0]) activateTab(tabs[0]);
+
+    // Upload your own template
+    const uploadZone   = document.getElementById("upload-zone")   as HTMLElement;
+    const uploadInput  = document.getElementById("tpl-upload")    as HTMLInputElement;
+    const uploadedCard = document.getElementById("uploaded-card") as HTMLElement;
+    const uploadedBtn  = document.getElementById("uploaded-card-btn") as HTMLButtonElement;
+    const uploadedImg  = document.getElementById("uploaded-preview")  as HTMLImageElement;
+
+    let uploadedDataUrl: string | null = null;
+
+    uploadZone.addEventListener("click", (e) => {
+        if ((e.target as HTMLElement).closest("#uploaded-card")) return;
+        uploadInput.click();
+    });
+    uploadZone.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") uploadInput.click();
+    });
+
+    let zoneDrag = 0;
+    uploadZone.addEventListener("dragenter", (e) => {
+        e.preventDefault();
+        zoneDrag += 1;
+        uploadZone.classList.add("!border-white/40", "!bg-white/[0.04]");
+    });
+    uploadZone.addEventListener("dragover", (e) => e.preventDefault());
+    uploadZone.addEventListener("dragleave", () => {
+        zoneDrag = Math.max(0, zoneDrag - 1);
+        if (zoneDrag === 0) uploadZone.classList.remove("!border-white/40", "!bg-white/[0.04]");
+    });
+    uploadZone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        zoneDrag = 0;
+        uploadZone.classList.remove("!border-white/40", "!bg-white/[0.04]");
+        const file = e.dataTransfer?.files[0];
+        if (file) handleFile(file);
+    });
+
+    uploadInput.addEventListener("change", () => {
+        const file = uploadInput.files?.[0];
+        if (file) handleFile(file);
+    });
+
+    function handleFile(file: File) {
+        const allowed = new Set(["image/png", "image/jpeg", "image/webp", "image/gif"]);
+        if (!allowed.has(file.type)) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+            uploadedDataUrl = reader.result as string;
+            uploadedImg.src = uploadedDataUrl;
+            uploadedCard.classList.remove("hidden");
+            grid.prepend(uploadedCard);
+            uploadedCard.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        };
+        reader.readAsDataURL(file);
+    }
+
+    uploadedBtn.addEventListener("click", async () => {
+        if (!uploadedDataUrl) return;
+        try {
+            await saveImage(uploadedDataUrl);
+            window.location.href = "/edit";
+        } catch {
+            alert("Image too large or storage full. Try a smaller image.");
+        }
+    });
+</script>
+
+<style>
+    .tab-btn[aria-selected="true"] {
+        box-shadow: 0 0 0 1px rgba(244, 255, 57, 0.35);
+    }
+
+    .tpl-card-wrap {
+        transition: opacity 0.15s ease;
+    }
+
+    .upload-zone:focus-visible {
+        outline: 2px solid white;
+        outline-offset: 2px;
+    }
+</style>
