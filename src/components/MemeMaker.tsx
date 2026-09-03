@@ -1,6 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./MemeMaker.css";
-import { loadImage, clearImage } from "../lib/imageStore";
+import {
+  loadImage,
+  clearImage,
+  loadTemplateUrl,
+  clearTemplateUrl,
+} from "../lib/imageStore";
 
 type TextLayer = {
   id: number;
@@ -14,13 +19,14 @@ type TextLayer = {
 const DEFAULT_IMAGE =
   "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&w=1200&q=80";
 
-const templates = [
-  DEFAULT_IMAGE,
-  "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=500&q=80",
-  "https://images.unsplash.com/photo-1535378917042-10a22c95931a?auto=format&fit=crop&w=500&q=80",
-  "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=500&q=80",
-  "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=500&q=80",
-];
+const DO_SPACES_BASE_URL =
+  "https://mememaker-templates.nyc3.cdn.digitaloceanspaces.com";
+
+const templates = Array.from({ length: 20 }, (_, i) => ({
+  id: i + 1,
+  thumbnail: `${DO_SPACES_BASE_URL}/thumbnails/${i + 1}.webp`,
+  full: `${DO_SPACES_BASE_URL}/full/${i + 1}.webp`,
+}));
 
 export default function MemeMaker() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -112,12 +118,28 @@ export default function MemeMaker() {
   };
 
   useEffect(() => {
-    loadImage().then((pending) => {
-      if (pending) {
-        setImage(pending);
-        clearImage();
-      }
-    });
+    const urlParams = new URLSearchParams(window.location.search);
+    const templateId = urlParams.get("template");
+
+    if (templateId) {
+      const fullImageUrl = `${DO_SPACES_BASE_URL}/full/${templateId}.webp`;
+      setImage(fullImageUrl);
+      window.history.replaceState({}, "", "/edit");
+    } else {
+      loadTemplateUrl().then((pendingTemplate) => {
+        if (pendingTemplate) {
+          setImage(pendingTemplate);
+          clearTemplateUrl();
+        } else {
+          loadImage().then((pending) => {
+            if (pending) {
+              setImage(pending);
+              clearImage();
+            }
+          });
+        }
+      });
+    }
   }, []);
 
   useEffect(() => {
@@ -438,16 +460,20 @@ export default function MemeMaker() {
               {templates
                 .filter((item) =>
                   search
-                    ? item.toLowerCase().includes(search.toLowerCase())
+                    ? String(item.id).includes(search) ||
+                      item.thumbnail.toLowerCase().includes(search.toLowerCase())
                     : true
                 )
-                .map((template, index) => (
+                .map((template) => (
                   <button
                     className="template"
-                    key={template}
-                    onClick={() => setImage(template)}
+                    key={template.id}
+                    onClick={() => setImage(template.full)}
                   >
-                    <img src={template} alt={`Template ${index + 1}`} />
+                    <img
+                      src={template.thumbnail}
+                      alt={`Template ${template.id}`}
+                    />
                   </button>
                 ))}
             </div>
@@ -585,9 +611,12 @@ export default function MemeMaker() {
           </div>
 
           <div className="featured-grid">
-            {templates.map((template, index) => (
-              <div className="featured-card" key={template}>
-                <img src={template} alt={`Featured meme ${index}`} />
+            {templates.map((template) => (
+              <div className="featured-card" key={template.id}>
+                <img
+                  src={template.thumbnail}
+                  alt={`Featured meme ${template.id}`}
+                />
 
                 <div className="featured-info">
                   <span>Popular Meme</span>

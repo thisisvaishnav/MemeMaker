@@ -135,11 +135,11 @@ const templateSlots = Array.from({ length: 20 });
             </a>
         </div>
 
-        <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+        <div class="columns-2 gap-3 sm:columns-3 lg:columns-4 xl:columns-5">
             {Array.from({ length: 20 }).map((_, i) => (
                 <a
                     href={`/edit?template=${i + 1}`}
-                    class="trending-card group relative overflow-hidden rounded-xl border border-white/10 bg-[#202020] outline-none focus-visible:ring-2 focus-visible:ring-white"
+                    class="trending-card group relative mb-3 block break-inside-avoid overflow-hidden rounded-xl border border-white/10 bg-[#202020] outline-none focus-visible:ring-2 focus-visible:ring-white"
                     data-trending-id={i + 1}
                     aria-label={`Use meme template ${i + 1}`}
                 >
