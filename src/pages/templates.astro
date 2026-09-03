@@ -58,16 +58,16 @@ const allIds = Array.from({ length: 20 }, (_, i) => i + 1);
         <!-- Template grid -->
         <div
             id="template-grid"
-            class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+            class="columns-2 gap-3 sm:columns-3 lg:columns-4 xl:columns-5"
             role="tabpanel"
             aria-live="polite"
         >
             <!-- Uploaded template card slot (hidden by default) -->
-            <div id="uploaded-card" class="hidden">
+            <div id="uploaded-card" class="mb-3 hidden break-inside-avoid">
                 <button
                     type="button"
                     id="uploaded-card-btn"
-                    class="group relative w-full overflow-hidden rounded-xl border border-primary/40 bg-[#202020] outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                    class="group relative block w-full overflow-hidden rounded-xl border border-primary/40 bg-[#202020] outline-none focus-visible:ring-2 focus-visible:ring-primary"
                     aria-label="Edit your uploaded template"
                 >
                     <img id="uploaded-preview" class="block h-auto w-full transition-[filter] duration-300 group-hover:blur-[3px]" alt="Your uploaded template" />
@@ -83,7 +83,7 @@ const allIds = Array.from({ length: 20 }, (_, i) => i + 1);
 
             <!-- CDN template cards -->
             {allIds.map((id) => (
-                <div class="tpl-card-wrap" data-id={id}>
+                <div class="tpl-card-wrap mb-3 break-inside-avoid" data-id={id}>
                     <a
                         href={`/edit?template=${id}`}
                         class="tpl-card group relative block overflow-hidden rounded-xl border border-white/10 bg-[#202020] outline-none focus-visible:ring-2 focus-visible:ring-white"
