@@ -17,14 +17,14 @@ const templateSlots = Array.from({ length: 20 });
         >
             <div
                 id="templates"
-                class="order-2 mt-12 grid w-full grid-cols-2 gap-4 sm:grid-cols-3 lg:absolute lg:inset-0 lg:order-0 lg:mt-0 lg:block"
+                class="order-2 mt-12 columns-2 gap-4 sm:columns-3 lg:absolute lg:inset-0 lg:order-0 lg:mt-0 lg:block"
                 aria-label="Random meme templates"
             >
                 {
                     templateSlots.map((_, index) => (
                         <button
                             type="button"
-                            class="template-card group relative z-10 w-full overflow-hidden rounded-2xl border border-white/15 bg-[#202020] text-left shadow-2xl outline-none transition-[transform,box-shadow,border-color] duration-200 focus-visible:z-30 focus-visible:border-white focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-black lg:absolute"
+                            class="template-card group relative z-10 mb-4 block w-full break-inside-avoid overflow-hidden rounded-2xl border border-white/15 bg-[#202020] text-left shadow-2xl outline-none transition-[transform,box-shadow,border-color] duration-200 focus-visible:z-30 focus-visible:border-white focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-black lg:mb-0 lg:absolute"
                             data-template-card
                             data-slot={index + 1}
                             aria-pressed="false"
