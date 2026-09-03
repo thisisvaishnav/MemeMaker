@@ -164,33 +164,34 @@ const templateSlots = Array.from({ length: 20 });
 </Layout>
 
 <script>
+    import {
+        getCachedTemplatePool,
+        shuffleArray,
+        preloadTemplateImages,
+    } from "../lib/templateCache";
+
     const templateBaseUrl =
         "https://mememaker-templates.nyc3.cdn.digitaloceanspaces.com/thumbnails";
     const cards = Array.from(
         document.querySelectorAll<HTMLButtonElement>("[data-template-card]"),
     );
 
-    const templateIds = Array.from({ length: 20 }, (_, index) => index + 1);
-    const positionSlots = Array.from({ length: 20 }, (_, index) => index);
+    // Retrieve cached template IDs from cookie/storage and shuffle locally
+    const templatePool = getCachedTemplatePool();
+    const templateIds = shuffleArray(templatePool);
+    const positionSlots = shuffleArray(
+        Array.from({ length: templateIds.length }, (_, index) => index),
+    );
 
-    for (let index = templateIds.length - 1; index > 0; index -= 1) {
-        const randomIndex = Math.floor(Math.random() * (index + 1));
-        [templateIds[index], templateIds[randomIndex]] = [
-            templateIds[randomIndex],
-            templateIds[index],
-        ];
-        [positionSlots[index], positionSlots[randomIndex]] = [
-            positionSlots[randomIndex],
-            positionSlots[index],
-        ];
-    }
+    // Pre-warm images into browser disk/memory cache for instant reload
+    preloadTemplateImages(templateBaseUrl, templatePool);
 
     const randomBetween = (minimum: number, maximum: number) =>
         minimum + Math.random() * (maximum - minimum);
 
     cards.forEach((card, index) => {
-        const templateId = templateIds[index];
-        const position = positionSlots[index];
+        const templateId = templateIds[index % templateIds.length];
+        const position = positionSlots[index % positionSlots.length];
         const column = position % 5;
         const row = Math.floor(position / 5);
 
@@ -356,15 +357,19 @@ const templateSlots = Array.from({ length: 20 });
         showSelectedFile(event.dataTransfer?.files[0]);
     });
 
-    // ── Trending images ──────────────────────────────────────────────
+    // ── Trending images (shuffled locally from cache on reload) ──────
     const trendingBase =
         "https://mememaker-templates.nyc3.cdn.digitaloceanspaces.com/thumbnails";
+    const trendingShuffled = shuffleArray(templatePool);
     document
         .querySelectorAll<HTMLAnchorElement>("[data-trending-id]")
-        .forEach((card) => {
-            const id = card.getAttribute("data-trending-id");
+        .forEach((card, index) => {
+            const id = trendingShuffled[index % trendingShuffled.length];
+            card.setAttribute("data-trending-id", String(id));
+            card.setAttribute("aria-label", `Use meme template ${id}`);
+            card.href = `/edit?template=${id}`;
             const img = card.querySelector<HTMLImageElement>("[data-trending-img]");
-            if (img && id) {
+            if (img) {
                 img.src = `${trendingBase}/${id}.webp`;
                 img.alt = `Meme template ${id}`;
             }
