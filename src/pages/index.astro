@@ -99,7 +99,7 @@ const templateSlots = Array.from({ length: 20 });
                                 id="meme-upload"
                                 class="sr-only"
                                 type="file"
-                                accept="image/png,image/jpeg,image/webp,image/gif"
+                                accept="image/png,image/jpeg,image/jpg,image/webp,image/gif,.png,.jpg,.jpeg,.webp,.gif"
                             />
                         </label>
                         <p
@@ -164,33 +164,34 @@ const templateSlots = Array.from({ length: 20 });
 </Layout>
 
 <script>
+    import {
+        getCachedTemplatePool,
+        shuffleArray,
+        preloadTemplateImages,
+    } from "../lib/templateCache";
+
     const templateBaseUrl =
         "https://mememaker-templates.nyc3.cdn.digitaloceanspaces.com/thumbnails";
     const cards = Array.from(
         document.querySelectorAll<HTMLButtonElement>("[data-template-card]"),
     );
 
-    const templateIds = Array.from({ length: 20 }, (_, index) => index + 1);
-    const positionSlots = Array.from({ length: 20 }, (_, index) => index);
+    // Retrieve cached template IDs from cookie/storage and shuffle locally
+    const templatePool = getCachedTemplatePool();
+    const templateIds = shuffleArray(templatePool);
+    const positionSlots = shuffleArray(
+        Array.from({ length: templateIds.length }, (_, index) => index),
+    );
 
-    for (let index = templateIds.length - 1; index > 0; index -= 1) {
-        const randomIndex = Math.floor(Math.random() * (index + 1));
-        [templateIds[index], templateIds[randomIndex]] = [
-            templateIds[randomIndex],
-            templateIds[index],
-        ];
-        [positionSlots[index], positionSlots[randomIndex]] = [
-            positionSlots[randomIndex],
-            positionSlots[index],
-        ];
-    }
+    // Pre-warm images into browser disk/memory cache for instant reload
+    preloadTemplateImages(templateBaseUrl, templatePool);
 
     const randomBetween = (minimum: number, maximum: number) =>
         minimum + Math.random() * (maximum - minimum);
 
     cards.forEach((card, index) => {
-        const templateId = templateIds[index];
-        const position = positionSlots[index];
+        const templateId = templateIds[index % templateIds.length];
+        const position = positionSlots[index % positionSlots.length];
         const column = position % 5;
         const row = Math.floor(position / 5);
 
@@ -248,15 +249,6 @@ const templateSlots = Array.from({ length: 20 });
                 window.location.href = `/edit?template=${templateId}`;
                 return;
             }
-
-            if (
-                !window.matchMedia("(hover: hover) and (pointer: fine)").matches
-            ) {
-                const willOpen = !card.classList.contains("is-active");
-                closeTemplates(card);
-                card.classList.toggle("is-active", willOpen);
-                card.setAttribute("aria-pressed", String(willOpen));
-            }
         });
     });
 
@@ -274,12 +266,14 @@ const templateSlots = Array.from({ length: 20 });
         "[data-upload-drop-zone]",
     );
     const defaultUploadStatus = "PNG, JPG, WEBP or GIF · drop anywhere";
-    const acceptedImageTypes = new Set([
-        "image/png",
-        "image/jpeg",
-        "image/webp",
-        "image/gif",
-    ]);
+
+    const isAcceptedImage = (file?: File): boolean => {
+        if (!file) return false;
+        if (file.type && /^image\/(png|jpe?g|jpg|webp|gif|x-png)$/i.test(file.type)) {
+            return true;
+        }
+        return /\.(png|jpe?g|jpg|webp|gif|jfif)$/i.test(file.name);
+    };
 
     const showSelectedFile = (file?: File) => {
         if (!uploadStatus) return;
@@ -289,22 +283,25 @@ const templateSlots = Array.from({ length: 20 });
             return;
         }
 
-        if (!acceptedImageTypes.has(file.type)) {
+        if (!isAcceptedImage(file)) {
             uploadStatus.textContent =
                 "Please drop a PNG, JPG, WEBP or GIF image";
             return;
         }
 
         if (uploadInput) {
-            const transfer = new DataTransfer();
-            transfer.items.add(file);
-            uploadInput.files = transfer.files;
+            try {
+                const transfer = new DataTransfer();
+                transfer.items.add(file);
+                uploadInput.files = transfer.files;
+            } catch {}
         }
-        uploadStatus.textContent = `Ready to use: ${file.name}`;
+        uploadStatus.textContent = `Processing image: ${file.name}...`;
 
         const reader = new FileReader();
         reader.onload = async () => {
             try {
+                uploadStatus.textContent = "Redirecting to editor...";
                 await saveImage(reader.result as string);
                 window.location.href = "/edit";
             } catch (err) {
@@ -312,6 +309,11 @@ const templateSlots = Array.from({ length: 20 });
                 if (uploadStatus) {
                     uploadStatus.textContent = "Image too large or storage full. Try a smaller image.";
                 }
+            }
+        };
+        reader.onerror = () => {
+            if (uploadStatus) {
+                uploadStatus.textContent = "Failed to read image. Please try again.";
             }
         };
         reader.readAsDataURL(file);
@@ -356,15 +358,19 @@ const templateSlots = Array.from({ length: 20 });
         showSelectedFile(event.dataTransfer?.files[0]);
     });
 
-    // ── Trending images ──────────────────────────────────────────────
+    // ── Trending images (shuffled locally from cache on reload) ──────
     const trendingBase =
         "https://mememaker-templates.nyc3.cdn.digitaloceanspaces.com/thumbnails";
+    const trendingShuffled = shuffleArray(templatePool);
     document
         .querySelectorAll<HTMLAnchorElement>("[data-trending-id]")
-        .forEach((card) => {
-            const id = card.getAttribute("data-trending-id");
+        .forEach((card, index) => {
+            const id = trendingShuffled[index % trendingShuffled.length];
+            card.setAttribute("data-trending-id", String(id));
+            card.setAttribute("aria-label", `Use meme template ${id}`);
+            card.href = `/edit?template=${id}`;
             const img = card.querySelector<HTMLImageElement>("[data-trending-img]");
-            if (img && id) {
+            if (img) {
                 img.src = `${trendingBase}/${id}.webp`;
                 img.alt = `Meme template ${id}`;
             }

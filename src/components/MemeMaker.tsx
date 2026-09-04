@@ -5,6 +5,7 @@ import {
   clearImage,
   loadTemplateUrl,
   clearTemplateUrl,
+  getCustomTemplateById,
 } from "../lib/imageStore";
 
 type TextLayer = {
@@ -58,7 +59,8 @@ export default function MemeMaker() {
     if (!ctx) return;
 
     const img = new Image();
-    if (!image.startsWith("data:")) {
+    const isDataOrBlob = image.startsWith("data:") || image.startsWith("blob:");
+    if (!isDataOrBlob) {
       img.crossOrigin = "anonymous";
     }
 
@@ -114,32 +116,47 @@ export default function MemeMaker() {
       }
     };
 
+    img.onerror = (e) => {
+      console.error("Failed to load image in MemeMaker canvas:", e);
+    };
+
     img.src = image;
   };
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const templateId = urlParams.get("template");
+    const customId = urlParams.get("custom");
+
+    if (customId) {
+      getCustomTemplateById(customId).then((tpl) => {
+        if (tpl) {
+          setImage(tpl.dataUrl);
+        }
+      });
+      window.history.replaceState({}, "", "/edit");
+      return;
+    }
 
     if (templateId) {
       const fullImageUrl = `${DO_SPACES_BASE_URL}/full/${templateId}.webp`;
       setImage(fullImageUrl);
       window.history.replaceState({}, "", "/edit");
-    } else {
-      loadTemplateUrl().then((pendingTemplate) => {
-        if (pendingTemplate) {
-          setImage(pendingTemplate);
-          clearTemplateUrl();
-        } else {
-          loadImage().then((pending) => {
-            if (pending) {
-              setImage(pending);
-              clearImage();
-            }
-          });
-        }
-      });
+      return;
     }
+
+    loadTemplateUrl().then((pendingTemplate) => {
+      if (pendingTemplate) {
+        setImage(pendingTemplate);
+        clearTemplateUrl();
+      } else {
+        loadImage().then((pending) => {
+          if (pending) {
+            setImage(pending);
+          }
+        });
+      }
+    });
   }, []);
 
   useEffect(() => {
@@ -159,10 +176,14 @@ export default function MemeMaker() {
 
     if (!file) return;
 
-    const url = URL.createObjectURL(file);
-
-    setImage(url);
-    setGenerated(null);
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (typeof reader.result === "string") {
+        setImage(reader.result);
+        setGenerated(null);
+      }
+    };
+    reader.readAsDataURL(file);
   };
 
   const generateMeme = () => {
