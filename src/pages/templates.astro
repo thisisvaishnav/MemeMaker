@@ -1,22 +1,27 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-const categories = [
-    { id: "trending",  label: "🔥 Trending",  ids: [1,2,3,4,5,6,7,8,9,10] },
-    { id: "newest",    label: "✨ Newest",     ids: [11,12,13,14,15,16,17,18,19,20] },
-    { id: "reactions", label: "😂 Reactions",  ids: [3,5,7,9,11,13,15,17,19,1] },
-];
-
 const allIds = Array.from({ length: 20 }, (_, i) => i + 1);
+
+const categories = [
+    { id: "all",       label: "⚡ All",          ids: allIds },
+    { id: "my",        label: "📁 My Templates",  ids: [] },
+    { id: "trending",  label: "🔥 Trending",     ids: [1,2,3,4,5,6,7,8,9,10] },
+    { id: "newest",    label: "✨ Newest",        ids: [11,12,13,14,15,16,17,18,19,20] },
+    { id: "reactions", label: "😂 Reactions",     ids: [3,5,7,9,11,13,15,17,19,1] },
+];
 ---
 
 <Layout title="Templates — MemeMaker" description="Browse meme templates by category, upload your own, and start editing in seconds.">
     <main class="mx-auto max-w-350 px-4 py-10 sm:px-6">
 
         <!-- Page header -->
-        <div class="mb-8">
-            <p class="mb-1 font-mono text-[9px] uppercase tracking-[0.18em] text-[#929292]">Browse &amp; remix</p>
-            <h1 class="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">Meme Templates</h1>
+        <div class="mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+                <p class="mb-1 font-mono text-[9px] uppercase tracking-[0.18em] text-[#929292]">Browse &amp; remix</p>
+                <h1 class="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">Meme Templates</h1>
+            </div>
+            <p id="custom-count-badge" class="font-mono text-xs text-[#888]"></p>
         </div>
 
         <!-- Category tabs -->
@@ -49,10 +54,15 @@ const allIds = Array.from({ length: 20 }, (_, i) => i + 1);
                 </svg>
             </div>
             <div>
-                <p class="text-sm font-medium text-ink">Upload your own template</p>
-                <p class="mt-0.5 text-xs text-[#777]">PNG, JPG, WEBP or GIF · click or drag &amp; drop</p>
+                <p class="text-sm font-medium text-ink" id="upload-zone-title">Upload your own template</p>
+                <p class="mt-0.5 text-xs text-[#777]" id="upload-zone-status">PNG, JPG, WEBP or GIF · click or drag &amp; drop to save &amp; edit</p>
             </div>
-            <input id="tpl-upload" type="file" accept="image/png,image/jpeg,image/webp,image/gif" class="sr-only" />
+            <input
+                id="tpl-upload"
+                type="file"
+                accept="image/png,image/jpeg,image/jpg,image/webp,image/gif,.png,.jpg,.jpeg,.webp,.gif"
+                class="sr-only"
+            />
         </div>
 
         <!-- Template grid -->
@@ -62,25 +72,6 @@ const allIds = Array.from({ length: 20 }, (_, i) => i + 1);
             role="tabpanel"
             aria-live="polite"
         >
-            <!-- Uploaded template card slot (hidden by default) -->
-            <div id="uploaded-card" class="mb-3 hidden break-inside-avoid">
-                <button
-                    type="button"
-                    id="uploaded-card-btn"
-                    class="group relative block w-full overflow-hidden rounded-xl border border-primary/40 bg-[#202020] outline-none focus-visible:ring-2 focus-visible:ring-primary"
-                    aria-label="Edit your uploaded template"
-                >
-                    <img id="uploaded-preview" class="block h-auto w-full transition-[filter] duration-300 group-hover:blur-[3px]" alt="Your uploaded template" />
-                    <span class="absolute right-2 top-2 rounded-full bg-primary px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-on-primary">Your template</span>
-                    <span class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/60 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100" aria-hidden="true">
-                        <span class="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-[11px] font-semibold text-black shadow">
-                            <svg class="h-3 w-3" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 14l1.5-4.5L11 2l3 3-7.5 7.5L2 14z"/></svg>
-                            Edit template
-                        </span>
-                    </span>
-                </button>
-            </div>
-
             <!-- CDN template cards -->
             {allIds.map((id) => (
                 <div class="tpl-card-wrap mb-3 break-inside-avoid" data-id={id}>
@@ -111,20 +102,27 @@ const allIds = Array.from({ length: 20 }, (_, i) => i + 1);
 </Layout>
 
 <script>
-    import { saveImage } from "../lib/imageStore";
+    import {
+        saveImage,
+        saveCustomTemplate,
+        getCustomTemplates,
+        deleteCustomTemplate,
+        type CustomTemplate,
+    } from "../lib/imageStore";
+    import { supabase } from "../lib/supabase";
 
     const templateBase =
         "https://mememaker-templates.nyc3.cdn.digitaloceanspaces.com/thumbnails";
 
     // Load CDN images + random user counts
     const cardWraps = Array.from(
-        document.querySelectorAll<HTMLElement>(".tpl-card-wrap"),
+        document.querySelectorAll<HTMLElement>(".tpl-card-wrap:not(.custom-tpl-card)"),
     );
 
     cardWraps.forEach((wrap) => {
         const id    = wrap.getAttribute("data-id");
         const img   = wrap.querySelector<HTMLImageElement>("[data-tpl-img]");
-        const count = wrap.querySelector<HTMLElement>(".user-count");
+        const count = wrap.querySelector<HTMLElement>(",user-count");
         if (img && id) {
             img.src = `${templateBase}/${id}.webp`;
         }
@@ -135,44 +133,176 @@ const allIds = Array.from({ length: 20 }, (_, i) => i + 1);
         }
     });
 
-    // Category tabs
-    const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>(".tab-btn"));
     const grid = document.getElementById("template-grid")!;
+    const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>(".tab-btn"));
+    const customCountBadge = document.getElementById("custom-count-badge");
+    const myTabBtn = document.querySelector<HTMLButtonElement>('[data-category="my"]');
+
+    let currentUserId: string | undefined = undefined;
+    let activeCategoryId = "all";
+
+    // ── Custom Templates Rendering ──────────────────────────────────
+    async function loadAndRenderCustomTemplates() {
+        const templates = await getCustomTemplates(currentUserId);
+        
+        // Remove existing custom cards before re-rendering
+        document.querySelectorAll(".custom-tpl-card").forEach((el) => el.remove());
+
+        // Update counts
+        if (myTabBtn) {
+            myTabBtn.textContent = `📁 My Templates (${templates.length})`;
+        }
+        if (customCountBadge) {
+            customCountBadge.textContent = templates.length > 0
+                ? `${templates.length} custom template${templates.length === 1 ? "" : "s"} saved`
+                : "";
+        }
+
+        // Render cards in reverse order so latest is first
+        templates.slice().reverse().forEach((tpl) => {
+            renderCustomTemplateCard(tpl, true);
+        });
+
+        // Re-apply tab filtering
+        filterGrid(activeCategoryId);
+    }
+
+    function renderCustomTemplateCard(tpl: CustomTemplate, prepend = false) {
+        const existing = document.querySelector(`[data-custom-id="${tpl.id}"]`);
+        if (existing) return;
+
+        const wrap = document.createElement("div");
+        wrap.className = "tpl-card-wrap custom-tpl-card mb-3 break-inside-avoid";
+        wrap.setAttribute("data-custom-id", tpl.id);
+
+        wrap.innerHTML = `
+            <div class="tpl-card group relative block overflow-hidden rounded-xl border border-primary/40 bg-[#202020] outline-none focus-within:ring-2 focus-within:ring-primary shadow-lg">
+                <img
+                    src="${tpl.dataUrl}"
+                    class="block h-auto w-full transition-[filter] duration-300 group-hover:blur-[3px]"
+                    alt="${tpl.name || 'Custom template'}"
+                    loading="lazy"
+                />
+                <span class="pointer-events-none absolute right-2 top-2 rounded-full bg-primary px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-on-primary shadow">
+                    Your template
+                </span>
+                <button
+                    type="button"
+                    class="delete-btn absolute left-2 top-2 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-black/70 text-white/80 opacity-0 transition hover:bg-red-600 hover:text-white group-hover:opacity-100 group-focus-within:opacity-100"
+                    title="Delete template"
+                    aria-label="Delete this template"
+                >
+                    <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 6h18m-2 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                    </svg>
+                </button>
+                <a
+                    href="/edit?custom=${tpl.id}"
+                    class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/60 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100"
+                    aria-label="Edit ${tpl.name || 'custom template'}"
+                >
+                    <span class="inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-2 text-[11px] font-semibold text-black shadow-lg">
+                        <svg class="h-3 w-3" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 14l1.5-4.5L11 2l3 3-7.5 7.5L2 14z"/></svg>
+                        Edit template
+                    </span>
+                </a>
+            </div>
+        `;
+
+        const deleteBtn = wrap.querySelector<HTMLButtonElement>(".delete-btn");
+        deleteBtn?.addEventListener("click", async (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            if (confirm("Delete this custom template?")) {
+                await deleteCustomTemplate(tpl.id);
+                wrap.remove();
+                loadAndRenderCustomTemplates();
+            }
+        });
+
+        if (prepend && grid.firstChild) {
+            grid.insertBefore(wrap, grid.firstChild);
+        } else {
+            grid.appendChild(wrap);
+        }
+    }
+
+    // ── Tab Handling ────────────────────────────────────────────────
+    function filterGrid(catId: string) {
+        activeCategoryId = catId;
+        const customCards = Array.from(document.querySelectorAll<HTMLElement>(".custom-tpl-card"));
+        const cdnCards = Array.from(document.querySelectorAll<HTMLElement>(".tpl-card-wrap:not(.custom-tpl-card)"));
+
+        if (catId === "my") {
+            // Show ONLY custom templates
+            customCards.forEach((c) => (c.style.display = ""));
+            cdnCards.forEach((c) => (c.style.display = "none"));
+            return;
+        }
+
+        const activeTab = tabs.find((t) => t.getAttribute("data-category") === catId);
+        const ids: number[] = JSON.parse(activeTab?.getAttribute("data-ids") || "[]");
+        const idSet = new Set(ids);
+
+        // Show custom cards on "all" and "trending"
+        const showCustom = catId === "all" || catId === "trending";
+        customCards.forEach((c) => (c.style.display = showCustom ? "" : "none"));
+
+        // Filter CDN cards
+        cdnCards.forEach((wrap) => {
+            const id = Number(wrap.getAttribute("data-id"));
+            wrap.style.display = idSet.has(id) ? "" : "none";
+        });
+    }
 
     function activateTab(btn: HTMLButtonElement) {
         tabs.forEach((t) => {
             const active = t === btn;
             t.setAttribute("aria-selected", String(active));
-            t.classList.toggle("bg-primary",     active);
+            t.classList.toggle("bg-primary", active);
             t.classList.toggle("text-on-primary", active);
-            t.classList.toggle("bg-white/8",      !active);
-            t.classList.toggle("text-[#9b9b9b]",  !active);
+            t.classList.toggle("bg-white/8", !active);
+            t.classList.toggle("text-[#9b9b9b]", !active);
             if (!active) t.classList.remove("hover:bg-white/12");
         });
 
-        const ids: number[] = JSON.parse(btn.getAttribute("data-ids") || "[]");
-        const idSet = new Set(ids);
-
-        cardWraps.forEach((wrap) => {
-            const id = Number(wrap.getAttribute("data-id"));
-            (wrap as HTMLElement).style.display = idSet.has(id) ? "" : "none";
-        });
+        const catId = btn.getAttribute("data-category") || "all";
+        filterGrid(catId);
     }
 
     tabs.forEach((btn) => btn.addEventListener("click", () => activateTab(btn)));
     if (tabs[0]) activateTab(tabs[0]);
 
-    // Upload your own template
+    // ── Supabase Auth Integration ───────────────────────────────────
+    try {
+        supabase.auth.getSession().then((res: { data: { session: { user: { id: string } } | null } }) => {
+            currentUserId = res.data.session?.user?.id;
+            loadAndRenderCustomTemplates();
+        });
+
+        supabase.auth.onAuthStateChange((_evt: string, session: { user: { id: string } } | null) => {
+            currentUserId = session?.user?.id;
+            loadAndRenderCustomTemplates();
+        });
+    } catch {
+        loadAndRenderCustomTemplates();
+    }
+
+    // ── Upload & Dropzone Handling ──────────────────────────────────
     const uploadZone   = document.getElementById("upload-zone")   as HTMLElement;
     const uploadInput  = document.getElementById("tpl-upload")    as HTMLInputElement;
-    const uploadedCard = document.getElementById("uploaded-card") as HTMLElement;
-    const uploadedBtn  = document.getElementById("uploaded-card-btn") as HTMLButtonElement;
-    const uploadedImg  = document.getElementById("uploaded-preview")  as HTMLImageElement;
+    const zoneTitle    = document.getElementById("upload-zone-title") as HTMLElement;
+    const zoneStatus   = document.getElementById("upload-zone-status") as HTMLElement;
 
-    let uploadedDataUrl: string | null = null;
+    const isAcceptedImage = (file?: File): boolean => {
+        if (!file) return false;
+        if (file.type && /^image\/(png|jpe?g|jpg|webp|gif|x-png)$/i.test(file.type)) {
+            return true;
+        }
+        return /\.(png|jpe?g|jpg|webp|gif|jfif)$/i.test(file.name);
+    };
 
-    uploadZone.addEventListener("click", (e) => {
-        if ((e.target as HTMLElement).closest("#uploaded-card")) return;
+    uploadZone.addEventListener("click", () => {
         uploadInput.click();
     });
     uploadZone.addEventListener("keydown", (e) => {
@@ -203,29 +333,53 @@ const allIds = Array.from({ length: 20 }, (_, i) => i + 1);
         if (file) handleFile(file);
     });
 
-    function handleFile(file: File) {
-        const allowed = new Set(["image/png", "image/jpeg", "image/webp", "image/gif"]);
-        if (!allowed.has(file.type)) return;
+    async function handleFile(file: File) {
+        if (!isAcceptedImage(file)) {
+            alert("Please select a valid image file (PNG, JPG, WEBP, or GIF).");
+            return;
+        }
+
+        if (zoneTitle) zoneTitle.textContent = "Saving template...";
+        if (zoneStatus) zoneStatus.textContent = `Processing ${file.name} and redirecting to editor...`;
+
         const reader = new FileReader();
-        reader.onload = () => {
-            uploadedDataUrl = reader.result as string;
-            uploadedImg.src = uploadedDataUrl;
-            uploadedCard.classList.remove("hidden");
-            grid.prepend(uploadedCard);
-            uploadedCard.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        reader.onload = async () => {
+            const dataUrl = reader.result as string;
+            const newTemplate: CustomTemplate = {
+                id: "custom_" + Date.now() + "_" + Math.random().toString(36).substring(2, 7),
+                name: file.name.replace(/\.[^/.]+$/, ""),
+                dataUrl: dataUrl,
+                userId: currentUserId || undefined,
+                createdAt: Date.now(),
+            };
+
+            try {
+                // 1. Save persistently in custom templates store (IndexedDB + localStorage)
+                await saveCustomTemplate(newTemplate);
+
+                // 2. Also set as pending editor image
+                await saveImage(dataUrl);
+
+                // 3. Render card in grid
+                renderCustomTemplateCard(newTemplate, true);
+
+                // 4. Redirect directly to editor with that photo
+                window.location.href = `/edit?custom=${newTemplate.id}`;
+            } catch (err) {
+                console.error("Failed to save custom template:", err);
+                if (zoneTitle) zoneTitle.textContent = "Upload your own template";
+                if (zoneStatus) zoneStatus.textContent = "Storage full or image too large. Try a smaller image.";
+            }
         };
+
+        reader.onerror = () => {
+            alert("Failed to read image file. Please try again.");
+            if (zoneTitle) zoneTitle.textContent = "Upload your own template";
+            if (zoneStatus) zoneStatus.textContent = "PNG, JPG, WEBP or GIF · click or drag & drop";
+        };
+
         reader.readAsDataURL(file);
     }
-
-    uploadedBtn.addEventListener("click", async () => {
-        if (!uploadedDataUrl) return;
-        try {
-            await saveImage(uploadedDataUrl);
-            window.location.href = "/edit";
-        } catch {
-            alert("Image too large or storage full. Try a smaller image.");
-        }
-    });
 </script>
 
 <style>

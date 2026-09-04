@@ -38,13 +38,21 @@ function openDB(): Promise<IDBDatabase> {
 }
 
 export async function saveImage(dataUrl: string): Promise<void> {
-  // Always save to sessionStorage as instant reliable backup
+  // 1. Sync to localStorage for persistence across reloads and tab navigation
+  try {
+    localStorage.setItem(KEY, dataUrl);
+  } catch (e) {
+    console.warn("Could not save pending image to localStorage (likely quota exceeded):", e);
+  }
+
+  // 2. Sync to sessionStorage
   try {
     sessionStorage.setItem(KEY, dataUrl);
   } catch (e) {
     console.warn("Could not save pending image to sessionStorage:", e);
   }
 
+  // 3. Save to IndexedDB
   try {
     const db = await openDB();
     return new Promise((resolve, reject) => {
@@ -60,12 +68,28 @@ export async function saveImage(dataUrl: string): Promise<void> {
       };
     });
   } catch (err) {
-    console.warn("IndexedDB saveImage failed, falling back to sessionStorage only:", err);
+    console.warn("IndexedDB saveImage failed, falling back to localStorage/sessionStorage:", err);
   }
 }
 
 export async function loadImage(): Promise<string | null> {
-  // 1. Try IndexedDB first
+  // 1. Check localStorage first (fast, persistent across page changes)
+  try {
+    const fromLocal = localStorage.getItem(KEY);
+    if (fromLocal) return fromLocal;
+  } catch (e) {
+    console.warn("Could not read from localStorage:", e);
+  }
+
+  // 2. Check sessionStorage
+  try {
+    const fromSession = sessionStorage.getItem(KEY);
+    if (fromSession) return fromSession;
+  } catch (e) {
+    console.warn("Could not read from sessionStorage:", e);
+  }
+
+  // 3. Fall back to IndexedDB
   try {
     const db = await openDB();
     const fromDB = await new Promise<string | null>((resolve, reject) => {
@@ -83,21 +107,17 @@ export async function loadImage(): Promise<string | null> {
 
     if (fromDB) return fromDB;
   } catch (err) {
-    console.warn("IndexedDB loadImage failed, trying sessionStorage:", err);
-  }
-
-  // 2. Fall back to sessionStorage
-  try {
-    const fromSession = sessionStorage.getItem(KEY);
-    if (fromSession) return fromSession;
-  } catch (e) {
-    console.warn("Could not read from sessionStorage:", e);
+    console.warn("IndexedDB loadImage failed:", err);
   }
 
   return null;
 }
 
 export async function clearImage(): Promise<void> {
+  try {
+    localStorage.removeItem(KEY);
+  } catch {}
+
   try {
     sessionStorage.removeItem(KEY);
   } catch {}
@@ -121,6 +141,10 @@ export async function clearImage(): Promise<void> {
 
 export async function saveTemplateUrl(url: string): Promise<void> {
   try {
+    localStorage.setItem(TEMPLATE_KEY, url);
+  } catch {}
+
+  try {
     sessionStorage.setItem(TEMPLATE_KEY, url);
   } catch {}
 
@@ -143,6 +167,16 @@ export async function saveTemplateUrl(url: string): Promise<void> {
 
 export async function loadTemplateUrl(): Promise<string | null> {
   try {
+    const fromLocal = localStorage.getItem(TEMPLATE_KEY);
+    if (fromLocal) return fromLocal;
+  } catch {}
+
+  try {
+    const fromSession = sessionStorage.getItem(TEMPLATE_KEY);
+    if (fromSession) return fromSession;
+  } catch {}
+
+  try {
     const db = await openDB();
     const fromDB = await new Promise<string | null>((resolve, reject) => {
       const tx = db.transaction(STORE_NAME, "readonly");
@@ -160,14 +194,14 @@ export async function loadTemplateUrl(): Promise<string | null> {
     if (fromDB) return fromDB;
   } catch {}
 
-  try {
-    return sessionStorage.getItem(TEMPLATE_KEY);
-  } catch {
-    return null;
-  }
+  return null;
 }
 
 export async function clearTemplateUrl(): Promise<void> {
+  try {
+    localStorage.removeItem(TEMPLATE_KEY);
+  } catch {}
+
   try {
     sessionStorage.removeItem(TEMPLATE_KEY);
   } catch {}

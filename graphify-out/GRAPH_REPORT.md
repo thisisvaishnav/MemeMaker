@@ -1,16 +1,16 @@
-# Graph Report - MemeMaker  (2026-09-03)
+# Graph Report - MemeMaker  (2026-09-04)
 
 ## Corpus Check
-- 232 files · ~263,831 words
+- 234 files · ~265,654 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1773 nodes · 1607 edges · 237 communities (216 shown, 18 thin omitted)
+- 1785 nodes · 1637 edges · 237 communities (216 shown, 18 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `28d5c973`
+- Built from commit: `5afd7db2`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -248,7 +248,7 @@
 - workflows/graphify.md
 - tailwind-merge
 - tw-animate
-- templates.astro
+- imageStore.ts
 
 ## God Nodes (most connected - your core abstractions)
 1. `Pseudo-class reference` - 38 edges
@@ -258,16 +258,16 @@
 5. `Media and feature queries` - 13 edges
 6. `Examples` - 12 edges
 7. `Examples` - 12 edges
-8. `Examples` - 11 edges
-9. `cn()` - 10 edges
-10. `Functional utilities` - 10 edges
+8. `openDB()` - 11 edges
+9. `Examples` - 11 edges
+10. `cn()` - 10 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `updateUserUI()` --calls--> `getUserAvatarUrl()`  [EXTRACTED]
   src/components/Header.astro → src/lib/avatar.ts
-- `MemeMaker()` --calls--> `clearImage()`  [EXTRACTED]
-  src/components/MemeMaker.tsx → src/lib/imageStore.ts
 - `MemeMaker()` --calls--> `clearTemplateUrl()`  [EXTRACTED]
+  src/components/MemeMaker.tsx → src/lib/imageStore.ts
+- `MemeMaker()` --calls--> `getCustomTemplateById()`  [EXTRACTED]
   src/components/MemeMaker.tsx → src/lib/imageStore.ts
 - `MemeMaker()` --calls--> `loadImage()`  [EXTRACTED]
   src/components/MemeMaker.tsx → src/lib/imageStore.ts
@@ -1139,12 +1139,12 @@ Nodes (3): Basic example, Examples, Responsive design
 Cohesion: 0.50
 Nodes (3): Examples, Optimizing with will change, Using a custom value
 
-### Community 236 - "templates.astro"
-Cohesion: 0.10
-Nodes (20): MemeMaker(), templates, TextLayer, clearImage(), clearTemplateUrl(), loadImage(), loadTemplateUrl(), openDB() (+12 more)
+### Community 236 - "imageStore.ts"
+Cohesion: 0.09
+Nodes (30): MemeMaker(), templates, TextLayer, clearImage(), clearTemplateUrl(), CustomTemplate, deleteCustomTemplate(), getCustomTemplateById() (+22 more)
 
 ## Knowledge Gaps
-- **1227 isolated node(s):** `colors`, `$schema`, `style`, `rsc`, `tsx` (+1222 more)
+- **1226 isolated node(s):** `colors`, `$schema`, `style`, `rsc`, `tsx` (+1221 more)
   These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1386 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **18 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -1153,12 +1153,12 @@ _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `Pseudo-class reference` connect `Pseudo-class reference` to `hover-focus-and-other-states.mdx`?**
   _High betweenness centrality (0.002) - this node is a cross-community bridge._
-- **Why does `Pseudo-elements` connect `Pseudo-elements` to `hover-focus-and-other-states.mdx`?**
+- **Why does `Pseudo-classes` connect `Pseudo-classes` to `hover-focus-and-other-states.mdx`?**
   _High betweenness centrality (0.002) - this node is a cross-community bridge._
 - **Why does `Appendix` connect `hover-focus-and-other-states.mdx` to `Pseudo-class reference`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
 - **What connects `colors`, `$schema`, `style` to the rest of the system?**
-  _1227 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _1226 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Header.astro` be split into smaller, more focused modules?**
   _Cohesion score 0.08374384236453201 - nodes in this community are weakly interconnected._
 - **Should `Changes from v3` be split into smaller, more focused modules?**
