@@ -1,5 +1,10 @@
 ---
 import AuthModal from "./AuthModal.astro";
+
+const pathname = Astro.url.pathname;
+const isDiscover  = pathname === "/";
+const isTemplates = pathname.startsWith("/templates");
+const isCreate    = pathname.startsWith("/edit");
 ---
 
 <header class="sticky top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4">
@@ -32,8 +37,31 @@ import AuthModal from "./AuthModal.astro";
             <span class="hidden sm:inline">MemeMaker</span>
         </a>
 
+        <!-- Centre nav -->
+        <nav class="pointer-events-auto absolute left-1/2 flex -translate-x-1/2 items-center gap-1" aria-label="Main navigation">
+            <a
+                href="/"
+                class={`inline-flex h-8 items-center rounded-full px-3.5 text-xs font-medium transition-colors ${isDiscover ? "bg-white/10 text-white" : "text-[#9b9b9b] hover:text-white hover:bg-white/8"}`}
+            >
+                Discover
+            </a>
+            <a
+                href="/templates"
+                class={`inline-flex h-8 items-center rounded-full px-3.5 text-xs font-medium transition-colors ${isTemplates ? "bg-white/10 text-white" : "text-[#9b9b9b] hover:text-white hover:bg-white/8"}`}
+            >
+                Templates
+            </a>
+            <a
+                href="/edit"
+                class={`inline-flex h-8 items-center gap-1.5 rounded-full px-3.5 text-xs font-semibold transition-colors ${isCreate ? "bg-primary text-on-primary" : "bg-primary/15 text-primary hover:bg-primary/25"}`}
+            >
+                <svg class="h-3 w-3" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M2 14l1.5-4.5L11 2l3 3-7.5 7.5L2 14z"/></svg>
+                Create
+            </a>
+        </nav>
+        <!-- Slogan — hidden until xl -->
         <p
-            class="pointer-events-none absolute left-1/2 hidden -translate-x-1/2 whitespace-nowrap text-center font-mono text-[10px] uppercase tracking-[0.16em] text-[#9b9b9b] md:block lg:text-[11px]"
+            class="pointer-events-none absolute left-1/2 hidden -translate-x-1/2 whitespace-nowrap text-center font-mono text-[10px] uppercase tracking-[0.16em] text-[#9b9b9b] xl:hidden"
         >
             Make memes, not meetings.
         </p>
@@ -63,6 +91,7 @@ import AuthModal from "./AuthModal.astro";
                             src=""
                             alt=""
                             class="hidden h-full w-full object-cover"
+                            onerror="this.classList.add('hidden'); document.getElementById('user-avatar-initial')?.classList.remove('hidden')"
                         />
                     </div>
                     <span
@@ -101,6 +130,7 @@ import AuthModal from "./AuthModal.astro";
 
 <script>
     import { supabase } from "../lib/supabase";
+    import { getUserAvatarUrl } from "../lib/avatar";
 
     type AuthUser = {
         email?: string | null;
@@ -139,19 +169,22 @@ import AuthModal from "./AuthModal.astro";
             metadata.name ||
             metadata.user_name ||
             (user.email ? user.email.split("@")[0] : "Account");
-        const avatarUrl = metadata.avatar_url || metadata.picture;
+
+        const avatarUrl = getUserAvatarUrl(user);
 
         if (userNameSpan) userNameSpan.textContent = name;
 
-        if (avatarUrl && avatarImg && avatarInitial) {
-            avatarImg.src = avatarUrl;
-            avatarImg.classList.remove("hidden");
-            avatarInitial.classList.add("hidden");
-        } else if (avatarInitial && avatarImg) {
-            avatarInitial.textContent = (name[0] || "U").toUpperCase();
-            avatarInitial.classList.remove("hidden");
-            avatarImg.classList.add("hidden");
-            avatarImg.removeAttribute("src");
+        if (avatarImg && avatarInitial) {
+            if (avatarUrl) {
+                avatarImg.src = avatarUrl;
+                avatarImg.classList.remove("hidden");
+                avatarInitial.classList.add("hidden");
+            } else {
+                avatarInitial.textContent = (name[0] || "U").toUpperCase();
+                avatarInitial.classList.remove("hidden");
+                avatarImg.classList.add("hidden");
+                avatarImg.removeAttribute("src");
+            }
         }
 
         unauthContainer?.classList.add("hidden");

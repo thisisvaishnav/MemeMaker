@@ -7,7 +7,6 @@ const templateSlots = Array.from({ length: 20 });
 <Layout
     title="MemeMaker — Make a meme in seconds"
     description="Choose a meme template or upload your own image and start creating."
-    showFooter={false}
 >
     <main
         class="relative mx-auto min-h-[calc(100dvh-6.5rem)] max-w-350 overflow-hidden px-4 pb-12 pt-8 sm:px-6 lg:pb-8 lg:pt-6"
@@ -18,14 +17,14 @@ const templateSlots = Array.from({ length: 20 });
         >
             <div
                 id="templates"
-                class="order-2 mt-12 grid w-full grid-cols-2 gap-4 sm:grid-cols-3 lg:absolute lg:inset-0 lg:order-0 lg:mt-0 lg:block"
+                class="order-2 mt-12 columns-2 gap-4 sm:columns-3 lg:absolute lg:inset-0 lg:order-0 lg:mt-0 lg:block"
                 aria-label="Random meme templates"
             >
                 {
                     templateSlots.map((_, index) => (
                         <button
                             type="button"
-                            class="template-card group relative z-10 w-full overflow-hidden rounded-2xl border border-white/15 bg-[#202020] text-left shadow-2xl outline-none transition-[transform,box-shadow,border-color] duration-200 focus-visible:z-30 focus-visible:border-white focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-black lg:absolute"
+                            class="template-card group relative z-10 mb-4 block w-full break-inside-avoid overflow-hidden rounded-2xl border border-white/15 bg-[#202020] text-left shadow-2xl outline-none transition-[transform,box-shadow,border-color] duration-200 focus-visible:z-30 focus-visible:border-white focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-black lg:mb-0 lg:absolute"
                             data-template-card
                             data-slot={index + 1}
                             aria-pressed="false"
@@ -45,7 +44,7 @@ const templateSlots = Array.from({ length: 20 });
                                 <span class="flex w-full items-center justify-between gap-2 rounded-full bg-white px-3 py-2 text-xs font-semibold text-black shadow-lg">
                                     Use template
                                     <span class="rounded-full bg-[#dedede] px-2 py-0.5 text-[9px] font-medium uppercase tracking-wide text-[#444]">
-                                        Editor soon
+                                        Open in Editor
                                     </span>
                                 </span>
                             </span>
@@ -113,38 +112,86 @@ const templateSlots = Array.from({ length: 20 });
                     </div>
                 </div>
             </div>
+            <!-- Scroll hint arrow -->
+            <div class="scroll-hint pointer-events-none absolute bottom-6 left-1/2 z-30 -translate-x-1/2" aria-hidden="true">
+                <svg class="h-6 w-6 animate-bounce text-[#555]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 5v14M5 12l7 7 7-7"/>
+                </svg>
+            </div>
         </section>
     </main>
+
+    <!-- ─── Trending Section ─────────────────────────────────── -->
+    <section class="mx-auto max-w-350 px-4 pb-20 pt-4 sm:px-6" aria-labelledby="trending-title">
+        <div class="mb-8 flex items-center justify-between">
+            <div>
+                <p class="mb-1 font-mono text-[9px] uppercase tracking-[0.18em] text-[#929292]">Scroll to explore</p>
+                <h2 id="trending-title" class="text-xl font-semibold tracking-tight text-ink sm:text-2xl">
+                    🔥 Trending Memes
+                </h2>
+            </div>
+            <a href="/templates" class="inline-flex h-8 items-center rounded-full border border-white/10 px-4 text-xs font-medium text-[#9b9b9b] transition-colors hover:border-white/25 hover:text-white">
+                Browse all →
+            </a>
+        </div>
+
+        <div class="columns-2 gap-3 sm:columns-3 lg:columns-4 xl:columns-5">
+            {Array.from({ length: 20 }).map((_, i) => (
+                <a
+                    href={`/edit?template=${i + 1}`}
+                    class="trending-card group relative mb-3 block break-inside-avoid overflow-hidden rounded-xl border border-white/10 bg-[#202020] outline-none focus-visible:ring-2 focus-visible:ring-white"
+                    data-trending-id={i + 1}
+                    aria-label={`Use meme template ${i + 1}`}
+                >
+                    <img
+                        data-trending-img
+                        class="block h-auto w-full transition-[filter] duration-300 group-hover:blur-[3px]"
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                    />
+                    <!-- hover overlay -->
+                    <span class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/60 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100" aria-hidden="true">
+                        <span class="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-[11px] font-semibold text-black shadow">
+                            <svg class="h-3 w-3" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 14l1.5-4.5L11 2l3 3-7.5 7.5L2 14z"/></svg>
+                            Edit template
+                        </span>
+                    </span>
+                </a>
+            ))}
+        </div>
+    </section>
 </Layout>
 
 <script>
+    import {
+        getCachedTemplatePool,
+        shuffleArray,
+        preloadTemplateImages,
+    } from "../lib/templateCache";
+
     const templateBaseUrl =
         "https://mememaker-templates.nyc3.cdn.digitaloceanspaces.com/thumbnails";
     const cards = Array.from(
         document.querySelectorAll<HTMLButtonElement>("[data-template-card]"),
     );
 
-    const templateIds = Array.from({ length: 20 }, (_, index) => index + 1);
-    const positionSlots = Array.from({ length: 20 }, (_, index) => index);
+    // Retrieve cached template IDs from cookie/storage and shuffle locally
+    const templatePool = getCachedTemplatePool();
+    const templateIds = shuffleArray(templatePool);
+    const positionSlots = shuffleArray(
+        Array.from({ length: templateIds.length }, (_, index) => index),
+    );
 
-    for (let index = templateIds.length - 1; index > 0; index -= 1) {
-        const randomIndex = Math.floor(Math.random() * (index + 1));
-        [templateIds[index], templateIds[randomIndex]] = [
-            templateIds[randomIndex],
-            templateIds[index],
-        ];
-        [positionSlots[index], positionSlots[randomIndex]] = [
-            positionSlots[randomIndex],
-            positionSlots[index],
-        ];
-    }
+    // Pre-warm images into browser disk/memory cache for instant reload
+    preloadTemplateImages(templateBaseUrl, templatePool);
 
     const randomBetween = (minimum: number, maximum: number) =>
         minimum + Math.random() * (maximum - minimum);
 
     cards.forEach((card, index) => {
-        const templateId = templateIds[index];
-        const position = positionSlots[index];
+        const templateId = templateIds[index % templateIds.length];
+        const position = positionSlots[index % positionSlots.length];
         const column = position % 5;
         const row = Math.floor(position / 5);
 
@@ -181,6 +228,7 @@ const templateSlots = Array.from({ length: 20 });
             image.alt = `Meme template ${templateId}`;
         }
         card.setAttribute("aria-label", `Preview meme template ${templateId}`);
+        card.setAttribute("data-template-id", String(templateId));
     });
 
     const closeTemplates = (except?: HTMLButtonElement) => {
@@ -197,24 +245,9 @@ const templateSlots = Array.from({ length: 20 });
             event.stopPropagation();
 
             const templateId = card.getAttribute("data-template-id");
-            if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-                if (templateId) {
-                    window.location.href = `/edit?template=${templateId}`;
-                    return;
-                }
-            }
-
-            const willOpen = !card.classList.contains("is-active");
-            closeTemplates(card);
-            card.classList.toggle("is-active", willOpen);
-            card.setAttribute("aria-pressed", String(willOpen));
-
-            if (willOpen && templateId) {
-                // If clicked again while active on touch, open editor
-                card.querySelector(".template-action")?.addEventListener("click", (e) => {
-                    e.stopPropagation();
-                    window.location.href = `/edit?template=${templateId}`;
-                }, { once: true });
+            if (templateId) {
+                window.location.href = `/edit?template=${templateId}`;
+                return;
             }
         });
     });
@@ -324,6 +357,37 @@ const templateSlots = Array.from({ length: 20 });
         uploadDropZone?.classList.remove("is-dragging");
         showSelectedFile(event.dataTransfer?.files[0]);
     });
+
+    // ── Trending images (shuffled locally from cache on reload) ──────
+    const trendingBase =
+        "https://mememaker-templates.nyc3.cdn.digitaloceanspaces.com/thumbnails";
+    const trendingShuffled = shuffleArray(templatePool);
+    document
+        .querySelectorAll<HTMLAnchorElement>("[data-trending-id]")
+        .forEach((card, index) => {
+            const id = trendingShuffled[index % trendingShuffled.length];
+            card.setAttribute("data-trending-id", String(id));
+            card.setAttribute("aria-label", `Use meme template ${id}`);
+            card.href = `/edit?template=${id}`;
+            const img = card.querySelector<HTMLImageElement>("[data-trending-img]");
+            if (img) {
+                img.src = `${trendingBase}/${id}.webp`;
+                img.alt = `Meme template ${id}`;
+            }
+        });
+
+    // ── Scroll-hint: hide once user scrolls ──────────────────────────
+    const scrollHint = document.querySelector<HTMLElement>(".scroll-hint");
+    if (scrollHint) {
+        const onScroll = () => {
+            if (window.scrollY > 60) {
+                scrollHint.style.opacity = "0";
+                scrollHint.style.transition = "opacity 0.4s";
+                window.removeEventListener("scroll", onScroll);
+            }
+        };
+        window.addEventListener("scroll", onScroll, { passive: true });
+    }
 </script>
 
 <style>
