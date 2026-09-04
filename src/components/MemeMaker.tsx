@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./MemeMaker.css";
-import { loadImage, clearImage } from "../lib/imageStore";
+import { loadImage, clearImage, getCustomTemplateById } from "../lib/imageStore";
 
 type TextLayer = {
   id: number;
@@ -52,7 +52,8 @@ export default function MemeMaker() {
     if (!ctx) return;
 
     const img = new Image();
-    if (!image.startsWith("data:")) {
+    const isDataOrBlob = image.startsWith("data:") || image.startsWith("blob:");
+    if (!isDataOrBlob) {
       img.crossOrigin = "anonymous";
     }
 
@@ -108,14 +109,36 @@ export default function MemeMaker() {
       }
     };
 
+    img.onerror = (e) => {
+      console.error("Failed to load image in MemeMaker canvas:", e);
+    };
+
     img.src = image;
   };
 
   useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const templateId = urlParams.get("template");
+    const customId = urlParams.get("custom");
+
+    if (customId) {
+      getCustomTemplateById(customId).then((tpl) => {
+        if (tpl) {
+          setImage(tpl.dataUrl);
+        }
+      });
+      return;
+    }
+
+    if (templateId) {
+      const fullImageUrl = `https://mememaker-templates.nyc3.cdn.digitaloceanspaces.com/full/${templateId}.webp`;
+      setImage(fullImageUrl);
+      return;
+    }
+
     loadImage().then((pending) => {
       if (pending) {
         setImage(pending);
-        clearImage();
       }
     });
   }, []);
@@ -137,10 +160,14 @@ export default function MemeMaker() {
 
     if (!file) return;
 
-    const url = URL.createObjectURL(file);
-
-    setImage(url);
-    setGenerated(null);
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (typeof reader.result === "string") {
+        setImage(reader.result);
+        setGenerated(null);
+      }
+    };
+    reader.readAsDataURL(file);
   };
 
   const generateMeme = () => {

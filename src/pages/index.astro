@@ -100,7 +100,7 @@ const templateSlots = Array.from({ length: 20 });
                                 id="meme-upload"
                                 class="sr-only"
                                 type="file"
-                                accept="image/png,image/jpeg,image/webp,image/gif"
+                                accept="image/png,image/jpeg,image/jpg,image/webp,image/gif,.png,.jpg,.jpeg,.webp,.gif"
                             />
                         </label>
                         <p
@@ -196,16 +196,26 @@ const templateSlots = Array.from({ length: 20 });
         card.addEventListener("click", (event) => {
             event.stopPropagation();
 
-            if (
-                !window.matchMedia("(hover: hover) and (pointer: fine)").matches
-            ) {
-                const willOpen = !card.classList.contains("is-active");
-                closeTemplates(card);
-                card.classList.toggle("is-active", willOpen);
-                card.setAttribute("aria-pressed", String(willOpen));
+            const templateId = card.getAttribute("data-template-id");
+            if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+                if (templateId) {
+                    window.location.href = `/edit?template=${templateId}`;
+                    return;
+                }
             }
 
-            // Future editor navigation intentionally belongs here once the editor is ready.
+            const willOpen = !card.classList.contains("is-active");
+            closeTemplates(card);
+            card.classList.toggle("is-active", willOpen);
+            card.setAttribute("aria-pressed", String(willOpen));
+
+            if (willOpen && templateId) {
+                // If clicked again while active on touch, open editor
+                card.querySelector(".template-action")?.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    window.location.href = `/edit?template=${templateId}`;
+                }, { once: true });
+            }
         });
     });
 
@@ -223,12 +233,14 @@ const templateSlots = Array.from({ length: 20 });
         "[data-upload-drop-zone]",
     );
     const defaultUploadStatus = "PNG, JPG, WEBP or GIF · drop anywhere";
-    const acceptedImageTypes = new Set([
-        "image/png",
-        "image/jpeg",
-        "image/webp",
-        "image/gif",
-    ]);
+
+    const isAcceptedImage = (file?: File): boolean => {
+        if (!file) return false;
+        if (file.type && /^image\/(png|jpe?g|jpg|webp|gif|x-png)$/i.test(file.type)) {
+            return true;
+        }
+        return /\.(png|jpe?g|jpg|webp|gif|jfif)$/i.test(file.name);
+    };
 
     const showSelectedFile = (file?: File) => {
         if (!uploadStatus) return;
@@ -238,22 +250,25 @@ const templateSlots = Array.from({ length: 20 });
             return;
         }
 
-        if (!acceptedImageTypes.has(file.type)) {
+        if (!isAcceptedImage(file)) {
             uploadStatus.textContent =
                 "Please drop a PNG, JPG, WEBP or GIF image";
             return;
         }
 
         if (uploadInput) {
-            const transfer = new DataTransfer();
-            transfer.items.add(file);
-            uploadInput.files = transfer.files;
+            try {
+                const transfer = new DataTransfer();
+                transfer.items.add(file);
+                uploadInput.files = transfer.files;
+            } catch {}
         }
-        uploadStatus.textContent = `Ready to use: ${file.name}`;
+        uploadStatus.textContent = `Processing image: ${file.name}...`;
 
         const reader = new FileReader();
         reader.onload = async () => {
             try {
+                uploadStatus.textContent = "Redirecting to editor...";
                 await saveImage(reader.result as string);
                 window.location.href = "/edit";
             } catch (err) {
@@ -261,6 +276,11 @@ const templateSlots = Array.from({ length: 20 });
                 if (uploadStatus) {
                     uploadStatus.textContent = "Image too large or storage full. Try a smaller image.";
                 }
+            }
+        };
+        reader.onerror = () => {
+            if (uploadStatus) {
+                uploadStatus.textContent = "Failed to read image. Please try again.";
             }
         };
         reader.readAsDataURL(file);
