@@ -122,7 +122,7 @@ const categories = [
     cardWraps.forEach((wrap) => {
         const id    = wrap.getAttribute("data-id");
         const img   = wrap.querySelector<HTMLImageElement>("[data-tpl-img]");
-        const count = wrap.querySelector<HTMLElement>(",user-count");
+        const count = wrap.querySelector<HTMLElement>(".user-count");
         if (img && id) {
             img.src = `${templateBase}/${id}.webp`;
         }
