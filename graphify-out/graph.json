@@ -353,7 +353,7 @@
       "file_type": "code",
       "norm_label": "gettrendingtemplates()",
       "source_file": "src/lib/templateCache.ts",
-      "source_location": "L81"
+      "source_location": "L85"
     },
     {
       "id": "src_lib_templatecache_randombetween",
@@ -377,7 +377,7 @@
       "file_type": "code",
       "norm_label": "if()",
       "source_file": "src/pages/index.astro",
-      "source_location": "L455"
+      "source_location": "L444"
     },
     {
       "id": "src_pages_templates_activatetab",
@@ -12008,6 +12008,17 @@
       "source_location": "L1"
     },
     {
+      "id": "src_pages_index_templateslots",
+      "label": "templateSlots",
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "imageStore.ts",
+      "file_type": "code",
+      "norm_label": "templateslots",
+      "source_file": "src/pages/index.astro",
+      "source_location": "L4"
+    },
+    {
       "id": "src_pages_templates",
       "label": "templates.astro",
       "_origin": "ast",
@@ -21845,7 +21856,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/lib/templateCache.ts",
-      "source_location": "L70",
+      "source_location": "L74",
       "weight": 1.0
     },
     {
@@ -39150,7 +39161,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/templateCache.ts",
-      "source_location": "L81",
+      "source_location": "L85",
       "weight": 1.0
     },
     {
@@ -39177,13 +39188,24 @@
     },
     {
       "source": "src_pages_index",
+      "target": "src_pages_index_templateslots",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/index.astro",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_index",
       "target": "src_pages_index_if",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/pages/index.astro",
-      "source_location": "L455",
+      "source_location": "L444",
       "weight": 1.0
     },
     {
@@ -39485,5 +39507,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "554f2fdf872f752f6351eccbc25daf997a25f115"
+  "built_at_commit": "ccbfa116e45b8bc522171a93dcfba5ea6ca12da1"
 }

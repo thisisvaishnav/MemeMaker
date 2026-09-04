@@ -126,9 +126,9 @@
     "semantic_hash": "3f8c0f1757350088ef15a8b704d594fb"
   },
   "src/pages/index.astro": {
-    "mtime": 1788512942.8857672,
-    "seen": 1788512959.9206882,
-    "ast_hash": "375c7746e3621669308cc286137665b1",
+    "mtime": 1788513298.6209848,
+    "seen": 1788513310.126747,
+    "ast_hash": "96ceab45d182709ffa256ea46ea305d4",
     "semantic_hash": ""
   },
   "test.ts": {
@@ -1686,9 +1686,9 @@
     "semantic_hash": ""
   },
   "src/lib/templateCache.ts": {
-    "mtime": 1788511495.8415418,
-    "seen": 1788511885.266082,
-    "ast_hash": "3e5c3d8f1bdca0073776f84e6137cf05",
+    "mtime": 1788513266.254367,
+    "seen": 1788513310.126691,
+    "ast_hash": "80a003e48f4d9b100cb1926865f6270a",
     "semantic_hash": ""
   },
   "public/templates/cdn/1.webp": {

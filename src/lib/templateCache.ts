@@ -3,7 +3,7 @@
  * No cookies are used; all template arrangements and active templates are persisted in localStorage.
  */
 
-const LANDING_LAYOUT_KEY = "mememaker_landing_layout";
+const LANDING_LAYOUT_KEY = "mememaker_landing_layout_v2";
 const TRENDING_TEMPLATES_KEY = "mememaker_trending_templates";
 
 export interface LandingCardLayout {
@@ -65,12 +65,16 @@ function generateDefaultLayout(count: number): LandingCardLayout[] {
     const column = position % 5;
     const row = Math.floor(position / 5);
 
+    // Balanced distribution so every template remains clearly visible
+    const colBase = column * 19.5;
+    const rowBase = row * 24.5;
+
     return {
       templateId,
-      width: `${randomBetween(14.85, 22.95).toFixed(2)}rem`,
-      left: `${Math.max(-5, Math.min(72, column * 18 + randomBetween(-7, 7))).toFixed(2)}%`,
-      top: `${Math.max(-8, Math.min(66, row * 23 + randomBetween(-8, 8))).toFixed(2)}%`,
-      rotation: `${randomBetween(-16, 16).toFixed(2)}deg`,
+      width: `${randomBetween(12.5, 15.5).toFixed(2)}rem`,
+      left: `${Math.max(-2, Math.min(80, colBase + randomBetween(-2.5, 2.5))).toFixed(2)}%`,
+      top: `${Math.max(-4, Math.min(74, rowBase + randomBetween(-3, 3))).toFixed(2)}%`,
+      rotation: `${randomBetween(-10, 10).toFixed(2)}deg`,
     };
   });
 }
