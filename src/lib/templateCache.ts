@@ -1,86 +1,111 @@
 /**
- * Cookie and storage helpers for landing page template caching and local shuffling.
+ * LocalStorage helpers for landing page template caching and layout persistence.
+ * No cookies are used; all template arrangements and active templates are persisted in localStorage.
  */
 
-const COOKIE_NAME = "mememaker_templates";
-const DEFAULT_POOL = Array.from({ length: 20 }, (_, i) => i + 1);
+const LANDING_LAYOUT_KEY = "mememaker_landing_layout";
+const TRENDING_TEMPLATES_KEY = "mememaker_trending_templates";
 
-/**
- * Get cookie value by name
- */
-export function getCookie(name: string): string | null {
-  if (typeof document === "undefined") return null;
-  const match = document.cookie.match(new RegExp("(^|;\\s*)" + name + "=([^;]+)"));
-  return match ? decodeURIComponent(match[2]) : null;
+export interface LandingCardLayout {
+  templateId: number;
+  width: string;
+  left: string;
+  top: string;
+  rotation: string;
 }
 
-/**
- * Set cookie with expiration (default 30 days)
- */
-export function setCookie(name: string, value: string, days = 30): void {
-  if (typeof document === "undefined") return;
-  const expires = new Date();
-  expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
-  document.cookie = `${name}=${encodeURIComponent(value)};expires=${expires.toUTCString()};path=/;SameSite=Lax`;
-}
+const randomBetween = (minimum: number, maximum: number) =>
+  minimum + Math.random() * (maximum - minimum);
 
 /**
- * Retrieve cached template ID list from cookies (fallback to localStorage, then default 1..20)
+ * Retrieves the persisted landing template layout from localStorage,
+ * or generates and persists it once so returning to the landing page
+ * shows the exact same templates without re-shuffling or hitting the server.
  */
-export function getCachedTemplatePool(): number[] {
-  try {
-    const cookieVal = getCookie(COOKIE_NAME);
-    if (cookieVal) {
-      const parsed = JSON.parse(cookieVal);
-      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-    }
-  } catch {
-    // ignore parse error
+export function getLandingTemplatesLayout(count: number = 20): LandingCardLayout[] {
+  if (typeof window === "undefined") {
+    return generateDefaultLayout(count);
   }
 
   try {
-    const localVal = localStorage.getItem(COOKIE_NAME);
-    if (localVal) {
-      const parsed = JSON.parse(localVal);
-      if (Array.isArray(parsed) && parsed.length > 0) {
-        setCookie(COOKIE_NAME, JSON.stringify(parsed));
+    const raw = localStorage.getItem(LANDING_LAYOUT_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length === count) {
         return parsed;
       }
     }
-  } catch {
-    // ignore localStorage error
+  } catch (e) {
+    console.warn("Could not read landing templates layout from localStorage:", e);
   }
 
-  // First time initialization: cache default pool in cookie & localStorage
-  const initial = [...DEFAULT_POOL];
+  const generated = generateDefaultLayout(count);
   try {
-    setCookie(COOKIE_NAME, JSON.stringify(initial));
-    localStorage.setItem(COOKIE_NAME, JSON.stringify(initial));
-  } catch {
-    // ignore
+    localStorage.setItem(LANDING_LAYOUT_KEY, JSON.stringify(generated));
+  } catch (e) {
+    console.warn("Could not persist landing templates layout to localStorage:", e);
   }
-  return initial;
+  return generated;
 }
 
-/**
- * In-place Fisher-Yates shuffle returning a newly randomized array
- */
-export function shuffleArray<T>(items: T[]): T[] {
-  const result = [...items];
-  for (let i = result.length - 1; i > 0; i--) {
+function generateDefaultLayout(count: number): LandingCardLayout[] {
+  const templateIds = Array.from({ length: count }, (_, index) => (index % 20) + 1);
+  const positionSlots = Array.from({ length: count }, (_, index) => index);
+
+  // Fisher-Yates shuffle for initial generation only
+  for (let i = templateIds.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [result[i], result[j]] = [result[j], result[i]];
+    [templateIds[i], templateIds[j]] = [templateIds[j], templateIds[i]];
+    [positionSlots[i], positionSlots[j]] = [positionSlots[j], positionSlots[i]];
   }
-  return result;
+
+  return Array.from({ length: count }, (_, index) => {
+    const templateId = templateIds[index];
+    const position = positionSlots[index];
+    const column = position % 5;
+    const row = Math.floor(position / 5);
+
+    return {
+      templateId,
+      width: `${randomBetween(14.85, 22.95).toFixed(2)}rem`,
+      left: `${Math.max(-5, Math.min(72, column * 18 + randomBetween(-7, 7))).toFixed(2)}%`,
+      top: `${Math.max(-8, Math.min(66, row * 23 + randomBetween(-8, 8))).toFixed(2)}%`,
+      rotation: `${randomBetween(-16, 16).toFixed(2)}deg`,
+    };
+  });
 }
 
 /**
- * Pre-warms images into the browser HTTP cache so reloads are instant
+ * Retrieves persisted trending template IDs from localStorage, or generates once.
  */
-export function preloadTemplateImages(baseUrl: string, ids: number[]): void {
-  if (typeof window === "undefined") return;
-  ids.forEach((id) => {
-    const img = new Image();
-    img.src = `${baseUrl}/${id}.webp`;
-  });
+export function getTrendingTemplates(count: number = 20): number[] {
+  if (typeof window === "undefined") {
+    return Array.from({ length: count }, (_, i) => (i % 20) + 1);
+  }
+
+  try {
+    const raw = localStorage.getItem(TRENDING_TEMPLATES_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length === count) {
+        return parsed;
+      }
+    }
+  } catch (e) {
+    console.warn("Could not read trending templates from localStorage:", e);
+  }
+
+  const ids = Array.from({ length: count }, (_, i) => (i % 20) + 1);
+  for (let i = ids.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [ids[i], ids[j]] = [ids[j], ids[i]];
+  }
+
+  try {
+    localStorage.setItem(TRENDING_TEMPLATES_KEY, JSON.stringify(ids));
+  } catch (e) {
+    console.warn("Could not persist trending templates to localStorage:", e);
+  }
+
+  return ids;
 }
