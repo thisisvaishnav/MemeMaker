@@ -19,17 +19,35 @@ type TextLayer = {
   y: number;
 };
 
-const DEFAULT_IMAGE =
-  "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&w=1200&q=80";
+const DEFAULT_IMAGE = "/templates/cdn/1.webp";
 
 const DO_SPACES_BASE_URL =
   "https://mememaker-templates.nyc3.cdn.digitaloceanspaces.com";
 
 const templates = Array.from({ length: 20 }, (_, i) => ({
   id: i + 1,
-  thumbnail: `${DO_SPACES_BASE_URL}/thumbnails/${i + 1}.webp`,
-  full: `${DO_SPACES_BASE_URL}/full/${i + 1}.webp`,
+  thumbnail: `/templates/cdn/${i + 1}.webp`,
+  full: `/templates/cdn/${i + 1}.webp`,
 }));
+
+const TEMPLATE_ALIAS_MAP: Record<string, number> = {
+  "harold": 20,
+  "hide-the-pain-harold": 20,
+  "disaster-girl": 18,
+  "expanding-brain": 16,
+  "two-buttons": 3,
+  "epic-handshake": 4,
+  "left-exit": 2,
+  "left-exit-12": 2,
+  "jim-halpert": 11,
+  "whiteboard": 11,
+  "leo-dicaprio": 12,
+  "laughing-leo": 12,
+  "confused-nick": 1,
+  "drake": 3,
+  "this-is-fine": 18,
+  "doge": 20,
+};
 
 export default function MemeMaker() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -62,7 +80,8 @@ export default function MemeMaker() {
 
     const img = new Image();
     const isDataOrBlob = image.startsWith("data:") || image.startsWith("blob:");
-    if (!isDataOrBlob) {
+    const isLocal = image.startsWith("/") || (typeof window !== "undefined" && image.startsWith(window.location.origin));
+    if (!isDataOrBlob && !isLocal) {
       img.crossOrigin = "anonymous";
     }
 
@@ -120,6 +139,10 @@ export default function MemeMaker() {
 
     img.onerror = (e) => {
       console.error("Failed to load image in MemeMaker canvas:", e);
+      if (img.crossOrigin) {
+        img.removeAttribute("crossorigin");
+        img.src = image;
+      }
     };
 
     img.src = image;
@@ -129,12 +152,28 @@ export default function MemeMaker() {
     const urlParams = new URLSearchParams(window.location.search);
     const templateId = urlParams.get("template");
     const customId = urlParams.get("custom");
+    const isUpload = urlParams.get("upload");
+
+    if (isUpload) {
+      setTimeout(() => {
+        fileInputRef.current?.click();
+      }, 150);
+    }
 
     if (customId) {
       getCustomTemplateById(customId).then((tpl) => {
         if (tpl) {
           setImage(tpl.dataUrl);
           saveImage(tpl.dataUrl);
+          clearTemplateUrl();
+        } else {
+          loadImage().then((pending) => {
+            if (pending) {
+              setImage(pending);
+              saveImage(pending);
+              clearTemplateUrl();
+            }
+          });
         }
       });
       window.history.replaceState({}, "", "/edit");
@@ -142,7 +181,10 @@ export default function MemeMaker() {
     }
 
     if (templateId) {
-      const fullImageUrl = `${DO_SPACES_BASE_URL}/full/${templateId}.webp`;
+      const aliasId = TEMPLATE_ALIAS_MAP[templateId.toLowerCase()];
+      const parsedNum = parseInt(templateId, 10);
+      const resolvedId = aliasId ?? (parsedNum >= 1 && parsedNum <= 20 ? parsedNum : 1);
+      const fullImageUrl = `/templates/cdn/${resolvedId}.webp`;
       setImage(fullImageUrl);
       saveTemplateUrl(fullImageUrl);
       saveImage(fullImageUrl);
@@ -151,16 +193,18 @@ export default function MemeMaker() {
     }
 
     // Restore persisted template/image across page changes
-    loadTemplateUrl().then((pendingTemplate) => {
-      if (pendingTemplate) {
-        setImage(pendingTemplate);
-      } else {
-        loadImage().then((pending) => {
-          if (pending) {
-            setImage(pending);
-          }
-        });
+    loadImage().then((pendingImage) => {
+      if (pendingImage && (pendingImage.startsWith("data:") || pendingImage.startsWith("blob:"))) {
+        setImage(pendingImage);
+        return;
       }
+      loadTemplateUrl().then((pendingTemplate) => {
+        if (pendingTemplate) {
+          setImage(pendingTemplate);
+        } else if (pendingImage) {
+          setImage(pendingImage);
+        }
+      });
     });
   }, []);
 

@@ -1,16 +1,16 @@
 # Graph Report - MemeMaker  (2026-09-04)
 
 ## Corpus Check
-- 234 files · ~265,807 words
+- 234 files · ~283,969 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1785 nodes · 1642 edges · 237 communities (216 shown, 18 thin omitted)
+- 1786 nodes · 1644 edges · 237 communities (216 shown, 18 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `ea9f890d`
+- Built from commit: `90ca03c1`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -1141,10 +1141,10 @@ Nodes (3): Examples, Optimizing with will change, Using a custom value
 
 ### Community 236 - "imageStore.ts"
 Cohesion: 0.09
-Nodes (30): MemeMaker(), templates, TextLayer, clearImage(), clearTemplateUrl(), CustomTemplate, deleteCustomTemplate(), getCustomTemplateById() (+22 more)
+Nodes (32): [], MemeMaker(), TEMPLATE_ALIAS_MAP, templates, TextLayer, clearImage(), clearTemplateUrl(), CustomTemplate (+24 more)
 
 ## Knowledge Gaps
-- **1226 isolated node(s):** `colors`, `$schema`, `style`, `rsc`, `tsx` (+1221 more)
+- **1227 isolated node(s):** `colors`, `$schema`, `style`, `rsc`, `tsx` (+1222 more)
   These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1386 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **18 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -1158,7 +1158,7 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `Appendix` connect `hover-focus-and-other-states.mdx` to `Pseudo-class reference`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
 - **What connects `colors`, `$schema`, `style` to the rest of the system?**
-  _1226 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _1227 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Header.astro` be split into smaller, more focused modules?**
   _Cohesion score 0.08374384236453201 - nodes in this community are weakly interconnected._
 - **Should `Changes from v3` be split into smaller, more focused modules?**

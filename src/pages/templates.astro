@@ -104,6 +104,7 @@ const categories = [
 <script>
     import {
         saveImage,
+        saveTemplateUrl,
         saveCustomTemplate,
         getCustomTemplates,
         deleteCustomTemplate,
@@ -111,10 +112,9 @@ const categories = [
     } from "../lib/imageStore";
     import { supabase } from "../lib/supabase";
 
-    const templateBase =
-        "https://mememaker-templates.nyc3.cdn.digitaloceanspaces.com/thumbnails";
+    const templateBase = "/templates/cdn";
 
-    // Load CDN images + random user counts
+    // Load CDN images + random user counts + click navigation
     const cardWraps = Array.from(
         document.querySelectorAll<HTMLElement>(".tpl-card-wrap:not(.custom-tpl-card)"),
     );
@@ -123,13 +123,27 @@ const categories = [
         const id    = wrap.getAttribute("data-id");
         const img   = wrap.querySelector<HTMLImageElement>("[data-tpl-img]");
         const count = wrap.querySelector<HTMLElement>(".user-count");
+        const link  = wrap.querySelector<HTMLAnchorElement>("a.tpl-card");
+        const tplUrl = `${templateBase}/${id}.webp`;
+
         if (img && id) {
-            img.src = `${templateBase}/${id}.webp`;
+            img.src = tplUrl;
         }
         if (count) {
             const n = Math.floor(Math.random() * 49000) + 1000;
             const label = n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(n);
             count.textContent = `\u2764\ufe0f ${label} used this`;
+        }
+        if (link && id) {
+            link.href = `/edit?template=${id}`;
+            link.addEventListener("click", async (e) => {
+                e.preventDefault();
+                try {
+                    await saveTemplateUrl(tplUrl);
+                    await saveImage(tplUrl);
+                } catch {}
+                window.location.href = `/edit?template=${id}`;
+            });
         }
     });
 

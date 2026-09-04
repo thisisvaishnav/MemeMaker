@@ -161,6 +161,57 @@ const templateSlots = Array.from({ length: 20 });
             ))}
         </div>
     </section>
+
+    <!-- ─── Features / Why MemeMaker Section ────────────────── -->
+    <section id="features" class="mx-auto max-w-350 border-t border-hairline px-4 py-16 sm:px-6 sm:py-20" aria-labelledby="features-title">
+        <div class="mb-12 text-center">
+            <p class="mb-1 font-mono text-[9px] uppercase tracking-[0.18em] text-[#929292]">Simple · Fast · Free</p>
+            <h2 id="features-title" class="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+                Why MemeMaker?
+            </h2>
+            <p class="mx-auto mt-2 max-w-lg text-xs text-[#a8a8a8] sm:text-sm">
+                Everything you need to craft high-impact memes in seconds without friction.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
+            <div id="why-free" class="rounded-2xl border border-white/10 bg-[#17171b] p-6 transition-all duration-200 hover:border-white/20">
+                <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary">
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                    </svg>
+                </div>
+                <h3 class="mb-2 text-base font-semibold text-ink">100% Free Forever</h3>
+                <p class="text-xs leading-relaxed text-[#8f8f97] sm:text-sm">
+                    No subscriptions, paywalls, or credit card required. Generate and export unlimited memes with high-speed rendering.
+                </p>
+            </div>
+
+            <div id="no-signup" class="rounded-2xl border border-white/10 bg-[#17171b] p-6 transition-all duration-200 hover:border-white/20">
+                <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-400/15 text-cyan-400">
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="17" y1="8" x2="23" y2="14"/><line x1="23" y1="8" x2="17" y2="14"/>
+                    </svg>
+                </div>
+                <h3 class="mb-2 text-base font-semibold text-ink">No Sign-up Required</h3>
+                <p class="text-xs leading-relaxed text-[#8f8f97] sm:text-sm">
+                    Jump straight into creating without creating an account. Sign-up is totally optional and only used for saving custom templates.
+                </p>
+            </div>
+
+            <div id="no-watermark" class="rounded-2xl border border-white/10 bg-[#17171b] p-6 transition-all duration-200 hover:border-white/20">
+                <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-violet-400/15 text-violet-400">
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/><path d="m9 9 6 6m0-6-6 6"/>
+                    </svg>
+                </div>
+                <h3 class="mb-2 text-base font-semibold text-ink">Zero Watermarks</h3>
+                <p class="text-xs leading-relaxed text-[#8f8f97] sm:text-sm">
+                    No forced branding stamped onto your creations. Your downloaded memes are clean, crisp, and ready to share anywhere.
+                </p>
+            </div>
+        </div>
+    </section>
 </Layout>
 
 <script>
@@ -168,10 +219,15 @@ const templateSlots = Array.from({ length: 20 });
         getLandingTemplatesLayout,
         getTrendingTemplates,
     } from "../lib/templateCache";
-    import { saveImage, saveTemplateUrl } from "../lib/imageStore";
+    import {
+        saveImage,
+        saveTemplateUrl,
+        clearTemplateUrl,
+        saveCustomTemplate,
+        type CustomTemplate,
+    } from "../lib/imageStore";
 
-    const templateBaseUrl =
-        "https://mememaker-templates.nyc3.cdn.digitaloceanspaces.com/thumbnails";
+    const templateBaseUrl = "/templates/cdn";
     const cards = Array.from(
         document.querySelectorAll<HTMLButtonElement>("[data-template-card]"),
     );
@@ -220,7 +276,7 @@ const templateSlots = Array.from({ length: 20 });
     };
 
     const navigateWithTemplate = async (templateId: string) => {
-        const fullImageUrl = `https://mememaker-templates.nyc3.cdn.digitaloceanspaces.com/full/${templateId}.webp`;
+        const fullImageUrl = `/templates/cdn/${templateId}.webp`;
         try {
             await saveTemplateUrl(fullImageUrl);
             await saveImage(fullImageUrl);
@@ -286,16 +342,31 @@ const templateSlots = Array.from({ length: 20 });
 
         const reader = new FileReader();
         reader.onload = async () => {
+            const dataUrl = reader.result as string;
+            uploadStatus.textContent = "Redirecting to editor...";
+
+            const customId = "custom_" + Date.now() + "_" + Math.random().toString(36).substring(2, 7);
+            const newTemplate: CustomTemplate = {
+                id: customId,
+                name: file.name.replace(/\.[^/.]+$/, ""),
+                dataUrl: dataUrl,
+                createdAt: Date.now(),
+            };
+
             try {
-                uploadStatus.textContent = "Redirecting to editor...";
-                await saveImage(reader.result as string);
-                window.location.href = "/edit";
+                await saveCustomTemplate(newTemplate);
+            } catch (e) {
+                console.warn("Could not save custom template:", e);
+            }
+
+            try {
+                await clearTemplateUrl();
+                await saveImage(dataUrl);
             } catch (err) {
                 console.error("Failed to save image:", err);
-                if (uploadStatus) {
-                    uploadStatus.textContent = "Image too large or storage full. Try a smaller image.";
-                }
             }
+
+            window.location.href = `/edit?custom=${customId}`;
         };
         reader.onerror = () => {
             if (uploadStatus) {
@@ -345,8 +416,7 @@ const templateSlots = Array.from({ length: 20 });
     });
 
     // ── Trending images (persisted in localStorage across reloads) ──────
-    const trendingBase =
-        "https://mememaker-templates.nyc3.cdn.digitaloceanspaces.com/thumbnails";
+    const trendingBase = "/templates/cdn";
     const trendingCards = Array.from(
         document.querySelectorAll<HTMLAnchorElement>("[data-trending-id]"),
     );
@@ -366,7 +436,7 @@ const templateSlots = Array.from({ length: 20 });
 
         card.addEventListener("click", async (e) => {
             e.preventDefault();
-            const fullImageUrl = `https://mememaker-templates.nyc3.cdn.digitaloceanspaces.com/full/${id}.webp`;
+            const fullImageUrl = `/templates/cdn/${id}.webp`;
             try {
                 await saveTemplateUrl(fullImageUrl);
                 await saveImage(fullImageUrl);

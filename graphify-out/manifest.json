@@ -60,21 +60,21 @@
     "semantic_hash": "9e090f88da25d696abe7757cfe5525f1"
   },
   "src/components/Footer.astro": {
-    "mtime": 1788280656.3861086,
-    "seen": 1788370344.285554,
-    "ast_hash": "4912d25f9bc93edb176b95e0fa9ceca1",
-    "semantic_hash": "4912d25f9bc93edb176b95e0fa9ceca1"
+    "mtime": 1788512769.934235,
+    "seen": 1788512790.452312,
+    "ast_hash": "dc9cb53cf0e862af0141eb20d13764fe",
+    "semantic_hash": ""
   },
   "src/components/Header.astro": {
-    "mtime": 1788511495.8383904,
-    "seen": 1788511885.2659929,
-    "ast_hash": "fd0149d5cba1e6cc747c3c226aa1af0f",
+    "mtime": 1788512874.843701,
+    "seen": 1788512891.374551,
+    "ast_hash": "6a86ca3b57af6077451e9eebf6ef751e",
     "semantic_hash": ""
   },
   "src/components/MemeMaker.tsx": {
-    "mtime": 1788511495.8395116,
-    "seen": 1788511885.265994,
-    "ast_hash": "b60c3247a1575e33a07cf52326507c81",
+    "mtime": 1788512729.755343,
+    "seen": 1788512790.452348,
+    "ast_hash": "72a8b16fbfc5305299e0b41c99a6fb41",
     "semantic_hash": ""
   },
   "src/components/ShadcnDemo.tsx": {
@@ -126,9 +126,9 @@
     "semantic_hash": "3f8c0f1757350088ef15a8b704d594fb"
   },
   "src/pages/index.astro": {
-    "mtime": 1788511495.842392,
-    "seen": 1788511885.266114,
-    "ast_hash": "d16085c9b5504cf704304e3b7d4bbf02",
+    "mtime": 1788512747.636624,
+    "seen": 1788512790.4526951,
+    "ast_hash": "3c8c190fd8b3d4bdd09ac201611c0a2f",
     "semantic_hash": ""
   },
   "test.ts": {
@@ -1680,15 +1680,135 @@
     "semantic_hash": ""
   },
   "src/pages/templates.astro": {
-    "mtime": 1788511876.6408672,
-    "seen": 1788511885.2661152,
-    "ast_hash": "cce0f0134fba91f31a3651f7b8991e76",
+    "mtime": 1788512286.2164493,
+    "seen": 1788512367.667277,
+    "ast_hash": "122ad8274f96f9e33074ea9a3747ab76",
     "semantic_hash": ""
   },
   "src/lib/templateCache.ts": {
     "mtime": 1788511495.8415418,
     "seen": 1788511885.266082,
     "ast_hash": "3e5c3d8f1bdca0073776f84e6137cf05",
+    "semantic_hash": ""
+  },
+  "public/templates/cdn/1.webp": {
+    "mtime": 1788512231.5672693,
+    "seen": 1788512367.676812,
+    "ast_hash": "66385d2c4d222d1e9c6cbf01936a4eca",
+    "semantic_hash": ""
+  },
+  "public/templates/cdn/10.webp": {
+    "mtime": 1788512231.8224332,
+    "seen": 1788512367.6768131,
+    "ast_hash": "3b612b4783c028bbc972e55cddeee76c",
+    "semantic_hash": ""
+  },
+  "public/templates/cdn/11.webp": {
+    "mtime": 1788512231.7209835,
+    "seen": 1788512367.676814,
+    "ast_hash": "861c55018568eb2699fa3fb5bd02084e",
+    "semantic_hash": ""
+  },
+  "public/templates/cdn/12.webp": {
+    "mtime": 1788512231.7227223,
+    "seen": 1788512367.676816,
+    "ast_hash": "24aa313da505af099baf54c11358af06",
+    "semantic_hash": ""
+  },
+  "public/templates/cdn/13.webp": {
+    "mtime": 1788512231.8643165,
+    "seen": 1788512367.676817,
+    "ast_hash": "83d70062beb3dc48997223a5860e97df",
+    "semantic_hash": ""
+  },
+  "public/templates/cdn/14.webp": {
+    "mtime": 1788512231.8763123,
+    "seen": 1788512367.676818,
+    "ast_hash": "e803b61a338a2ec46df019f31e51cf48",
+    "semantic_hash": ""
+  },
+  "public/templates/cdn/15.webp": {
+    "mtime": 1788512231.8572185,
+    "seen": 1788512367.6768188,
+    "ast_hash": "cc86313b2baa1f8cc3740ea5d915605f",
+    "semantic_hash": ""
+  },
+  "public/templates/cdn/16.webp": {
+    "mtime": 1788512231.8544447,
+    "seen": 1788512367.67682,
+    "ast_hash": "afdac0d8c78fcf71a0860c94703e5277",
+    "semantic_hash": ""
+  },
+  "public/templates/cdn/17.webp": {
+    "mtime": 1788512231.8846931,
+    "seen": 1788512367.676821,
+    "ast_hash": "a749ff43561e6ce784709778ad88f372",
+    "semantic_hash": ""
+  },
+  "public/templates/cdn/18.webp": {
+    "mtime": 1788512231.8839803,
+    "seen": 1788512367.6768231,
+    "ast_hash": "17abd75bd96bf331317001152b5495fa",
+    "semantic_hash": ""
+  },
+  "public/templates/cdn/19.webp": {
+    "mtime": 1788512231.8773038,
+    "seen": 1788512367.676824,
+    "ast_hash": "c9da0b23abf5b20058292c5e7b08f6c6",
+    "semantic_hash": ""
+  },
+  "public/templates/cdn/2.webp": {
+    "mtime": 1788512231.5744245,
+    "seen": 1788512367.676825,
+    "ast_hash": "f8de19b4ee2def82114cc647495cb76c",
+    "semantic_hash": ""
+  },
+  "public/templates/cdn/20.webp": {
+    "mtime": 1788512231.8779519,
+    "seen": 1788512367.676826,
+    "ast_hash": "8db4e6494657ad5b1a6ec75aa1500260",
+    "semantic_hash": ""
+  },
+  "public/templates/cdn/3.webp": {
+    "mtime": 1788512231.593504,
+    "seen": 1788512367.676827,
+    "ast_hash": "4e3331d76416b1791bc07854e65b1849",
+    "semantic_hash": ""
+  },
+  "public/templates/cdn/4.webp": {
+    "mtime": 1788512231.6861227,
+    "seen": 1788512367.676828,
+    "ast_hash": "f0895b28770eddfb3902b00ef17b1460",
+    "semantic_hash": ""
+  },
+  "public/templates/cdn/5.webp": {
+    "mtime": 1788512231.5781078,
+    "seen": 1788512367.6768289,
+    "ast_hash": "14bb1f636ff6431da5495d662902d02f",
+    "semantic_hash": ""
+  },
+  "public/templates/cdn/6.webp": {
+    "mtime": 1788512231.5944257,
+    "seen": 1788512367.67683,
+    "ast_hash": "f48678927a6f73b47588f0db8b1c410b",
+    "semantic_hash": ""
+  },
+  "public/templates/cdn/7.webp": {
+    "mtime": 1788512231.6880286,
+    "seen": 1788512367.676831,
+    "ast_hash": "feed00f9848828c61b5a043328fa4353",
+    "semantic_hash": ""
+  },
+  "public/templates/cdn/8.webp": {
+    "mtime": 1788512231.8456733,
+    "seen": 1788512367.676832,
+    "ast_hash": "e9b5fd7be83ef52eebbc4ca7b7e3edcc",
+    "semantic_hash": ""
+  },
+  "public/templates/cdn/9.webp": {
+    "mtime": 1788512231.960809,
+    "seen": 1788512367.676833,
+    "ast_hash": "f0d21a255e2f0bb9a176328ffbc63f94",
     "semantic_hash": ""
   }
 }

@@ -1,34 +1,52 @@
 ---
-const columns = [
+interface FooterLink {
+	label: string;
+	href?: string;
+	id?: string;
+	external?: boolean;
+	action?: string;
+}
+
+interface FooterColumn {
+	title: string;
+	links: FooterLink[];
+}
+
+const columns: FooterColumn[] = [
 	{
 		title: "Product",
 		links: [
-			{ label: "Templates", href: "/#templates" },
-			{ label: "Editor", href: "/edit" },
-			{ label: "Upload image", href: "/edit?upload=1" },
+			{ label: "Meme Editor", href: "/edit" },
+			{ label: "Browse Templates", href: "/templates" },
+			{ label: "Trending Memes", href: "/#trending-title" },
+			{ label: "Upload Image", href: "/edit?upload=1" },
 		],
 	},
 	{
-		title: "Templates",
+		title: "Popular Templates",
 		links: [
-			{ label: "Drake", href: "/edit?template=drake" },
-			{ label: "This Is Fine", href: "/edit?template=this-is-fine" },
-			{ label: "Doge", href: "/edit?template=doge" },
+			{ label: "Hide the Pain Harold", href: "/edit?template=20" },
+			{ label: "Disaster Girl", href: "/edit?template=18" },
+			{ label: "Expanding Brain", href: "/edit?template=16" },
+			{ label: "Two Buttons", href: "/edit?template=3" },
+			{ label: "Left Exit 12", href: "/edit?template=2" },
 		],
 	},
 	{
 		title: "About",
 		links: [
-			{ label: "Why free?", href: "/#features" },
-			{ label: "No sign-up", href: "/#features" },
-			{ label: "No watermark", href: "/#features" },
+			{ label: "Why free?", href: "/#why-free" },
+			{ label: "No sign-up", href: "/#no-signup" },
+			{ label: "No watermark", href: "/#no-watermark" },
+			{ label: "All features", href: "/#features" },
 		],
 	},
 	{
-		title: "Resources",
+		title: "Community & Account",
 		links: [
-			{ label: "imgflip", href: "https://imgflip.com" },
-			{ label: "iloveimg", href: "https://www.iloveimg.com" },
+			{ label: "Create Account / Sign In", id: "footer-btn-auth", action: "auth" },
+			{ label: "My Custom Templates", href: "/templates#upload-zone" },
+			{ label: "GitHub Repository", href: "https://github.com/thisisvaishnav/MemeMaker", external: true },
 		],
 	},
 ];
@@ -44,9 +62,29 @@ const columns = [
 						<ul class="flex flex-col gap-2.5">
 							{col.links.map((link) => (
 								<li>
-									<a href={link.href} class="text-sm text-body transition-colors hover:text-ink">
-										{link.label}
-									</a>
+									{link.action === "auth" ? (
+										<button
+											type="button"
+											id={link.id}
+											class="text-left text-sm text-body transition-colors hover:text-ink cursor-pointer outline-none focus-visible:underline"
+										>
+											{link.label}
+										</button>
+									) : (
+										<a
+											href={link.href}
+											target={link.external ? "_blank" : undefined}
+											rel={link.external ? "noopener noreferrer" : undefined}
+											class="inline-flex items-center gap-1 text-sm text-body transition-colors hover:text-ink outline-none focus-visible:underline"
+										>
+											{link.label}
+											{link.external && (
+												<svg class="h-3 w-3 opacity-60" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+													<path d="M6 3h7v7M13 3L7 9"/>
+												</svg>
+											)}
+										</a>
+									)}
 								</li>
 							))}
 						</ul>
@@ -64,7 +102,21 @@ const columns = [
 				</span>
 				MemeMaker — free, no sign-up, no watermark.
 			</p>
-			<p class="font-mono text-xs text-mute">mememaker.com</p>
+			<a
+				href="/"
+				class="font-mono text-xs text-mute transition-colors hover:text-ink"
+			>
+				mememaker.com
+			</a>
 		</div>
 	</div>
 </footer>
+
+<script>
+	const authBtn = document.getElementById("footer-btn-auth");
+	authBtn?.addEventListener("click", () => {
+		if (typeof window.openAuthModal === "function") {
+			window.openAuthModal("signup");
+		}
+	});
+</script>
