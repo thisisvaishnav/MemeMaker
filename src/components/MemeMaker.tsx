@@ -2,8 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import "./MemeMaker.css";
 import {
   loadImage,
+  saveImage,
   clearImage,
   loadTemplateUrl,
+  saveTemplateUrl,
   clearTemplateUrl,
   getCustomTemplateById,
 } from "../lib/imageStore";
@@ -132,6 +134,7 @@ export default function MemeMaker() {
       getCustomTemplateById(customId).then((tpl) => {
         if (tpl) {
           setImage(tpl.dataUrl);
+          saveImage(tpl.dataUrl);
         }
       });
       window.history.replaceState({}, "", "/edit");
@@ -141,14 +144,16 @@ export default function MemeMaker() {
     if (templateId) {
       const fullImageUrl = `${DO_SPACES_BASE_URL}/full/${templateId}.webp`;
       setImage(fullImageUrl);
+      saveTemplateUrl(fullImageUrl);
+      saveImage(fullImageUrl);
       window.history.replaceState({}, "", "/edit");
       return;
     }
 
+    // Restore persisted template/image across page changes
     loadTemplateUrl().then((pendingTemplate) => {
       if (pendingTemplate) {
         setImage(pendingTemplate);
-        clearTemplateUrl();
       } else {
         loadImage().then((pending) => {
           if (pending) {
@@ -180,6 +185,8 @@ export default function MemeMaker() {
     reader.onload = () => {
       if (typeof reader.result === "string") {
         setImage(reader.result);
+        saveImage(reader.result);
+        clearTemplateUrl();
         setGenerated(null);
       }
     };
@@ -254,6 +261,8 @@ export default function MemeMaker() {
     setLayers([]);
     setGenerated(null);
     setImage(DEFAULT_IMAGE);
+    clearImage();
+    clearTemplateUrl();
   };
 
   const [dragging, setDragging] = useState<{
@@ -476,7 +485,16 @@ export default function MemeMaker() {
 
             {/* TEMPLATES */}
             <div className="template-list">
-              <button className="blank-template">Blank</button>
+              <button
+                className="blank-template"
+                onClick={() => {
+                  setImage(DEFAULT_IMAGE);
+                  saveImage(DEFAULT_IMAGE);
+                  clearTemplateUrl();
+                }}
+              >
+                Blank
+              </button>
 
               {templates
                 .filter((item) =>
@@ -489,7 +507,11 @@ export default function MemeMaker() {
                   <button
                     className="template"
                     key={template.id}
-                    onClick={() => setImage(template.full)}
+                    onClick={() => {
+                      setImage(template.full);
+                      saveTemplateUrl(template.full);
+                      saveImage(template.full);
+                    }}
                   >
                     <img
                       src={template.thumbnail}
@@ -633,7 +655,17 @@ export default function MemeMaker() {
 
           <div className="featured-grid">
             {templates.map((template) => (
-              <div className="featured-card" key={template.id}>
+              <div
+                className="featured-card"
+                key={template.id}
+                onClick={() => {
+                  setImage(template.full);
+                  saveTemplateUrl(template.full);
+                  saveImage(template.full);
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
+                style={{ cursor: "pointer" }}
+              >
                 <img
                   src={template.thumbnail}
                   alt={`Featured meme ${template.id}`}

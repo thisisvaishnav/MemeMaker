@@ -14,7 +14,7 @@
       "file_type": "code",
       "norm_label": "textlayer",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L11"
+      "source_location": "L13"
     },
     {
       "id": "src_lib_imagestore_customtemplate",
@@ -27,6 +27,19 @@
       "file_type": "code",
       "norm_label": "customtemplate",
       "source_file": "src/lib/imageStore.ts",
+      "source_location": "L9"
+    },
+    {
+      "id": "src_lib_templatecache_landingcardlayout",
+      "label": "LandingCardLayout",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "imageStore.ts",
+      "file_type": "code",
+      "norm_label": "landingcardlayout",
+      "source_file": "src/lib/templateCache.ts",
       "source_location": "L9"
     },
     {
@@ -136,7 +149,7 @@
       "file_type": "code",
       "norm_label": "mememaker()",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L32"
+      "source_location": "L34"
     },
     {
       "id": "src_components_mememaker_textinput",
@@ -148,7 +161,7 @@
       "file_type": "code",
       "norm_label": "textinput()",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L657"
+      "source_location": "L689"
     },
     {
       "id": "src_lib_imagestore_clearimage",
@@ -307,64 +320,64 @@
       "source_location": "L237"
     },
     {
-      "id": "src_lib_templatecache_getcachedtemplatepool",
-      "label": "getCachedTemplatePool()",
+      "id": "src_lib_templatecache_generatedefaultlayout",
+      "label": "generateDefaultLayout()",
       "_callable": true,
       "_origin": "ast",
       "community": 236,
       "community_name": "imageStore.ts",
       "file_type": "code",
-      "norm_label": "getcachedtemplatepool()",
+      "norm_label": "generatedefaultlayout()",
       "source_file": "src/lib/templateCache.ts",
-      "source_location": "L30"
+      "source_location": "L51"
     },
     {
-      "id": "src_lib_templatecache_getcookie",
-      "label": "getCookie()",
+      "id": "src_lib_templatecache_getlandingtemplateslayout",
+      "label": "getLandingTemplatesLayout()",
       "_callable": true,
       "_origin": "ast",
       "community": 236,
       "community_name": "imageStore.ts",
       "file_type": "code",
-      "norm_label": "getcookie()",
+      "norm_label": "getlandingtemplateslayout()",
       "source_file": "src/lib/templateCache.ts",
-      "source_location": "L11"
+      "source_location": "L25"
     },
     {
-      "id": "src_lib_templatecache_preloadtemplateimages",
-      "label": "preloadTemplateImages()",
+      "id": "src_lib_templatecache_gettrendingtemplates",
+      "label": "getTrendingTemplates()",
       "_callable": true,
       "_origin": "ast",
       "community": 236,
       "community_name": "imageStore.ts",
       "file_type": "code",
-      "norm_label": "preloadtemplateimages()",
+      "norm_label": "gettrendingtemplates()",
       "source_file": "src/lib/templateCache.ts",
-      "source_location": "L80"
+      "source_location": "L81"
     },
     {
-      "id": "src_lib_templatecache_setcookie",
-      "label": "setCookie()",
+      "id": "src_lib_templatecache_randombetween",
+      "label": "randomBetween()",
       "_callable": true,
       "_origin": "ast",
       "community": 236,
       "community_name": "imageStore.ts",
       "file_type": "code",
-      "norm_label": "setcookie()",
+      "norm_label": "randombetween()",
       "source_file": "src/lib/templateCache.ts",
-      "source_location": "L20"
+      "source_location": "L17"
     },
     {
-      "id": "src_lib_templatecache_shufflearray",
-      "label": "shuffleArray()",
+      "id": "src_pages_index_if",
+      "label": "if()",
       "_callable": true,
       "_origin": "ast",
       "community": 236,
       "community_name": "imageStore.ts",
       "file_type": "code",
-      "norm_label": "shufflearray()",
-      "source_file": "src/lib/templateCache.ts",
-      "source_location": "L68"
+      "norm_label": "if()",
+      "source_file": "src/pages/index.astro",
+      "source_location": "L382"
     },
     {
       "id": "src_pages_templates_activatetab",
@@ -11926,7 +11939,7 @@
       "file_type": "code",
       "norm_label": "templates",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L26"
+      "source_location": "L28"
     },
     {
       "id": "src_layouts_layout",
@@ -11960,17 +11973,6 @@
       "norm_label": "templatecache.ts",
       "source_file": "src/lib/templateCache.ts",
       "source_location": "L1"
-    },
-    {
-      "id": "src_lib_templatecache_default_pool",
-      "label": "DEFAULT_POOL",
-      "_origin": "ast",
-      "community": 236,
-      "community_name": "imageStore.ts",
-      "file_type": "code",
-      "norm_label": "default_pool",
-      "source_file": "src/lib/templateCache.ts",
-      "source_location": "L6"
     },
     {
       "id": "src_pages_edit",
@@ -21424,7 +21426,31 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L132",
+      "source_location": "L134",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_mememaker_mememaker",
+      "target": "src_lib_imagestore_saveimage",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/components/MemeMaker.tsx",
+      "source_location": "L137",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_mememaker_mememaker",
+      "target": "src_lib_imagestore_savetemplateurl",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/components/MemeMaker.tsx",
+      "source_location": "L147",
       "weight": 1.0
     },
     {
@@ -21436,19 +21462,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L148",
-      "weight": 1.0
-    },
-    {
-      "source": "src_components_mememaker_mememaker",
-      "target": "src_lib_imagestore_cleartemplateurl",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L151",
+      "source_location": "L154",
       "weight": 1.0
     },
     {
@@ -21460,7 +21474,31 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L153",
+      "source_location": "L158",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_mememaker_mememaker",
+      "target": "src_lib_imagestore_cleartemplateurl",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/components/MemeMaker.tsx",
+      "source_location": "L189",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_mememaker_mememaker",
+      "target": "src_lib_imagestore_clearimage",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/components/MemeMaker.tsx",
+      "source_location": "L264",
       "weight": 1.0
     },
     {
@@ -21788,27 +21826,27 @@
       "weight": 1.0
     },
     {
-      "source": "src_lib_templatecache_getcachedtemplatepool",
-      "target": "src_lib_templatecache_getcookie",
+      "source": "src_lib_templatecache_generatedefaultlayout",
+      "target": "src_lib_templatecache_randombetween",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/lib/templateCache.ts",
-      "source_location": "L32",
+      "source_location": "L70",
       "weight": 1.0
     },
     {
-      "source": "src_lib_templatecache_getcachedtemplatepool",
-      "target": "src_lib_templatecache_setcookie",
+      "source": "src_lib_templatecache_getlandingtemplateslayout",
+      "target": "src_lib_templatecache_generatedefaultlayout",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/lib/templateCache.ts",
-      "source_location": "L46",
+      "source_location": "L27",
       "weight": 1.0
     },
     {
@@ -22198,6 +22236,30 @@
     {
       "source": "src_components_mememaker",
       "target": "src_lib_imagestore_loadtemplateurl",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/MemeMaker.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_mememaker",
+      "target": "src_lib_imagestore_saveimage",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/MemeMaker.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_mememaker",
+      "target": "src_lib_imagestore_savetemplateurl",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -38659,7 +38721,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L11",
+      "source_location": "L13",
       "weight": 1.0
     },
     {
@@ -38670,7 +38732,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L26",
+      "source_location": "L28",
       "weight": 1.0
     },
     {
@@ -38681,7 +38743,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L32",
+      "source_location": "L34",
       "weight": 1.0
     },
     {
@@ -38692,7 +38754,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L657",
+      "source_location": "L689",
       "weight": 1.0
     },
     {
@@ -39016,68 +39078,57 @@
     },
     {
       "source": "src_lib_templatecache",
-      "target": "src_lib_templatecache_getcookie",
+      "target": "src_lib_templatecache_randombetween",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/templateCache.ts",
-      "source_location": "L11",
+      "source_location": "L17",
       "weight": 1.0
     },
     {
       "source": "src_lib_templatecache",
-      "target": "src_lib_templatecache_setcookie",
+      "target": "src_lib_templatecache_getlandingtemplateslayout",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/templateCache.ts",
-      "source_location": "L20",
+      "source_location": "L25",
       "weight": 1.0
     },
     {
       "source": "src_lib_templatecache",
-      "target": "src_lib_templatecache_getcachedtemplatepool",
+      "target": "src_lib_templatecache_generatedefaultlayout",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/templateCache.ts",
-      "source_location": "L30",
+      "source_location": "L51",
       "weight": 1.0
     },
     {
       "source": "src_lib_templatecache",
-      "target": "src_lib_templatecache_default_pool",
+      "target": "src_lib_templatecache_gettrendingtemplates",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/templateCache.ts",
-      "source_location": "L6",
+      "source_location": "L81",
       "weight": 1.0
     },
     {
       "source": "src_lib_templatecache",
-      "target": "src_lib_templatecache_shufflearray",
+      "target": "src_lib_templatecache_landingcardlayout",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/templateCache.ts",
-      "source_location": "L68",
-      "weight": 1.0
-    },
-    {
-      "source": "src_lib_templatecache",
-      "target": "src_lib_templatecache_preloadtemplateimages",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/lib/templateCache.ts",
-      "source_location": "L80",
+      "source_location": "L9",
       "weight": 1.0
     },
     {
@@ -39089,6 +39140,17 @@
       "confidence_score": 1.0,
       "source_file": "src/lib/utils.ts",
       "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_index",
+      "target": "src_pages_index_if",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/index.astro",
+      "source_location": "L382",
       "weight": 1.0
     },
     {
@@ -39390,5 +39452,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "5afd7db2f585cf26d72a49ca42824f5afba74018"
+  "built_at_commit": "ea9f890dd01e120e9ceda06a1bc63b52f13bd476"
 }

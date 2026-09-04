@@ -1,16 +1,16 @@
 # Graph Report - MemeMaker  (2026-09-04)
 
 ## Corpus Check
-- 234 files · ~265,654 words
+- 234 files · ~265,807 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1785 nodes · 1637 edges · 237 communities (216 shown, 18 thin omitted)
+- 1785 nodes · 1642 edges · 237 communities (216 shown, 18 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `5afd7db2`
+- Built from commit: `ea9f890d`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -265,13 +265,13 @@
 ## Surprising Connections (you probably didn't know these)
 - `updateUserUI()` --calls--> `getUserAvatarUrl()`  [EXTRACTED]
   src/components/Header.astro → src/lib/avatar.ts
+- `MemeMaker()` --calls--> `clearImage()`  [EXTRACTED]
+  src/components/MemeMaker.tsx → src/lib/imageStore.ts
 - `MemeMaker()` --calls--> `clearTemplateUrl()`  [EXTRACTED]
   src/components/MemeMaker.tsx → src/lib/imageStore.ts
 - `MemeMaker()` --calls--> `getCustomTemplateById()`  [EXTRACTED]
   src/components/MemeMaker.tsx → src/lib/imageStore.ts
 - `MemeMaker()` --calls--> `loadImage()`  [EXTRACTED]
-  src/components/MemeMaker.tsx → src/lib/imageStore.ts
-- `MemeMaker()` --calls--> `loadTemplateUrl()`  [EXTRACTED]
   src/components/MemeMaker.tsx → src/lib/imageStore.ts
 
 ## Import Cycles

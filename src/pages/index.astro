@@ -165,10 +165,10 @@ const templateSlots = Array.from({ length: 20 });
 
 <script>
     import {
-        getCachedTemplatePool,
-        shuffleArray,
-        preloadTemplateImages,
+        getLandingTemplatesLayout,
+        getTrendingTemplates,
     } from "../lib/templateCache";
+    import { saveImage, saveTemplateUrl } from "../lib/imageStore";
 
     const templateBaseUrl =
         "https://mememaker-templates.nyc3.cdn.digitaloceanspaces.com/thumbnails";
@@ -176,41 +176,20 @@ const templateSlots = Array.from({ length: 20 });
         document.querySelectorAll<HTMLButtonElement>("[data-template-card]"),
     );
 
-    // Retrieve cached template IDs from cookie/storage and shuffle locally
-    const templatePool = getCachedTemplatePool();
-    const templateIds = shuffleArray(templatePool);
-    const positionSlots = shuffleArray(
-        Array.from({ length: templateIds.length }, (_, index) => index),
-    );
-
-    // Pre-warm images into browser disk/memory cache for instant reload
-    preloadTemplateImages(templateBaseUrl, templatePool);
-
-    const randomBetween = (minimum: number, maximum: number) =>
-        minimum + Math.random() * (maximum - minimum);
+    // Retrieve persisted template layout from localStorage so page changes do not reshuffle or refetch
+    const layout = getLandingTemplatesLayout(cards.length);
 
     cards.forEach((card, index) => {
-        const templateId = templateIds[index % templateIds.length];
-        const position = positionSlots[index % positionSlots.length];
-        const column = position % 5;
-        const row = Math.floor(position / 5);
+        const item = layout[index];
+        if (!item) return;
 
-        card.style.setProperty(
-            "--card-width",
-            `${randomBetween(14.85, 22.95).toFixed(2)}rem`,
-        );
-        card.style.setProperty(
-            "--card-left",
-            `${Math.max(-5, Math.min(72, column * 18 + randomBetween(-7, 7))).toFixed(2)}%`,
-        );
-        card.style.setProperty(
-            "--card-top",
-            `${Math.max(-8, Math.min(66, row * 23 + randomBetween(-8, 8))).toFixed(2)}%`,
-        );
-        card.style.setProperty(
-            "--rotation",
-            `${randomBetween(-16, 16).toFixed(2)}deg`,
-        );
+        const { templateId, width, left, top, rotation } = item;
+
+        card.style.setProperty("--card-width", width);
+        card.style.setProperty("--card-left", left);
+        card.style.setProperty("--card-top", top);
+        card.style.setProperty("--rotation", rotation);
+
         const image = card.querySelector<HTMLImageElement>(
             "[data-template-image]",
         );
@@ -240,13 +219,22 @@ const templateSlots = Array.from({ length: 20 });
         });
     };
 
+    const navigateWithTemplate = async (templateId: string) => {
+        const fullImageUrl = `https://mememaker-templates.nyc3.cdn.digitaloceanspaces.com/full/${templateId}.webp`;
+        try {
+            await saveTemplateUrl(fullImageUrl);
+            await saveImage(fullImageUrl);
+        } catch {}
+        window.location.href = `/edit?template=${templateId}`;
+    };
+
     cards.forEach((card) => {
-        card.addEventListener("click", (event) => {
+        card.addEventListener("click", async (event) => {
             event.stopPropagation();
 
             const templateId = card.getAttribute("data-template-id");
             if (templateId) {
-                window.location.href = `/edit?template=${templateId}`;
+                await navigateWithTemplate(templateId);
                 return;
             }
         });
@@ -256,8 +244,6 @@ const templateSlots = Array.from({ length: 20 });
     document.addEventListener("keydown", (event) => {
         if (event.key === "Escape") closeTemplates();
     });
-
-    import { saveImage } from "../lib/imageStore";
 
     const uploadInput =
         document.querySelector<HTMLInputElement>("#meme-upload");
@@ -358,23 +344,36 @@ const templateSlots = Array.from({ length: 20 });
         showSelectedFile(event.dataTransfer?.files[0]);
     });
 
-    // ── Trending images (shuffled locally from cache on reload) ──────
+    // ── Trending images (persisted in localStorage across reloads) ──────
     const trendingBase =
         "https://mememaker-templates.nyc3.cdn.digitaloceanspaces.com/thumbnails";
-    const trendingShuffled = shuffleArray(templatePool);
-    document
-        .querySelectorAll<HTMLAnchorElement>("[data-trending-id]")
-        .forEach((card, index) => {
-            const id = trendingShuffled[index % trendingShuffled.length];
-            card.setAttribute("data-trending-id", String(id));
-            card.setAttribute("aria-label", `Use meme template ${id}`);
-            card.href = `/edit?template=${id}`;
-            const img = card.querySelector<HTMLImageElement>("[data-trending-img]");
-            if (img) {
-                img.src = `${trendingBase}/${id}.webp`;
-                img.alt = `Meme template ${id}`;
-            }
+    const trendingCards = Array.from(
+        document.querySelectorAll<HTMLAnchorElement>("[data-trending-id]"),
+    );
+    const trendingTemplates = getTrendingTemplates(trendingCards.length);
+
+    trendingCards.forEach((card, index) => {
+        const id = trendingTemplates[index % trendingTemplates.length];
+        card.setAttribute("data-trending-id", String(id));
+        card.setAttribute("aria-label", `Use meme template ${id}`);
+        card.href = `/edit?template=${id}`;
+
+        const img = card.querySelector<HTMLImageElement>("[data-trending-img]");
+        if (img) {
+            img.src = `${trendingBase}/${id}.webp`;
+            img.alt = `Meme template ${id}`;
+        }
+
+        card.addEventListener("click", async (e) => {
+            e.preventDefault();
+            const fullImageUrl = `https://mememaker-templates.nyc3.cdn.digitaloceanspaces.com/full/${id}.webp`;
+            try {
+                await saveTemplateUrl(fullImageUrl);
+                await saveImage(fullImageUrl);
+            } catch {}
+            window.location.href = `/edit?template=${id}`;
         });
+    });
 
     // ── Scroll-hint: hide once user scrolls ──────────────────────────
     const scrollHint = document.querySelector<HTMLElement>(".scroll-hint");
