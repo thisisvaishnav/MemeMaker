@@ -377,7 +377,7 @@
       "file_type": "code",
       "norm_label": "if()",
       "source_file": "src/pages/index.astro",
-      "source_location": "L452"
+      "source_location": "L455"
     },
     {
       "id": "src_pages_templates_activatetab",
@@ -39183,7 +39183,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/pages/index.astro",
-      "source_location": "L452",
+      "source_location": "L455",
       "weight": 1.0
     },
     {
@@ -39485,5 +39485,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "90ca03c141f175f6f0caccd18a03588c982bae22"
+  "built_at_commit": "554f2fdf872f752f6351eccbc25daf997a25f115"
 }

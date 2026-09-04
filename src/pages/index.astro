@@ -251,16 +251,19 @@ const templateSlots = Array.from({ length: 20 });
         );
 
         if (image) {
-            image.addEventListener(
-                "load",
-                () => {
-                    image.width = image.naturalWidth;
-                    image.height = image.naturalHeight;
-                },
-                { once: true },
-            );
+            const markLoaded = () => {
+                image.width = image.naturalWidth;
+                image.height = image.naturalHeight;
+                card.classList.add("is-loaded");
+            };
+
+            image.addEventListener("load", markLoaded, { once: true });
             image.src = `${templateBaseUrl}/${templateId}.webp`;
             image.alt = `Meme template ${templateId}`;
+
+            if (image.complete && image.naturalWidth > 0) {
+                markLoaded();
+            }
         }
         card.setAttribute("aria-label", `Preview meme template ${templateId}`);
         card.setAttribute("data-template-id", String(templateId));
@@ -464,6 +467,17 @@ const templateSlots = Array.from({ length: 20 });
         border-color: white;
         background-color: rgb(18 18 18 / 0.94);
         transform: scale(1.03);
+    }
+
+    .template-card {
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s, opacity 0.35s ease-out;
+    }
+
+    .template-card.is-loaded {
+        opacity: 1;
+        pointer-events: auto;
     }
 
     @media (min-width: 64rem) {

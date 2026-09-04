@@ -126,9 +126,9 @@
     "semantic_hash": "3f8c0f1757350088ef15a8b704d594fb"
   },
   "src/pages/index.astro": {
-    "mtime": 1788512747.636624,
-    "seen": 1788512790.4526951,
-    "ast_hash": "3c8c190fd8b3d4bdd09ac201611c0a2f",
+    "mtime": 1788512942.8857672,
+    "seen": 1788512959.9206882,
+    "ast_hash": "375c7746e3621669308cc286137665b1",
     "semantic_hash": ""
   },
   "test.ts": {
