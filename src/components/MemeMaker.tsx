@@ -49,11 +49,35 @@ const TEMPLATE_ALIAS_MAP: Record<string, number> = {
   "doge": 20,
 };
 
+export const TEMPLATE_NAMES: Record<number, string> = {
+  1: "Confused Nick Young",
+  2: "Left Exit 12 - Car Swerving",
+  3: "Two Buttons",
+  4: "Epic Handshake",
+  5: "Change My Mind",
+  6: "Distracted Boyfriend",
+  7: "Woman Yelling at Cat",
+  8: "Buff Doge vs. Cheems",
+  9: "Bernie I Am Once Again Asking",
+  10: "Always Has Been",
+  11: "Jim Halpert Explaining to Whiteboard",
+  12: "Leonardo DiCaprio Laughing",
+  13: "Anakin and Padme",
+  14: "Trade Offer",
+  15: "Panik Kalm Panik",
+  16: "Expanding Brain",
+  17: "Is This a Pigeon?",
+  18: "Disaster Girl",
+  19: "They're the Same Picture",
+  20: "Hide the Pain Harold",
+};
+
 export default function MemeMaker() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [image, setImage] = useState(DEFAULT_IMAGE);
+  const [templateTitle, setTemplateTitle] = useState(TEMPLATE_NAMES[1]);
   const [topText, setTopText] = useState("");
   const [bottomText, setBottomText] = useState("");
 
@@ -133,7 +157,7 @@ export default function MemeMaker() {
         ctx.textBaseline = "bottom";
 
         ctx.fillStyle = "rgba(255,255,255,0.75)";
-        ctx.fillText("MemeForge", 12, canvas.height - 12);
+        ctx.fillText("MemeMaker", 12, canvas.height - 12);
       }
     };
 
@@ -164,12 +188,14 @@ export default function MemeMaker() {
       getCustomTemplateById(customId).then((tpl) => {
         if (tpl) {
           setImage(tpl.dataUrl);
+          setTemplateTitle(tpl.name || "Custom Template");
           saveImage(tpl.dataUrl);
           clearTemplateUrl();
         } else {
           loadImage().then((pending) => {
             if (pending) {
               setImage(pending);
+              setTemplateTitle("Custom Template");
               saveImage(pending);
               clearTemplateUrl();
             }
@@ -186,6 +212,7 @@ export default function MemeMaker() {
       const resolvedId = aliasId ?? (parsedNum >= 1 && parsedNum <= 20 ? parsedNum : 1);
       const fullImageUrl = `/templates/cdn/${resolvedId}.webp`;
       setImage(fullImageUrl);
+      setTemplateTitle(TEMPLATE_NAMES[resolvedId] || `Template ${resolvedId}`);
       saveTemplateUrl(fullImageUrl);
       saveImage(fullImageUrl);
       window.history.replaceState({}, "", "/edit");
@@ -196,13 +223,20 @@ export default function MemeMaker() {
     loadImage().then((pendingImage) => {
       if (pendingImage && (pendingImage.startsWith("data:") || pendingImage.startsWith("blob:"))) {
         setImage(pendingImage);
+        setTemplateTitle("Custom Template");
         return;
       }
       loadTemplateUrl().then((pendingTemplate) => {
         if (pendingTemplate) {
           setImage(pendingTemplate);
+          const match = pendingTemplate.match(/\/templates\/cdn\/(\d+)\.webp/);
+          if (match) {
+            const id = parseInt(match[1], 10);
+            setTemplateTitle(TEMPLATE_NAMES[id] || `Template ${id}`);
+          }
         } else if (pendingImage) {
           setImage(pendingImage);
+          setTemplateTitle("Custom Template");
         }
       });
     });
@@ -229,6 +263,7 @@ export default function MemeMaker() {
     reader.onload = () => {
       if (typeof reader.result === "string") {
         setImage(reader.result);
+        setTemplateTitle(file.name.replace(/\.[^/.]+$/, "") || "Custom Upload");
         saveImage(reader.result);
         clearTemplateUrl();
         setGenerated(null);
@@ -254,7 +289,7 @@ export default function MemeMaker() {
     if (!generated) return;
 
     const link = document.createElement("a");
-    link.download = "memeforge-meme.png";
+    link.download = "mememaker-meme.png";
     link.href = generated;
     link.click();
   };
@@ -266,7 +301,7 @@ export default function MemeMaker() {
       const response = await fetch(generated);
       const blob = await response.blob();
 
-      const file = new File([blob], "memeforge.png", {
+      const file = new File([blob], "mememaker.png", {
         type: "image/png",
       });
 
@@ -278,11 +313,11 @@ export default function MemeMaker() {
       ) {
         await navigator.share({
           title: "My Meme",
-          text: "Created with MemeForge",
+          text: "Created with MemeMaker",
           files: [file],
         });
       } else {
-        await navigator.clipboard.writeText("My Meme created with MemeForge");
+        await navigator.clipboard.writeText("My Meme created with MemeMaker");
         alert("Share is not supported. Meme link copied.");
       }
     } catch {
@@ -305,6 +340,7 @@ export default function MemeMaker() {
     setLayers([]);
     setGenerated(null);
     setImage(DEFAULT_IMAGE);
+    setTemplateTitle(TEMPLATE_NAMES[1]);
     clearImage();
     clearTemplateUrl();
   };
@@ -403,12 +439,23 @@ export default function MemeMaker() {
     setDragging(null);
   };
 
+  const searchLower = search.trim().toLowerCase();
+  const matchesSearch = (id: number) => {
+    if (!searchLower) return true;
+    if (String(id).includes(searchLower)) return true;
+    const name = TEMPLATE_NAMES[id]?.toLowerCase() || "";
+    if (name.includes(searchLower)) return true;
+    return Object.entries(TEMPLATE_ALIAS_MAP).some(
+      ([alias, aliasId]) => aliasId === id && alias.includes(searchLower)
+    );
+  };
+
   return (
     <div className="meme-app">
       <main className="page">
         {/* PAGE TITLE */}
         <section className="page-heading">
-          <h1>whiplash rushing or dragging Meme Generator</h1>
+          <h1>{templateTitle} Meme Generator</h1>
           <p>
             The fastest meme generator. Easily add text to images or memes.
           </p>
@@ -419,14 +466,25 @@ export default function MemeMaker() {
           {/* PREVIEW */}
           <div className="preview-section">
             <div className="preview-toolbar">
-              <button>↶</button>
-              <button>Spacing</button>
-
-              <button onClick={triggerUpload}>
-                + Add Image
+              <button type="button" title="Reset" onClick={reset}>↶</button>
+              <button
+                type="button"
+                onClick={() => setFontSize((f) => Math.min(100, f + 4))}
+                title="Increase Font Size"
+              >
+                Size +
+              </button>
+              <button
+                type="button"
+                onClick={() => setFontSize((f) => Math.max(20, f - 4))}
+                title="Decrease Font Size"
+              >
+                Size -
               </button>
 
-              <button>Draw</button>
+              <button type="button" onClick={triggerUpload}>
+                + Add Image
+              </button>
             </div>
 
             <div
@@ -511,19 +569,24 @@ export default function MemeMaker() {
 
               <input
                 className="template-search"
-                placeholder="Search all memes"
+                placeholder="Search templates (e.g. harold, drake)..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
             </div>
 
             <div className="template-title">
-              <span>whiplash rushing or dragging</span>
+              <span>{templateTitle}</span>
 
               <div className="template-tabs">
-                <button>My</button>
-                <button>Hot</button>
-                <button>Top</button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    window.location.href = "/templates";
+                  }}
+                >
+                  Templates →
+                </button>
               </div>
             </div>
 
@@ -533,6 +596,7 @@ export default function MemeMaker() {
                 className="blank-template"
                 onClick={() => {
                   setImage(DEFAULT_IMAGE);
+                  setTemplateTitle("Blank Template");
                   saveImage(DEFAULT_IMAGE);
                   clearTemplateUrl();
                 }}
@@ -541,25 +605,22 @@ export default function MemeMaker() {
               </button>
 
               {templates
-                .filter((item) =>
-                  search
-                    ? String(item.id).includes(search) ||
-                      item.thumbnail.toLowerCase().includes(search.toLowerCase())
-                    : true
-                )
+                .filter((item) => matchesSearch(item.id))
                 .map((template) => (
                   <button
                     className="template"
                     key={template.id}
+                    title={TEMPLATE_NAMES[template.id] || `Template ${template.id}`}
                     onClick={() => {
                       setImage(template.full);
+                      setTemplateTitle(TEMPLATE_NAMES[template.id] || `Template ${template.id}`);
                       saveTemplateUrl(template.full);
                       saveImage(template.full);
                     }}
                   >
                     <img
                       src={template.thumbnail}
-                      alt={`Template ${template.id}`}
+                      alt={TEMPLATE_NAMES[template.id] || `Template ${template.id}`}
                     />
                   </button>
                 ))}
@@ -660,9 +721,7 @@ export default function MemeMaker() {
 
             {showOptions && (
               <div className="advanced-options">
-                <button>AI</button>
-                <button>Effects</button>
-                <button onClick={addTextLayer}>+ Add Text</button>
+                <button type="button" onClick={addTextLayer}>+ Add Text</button>
               </div>
             )}
 
@@ -687,14 +746,21 @@ export default function MemeMaker() {
         {/* AI BANNER */}
         <section className="ai-banner">
           Instant memes with one prompt:
-          <strong>MemeForge AI</strong>
+          <strong>MemeMaker AI</strong>
         </section>
 
         {/* FEATURED */}
         <section className="featured">
           <div className="featured-header">
             <h2>Featured Meme Templates</h2>
-            <button>See All →</button>
+            <button
+              type="button"
+              onClick={() => {
+                window.location.href = "/templates";
+              }}
+            >
+              See All →
+            </button>
           </div>
 
           <div className="featured-grid">
@@ -704,6 +770,7 @@ export default function MemeMaker() {
                 key={template.id}
                 onClick={() => {
                   setImage(template.full);
+                  setTemplateTitle(TEMPLATE_NAMES[template.id] || `Template ${template.id}`);
                   saveTemplateUrl(template.full);
                   saveImage(template.full);
                   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -712,11 +779,11 @@ export default function MemeMaker() {
               >
                 <img
                   src={template.thumbnail}
-                  alt={`Featured meme ${template.id}`}
+                  alt={TEMPLATE_NAMES[template.id] || `Featured meme ${template.id}`}
                 />
 
                 <div className="featured-info">
-                  <span>Popular Meme</span>
+                  <span>{TEMPLATE_NAMES[template.id] || `Template ${template.id}`}</span>
                   <small>🔥 Trending</small>
                 </div>
               </div>
