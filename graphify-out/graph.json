@@ -149,7 +149,7 @@
       "file_type": "code",
       "norm_label": "mememaker()",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L52"
+      "source_location": "L75"
     },
     {
       "id": "src_components_mememaker_textinput",
@@ -161,7 +161,7 @@
       "file_type": "code",
       "norm_label": "textinput()",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L733"
+      "source_location": "L800"
     },
     {
       "id": "src_lib_imagestore_clearimage",
@@ -389,7 +389,7 @@
       "file_type": "code",
       "norm_label": "activatetab()",
       "source_file": "src/pages/templates.astro",
-      "source_location": "L272"
+      "source_location": "L281"
     },
     {
       "id": "src_pages_templates_handlefile",
@@ -401,7 +401,7 @@
       "file_type": "code",
       "norm_label": "handlefile()",
       "source_file": "src/pages/templates.astro",
-      "source_location": "L350"
+      "source_location": "L359"
     },
     {
       "id": "src_pages_templates_isacceptedimage",
@@ -413,7 +413,7 @@
       "file_type": "code",
       "norm_label": "isacceptedimage()",
       "source_file": "src/pages/templates.astro",
-      "source_location": "L311"
+      "source_location": "L320"
     },
     {
       "id": "src_components_shadcndemo_shadcndemo",
@@ -11942,6 +11942,17 @@
       "source_location": "L33"
     },
     {
+      "id": "src_components_mememaker_template_names",
+      "label": "TEMPLATE_NAMES",
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "imageStore.ts",
+      "file_type": "code",
+      "norm_label": "template_names",
+      "source_file": "src/components/MemeMaker.tsx",
+      "source_location": "L52"
+    },
+    {
       "id": "src_components_mememaker_templates",
       "label": "templates",
       "_origin": "ast",
@@ -12060,7 +12071,7 @@
       "file_type": "code",
       "norm_label": "idset",
       "source_file": "src/pages/templates.astro",
-      "source_location": "L259"
+      "source_location": "L268"
     },
     {
       "id": "src_pages_templates_uploadinput",
@@ -12071,7 +12082,7 @@
       "file_type": "code",
       "norm_label": "uploadinput",
       "source_file": "src/pages/templates.astro",
-      "source_location": "L307"
+      "source_location": "L316"
     },
     {
       "id": "src_pages_templates_uploadzone",
@@ -12082,7 +12093,7 @@
       "file_type": "code",
       "norm_label": "uploadzone",
       "source_file": "src/pages/templates.astro",
-      "source_location": "L306"
+      "source_location": "L315"
     },
     {
       "id": "src_pages_templates_zonestatus",
@@ -12093,7 +12104,7 @@
       "file_type": "code",
       "norm_label": "zonestatus",
       "source_file": "src/pages/templates.astro",
-      "source_location": "L309"
+      "source_location": "L318"
     },
     {
       "id": "src_pages_templates_zonetitle",
@@ -12104,7 +12115,7 @@
       "file_type": "code",
       "norm_label": "zonetitle",
       "source_file": "src/pages/templates.astro",
-      "source_location": "L308"
+      "source_location": "L317"
     },
     {
       "id": "package_dependencies_types_react_dom",
@@ -21448,7 +21459,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L164",
+      "source_location": "L188",
       "weight": 1.0
     },
     {
@@ -21460,7 +21471,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L167",
+      "source_location": "L192",
       "weight": 1.0
     },
     {
@@ -21472,7 +21483,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L168",
+      "source_location": "L193",
       "weight": 1.0
     },
     {
@@ -21484,7 +21495,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L170",
+      "source_location": "L195",
       "weight": 1.0
     },
     {
@@ -21496,7 +21507,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L189",
+      "source_location": "L216",
       "weight": 1.0
     },
     {
@@ -21508,7 +21519,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L201",
+      "source_location": "L229",
       "weight": 1.0
     },
     {
@@ -21520,7 +21531,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L308",
+      "source_location": "L344",
       "weight": 1.0
     },
     {
@@ -21724,7 +21735,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/lib/imageStore.ts",
-      "source_location": "L347",
+      "source_location": "L349",
       "weight": 1.0
     },
     {
@@ -21880,7 +21891,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/pages/templates.astro",
-      "source_location": "L351",
+      "source_location": "L360",
       "weight": 1.0
     },
     {
@@ -21892,7 +21903,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/pages/templates.astro",
-      "source_location": "L372",
+      "source_location": "L381",
       "weight": 1.0
     },
     {
@@ -21904,7 +21915,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/pages/templates.astro",
-      "source_location": "L375",
+      "source_location": "L384",
       "weight": 1.0
     },
     {
@@ -38781,7 +38792,7 @@
     },
     {
       "source": "src_components_mememaker",
-      "target": "src_components_mememaker_mememaker",
+      "target": "src_components_mememaker_template_names",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -38792,13 +38803,24 @@
     },
     {
       "source": "src_components_mememaker",
+      "target": "src_components_mememaker_mememaker",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/MemeMaker.tsx",
+      "source_location": "L75",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_mememaker",
       "target": "src_components_mememaker_textinput",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L733",
+      "source_location": "L800",
       "weight": 1.0
     },
     {
@@ -39216,7 +39238,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/pages/templates.astro",
-      "source_location": "L259",
+      "source_location": "L268",
       "weight": 1.0
     },
     {
@@ -39227,7 +39249,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/pages/templates.astro",
-      "source_location": "L272",
+      "source_location": "L281",
       "weight": 1.0
     },
     {
@@ -39238,7 +39260,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/pages/templates.astro",
-      "source_location": "L306",
+      "source_location": "L315",
       "weight": 1.0
     },
     {
@@ -39249,7 +39271,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/pages/templates.astro",
-      "source_location": "L307",
+      "source_location": "L316",
       "weight": 1.0
     },
     {
@@ -39260,7 +39282,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/pages/templates.astro",
-      "source_location": "L308",
+      "source_location": "L317",
       "weight": 1.0
     },
     {
@@ -39271,7 +39293,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/pages/templates.astro",
-      "source_location": "L309",
+      "source_location": "L318",
       "weight": 1.0
     },
     {
@@ -39282,7 +39304,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/pages/templates.astro",
-      "source_location": "L311",
+      "source_location": "L320",
       "weight": 1.0
     },
     {
@@ -39293,7 +39315,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/pages/templates.astro",
-      "source_location": "L350",
+      "source_location": "L359",
       "weight": 1.0
     },
     {
@@ -39507,5 +39529,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "ccbfa116e45b8bc522171a93dcfba5ea6ca12da1"
+  "built_at_commit": "67f274c6e39ca1277191e0f02c15937fe0f33c0c"
 }

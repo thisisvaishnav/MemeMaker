@@ -223,6 +223,15 @@ const categories = [
             </div>
         `;
 
+        const editLink = wrap.querySelector<HTMLAnchorElement>("a[href^='/edit']");
+        editLink?.addEventListener("click", async (e) => {
+            e.preventDefault();
+            try {
+                await saveImage(tpl.dataUrl);
+            } catch {}
+            window.location.href = `/edit?custom=${tpl.id}`;
+        });
+
         const deleteBtn = wrap.querySelector<HTMLButtonElement>(".delete-btn");
         deleteBtn?.addEventListener("click", async (e) => {
             e.stopPropagation();
