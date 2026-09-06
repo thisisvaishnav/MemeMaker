@@ -6,29 +6,90 @@ import "../styles/global.css";
 interface Props {
     title: string;
     description?: string;
+    image?: string;
     showHeader?: boolean;
     showFooter?: boolean;
+    canonical?: string;
 }
 
 const {
     title,
     description = "Free online meme generator. Pick a template or upload your own image, add captions, and download instantly. No sign-up, no watermark.",
+    image = "/android-chrome-512x512.png",
     showHeader = true,
     showFooter = true,
+    canonical,
 } = Astro.props;
+
+const siteUrl = Astro.site?.toString() || "https://mememaker.com";
+const canonicalURL = canonical ? new URL(canonical, siteUrl) : new URL(Astro.url.pathname, siteUrl);
+const ogImageURL = new URL(image, siteUrl);
+const gaId = import.meta.env.PUBLIC_GA_ID || "G-3SML7PZ2TL";
 ---
 
 <!doctype html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="generator" content={Astro.generator} />
-        <meta name="description" content={description} />
-        <meta name="theme-color" content="#0a0a0c" />
+
         <title>{title}</title>
+        <meta name="description" content={description} />
+        <link rel="canonical" href={canonicalURL} />
+
+        <!-- Favicons & App Icons -->
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <meta name="theme-color" content="#0a0a0c" />
+        <meta name="apple-mobile-web-app-title" content="MemeMaker" />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonicalURL} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={ogImageURL} />
+        <meta property="og:site_name" content="MemeMaker" />
+
+        <!-- Twitter -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content={canonicalURL} />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={ogImageURL} />
+
+        <!-- Google tag (gtag.js) -->
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+        <script is:inline define:vars={{ gaId }}>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', gaId);
+        </script>
+
+        <!-- Structured Data -->
+        <script type="application/ld+json" is:inline>
+            {
+                "@context": "https://schema.org",
+                "@type": "WebApplication",
+                "name": "MemeMaker",
+                "url": "https://mememaker.com",
+                "applicationCategory": "MultimediaApplication",
+                "operatingSystem": "All",
+                "browserRequirements": "Requires JavaScript. Requires HTML5.",
+                "description": "Free online meme generator. Pick a template or upload your own image, customize text and fonts, and download watermark-free.",
+                "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD"
+                }
+            }
+        </script>
     </head>
     <body class="min-h-dvh bg-canvas-soft text-ink antialiased">
         {showHeader && <Header />}
