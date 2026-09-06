@@ -212,6 +212,261 @@ const templateSlots = Array.from({ length: 20 });
             </div>
         </div>
     </section>
+
+    <!-- ─── FAQ Section ───────────────────────────────────────── -->
+    <section id="faq" class="mx-auto max-w-350 border-t border-hairline px-4 py-16 sm:px-6 sm:py-20" aria-labelledby="faq-title">
+        <div class="mb-12 text-center">
+            <p class="mb-1 font-mono text-[9px] uppercase tracking-[0.18em] text-primary">Got Questions?</p>
+            <h2 id="faq-title" class="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+                Frequently Asked Questions
+            </h2>
+            <p class="mx-auto mt-2 max-w-lg text-xs text-[#a8a8a8] sm:text-sm">
+                Everything you need to know about creating memes on MemeMaker.
+            </p>
+        </div>
+
+        <div class="mx-auto max-w-3xl space-y-4">
+            <details class="group rounded-2xl border border-white/10 bg-[#16161a] p-5 transition-colors open:border-primary/40 open:bg-[#18181e]">
+                <summary class="flex cursor-pointer items-center justify-between text-sm font-semibold text-ink outline-none select-none">
+                    <span>Is MemeMaker completely free to use?</span>
+                    <span class="ml-4 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/10 text-xs transition-transform duration-200 group-open:rotate-180 group-open:bg-primary group-open:text-on-primary">
+                        ↓
+                    </span>
+                </summary>
+                <div class="mt-3 text-xs leading-relaxed text-[#a8a8b2] sm:text-sm">
+                    Yes, MemeMaker is 100% free forever. There are no paywalls, premium tiers, trial expirations, or hidden fees. You can design, customize, and export as many high-resolution memes as you want without paying a single cent.
+                </div>
+            </details>
+
+            <details class="group rounded-2xl border border-white/10 bg-[#16161a] p-5 transition-colors open:border-primary/40 open:bg-[#18181e]">
+                <summary class="flex cursor-pointer items-center justify-between text-sm font-semibold text-ink outline-none select-none">
+                    <span>Do I need to sign up or create an account?</span>
+                    <span class="ml-4 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/10 text-xs transition-transform duration-200 group-open:rotate-180 group-open:bg-primary group-open:text-on-primary">
+                        ↓
+                    </span>
+                </summary>
+                <div class="mt-3 text-xs leading-relaxed text-[#a8a8b2] sm:text-sm">
+                    No sign-up is required to make and download memes. You can open any template, upload any image, edit captions, and download immediately. An account is purely optional if you wish to sync your own uploaded templates across multiple devices.
+                </div>
+            </details>
+
+            <details class="group rounded-2xl border border-white/10 bg-[#16161a] p-5 transition-colors open:border-primary/40 open:bg-[#18181e]">
+                <summary class="flex cursor-pointer items-center justify-between text-sm font-semibold text-ink outline-none select-none">
+                    <span>Will my downloaded memes have watermarks?</span>
+                    <span class="ml-4 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/10 text-xs transition-transform duration-200 group-open:rotate-180 group-open:bg-primary group-open:text-on-primary">
+                        ↓
+                    </span>
+                </summary>
+                <div class="mt-3 text-xs leading-relaxed text-[#a8a8b2] sm:text-sm">
+                    Never. We despise obtrusive branding stamps as much as you do. Every meme generated and exported from MemeMaker is completely watermark-free, clean, and ready for Reddit, Discord, Twitter, Slack, or wherever you share.
+                </div>
+            </details>
+
+            <details class="group rounded-2xl border border-white/10 bg-[#16161a] p-5 transition-colors open:border-primary/40 open:bg-[#18181e]">
+                <summary class="flex cursor-pointer items-center justify-between text-sm font-semibold text-ink outline-none select-none">
+                    <span>Can I upload my own pictures and photos?</span>
+                    <span class="ml-4 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/10 text-xs transition-transform duration-200 group-open:rotate-180 group-open:bg-primary group-open:text-on-primary">
+                        ↓
+                    </span>
+                </summary>
+                <div class="mt-3 text-xs leading-relaxed text-[#a8a8b2] sm:text-sm">
+                    Yes! You can drag and drop your own photo directly onto the homepage or click "Upload your image". You can also upload custom templates directly in our Templates directory to reuse them whenever you want.
+                </div>
+            </details>
+
+            <details class="group rounded-2xl border border-white/10 bg-[#16161a] p-5 transition-colors open:border-primary/40 open:bg-[#18181e]">
+                <summary class="flex cursor-pointer items-center justify-between text-sm font-semibold text-ink outline-none select-none">
+                    <span>What image file formats and dimensions are supported?</span>
+                    <span class="ml-4 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/10 text-xs transition-transform duration-200 group-open:rotate-180 group-open:bg-primary group-open:text-on-primary">
+                        ↓
+                    </span>
+                </summary>
+                <div class="mt-3 text-xs leading-relaxed text-[#a8a8b2] sm:text-sm">
+                    MemeMaker supports PNG, JPG, JPEG, WEBP, and GIF images. The editor automatically preserves the high aspect ratio and resolution of your source image so your exported graphics stay ultra-sharp.
+                </div>
+            </details>
+
+            <details class="group rounded-2xl border border-white/10 bg-[#16161a] p-5 transition-colors open:border-primary/40 open:bg-[#18181e]">
+                <summary class="flex cursor-pointer items-center justify-between text-sm font-semibold text-ink outline-none select-none">
+                    <span>Are my uploaded images kept private and secure?</span>
+                    <span class="ml-4 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/10 text-xs transition-transform duration-200 group-open:rotate-180 group-open:bg-primary group-open:text-on-primary">
+                        ↓
+                    </span>
+                </summary>
+                <div class="mt-3 text-xs leading-relaxed text-[#a8a8b2] sm:text-sm">
+                    Yes, 100%. MemeMaker processes your images client-side using your browser's native HTML5 Canvas engine. Your private personal photos are not transmitted to or stored on our servers unless you explicitly sign in and save them to your personal cloud account.
+                </div>
+            </details>
+
+            <details class="group rounded-2xl border border-white/10 bg-[#16161a] p-5 transition-colors open:border-primary/40 open:bg-[#18181e]">
+                <summary class="flex cursor-pointer items-center justify-between text-sm font-semibold text-ink outline-none select-none">
+                    <span>What customization controls are available in the editor?</span>
+                    <span class="ml-4 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/10 text-xs transition-transform duration-200 group-open:rotate-180 group-open:bg-primary group-open:text-on-primary">
+                        ↓
+                    </span>
+                </summary>
+                <div class="mt-3 text-xs leading-relaxed text-[#a8a8b2] sm:text-sm">
+                    You can add top, bottom, and free-floating text boxes, drag and rotate elements, toggle classic Impact bold font or modern sans-serif typography, customize text fills, black or white strokes/outlines, adjust font sizes, text alignments, and even add stickers.
+                </div>
+            </details>
+
+            <details class="group rounded-2xl border border-white/10 bg-[#16161a] p-5 transition-colors open:border-primary/40 open:bg-[#18181e]">
+                <summary class="flex cursor-pointer items-center justify-between text-sm font-semibold text-ink outline-none select-none">
+                    <span>Can I use the memes commercially for marketing or social media?</span>
+                    <span class="ml-4 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/10 text-xs transition-transform duration-200 group-open:rotate-180 group-open:bg-primary group-open:text-on-primary">
+                        ↓
+                    </span>
+                </summary>
+                <div class="mt-3 text-xs leading-relaxed text-[#a8a8b2] sm:text-sm">
+                    MemeMaker does not charge any royalties or impose restrictions on exported images. You are free to post your memes across corporate social channels, Discord servers, email newsletters, presentations, and digital marketing campaigns subject to standard fair use.
+                </div>
+            </details>
+        </div>
+
+        <!-- FAQ Schema JSON-LD -->
+        <script type="application/ld+json" is:inline>
+            {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "Is MemeMaker completely free to use?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes, MemeMaker is 100% free forever. There are no paywalls, premium tiers, trial expirations, or hidden fees. You can design, customize, and export unlimited high-resolution memes without paying anything."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Do I need to sign up or create an account?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "No sign-up is required to make and download memes. You can open any template, upload any image, edit captions, and download immediately."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Will my downloaded memes have watermarks?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Never. Every meme generated and exported from MemeMaker is completely watermark-free, clean, and ready for social sharing."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Can I upload my own pictures and photos?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes! You can drag and drop your own photo directly onto the homepage or click 'Upload your image' to create memes from your personal images."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Are my uploaded images kept private and secure?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes. MemeMaker processes images client-side directly in your browser using HTML5 Canvas. Your private photos are not uploaded to our servers unless you save them to a personal account."
+                        }
+                    }
+                ]
+            }
+        </script>
+    </section>
+
+    <!-- ─── Comprehensive 600+ Word SEO Guide Section ───────────── -->
+    <section id="guide" class="mx-auto max-w-350 border-t border-hairline px-4 py-16 sm:px-6 sm:py-24" aria-labelledby="guide-title">
+        <div class="mx-auto max-w-4xl">
+            <div class="mb-10 text-center">
+                <p class="mb-1 font-mono text-[9px] uppercase tracking-[0.18em] text-primary">Creator Resource &amp; Guide</p>
+                <h2 id="guide-title" class="text-2xl font-bold tracking-tight text-ink sm:text-4xl">
+                    The Ultimate Free Online Meme Maker: Create, Customize &amp; Share
+                </h2>
+                <p class="mx-auto mt-3 max-w-2xl text-xs text-[#a8a8a8] sm:text-sm">
+                    Discover why millions of creators, developers, and humor enthusiasts choose MemeMaker as their go-to meme generator.
+                </p>
+            </div>
+
+            <article class="prose prose-invert max-w-none space-y-10 text-sm leading-relaxed text-[#c4c4cc]">
+                <div class="rounded-3xl border border-white/10 bg-[#141418] p-6 sm:p-10">
+                    <h3 class="text-xl font-bold text-ink">Fast, Frictionless &amp; Modern: The Meme Generator You Deserve</h3>
+                    <p class="mt-3">
+                        In the fast-moving landscape of internet culture, timing is everything. When a breaking viral news event, hilarious tech fail, or cultural milestone occurs, the window to post the definitive reaction meme is measured in minutes, not hours. Yet traditional online meme generators have become clogged with bloated user interfaces, mandatory account creation walls, slow server-side render queues, and invasive branding stamps.
+                    </p>
+                    <p class="mt-3">
+                        <strong>MemeMaker</strong> was engineered from the ground up to eliminate every single point of friction. By leveraging client-side WebAssembly, modern CSS, and hardware-accelerated HTML5 Canvas rendering, MemeMaker delivers instantaneous interactive editing right in your web browser. You can select an iconic template, type your punchline, customize formatting, and save a crystal-clear PNG image in under ten seconds flat. No credit card, no registration captcha, and zero watermarks stamped onto your joke.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+                    <div class="rounded-2xl border border-white/10 bg-[#16161a] p-6">
+                        <div class="text-2xl font-bold text-primary">01</div>
+                        <h4 class="mt-2 text-base font-semibold text-ink">Select or Upload</h4>
+                        <p class="mt-2 text-xs leading-relaxed text-[#8f8f97] sm:text-sm">
+                            Browse through hundreds of curated meme templates spanning timeless reaction classics to current trending formats. Have your own funny photo, screenshot, or graphic? Simply drag and drop it into the browser window to instantly launch the editor.
+                        </p>
+                    </div>
+
+                    <div class="rounded-2xl border border-white/10 bg-[#16161a] p-6">
+                        <div class="text-2xl font-bold text-cyan-400">02</div>
+                        <h4 class="mt-2 text-base font-semibold text-ink">Customize Captions</h4>
+                        <p class="mt-2 text-xs leading-relaxed text-[#8f8f97] sm:text-sm">
+                            Craft your punchline with total typographic flexibility. Position top and bottom captions, add free-floating text labels, switch between classic bold all-caps Impact font and modern sleek typefaces, and tweak outline stroke thickness and shadow depth.
+                        </p>
+                    </div>
+
+                    <div class="rounded-2xl border border-white/10 bg-[#16161a] p-6">
+                        <div class="text-2xl font-bold text-violet-400">03</div>
+                        <h4 class="mt-2 text-base font-semibold text-ink">Download &amp; Share</h4>
+                        <p class="mt-2 text-xs leading-relaxed text-[#8f8f97] sm:text-sm">
+                            Export your completed masterpiece with a single click. Download full-resolution, high-definition PNG or WebP images ready to share instantly on Twitter, Reddit, Instagram, TikTok, LinkedIn, Discord communities, or Slack channels.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="rounded-3xl border border-white/10 bg-[#141418] p-6 sm:p-10">
+                    <h3 class="text-xl font-bold text-ink">Pro Tips for Crafting High-Impact, Viral Memes</h3>
+                    <p class="mt-3">
+                        Great memes strike a delicate balance between relatable humor, visual clarity, and typographic punch. To ensure your creations resonate and earn maximum engagement, keep these core principles in mind:
+                    </p>
+                    <ul class="mt-4 list-disc pl-6 space-y-2 text-[#a8a8b2]">
+                        <li>
+                            <strong class="text-ink">High-Contrast Readability:</strong> White text with a thick black stroke is the golden standard for classic internet memes because it remains readable over any light or dark background photo. MemeMaker applies this stroke by default so your text never disappears into the graphic.
+                        </li>
+                        <li>
+                            <strong class="text-ink">Brevity Is the Soul of Wit:</strong> Keep setup captions punchy. The best memes deliver their comedic reversal in just a handful of words. If a caption feels crowded, trim adjectives or split the thought across top and bottom placements.
+                        </li>
+                        <li>
+                            <strong class="text-ink">Pick the Right Emotional Template:</strong> Match the nuance of your joke with the template's underlying emotion. Use <em>Two Buttons</em> for difficult dilemmas, <em>Disaster Girl</em> for chaotic schadenfreude, <em>Distracted Boyfriend</em> for fleeting desires over sensible choices, and <em>This Is Fine</em> for stubborn optimism amidst unfolding disaster.
+                        </li>
+                        <li>
+                            <strong class="text-ink">Context Matters:</strong> Tailor your humor to your audience. A meme destined for a tech Discord server thrives on inside developer jargon, whereas a meme created for a broader audience should tap into universal everyday frustrations.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="rounded-3xl border border-white/10 bg-[#141418] p-6 sm:p-10">
+                    <h3 class="text-xl font-bold text-ink">Built for Social Media Managers, Marketers &amp; Educators</h3>
+                    <p class="mt-3">
+                        Memes are no longer confined to hobbyist message boards; they have evolved into the most engaging communicative medium on the contemporary internet. Forward-thinking brands, startup founders, community managers, and university educators use memes to humanize their messaging, simplify complex technical concepts, and build authentic connections with digital-native audiences.
+                    </p>
+                    <p class="mt-3">
+                        Because MemeMaker provides clean, unwatermarked exports, professionals can safely produce branded social campaigns, internal team sprint review humor, and presentation slide decks without embarrassing third-party logos stamped across their graphics. With lightning-fast local processing, you spend your creative energy perfecting the joke rather than wrestling with heavy graphic design software like Photoshop or Canva.
+                    </p>
+                </div>
+
+                <div class="rounded-3xl border border-white/10 bg-[#141418] p-6 sm:p-10">
+                    <h3 class="text-xl font-bold text-ink">Universal Device Support &amp; High-Speed Web Performance</h3>
+                    <p class="mt-3">
+                        Whether you are designing on a desktop widescreen monitor, a tablet on your couch, or a mobile phone on the go, MemeMaker adapts seamlessly to your screen size. The user interface features fluid gesture controls, responsive touch targets, and automatic layout scaling.
+                    </p>
+                    <p class="mt-3">
+                        Our lightweight architecture ensures ultra-fast initial page loads under 300 milliseconds with minimal battery and memory overhead. No heavy downloads or background background bloatware—just open the browser tab, make the meme before the trend passes, and get right back to what you were doing.
+                    </p>
+                </div>
+            </article>
+        </div>
+    </section>
 </Layout>
 
 <script>

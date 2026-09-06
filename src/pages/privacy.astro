@@ -1,0 +1,96 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const lastUpdated = "September 6, 2026";
+---
+
+<Layout
+    title="Privacy Policy — MemeMaker"
+    description="Learn how MemeMaker handles your data. We respect your privacy with local-first image processing, zero tracking of uploaded photos, and no forced accounts."
+>
+    <main class="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24">
+        <div class="mb-10 text-center sm:text-left">
+            <p class="font-mono text-xs uppercase tracking-[0.18em] text-primary">Legal &amp; Privacy</p>
+            <h1 class="mt-2 text-3xl font-bold tracking-tight text-ink sm:text-4xl">Privacy Policy</h1>
+            <p class="mt-3 text-xs text-[#8f8f97]">Last updated: {lastUpdated}</p>
+        </div>
+
+        <div class="prose prose-invert max-w-none space-y-8 text-sm leading-relaxed text-[#c4c4cc]">
+            <section class="rounded-2xl border border-white/10 bg-[#16161a] p-6 sm:p-8">
+                <h2 class="text-lg font-semibold text-ink">1. Overview &amp; Local-First Processing</h2>
+                <p class="mt-3">
+                    At <strong>MemeMaker</strong>, accessible at <a href="https://mememaker.com" class="text-primary hover:underline">mememaker.com</a>, one of our main priorities is the privacy of our visitors.
+                    Unlike traditional online image editing tools, MemeMaker processes your custom uploaded images directly in your browser using modern client-side HTML5 Canvas technologies.
+                </p>
+                <p class="mt-3">
+                    When you upload an image to caption it, your original image file does not get transmitted to any private server or permanent storage by default. You can edit, format, and download your memes completely privately on your device.
+                </p>
+            </section>
+
+            <section class="rounded-2xl border border-white/10 bg-[#16161a] p-6 sm:p-8">
+                <h2 class="text-lg font-semibold text-ink">2. Information We Collect</h2>
+                <p class="mt-3">
+                    We only collect information that is strictly necessary to provide the service:
+                </p>
+                <ul class="mt-3 list-disc pl-5 space-y-2 text-[#a8a8b2]">
+                    <li>
+                        <strong class="text-ink">Account Data (Optional):</strong> If you choose to authenticate via Google, GitHub, or Magic Link to save personal custom templates across devices, your email address, display name, and avatar URL are securely managed via Supabase Auth.
+                    </li>
+                    <li>
+                        <strong class="text-ink">Local Storage Data:</strong> We store layout states, cached template selections, and offline drafts directly in your browser's <code class="rounded bg-white/10 px-1 py-0.5 text-xs text-ink">localStorage</code> and <code class="rounded bg-white/10 px-1 py-0.5 text-xs text-ink">IndexedDB</code>.
+                    </li>
+                    <li>
+                        <strong class="text-ink">Analytics Data:</strong> We use Google Analytics (GA4) to understand aggregated site traffic, popular template usage, and bounce rates. This does not contain personally identifiable information (PII) or your generated memes.
+                    </li>
+                </ul>
+            </section>
+
+            <section class="rounded-2xl border border-white/10 bg-[#16161a] p-6 sm:p-8">
+                <h2 class="text-lg font-semibold text-ink">3. How We Use Your Information</h2>
+                <p class="mt-3">
+                    The minimal data we collect is used solely to:
+                </p>
+                <ul class="mt-3 list-disc pl-5 space-y-2 text-[#a8a8b2]">
+                    <li>Render the interactive meme canvas and support custom text generation.</li>
+                    <li>Enable logged-in users to retrieve their saved personal template library.</li>
+                    <li>Monitor and protect website security and uptime performance.</li>
+                    <li>Improve user experience based on aggregated browser analytics.</li>
+                </ul>
+            </section>
+
+            <section class="rounded-2xl border border-white/10 bg-[#16161a] p-6 sm:p-8">
+                <h2 class="text-lg font-semibold text-ink">4. Third-Party Services &amp; Cookies</h2>
+                <p class="mt-3">
+                    We may employ third-party service providers to facilitate our platform:
+                </p>
+                <ul class="mt-3 list-disc pl-5 space-y-2 text-[#a8a8b2]">
+                    <li><strong>Google Analytics:</strong> Collects anonymous session metrics to help us optimize performance.</li>
+                    <li><strong>Supabase:</strong> Provides optional secure user authentication and cloud database services.</li>
+                </ul>
+                <p class="mt-3">
+                    You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent.
+                </p>
+            </section>
+
+            <section class="rounded-2xl border border-white/10 bg-[#16161a] p-6 sm:p-8">
+                <h2 class="text-lg font-semibold text-ink">5. Your Data Protection Rights (GDPR &amp; CCPA)</h2>
+                <p class="mt-3">
+                    Depending on your jurisdiction, you are entitled to certain rights regarding your personal information:
+                </p>
+                <ul class="mt-3 list-disc pl-5 space-y-2 text-[#a8a8b2]">
+                    <li><strong>Right to access:</strong> Request copies of your personal data stored in your account.</li>
+                    <li><strong>Right to rectification:</strong> Request correction of inaccurate information.</li>
+                    <li><strong>Right to erasure:</strong> Request that we delete your account and saved templates.</li>
+                    <li><strong>Right to restrict processing:</strong> Request limits on how we process your data.</li>
+                </ul>
+            </section>
+
+            <section class="rounded-2xl border border-white/10 bg-[#16161a] p-6 sm:p-8">
+                <h2 class="text-lg font-semibold text-ink">6. Contact Us</h2>
+                <p class="mt-3">
+                    If you have questions or suggestions regarding our Privacy Policy, please reach out to us via our <a href="/contact" class="text-primary hover:underline">Contact page</a> or email <code class="rounded bg-white/10 px-1.5 py-0.5 text-xs text-ink">privacy@mememaker.com</code>.
+                </p>
+            </section>
+        </div>
+    </main>
+</Layout>

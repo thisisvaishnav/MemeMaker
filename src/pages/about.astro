@@ -1,0 +1,87 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+    title="About Us — MemeMaker"
+    description="The story behind MemeMaker: built to be the fastest, easiest, watermark-free meme creator on the web."
+>
+    <main class="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-24">
+        <!-- Hero Header -->
+        <div class="mb-14 text-center">
+            <span class="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1 text-xs font-medium text-primary">
+                Make memes, not meetings.
+            </span>
+            <h1 class="mt-4 text-3xl font-bold tracking-tight text-ink sm:text-5xl sm:leading-tight">
+                About MemeMaker
+            </h1>
+            <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-[#a8a8b2] sm:text-base">
+                We believe internet humor should be free, fast, and unencumbered by forced subscriptions, obtrusive watermarks, or unnecessary sign-up screens.
+            </p>
+        </div>
+
+        <!-- Core Mission Pillars -->
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
+            <div class="rounded-2xl border border-white/10 bg-[#16161a] p-6">
+                <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary text-xl font-bold">
+                    ⚡
+                </div>
+                <h2 class="text-base font-semibold text-ink">Zero Latency</h2>
+                <p class="mt-2 text-xs leading-relaxed text-[#8f8f97] sm:text-sm">
+                    Client-side canvas rendering means your edits render instantly in real time at 60 FPS without waiting on slow server queues.
+                </p>
+            </div>
+
+            <div class="rounded-2xl border border-white/10 bg-[#16161a] p-6">
+                <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-400/15 text-cyan-400 text-xl font-bold">
+                    🛡️
+                </div>
+                <h2 class="text-base font-semibold text-ink">No Watermarks Ever</h2>
+                <p class="mt-2 text-xs leading-relaxed text-[#8f8f97] sm:text-sm">
+                    Your content belongs to you. Every downloaded meme is 100% clean and unbranded, ready for your group chats, Reddit, or Twitter.
+                </p>
+            </div>
+
+            <div class="rounded-2xl border border-white/10 bg-[#16161a] p-6">
+                <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-violet-400/15 text-violet-400 text-xl font-bold">
+                    🔓
+                </div>
+                <h2 class="text-base font-semibold text-ink">Privacy-First</h2>
+                <p class="mt-2 text-xs leading-relaxed text-[#8f8f97] sm:text-sm">
+                    No sign-up wall. No tracking of personal photos. When you upload a private photo to caption it, it stays in your browser memory.
+                </p>
+            </div>
+        </div>
+
+        <!-- Detailed Story Section -->
+        <section class="mt-16 rounded-3xl border border-white/10 bg-[#121215] p-8 sm:p-12">
+            <h2 class="text-2xl font-bold text-ink">Why did we build MemeMaker?</h2>
+            <div class="mt-4 space-y-4 text-sm leading-relaxed text-[#a8a8b2]">
+                <p>
+                    Every time a viral internet moment happened, making a meme was frustrating. Existing tools were bloated, required invasive account registrations, charged monthly fees, or slapped massive brand watermarks on the final image.
+                </p>
+                <p>
+                    MemeMaker was built to solve that exact problem: provide a slick, keyboard-friendly, modern web application where anyone can open a template or drag their own photo, type classic Impact or modern clean typography, adjust colors and outlines, and export high-resolution memes in under 5 seconds.
+                </p>
+                <p>
+                    Whether you're a casual internet surfer creating reaction images for Discord, or a social media manager crafting witty marketing content, MemeMaker is designed to get out of your way.
+                </p>
+            </div>
+
+            <div class="mt-8 flex flex-wrap items-center gap-4 border-t border-white/10 pt-6">
+                <a
+                    href="/edit"
+                    class="inline-flex h-10 items-center justify-center rounded-full bg-primary px-6 text-xs font-semibold text-on-primary transition hover:opacity-90"
+                >
+                    Open Meme Editor
+                </a>
+                <a
+                    href="/templates"
+                    class="inline-flex h-10 items-center justify-center rounded-full border border-white/15 px-6 text-xs font-medium text-ink transition hover:border-white/30"
+                >
+                    Browse 100+ Templates
+                </a>
+            </div>
+        </section>
+    </main>
+</Layout>

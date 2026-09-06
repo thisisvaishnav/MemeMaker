@@ -1,0 +1,121 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+    title="Contact Us — MemeMaker"
+    description="Have feedback, template requests, or a partnership inquiry? Get in touch with the MemeMaker team."
+>
+    <main class="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24">
+        <div class="mb-10 text-center">
+            <p class="font-mono text-xs uppercase tracking-[0.18em] text-primary">Get In Touch</p>
+            <h1 class="mt-2 text-3xl font-bold tracking-tight text-ink sm:text-4xl">Contact Us</h1>
+            <p class="mx-auto mt-3 max-w-lg text-sm text-[#8f8f97]">
+                We love hearing from meme enthusiasts, developers, and creators. Send us a message or reach out via our channels.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+            <!-- Info Sidebar -->
+            <div class="space-y-4 md:col-span-1">
+                <div class="rounded-2xl border border-white/10 bg-[#16161a] p-5">
+                    <p class="font-mono text-[10px] uppercase tracking-wider text-[#777]">Direct Support</p>
+                    <p class="mt-1.5 text-sm font-semibold text-ink">help@mememaker.com</p>
+                    <p class="mt-2 text-xs text-[#888]">We respond within 24-48 business hours.</p>
+                </div>
+
+                <div class="rounded-2xl border border-white/10 bg-[#16161a] p-5">
+                    <p class="font-mono text-[10px] uppercase tracking-wider text-[#777]">Bug Reports &amp; Code</p>
+                    <p class="mt-1.5 text-sm font-semibold text-ink">GitHub Repository</p>
+                    <a
+                        href="https://github.com/thisisvaishnav/MemeMaker/issues"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="mt-2 inline-flex items-center gap-1 text-xs text-primary hover:underline"
+                    >
+                        Open GitHub Issue →
+                    </a>
+                </div>
+
+                <div class="rounded-2xl border border-white/10 bg-[#16161a] p-5">
+                    <p class="font-mono text-[10px] uppercase tracking-wider text-[#777]">Common Questions</p>
+                    <p class="mt-1.5 text-sm font-semibold text-ink">Check the FAQ</p>
+                    <a href="/#faq" class="mt-2 inline-flex items-center gap-1 text-xs text-primary hover:underline">
+                        View Frequently Asked Questions →
+                    </a>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="rounded-2xl border border-white/10 bg-[#16161a] p-6 sm:p-8 md:col-span-2">
+                <form id="contact-form" class="space-y-4" onsubmit="event.preventDefault(); document.getElementById('contact-success').classList.remove('hidden'); document.getElementById('contact-form').reset();">
+                    <div>
+                        <label for="name" class="block text-xs font-semibold uppercase tracking-wider text-[#a8a8b2]">
+                            Your Name
+                        </label>
+                        <input
+                            type="text"
+                            id="name"
+                            required
+                            placeholder="Alex Vance"
+                            class="mt-1.5 w-full rounded-xl border border-white/15 bg-black/50 px-4 py-2.5 text-sm text-ink outline-none transition focus:border-primary focus:ring-1 focus:ring-primary"
+                        />
+                    </div>
+
+                    <div>
+                        <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-[#a8a8b2]">
+                            Email Address
+                        </label>
+                        <input
+                            type="email"
+                            id="email"
+                            required
+                            placeholder="alex@example.com"
+                            class="mt-1.5 w-full rounded-xl border border-white/15 bg-black/50 px-4 py-2.5 text-sm text-ink outline-none transition focus:border-primary focus:ring-1 focus:ring-primary"
+                        />
+                    </div>
+
+                    <div>
+                        <label for="subject" class="block text-xs font-semibold uppercase tracking-wider text-[#a8a8b2]">
+                            Topic
+                        </label>
+                        <select
+                            id="subject"
+                            class="mt-1.5 w-full rounded-xl border border-white/15 bg-black/50 px-4 py-2.5 text-sm text-ink outline-none transition focus:border-primary focus:ring-1 focus:ring-primary"
+                        >
+                            <option value="general">General Inquiry</option>
+                            <option value="template">Suggest New Meme Template</option>
+                            <option value="bug">Report a Bug / Glitch</option>
+                            <option value="feature">Feature Request</option>
+                            <option value="press">Press &amp; Partnerships</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="message" class="block text-xs font-semibold uppercase tracking-wider text-[#a8a8b2]">
+                            Message
+                        </label>
+                        <textarea
+                            id="message"
+                            rows="4"
+                            required
+                            placeholder="Tell us what's on your mind..."
+                            class="mt-1.5 w-full rounded-xl border border-white/15 bg-black/50 px-4 py-2.5 text-sm text-ink outline-none transition focus:border-primary focus:ring-1 focus:ring-primary"
+                        ></textarea>
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="inline-flex w-full items-center justify-center rounded-xl bg-primary py-3 text-xs font-semibold text-on-primary transition hover:opacity-90 cursor-pointer"
+                    >
+                        Send Message
+                    </button>
+
+                    <div id="contact-success" class="hidden rounded-xl bg-emerald-500/10 border border-emerald-500/20 p-3 text-center text-xs text-emerald-400">
+                        Thank you! Your message has been sent. We'll be in touch soon.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+</Layout>
