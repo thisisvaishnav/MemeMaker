@@ -331,7 +331,7 @@ export async function deleteCustomTemplate(id: string): Promise<void> {
 export async function getCustomTemplateById(id: string): Promise<CustomTemplate | null> {
   try {
     const db = await openDB();
-    return new Promise<CustomTemplate | null>((resolve, reject) => {
+    const fromDB = await new Promise<CustomTemplate | null>((resolve, reject) => {
       const tx = db.transaction(TEMPLATES_STORE, "readonly");
       const request = tx.objectStore(TEMPLATES_STORE).get(id);
       request.onsuccess = () => {
@@ -343,8 +343,9 @@ export async function getCustomTemplateById(id: string): Promise<CustomTemplate 
         reject(request.error);
       };
     });
-  } catch {
-    const local = getLocalStorageTemplates();
-    return local.find((t) => t.id === id) ?? null;
-  }
+    if (fromDB) return fromDB;
+  } catch {}
+
+  const local = getLocalStorageTemplates();
+  return local.find((t) => t.id === id) ?? null;
 }
