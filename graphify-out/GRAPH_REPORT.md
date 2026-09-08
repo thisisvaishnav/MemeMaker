@@ -1,16 +1,16 @@
-# Graph Report - MemeMaker  (2026-09-06)
+# Graph Report - MemeMaker  (2026-09-08)
 
 ## Corpus Check
-- 241 files · ~289,565 words
+- 247 files · ~291,075 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1799 nodes · 1656 edges · 240 communities (217 shown, 19 thin omitted)
+- 1810 nodes · 1684 edges · 228 communities (217 shown, 6 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `5a2a5240`
+- Built from commit: `a28e1330`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -18,23 +18,17 @@
 - Header.astro
 - Changes from v3
 - components.json
-- package.json
+- scripts
 - ShadcnDemo.tsx
 - tsconfig.json
 - main
 - dependencies
 - colors.ts
-- Styling based on parent state
-- @aws-sdk/client-s3
-- class-variance-authority
-- clsx
+- templateCache.ts
 - Pseudo-class reference
-- @fontsource/jetbrains-mono
-- lucide-react
+- Styling based on parent state
 - MemeMaker — Design & Architecture Specification
-- react
 - Functional utilities
-- @supabase/supabase-js
 - Thinking in utility classes
 - Customizing your theme
 - Container queries
@@ -130,7 +124,6 @@
 - Examples
 - Examples
 - Examples
-- scripts
 - Examples
 - Examples
 - Examples
@@ -243,14 +236,8 @@
 - rules/graphify.md
 - gotchas.md
 - workflows/graphify.md
-- tailwind-merge
-- tw-animate
 - imageStore.ts
-- @astrojs/sitemap
-- @radix-ui/react-slot
-- react-dom
-- @tailwindcss/vite
-- tw-colors
+- sitemap.xml.ts
 
 ## God Nodes (most connected - your core abstractions)
 1. `Pseudo-class reference` - 38 edges
@@ -279,11 +266,11 @@
 ## Import Cycles
 - None detected.
 
-## Communities (240 total, 19 thin omitted)
+## Communities (228 total, 6 thin omitted)
 
 ### Community 0 - "Header.astro"
-Cohesion: 0.08
-Nodes (24): alertBox, clearAlert(), closeBtn, googleBtn, modal, nameField, setMode(), submitText (+16 more)
+Cohesion: 0.09
+Nodes (23): alertBox, clearAlert(), closeBtn, googleBtn, modal, nameField, setMode(), submitText (+15 more)
 
 ### Community 1 - "Changes from v3"
 Cohesion: 0.05
@@ -293,9 +280,9 @@ Nodes (41): Adding custom utilities, Arbitrary values in grid and object-positio
 Cohesion: 0.12
 Nodes (16): aliases, components, hooks, lib, ui, utils, iconLibrary, rsc (+8 more)
 
-### Community 3 - "package.json"
-Cohesion: 0.22
-Nodes (8): devDependencies, playwright, engines, node, name, type, version, playwright
+### Community 3 - "scripts"
+Cohesion: 0.08
+Nodes (23): fake-indexeddb, jsdom, devDependencies, fake-indexeddb, jsdom, playwright, vitest, engines (+15 more)
 
 ### Community 4 - "ShadcnDemo.tsx"
 Cohesion: 0.30
@@ -310,20 +297,24 @@ Cohesion: 0.76
 Nodes (6): clone_repo(), main(), run(), update_repo(), write_source_file(), Path
 
 ### Community 7 - "dependencies"
-Cohesion: 0.15
-Nodes (13): astro, @astrojs/react, @fontsource/inter, dependencies, astro, @astrojs/react, @fontsource/inter, tailwindcss (+5 more)
+Cohesion: 0.05
+Nodes (41): astro, @astrojs/react, @astrojs/sitemap, @aws-sdk/client-s3, class-variance-authority, clsx, @fontsource/inter, @fontsource/jetbrains-mono (+33 more)
 
-### Community 9 - "Styling based on parent state"
-Cohesion: 0.50
-Nodes (4): Arbitrary groups, Differentiating nested groups, Implicit groups, Styling based on parent state
+### Community 9 - "templateCache.ts"
+Cohesion: 0.48
+Nodes (5): generateDefaultLayout(), getLandingTemplatesLayout(), getTrendingTemplates(), LandingCardLayout, randomBetween()
 
 ### Community 13 - "Pseudo-class reference"
 Cohesion: 0.05
 Nodes (34): :active, :autofill, :checked, :default, :details-content, :disabled, :empty, :enabled (+26 more)
 
+### Community 14 - "Styling based on parent state"
+Cohesion: 0.50
+Nodes (4): Arbitrary groups, Differentiating nested groups, Implicit groups, Styling based on parent state
+
 ### Community 16 - "MemeMaker — Design & Architecture Specification"
-Cohesion: 0.08
-Nodes (23): 1. Product Vision & UX Principles, 2.1 Color Palette & Theme Tokens, 2.2 Atmospheric Brand Mesh Gradient, 2.3 Typography Matrix, 2. Visual Design System, 3.1 Stack Breakdown, 3. Architecture & Technical Stack, 4.1 Global Navigation Header (`src/components/Header.astro`) (+15 more)
+Cohesion: 0.10
+Nodes (19): 1. UX Principles & Interaction Architecture, 2.1 Color Palette & Theme Tokens, 2.2 Atmospheric Brand Mesh Gradient, 2.3 Typography Matrix, 2. Visual Design System, 3.1 Stack Breakdown, 3. Technology Stack & Directory Structure, 4.1 Home Page (`/` — `src/pages/index.astro`) (+11 more)
 
 ### Community 18 - "Functional utilities"
 Cohesion: 0.08
@@ -708,10 +699,6 @@ Nodes (6): Allowing text to wrap, Balanced text wrapping, Examples, Pretty text 
 ### Community 120 - "Examples"
 Cohesion: 0.29
 Nodes (6): Allowing text selection, Disabling text selection, Examples, Responsive design, Selecting all text in one click, Using auto select behavior
-
-### Community 121 - "scripts"
-Cohesion: 0.29
-Nodes (7): scripts, astro, build, dev, graphify, graphify:export, preview
 
 ### Community 122 - "Examples"
 Cohesion: 0.33
@@ -1146,27 +1133,27 @@ Cohesion: 0.50
 Nodes (3): Examples, Optimizing with will change, Using a custom value
 
 ### Community 236 - "imageStore.ts"
-Cohesion: 0.07
-Nodes (35): [], MemeMaker(), TEMPLATE_ALIAS_MAP, TEMPLATE_NAMES, templates, TextLayer, ogImageURL, clearImage() (+27 more)
+Cohesion: 0.08
+Nodes (32): [], MemeMaker(), TEMPLATE_ALIAS_MAP, TEMPLATE_NAMES, templates, TextLayer, ogImageURL, clearImage() (+24 more)
 
 ## Knowledge Gaps
-- **1231 isolated node(s):** `colors`, `$schema`, `style`, `rsc`, `tsx` (+1226 more)
+- **1232 isolated node(s):** `colors`, `$schema`, `style`, `rsc`, `tsx` (+1227 more)
   These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1398 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **19 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **6 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `dependencies` connect `dependencies` to `package.json`, `@aws-sdk/client-s3`, `class-variance-authority`, `clsx`, `tailwind-merge`, `@fontsource/jetbrains-mono`, `lucide-react`, `tw-animate`, `react`, `@supabase/supabase-js`, `@astrojs/sitemap`, `@radix-ui/react-slot`, `react-dom`, `@tailwindcss/vite`, `tw-colors`?**
-  _High betweenness centrality (0.001) - this node is a cross-community bridge._
+- **Why does `dependencies` connect `dependencies` to `scripts`?**
+  _High betweenness centrality (0.002) - this node is a cross-community bridge._
 - **Why does `Pseudo-class reference` connect `Pseudo-class reference` to `hover-focus-and-other-states.mdx`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
 - **Why does `Appendix` connect `hover-focus-and-other-states.mdx` to `Pseudo-class reference`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
 - **What connects `colors`, `$schema`, `style` to the rest of the system?**
-  _1231 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _1232 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Header.astro` be split into smaller, more focused modules?**
-  _Cohesion score 0.08374384236453201 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.08994708994708994 - nodes in this community are weakly interconnected._
 - **Should `Changes from v3` be split into smaller, more focused modules?**
   _Cohesion score 0.047619047619047616 - nodes in this community are weakly interconnected._
 - **Should `components.json` be split into smaller, more focused modules?**

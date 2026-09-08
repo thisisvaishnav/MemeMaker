@@ -43,6 +43,9 @@ export async function saveImage(dataUrl: string): Promise<void> {
     localStorage.setItem(KEY, dataUrl);
   } catch (e) {
     console.warn("Could not save pending image to localStorage (likely quota exceeded):", e);
+    try {
+      localStorage.removeItem(KEY);
+    } catch {}
   }
 
   // 2. Sync to sessionStorage
@@ -50,6 +53,9 @@ export async function saveImage(dataUrl: string): Promise<void> {
     sessionStorage.setItem(KEY, dataUrl);
   } catch (e) {
     console.warn("Could not save pending image to sessionStorage:", e);
+    try {
+      sessionStorage.removeItem(KEY);
+    } catch {}
   }
 
   // 3. Save to IndexedDB
@@ -284,14 +290,12 @@ export async function getCustomTemplates(userId?: string): Promise<CustomTemplat
       };
     });
 
-    if (templates.length > 0) {
-      // Keep localStorage in sync
-      setLocalStorageTemplates(templates);
-      const filtered = userId
-        ? templates.filter((t) => !t.userId || t.userId === userId)
-        : templates;
-      return filtered.sort((a, b) => b.createdAt - a.createdAt);
-    }
+    // Keep localStorage in sync
+    setLocalStorageTemplates(templates);
+    const filtered = userId
+      ? templates.filter((t) => !t.userId || t.userId === userId)
+      : templates;
+    return filtered.sort((a, b) => b.createdAt - a.createdAt);
   } catch (err) {
     console.warn("IndexedDB getCustomTemplates failed, reading localStorage:", err);
   }

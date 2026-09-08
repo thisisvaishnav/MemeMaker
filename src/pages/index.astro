@@ -481,6 +481,17 @@ const templateSlots = Array.from({ length: 20 });
         saveCustomTemplate,
         type CustomTemplate,
     } from "../lib/imageStore";
+    import { supabase } from "../lib/supabase";
+
+    let currentUserId: string | undefined = undefined;
+    try {
+        supabase.auth.getSession().then((res: { data: { session: { user: { id: string } } | null } }) => {
+            currentUserId = res.data.session?.user?.id;
+        });
+        supabase.auth.onAuthStateChange((_evt: string, session: { user: { id: string } } | null) => {
+            currentUserId = session?.user?.id;
+        });
+    } catch {}
 
     const templateBaseUrl = "/templates/cdn";
     const cards = Array.from(
@@ -597,6 +608,7 @@ const templateSlots = Array.from({ length: 20 });
                 id: customId,
                 name: file.name.replace(/\.[^/.]+$/, ""),
                 dataUrl: dataUrl,
+                userId: currentUserId || undefined,
                 createdAt: Date.now(),
             };
 

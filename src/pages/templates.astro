@@ -181,9 +181,25 @@ const categories = [
         filterGrid(activeCategoryId);
     }
 
+    function escapeHtml(str: string): string {
+        return str.replace(/[&<>"']/g, (m) => ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;",
+        })[m] || m);
+    }
+
     function renderCustomTemplateCard(tpl: CustomTemplate, prepend = false) {
-        const existing = document.querySelector(`[data-custom-id="${tpl.id}"]`);
+        const existing = document.querySelector(`[data-custom-id="${CSS.escape(tpl.id)}"]`);
         if (existing) return;
+
+        const safeName = escapeHtml(tpl.name || "Custom template");
+        const safeId = encodeURIComponent(tpl.id);
+        const safeDataUrl = (tpl.dataUrl && (tpl.dataUrl.startsWith("data:image/") || tpl.dataUrl.startsWith("blob:") || tpl.dataUrl.startsWith("/") || tpl.dataUrl.startsWith("http://") || tpl.dataUrl.startsWith("https://")))
+            ? tpl.dataUrl
+            : "";
 
         const wrap = document.createElement("div");
         wrap.className = "tpl-card-wrap custom-tpl-card mb-3 break-inside-avoid";
@@ -192,9 +208,9 @@ const categories = [
         wrap.innerHTML = `
             <div class="tpl-card group relative block overflow-hidden rounded-xl border border-primary/40 bg-[#202020] outline-none focus-within:ring-2 focus-within:ring-primary shadow-lg">
                 <img
-                    src="${tpl.dataUrl}"
+                    src="${safeDataUrl}"
                     class="block h-auto w-full transition-[filter] duration-300 group-hover:blur-[3px]"
-                    alt="${tpl.name || 'Custom template'}"
+                    alt="${safeName}"
                     loading="lazy"
                 />
                 <span class="pointer-events-none absolute right-2 top-2 rounded-full bg-primary px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-on-primary shadow">
@@ -211,9 +227,9 @@ const categories = [
                     </svg>
                 </button>
                 <a
-                    href="/edit?custom=${tpl.id}"
+                    href="/edit?custom=${safeId}"
                     class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/60 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100"
-                    aria-label="Edit ${tpl.name || 'custom template'}"
+                    aria-label="Edit ${safeName}"
                 >
                     <span class="inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-2 text-[11px] font-semibold text-black shadow-lg">
                         <svg class="h-3 w-3" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 14l1.5-4.5L11 2l3 3-7.5 7.5L2 14z"/></svg>
