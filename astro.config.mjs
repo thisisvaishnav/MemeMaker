@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://mememaker.com',
+  site: 'https://realmememaker.com',
 
   vite: {
       plugins: [tailwindcss()],

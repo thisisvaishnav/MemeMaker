@@ -12,13 +12,13 @@ describe("Sitemap Generator (pages/sitemap.xml.ts)", () => {
     expect(xml).toContain('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">');
 
     const expectedRoutes = [
-      "https://mememaker.com/",
-      "https://mememaker.com/about/",
-      "https://mememaker.com/contact/",
-      "https://mememaker.com/edit/",
-      "https://mememaker.com/privacy/",
-      "https://mememaker.com/templates/",
-      "https://mememaker.com/terms/",
+      "https://realmememaker.com/",
+      "https://realmememaker.com/about/",
+      "https://realmememaker.com/contact/",
+      "https://realmememaker.com/edit/",
+      "https://realmememaker.com/privacy/",
+      "https://realmememaker.com/templates/",
+      "https://realmememaker.com/terms/",
     ];
 
     for (const route of expectedRoutes) {

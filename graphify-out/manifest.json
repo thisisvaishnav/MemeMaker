@@ -30,9 +30,9 @@
     "semantic_hash": "60493763dcbc2d109e57da86d997602a"
   },
   "astro.config.mjs": {
-    "mtime": 1788667755.4524887,
-    "seen": 1788667778.952478,
-    "ast_hash": "bd3389892a3fdd0ff5df033dc24571d9",
+    "mtime": 1788937190.442954,
+    "seen": 1788937271.632128,
+    "ast_hash": "fcd80df0ab10dd7692d8ceea939b48b2",
     "semantic_hash": ""
   },
   "components.json": {
@@ -42,8 +42,8 @@
     "semantic_hash": "47384a2c6e43af3dd8d920a44043a65d"
   },
   "package.json": {
-    "mtime": 1788805757.5127397,
-    "seen": 1788881509.2921898,
+    "mtime": 1788882642.0908241,
+    "seen": 1788937271.632143,
     "ast_hash": "4a5f2cfc1cedb1884c99c686e6ef20e0",
     "semantic_hash": ""
   },
@@ -60,9 +60,9 @@
     "semantic_hash": "9e090f88da25d696abe7757cfe5525f1"
   },
   "src/components/Footer.astro": {
-    "mtime": 1788667755.4985423,
-    "seen": 1788667778.952527,
-    "ast_hash": "c52e0e3aee1f36d5e7c1790e9d756654",
+    "mtime": 1788937245.1047852,
+    "seen": 1788937271.632174,
+    "ast_hash": "6847fc3850cb4f6f9188883af23b72a8",
     "semantic_hash": ""
   },
   "src/components/Header.astro": {
@@ -72,8 +72,8 @@
     "semantic_hash": ""
   },
   "src/components/MemeMaker.tsx": {
-    "mtime": 1788805849.214415,
-    "seen": 1788881509.292254,
+    "mtime": 1788882642.0912583,
+    "seen": 1788937271.632191,
     "ast_hash": "3868af1f4454d75e8a9f888fcd5609a9",
     "semantic_hash": ""
   },
@@ -96,14 +96,14 @@
     "semantic_hash": "95a31ddfbb8d460f8b90409681856156"
   },
   "src/layouts/Layout.astro": {
-    "mtime": 1788667755.5008585,
-    "seen": 1788667778.9525938,
-    "ast_hash": "e70b0f639300e7c4204371f848cb3295",
+    "mtime": 1788937203.6677113,
+    "seen": 1788937271.632242,
+    "ast_hash": "152aad2a394f008e40095614e9c783d2",
     "semantic_hash": ""
   },
   "src/lib/imageStore.ts": {
-    "mtime": 1788805837.8390064,
-    "seen": 1788881509.292338,
+    "mtime": 1788882642.0926838,
+    "seen": 1788937271.63226,
     "ast_hash": "6f1a69506822a2ff70591f037f1c048c",
     "semantic_hash": ""
   },
@@ -126,8 +126,8 @@
     "semantic_hash": "3f8c0f1757350088ef15a8b704d594fb"
   },
   "src/pages/index.astro": {
-    "mtime": 1788881489.6332457,
-    "seen": 1788881509.292462,
+    "mtime": 1788882642.0935,
+    "seen": 1788937271.63237,
     "ast_hash": "0055d5effa7ba0f2f6efca5e32c10c1c",
     "semantic_hash": ""
   },
@@ -1368,8 +1368,8 @@
     "semantic_hash": ""
   },
   "DESIGN.md": {
-    "mtime": 1788882077.1180556,
-    "seen": 1788882120.299736,
+    "mtime": 1788882642.0811684,
+    "seen": 1788937271.636584,
     "ast_hash": "264d3767b86cde61eb2ac27822c54add",
     "semantic_hash": ""
   },
@@ -1674,8 +1674,8 @@
     "semantic_hash": ""
   },
   "src/pages/templates.astro": {
-    "mtime": 1788881751.3280425,
-    "seen": 1788881845.125351,
+    "mtime": 1788882642.0941052,
+    "seen": 1788937271.632372,
     "ast_hash": "a2beef13c4664f18a5fd2e459ea9bc23",
     "semantic_hash": ""
   },
@@ -1824,33 +1824,33 @@
     "semantic_hash": ""
   },
   "src/pages/contact.astro": {
-    "mtime": 1788667755.504068,
-    "seen": 1788667778.952663,
-    "ast_hash": "1216b45effeb3481558e877a682480dd",
+    "mtime": 1788937216.9657233,
+    "seen": 1788937271.632354,
+    "ast_hash": "bfd97a418be604617b55f153f517a8f0",
     "semantic_hash": ""
   },
   "src/pages/privacy.astro": {
-    "mtime": 1788667755.5067215,
-    "seen": 1788667778.9526799,
-    "ast_hash": "9621289b5e4837ab637d30e4984e09a4",
+    "mtime": 1788937232.588257,
+    "seen": 1788937271.632371,
+    "ast_hash": "56b954205579300ebd6deb006b10d727",
     "semantic_hash": ""
   },
   "src/pages/sitemap.xml.ts": {
-    "mtime": 1788667755.5071182,
-    "seen": 1788667778.952681,
-    "ast_hash": "93af98eca4c5eca90144bd833b5e226a",
+    "mtime": 1788937212.0884104,
+    "seen": 1788937271.632372,
+    "ast_hash": "47aa5f2b8f83785286c774caa5e91f93",
     "semantic_hash": ""
   },
   "src/pages/terms.astro": {
-    "mtime": 1788667755.5079138,
-    "seen": 1788667778.952682,
-    "ast_hash": "2d55400f20b1a27793852bce10422487",
+    "mtime": 1788937240.6271186,
+    "seen": 1788937271.632373,
+    "ast_hash": "591b2b56892d9cdd735301e7b56c13aa",
     "semantic_hash": ""
   },
   "public/robots.txt": {
-    "mtime": 1788667755.4977102,
-    "seen": 1788667778.9567418,
-    "ast_hash": "9c5bfae4cfc886c0f3697b046f934a86",
+    "mtime": 1788937195.1212304,
+    "seen": 1788937271.636598,
+    "ast_hash": "c9ba88ad7c95afd9a98b8b999ec91b5f",
     "semantic_hash": ""
   },
   "public/android-chrome-192x192.png": {
@@ -1884,44 +1884,44 @@
     "semantic_hash": ""
   },
   "tests/avatar.test.ts": {
-    "mtime": 1788805765.5028005,
-    "seen": 1788881509.292524,
+    "mtime": 1788882642.0943403,
+    "seen": 1788937271.632374,
     "ast_hash": "c5e1ae3ea3ee2c0b7bad328414087581",
     "semantic_hash": ""
   },
   "tests/imageStore.test.ts": {
-    "mtime": 1788805818.8660152,
-    "seen": 1788881509.292525,
+    "mtime": 1788882642.0945156,
+    "seen": 1788937271.632375,
     "ast_hash": "a3e3b90df1bbc33bdbf4533e89b2582f",
     "semantic_hash": ""
   },
   "tests/memeMaker.test.ts": {
-    "mtime": 1788805786.629016,
-    "seen": 1788881509.292525,
+    "mtime": 1788882642.0946803,
+    "seen": 1788937271.632376,
     "ast_hash": "e744d18544a1f46c2ab32002baf80179",
     "semantic_hash": ""
   },
   "tests/setup.ts": {
-    "mtime": 1788805754.460194,
-    "seen": 1788881509.292526,
+    "mtime": 1788882642.0948372,
+    "seen": 1788937271.632376,
     "ast_hash": "027a6d11e8de7bc67547c0179d914081",
     "semantic_hash": ""
   },
   "tests/sitemap.test.ts": {
-    "mtime": 1788805783.3215473,
-    "seen": 1788881509.2925272,
-    "ast_hash": "44bdf8eefdd35a6b5e0d257482a72a52",
+    "mtime": 1788937250.7922363,
+    "seen": 1788937271.6323771,
+    "ast_hash": "3e702bf6bcf71bdd95867e04079f00d1",
     "semantic_hash": ""
   },
   "tests/templateCache.test.ts": {
-    "mtime": 1788805768.7902606,
-    "seen": 1788881509.2925282,
+    "mtime": 1788882642.095185,
+    "seen": 1788937271.632378,
     "ast_hash": "f52db229c4208239744a504a048e6cb5",
     "semantic_hash": ""
   },
   "vitest.config.ts": {
-    "mtime": 1788805810.6430025,
-    "seen": 1788881509.292542,
+    "mtime": 1788882642.0953546,
+    "seen": 1788937271.632392,
     "ast_hash": "2ce5b8256efbad176d3a21952cc0a6dd",
     "semantic_hash": ""
   }

@@ -21,7 +21,7 @@ const {
     canonical,
 } = Astro.props;
 
-const siteUrl = Astro.site?.toString() || "https://mememaker.com";
+const siteUrl = Astro.site?.toString() || "https://realmememaker.com";
 const canonicalURL = canonical ? new URL(canonical, siteUrl) : new URL(Astro.url.pathname, siteUrl);
 const ogImageURL = new URL(image, siteUrl);
 const gaId = import.meta.env.PUBLIC_GA_ID || "G-3SML7PZ2TL";
@@ -78,7 +78,7 @@ const gaId = import.meta.env.PUBLIC_GA_ID || "G-3SML7PZ2TL";
                 "@context": "https://schema.org",
                 "@type": "WebApplication",
                 "name": "MemeMaker",
-                "url": "https://mememaker.com",
+                "url": "https://realmememaker.com",
                 "applicationCategory": "MultimediaApplication",
                 "operatingSystem": "All",
                 "browserRequirements": "Requires JavaScript. Requires HTML5.",

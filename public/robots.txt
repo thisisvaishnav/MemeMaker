@@ -6,5 +6,5 @@ Allow: /
 Disallow: /edit?*
 
 # Sitemaps
-Sitemap: https://mememaker.com/sitemap.xml
-Sitemap: https://mememaker.com/sitemap-index.xml
+Sitemap: https://realmememaker.com/sitemap.xml
+Sitemap: https://realmememaker.com/sitemap-index.xml
