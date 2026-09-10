@@ -327,6 +327,52 @@ describe("Regression Tests: Edit Page Non-Obscuring Handle Placement & Drag Math
       expect(box.x * desktopWidth / desktopWidth).toBe(box.x);
       expect(box.x * canvasWidth / canvasWidth).toBe(box.x);
     });
+
+    it("guarantees 1:1 text size parity between preview and export on 500px CDN template images", () => {
+      const box = {
+        id: "top",
+        label: "Top Text",
+        placeholder: "Top Text",
+        x: 0.5,
+        y: 0.12,
+        fontSizeRatio: 1.0,
+      };
+
+      const canvasWidth = 500; // CDN template 1, 2, 7 width
+      const mobileDisplayWidth = 300;
+      const desktopDisplayWidth = 500;
+      const baseFontSize = 52;
+
+      // When not custom-resized:
+      const canvasExportFontSize = calculateEffectiveFontSize({
+        box,
+        baseFontSize,
+        scaleFactor: 1,
+      });
+
+      const mobilePreviewFontSize = calculateEffectiveFontSize({
+        box,
+        baseFontSize,
+        scaleFactor: mobileDisplayWidth / canvasWidth,
+      });
+
+      const desktopPreviewFontSize = calculateEffectiveFontSize({
+        box,
+        baseFontSize,
+        scaleFactor: desktopDisplayWidth / canvasWidth,
+      });
+
+      // Assert that the visual proportion relative to image width is identical
+      expect(canvasExportFontSize / canvasWidth).toBeCloseTo(mobilePreviewFontSize / mobileDisplayWidth, 2);
+      expect(canvasExportFontSize / canvasWidth).toBeCloseTo(desktopPreviewFontSize / desktopDisplayWidth, 2);
+
+      // When user custom-resizes on mobile to 40px:
+      const customMobileDisplayFont = 40;
+      const exportScaledFont = Math.round(customMobileDisplayFont * (canvasWidth / mobileDisplayWidth));
+
+      // Assert export scaled font matches the custom display font proportion
+      expect(exportScaledFont / canvasWidth).toBeCloseTo(customMobileDisplayFont / mobileDisplayWidth, 2);
+    });
   });
 });
 

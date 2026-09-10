@@ -320,9 +320,7 @@ export default function MemeMaker() {
 
       if (includeLayers) {
         const displayWidth = canvasRef.current?.getBoundingClientRect().width ?? canvas.width;
-        const scaleFactor = displayWidth > 0 ? canvas.width / displayWidth : 1;
-
-        const canvasScale = canvas.width / 1000;
+        const exportScale = displayWidth > 0 ? canvas.width / displayWidth : 1;
 
         // Draw template specific boxes
         activeBoxes.forEach((box) => {
@@ -337,15 +335,16 @@ export default function MemeMaker() {
           const defaultColor = isPlain ? "#000000" : textColor;
           const color = boxColors[box.id] || (box.color ? box.color : defaultColor);
           const customFont = boxFontSizes[box.id];
-          const size = calculateEffectiveFontSize({
-            box,
-            baseFontSize: fontSize,
-            scaleFactor: canvasScale,
-            customFontSize: customFont ? Math.round(customFont * scaleFactor) : undefined,
-          });
+          const size = customFont
+            ? Math.max(12, Math.round(customFont * exportScale))
+            : calculateEffectiveFontSize({
+                box,
+                baseFontSize: fontSize,
+                scaleFactor: 1,
+              });
           const customW = boxWidths[box.id];
           const maxW = customW
-            ? customW * scaleFactor
+            ? customW * exportScale
             : box.maxWidthRatio
             ? canvas.width * box.maxWidthRatio
             : undefined;
@@ -358,12 +357,12 @@ export default function MemeMaker() {
           if (!layer.text || !layer.text.trim()) return;
           const isPlain = Boolean(layer.isPlain ?? (globalFontStyle === "slim-black"));
           const fontFam = layer.fontFamily || (isPlain ? "Inter, system-ui, -apple-system, sans-serif" : "Impact, Arial Black, sans-serif");
-          const maxW = layer.width ? layer.width * scaleFactor : undefined;
+          const maxW = layer.width ? layer.width * exportScale : undefined;
           drawText(
             layer.text,
             layer.x,
             layer.y,
-            Math.round(layer.fontSize * scaleFactor),
+            layer.fontSize,
             layer.color,
             "center",
             maxW,
@@ -924,8 +923,12 @@ export default function MemeMaker() {
         const ratio = distY / Math.max(15, initialFontSize * 0.65);
         const newFontSize = Math.max(14, Math.min(130, Math.round(initialFontSize * ratio)));
         if (transformState.isLayer) {
+          const canvas = canvasRef.current;
+          const canvasWidth = canvas?.width ?? 1000;
+          const canvasExportScale = displayWidth > 0 ? canvasWidth / displayWidth : 1;
+          const canvasLayerFontSize = Math.round(newFontSize * canvasExportScale);
           setLayers((current) =>
-            current.map((l) => (l.id === transformState.id ? { ...l, fontSize: newFontSize } : l))
+            current.map((l) => (l.id === transformState.id ? { ...l, fontSize: canvasLayerFontSize } : l))
           );
         } else {
           setBoxFontSizes((prev) => ({ ...prev, [transformState.id]: newFontSize }));
@@ -941,9 +944,13 @@ export default function MemeMaker() {
         const newFontSize = Math.max(14, Math.min(130, Math.round(initialFontSize * ratio)));
 
         if (transformState.isLayer) {
+          const canvas = canvasRef.current;
+          const canvasWidth = canvas?.width ?? 1000;
+          const canvasExportScale = displayWidth > 0 ? canvasWidth / displayWidth : 1;
+          const canvasLayerFontSize = Math.round(newFontSize * canvasExportScale);
           setLayers((current) =>
             current.map((l) =>
-              l.id === transformState.id ? { ...l, width: newWidth, fontSize: newFontSize } : l
+              l.id === transformState.id ? { ...l, width: newWidth, fontSize: canvasLayerFontSize } : l
             )
           );
         } else {
@@ -1170,14 +1177,15 @@ export default function MemeMaker() {
                   // Render if text is typed, or if user is focusing/hovering this text zone
                   if (!hasText && !isSelected && !isHovered) return null;
 
-                  const scaleFactor = displayWidth / canvasWidth;
+                  const scaleFactor = canvasWidth > 0 ? displayWidth / canvasWidth : 1;
                   const customFontSize = boxFontSizes[box.id];
-                  const effectiveFontSize = calculateEffectiveFontSize({
-                    box,
-                    baseFontSize: fontSize,
-                    scaleFactor,
-                    customFontSize,
-                  });
+                  const effectiveFontSize = customFontSize
+                    ? Math.max(12, Math.round(customFontSize))
+                    : calculateEffectiveFontSize({
+                        box,
+                        baseFontSize: fontSize,
+                        scaleFactor,
+                      });
                   const isPlain = boxPlainOverrides[box.id] !== undefined
                     ? boxPlainOverrides[box.id]
                     : (box.isPlain ?? (globalFontStyle === "slim-black" || isPlainBoxStyle(box)));
