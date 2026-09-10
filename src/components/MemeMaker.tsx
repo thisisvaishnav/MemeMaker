@@ -229,10 +229,8 @@ export default function MemeMaker() {
     if (!ctx) return;
 
     const renderOnImage = (img: HTMLImageElement) => {
-      const maxWidth = 1000;
-      const scale = Math.min(1, maxWidth / img.width);
-      const targetWidth = Math.round(img.width * scale);
-      const targetHeight = Math.round(img.height * scale);
+      const targetWidth = Math.min(1600, Math.max(1000, img.width));
+      const targetHeight = Math.round(img.height * (targetWidth / img.width));
 
       // Only reallocate canvas buffer if dimensions actually changed
       if (canvas.width !== targetWidth || canvas.height !== targetHeight) {
@@ -242,6 +240,8 @@ export default function MemeMaker() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
       }
 
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
       const drawText = (
@@ -278,8 +278,10 @@ export default function MemeMaker() {
         } else {
           ctx.font = `900 ${size}px ${fontFamily}`;
           ctx.fillStyle = color;
-          ctx.strokeStyle = "#000";
-          ctx.lineWidth = Math.max(2.5, Math.round(size / 13));
+          ctx.shadowColor = "rgba(0, 0, 0, 0.45)";
+          ctx.shadowBlur = Math.max(2, Math.round(size / 15));
+          ctx.shadowOffsetX = 0;
+          ctx.shadowOffsetY = Math.max(1, Math.round(size / 30));
         }
 
         // Word-wrap and newline handling relative to local (0, 0)
@@ -311,9 +313,6 @@ export default function MemeMaker() {
 
         lines.forEach((line, idx) => {
           const lineY = startY + idx * lineHeight;
-          if (!isPlain) {
-            ctx.strokeText(line, 0, lineY);
-          }
           ctx.fillText(line, 0, lineY);
         });
 

@@ -493,14 +493,9 @@ button {
   white-space: pre-wrap;
   word-break: break-word;
   width: 100%;
-  paint-order: stroke fill;
-  -webkit-text-stroke: 1px #000;
-  text-shadow:
-    1px 1px 0 #000,
-    -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    0 1.5px 3px rgba(0, 0, 0, 0.6);
+  paint-order: normal;
+  -webkit-text-stroke: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.45);
 }
 
 .box-text-content.is-slim-black {
@@ -1117,13 +1112,8 @@ button {
   }
 
   .box-text-content {
-    -webkit-text-stroke: 0.6px #000;
-    text-shadow:
-      0 0 1px #000,
-      -0.8px -0.8px 0 #000,
-      0.8px -0.8px 0 #000,
-      -0.8px 0.8px 0 #000,
-      0.8px 0.8px 0 #000;
+    -webkit-text-stroke: 0;
+    text-shadow: 0 1.5px 3px rgba(0, 0, 0, 0.45);
   }
 
   .controls {
@@ -1280,7 +1270,7 @@ button {
   }
 
   .box-text-content {
-    -webkit-text-stroke: 0.5px #000;
+    -webkit-text-stroke: 0;
   }
 
   .controls {

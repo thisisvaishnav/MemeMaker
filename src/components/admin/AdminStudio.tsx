@@ -77,10 +77,8 @@ export default function AdminStudio() {
     }
 
     img.onload = () => {
-      const maxWidth = 1000;
-      const scale = Math.min(1, maxWidth / img.width);
-      const targetWidth = Math.round(img.width * scale);
-      const targetHeight = Math.round(img.height * scale);
+      const targetWidth = Math.min(1600, Math.max(1000, img.width));
+      const targetHeight = Math.round(img.height * (targetWidth / img.width));
 
       if (canvas.width !== targetWidth || canvas.height !== targetHeight) {
         canvas.width = targetWidth;
@@ -88,6 +86,8 @@ export default function AdminStudio() {
       } else {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
       }
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
       setImageAspect(img.width / img.height);
     };
