@@ -13,7 +13,10 @@ import {
   TEMPLATE_BOXES,
   DEFAULT_BOXES,
   getTemplateBoxes,
+  calculateHandlePlacement,
+  calculateClampedCoordinate,
   type TemplateTextBox,
+  type HandlePlacement,
 } from "../lib/templateBoxes";
 import {
   fetchTemplates,
@@ -22,7 +25,13 @@ import {
 } from "../lib/templatesDb";
 import { getAdminSession } from "../lib/adminAuth";
 
-export { TEMPLATE_BOXES, DEFAULT_BOXES, getTemplateBoxes };
+export {
+  TEMPLATE_BOXES,
+  DEFAULT_BOXES,
+  getTemplateBoxes,
+  calculateHandlePlacement,
+  calculateClampedCoordinate,
+};
 export type { TemplateTextBox };
 
 type TextLayer = {
@@ -145,6 +154,8 @@ export default function MemeMaker() {
   const [showOptions, setShowOptions] = useState(false);
 
   const [search, setSearch] = useState("");
+  const [focusedBoxId, setFocusedBoxId] = useState<string | null>(null);
+  const [hoveredBoxId, setHoveredBoxId] = useState<string | null>(null);
 
   const currentDbTemplate = dbTemplates.find((t) => t.id === selectedTemplateId);
   const baseBoxes = currentDbTemplate?.boxes || getTemplateBoxes(selectedTemplateId);
@@ -472,8 +483,10 @@ export default function MemeMaker() {
   const [dragging, setDragging] = useState<{
     id: number | string;
     isLayer: boolean;
-    offsetX: number;
-    offsetY: number;
+    startX: number;
+    startY: number;
+    initialX: number;
+    initialY: number;
   } | null>(null);
 
   const addTextLayer = () => {
@@ -520,28 +533,30 @@ export default function MemeMaker() {
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
     setDragging({
       id: layer.id,
       isLayer: true,
-      offsetX: e.clientX - rect.left,
-      offsetY: e.clientY - rect.top,
+      startX: e.clientX,
+      startY: e.clientY,
+      initialX: layer.x,
+      initialY: layer.y,
     });
     (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
   };
 
   const handleBoxPointerDown = (
     e: React.PointerEvent,
-    boxId: string
+    box: { id: string; x: number; y: number }
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
     setDragging({
-      id: boxId,
+      id: box.id,
       isLayer: false,
-      offsetX: e.clientX - rect.left,
-      offsetY: e.clientY - rect.top,
+      startX: e.clientX,
+      startY: e.clientY,
+      initialX: box.x,
+      initialY: box.y,
     });
     (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
   };
@@ -595,24 +610,25 @@ export default function MemeMaker() {
   const handlePointerMove = (e: React.PointerEvent) => {
     if (!dragging) return;
 
-    const wrapper = canvasRef.current?.parentElement;
-    if (!wrapper) return;
-
-    const wrapperRect = wrapper.getBoundingClientRect();
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     const canvasRect = canvas.getBoundingClientRect();
+    if (!canvasRect.width || !canvasRect.height) return;
 
-    const relX =
-      (e.clientX - wrapperRect.left - dragging.offsetX) /
-      canvasRect.width;
-    const relY =
-      (e.clientY - wrapperRect.top - dragging.offsetY) /
-      canvasRect.height;
+    const deltaX = e.clientX - dragging.startX;
+    const deltaY = e.clientY - dragging.startY;
 
-    const clampedX = Math.round(Math.max(0.02, Math.min(0.98, relX)) * 100) / 100;
-    const clampedY = Math.round(Math.max(0.02, Math.min(0.98, relY)) * 100) / 100;
+    const clampedX = calculateClampedCoordinate(
+      dragging.initialX,
+      deltaX,
+      canvasRect.width
+    );
+    const clampedY = calculateClampedCoordinate(
+      dragging.initialY,
+      deltaY,
+      canvasRect.height
+    );
 
     if (dragging.isLayer) {
       setLayers((current) =>
@@ -687,80 +703,111 @@ export default function MemeMaker() {
               onPointerMove={handlePointerMove}
               onPointerUp={handlePointerUp}
             >
-              <canvas ref={canvasRef} />
+              <div className="canvas-stage">
+                <canvas ref={canvasRef} />
 
-              {layers.map((layer) => {
-                const canvas = canvasRef.current;
-                const canvasWidth = canvas?.width ?? 1000;
-                const canvasHeight = canvas?.height ?? 600;
+                {layers.map((layer) => {
+                  const canvas = canvasRef.current;
+                  const canvasWidth = canvas?.width ?? 1000;
+                  const canvasHeight = canvas?.height ?? 600;
 
-                const displayWidth =
-                  canvas?.getBoundingClientRect().width ?? canvasWidth;
-                const displayHeight =
-                  canvas?.getBoundingClientRect().height ?? canvasHeight;
+                  const displayWidth =
+                    canvas?.getBoundingClientRect().width ?? canvasWidth;
+                  const displayHeight =
+                    canvas?.getBoundingClientRect().height ?? canvasHeight;
 
-                const px = layer.x * displayWidth;
-                const py = layer.y * displayHeight;
+                  const px = layer.x * displayWidth;
+                  const py = layer.y * displayHeight;
 
-                const scaleFactor = displayWidth / canvasWidth;
-                const displayFontSize = layer.fontSize * scaleFactor;
+                  const scaleFactor = displayWidth / canvasWidth;
+                  const displayFontSize = layer.fontSize * scaleFactor;
 
-                return (
-                  <div
-                    key={layer.id}
-                    className="text-overlay"
-                    style={{
-                      left: px,
-                      top: py,
-                      color: layer.color,
-                      fontSize: displayFontSize,
-                      fontWeight: 900,
-                      fontFamily: 'Impact, "Arial Black", sans-serif',
-                      textShadow:
-                        "2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000",
-                      whiteSpace: "nowrap",
-                      transform: "translate(-50%, -50%)",
-                      cursor:
-                        dragging?.id === layer.id ? "grabbing" : "grab",
-                    }}
-                    onPointerDown={(e) => handlePointerDown(e, layer)}
-                  >
-                    {layer.text}
-                  </div>
-                );
-              })}
+                  return (
+                    <div
+                      key={layer.id}
+                      className="text-overlay"
+                      style={{
+                        left: px,
+                        top: py,
+                        color: layer.color,
+                        fontSize: displayFontSize,
+                        fontWeight: 900,
+                        fontFamily: 'Impact, "Arial Black", sans-serif',
+                        textShadow:
+                          "2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000",
+                        whiteSpace: "nowrap",
+                        transform: "translate(-50%, -50%)",
+                        cursor:
+                          dragging?.id === layer.id ? "grabbing" : "grab",
+                      }}
+                      onPointerDown={(e) => handlePointerDown(e, layer)}
+                    >
+                      {layer.text}
+                    </div>
+                  );
+                })}
 
-              {/* DEFAULT TEMPLATE BOX DRAGGABLE HANDLES */}
-              {activeBoxes.map((box) => {
-                const canvas = canvasRef.current;
-                const canvasWidth = canvas?.width ?? 1000;
-                const canvasHeight = canvas?.height ?? 600;
+                {/* DEFAULT TEMPLATE BOX DRAGGABLE HANDLES */}
+                {activeBoxes.map((box) => {
+                  const canvas = canvasRef.current;
+                  const canvasWidth = canvas?.width ?? 1000;
+                  const canvasHeight = canvas?.height ?? 600;
 
-                const displayWidth =
-                  canvas?.getBoundingClientRect().width ?? canvasWidth;
-                const displayHeight =
-                  canvas?.getBoundingClientRect().height ?? canvasHeight;
+                  const displayWidth =
+                    canvas?.getBoundingClientRect().width ?? canvasWidth;
+                  const displayHeight =
+                    canvas?.getBoundingClientRect().height ?? canvasHeight;
 
-                const px = box.x * displayWidth;
-                const py = box.y * displayHeight;
-                const isMoved = Boolean(boxPositions[box.id]);
+                  const px = box.x * displayWidth;
+                  const py = box.y * displayHeight;
+                  const isMoved = Boolean(boxPositions[box.id]);
+                  const text =
+                    boxTexts[box.id] ??
+                    (box.id === "top" ? topText : box.id === "bottom" ? bottomText : "");
+                  const hasText = Boolean(text && text.trim().length > 0);
+                  const isDraggingThis = dragging?.id === box.id;
+                  const isFocused = focusedBoxId === box.id;
+                  const isHovered = hoveredBoxId === box.id;
+                  const scaleFactor = displayWidth / canvasWidth;
+                  const effectiveFontSize = Math.round(
+                    fontSize * (box.fontSizeRatio || 1) * scaleFactor
+                  );
 
-                return (
-                  <div
-                    key={`box-overlay-${box.id}`}
-                    className={`template-box-overlay ${isMoved ? "is-moved" : ""}`}
-                    style={{
-                      left: px,
-                      top: py,
-                      cursor: dragging?.id === box.id ? "grabbing" : "grab",
-                    }}
-                    title={`Drag to reposition ${box.label} (${Math.round(box.x * 100)}%, ${Math.round(box.y * 100)}%)`}
-                    onPointerDown={(e) => handleBoxPointerDown(e, box.id)}
-                  >
-                    <span className="box-drag-label">⋮⋮ {box.label}</span>
-                  </div>
-                );
-              })}
+                  const placement = calculateHandlePlacement(
+                    box.y,
+                    hasText,
+                    effectiveFontSize
+                  );
+
+                  return (
+                    <div
+                      key={`box-overlay-${box.id}`}
+                      className={`template-box-wrapper ${placement.placeBelow ? "pos-below" : "pos-above"} ${isMoved ? "is-moved" : ""} ${isDraggingThis ? "is-dragging" : ""} ${isFocused ? "is-focused" : ""} ${isHovered ? "is-hovered" : ""} ${hasText ? "has-text" : "empty-text"}`}
+                      style={{
+                        left: px,
+                        top: py,
+                      }}
+                      onMouseEnter={() => setHoveredBoxId(box.id)}
+                      onMouseLeave={() => setHoveredBoxId(null)}
+                    >
+                      <button
+                        type="button"
+                        className="box-drag-handle-tab"
+                        style={{
+                          cursor: isDraggingThis ? "grabbing" : "grab",
+                          transform: placement.transform,
+                        }}
+                        title={`Drag to reposition ${box.label} (${Math.round(box.x * 100)}%, ${Math.round(box.y * 100)}%)`}
+                        onPointerDown={(e) => handleBoxPointerDown(e, box)}
+                      >
+                        <span className="box-drag-grip">⋮⋮</span>
+                        <span className="box-drag-label">{box.label}</span>
+                        {isMoved && <span className="box-moved-dot" title="Custom position active">•</span>}
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
 
             <input
@@ -911,6 +958,10 @@ export default function MemeMaker() {
                         ? () => resetBoxPosition(box.id)
                         : undefined
                     }
+                    onFocus={() => setFocusedBoxId(box.id)}
+                    onBlur={() => setFocusedBoxId(null)}
+                    onMouseEnter={() => setHoveredBoxId(box.id)}
+                    onMouseLeave={() => setHoveredBoxId(null)}
                   />
                 );
               })}
@@ -1087,6 +1138,10 @@ function TextInput({
   color,
   setColor,
   onResetPosition,
+  onFocus,
+  onBlur,
+  onMouseEnter,
+  onMouseLeave,
 }: {
   label?: string;
   placeholder: string;
@@ -1095,9 +1150,17 @@ function TextInput({
   color: string;
   setColor: (value: string) => void;
   onResetPosition?: () => void;
+  onFocus?: () => void;
+  onBlur?: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 }) {
   return (
-    <div className="box-input-wrapper">
+    <div
+      className="box-input-wrapper"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       <div className="box-label-row">
         {label && <label className="box-label">{label}</label>}
         {onResetPosition && (
@@ -1117,6 +1180,8 @@ function TextInput({
           placeholder={placeholder}
           value={value}
           onChange={(e) => onChange(e.target.value)}
+          onFocus={onFocus}
+          onBlur={onBlur}
         />
 
         <input

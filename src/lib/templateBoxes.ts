@@ -153,3 +153,62 @@ export function getTemplateBoxes(templateId: number | null): TemplateTextBox[] {
   }
   return DEFAULT_BOXES;
 }
+
+export interface HandlePlacement {
+  placeBelow: boolean;
+  verticalOffset: number;
+  transform: string;
+  isObscuringText: boolean;
+}
+
+/**
+ * Calculates the non-obscuring drag handle tab placement relative to a text zone.
+ * When text is present, the handle is physically placed outside the text baseline:
+ * - Upper zones (y <= 0.16): offset downward below the text line to avoid canvas top-edge clipping.
+ * - Middle/lower zones (y > 0.16): offset upward above the text line so it never covers the letters.
+ * When text is empty, the handle rests at center (y) as an intuitive positioning guide.
+ */
+export function calculateHandlePlacement(
+  boxY: number,
+  hasText: boolean,
+  effectiveFontSize: number
+): HandlePlacement {
+  if (!hasText) {
+    return {
+      placeBelow: false,
+      verticalOffset: 0,
+      transform: "translate(-50%, -50%)",
+      isObscuringText: false,
+    };
+  }
+
+  const placeBelow = boxY <= 0.16;
+  const verticalOffset = Math.max(18, Math.round(effectiveFontSize * 0.7));
+  const transform = placeBelow
+    ? `translate(-50%, ${verticalOffset}px)`
+    : `translate(-50%, calc(-100% - ${verticalOffset}px))`;
+
+  return {
+    placeBelow,
+    verticalOffset,
+    transform,
+    isObscuringText: false,
+  };
+}
+
+/**
+ * Calculates clamped normalized coordinates (0.02 to 0.98) from a drag movement delta.
+ * Ensures 1:1 jitter-free tracking without CSS transform jumps or border overflow.
+ */
+export function calculateClampedCoordinate(
+  initialCoord: number,
+  deltaPixels: number,
+  dimensionPixels: number,
+  min = 0.02,
+  max = 0.98
+): number {
+  if (!dimensionPixels || dimensionPixels <= 0) return initialCoord;
+  const delta = deltaPixels / dimensionPixels;
+  return Math.round(Math.max(min, Math.min(max, initialCoord + delta)) * 100) / 100;
+}
+
