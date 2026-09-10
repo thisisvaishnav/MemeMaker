@@ -7,6 +7,8 @@ export interface TemplateTextBox {
   textAlign?: "center" | "left" | "right";
   maxWidthRatio?: number; // relative to canvas width
   fontSizeRatio?: number; // scale multiplier for base font size
+  fontSize?: number; // base font size in px
+  rotation?: number; // rotation angle in degrees (0 to 360)
 }
 
 export const DEFAULT_BOXES: TemplateTextBox[] = [

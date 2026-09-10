@@ -42,4 +42,54 @@ describe("Admin & Database Templates (lib/templatesDb.ts & lib/adminAuth.ts)", (
     const session = await getAdminSession();
     expect(session).toBeNull();
   });
+
+  it("saveTemplate preserves box rotation, maxWidthRatio, and fontSizeRatio", async () => {
+    const { saveTemplate } = await import("../src/lib/templatesDb");
+    const testBoxes = [
+      {
+        id: "box-rot",
+        label: "Text #1",
+        placeholder: "Text #1",
+        x: 0.45,
+        y: 0.25,
+        rotation: 45,
+        maxWidthRatio: 0.65,
+        fontSizeRatio: 1.25,
+        fontSize: 48,
+        textAlign: "center" as const,
+      },
+      {
+        id: "box-straight",
+        label: "Text #2",
+        placeholder: "Text #2",
+        x: 0.5,
+        y: 0.8,
+        rotation: 0,
+        maxWidthRatio: 0.8,
+        fontSizeRatio: 1.0,
+        fontSize: 32,
+        textAlign: "center" as const,
+      },
+    ];
+
+    const result = await saveTemplate({
+      id: 1,
+      name: "Confused Nick Young",
+      boxes: testBoxes,
+    });
+
+    expect(result.success).toBe(true);
+
+    const all = await fetchTemplates();
+    const updated = all.find((t) => t.id === 1);
+    expect(updated).toBeDefined();
+    expect(updated?.boxes).toBeDefined();
+    const rotBox = updated?.boxes.find((b) => b.id === "box-rot");
+    expect(rotBox).toBeDefined();
+    expect(rotBox?.rotation).toBe(45);
+    expect(rotBox?.maxWidthRatio).toBe(0.65);
+    expect(rotBox?.fontSizeRatio).toBe(1.25);
+    expect(rotBox?.fontSize).toBe(48);
+    expect(rotBox?.label).toBe("Text #1");
+  });
 });

@@ -316,6 +316,8 @@ export default function MemeMaker() {
           const customFont = boxFontSizes[box.id];
           const size = customFont
             ? Math.round(customFont * scaleFactor)
+            : box.fontSize
+            ? Math.round(box.fontSize * (box.fontSizeRatio || 1))
             : Math.round(fontSize * (box.fontSizeRatio || 1));
           const customW = boxWidths[box.id];
           const maxW = customW
@@ -323,7 +325,7 @@ export default function MemeMaker() {
             : box.maxWidthRatio
             ? canvas.width * box.maxWidthRatio
             : undefined;
-          const rot = boxRotations[box.id] || 0;
+          const rot = boxRotations[box.id] ?? box.rotation ?? 0;
           drawText(text, box.x, box.y, size, color, box.textAlign || "center", maxW, rot);
         });
 
@@ -753,6 +755,8 @@ export default function MemeMaker() {
       textAlign: b.textAlign,
       maxWidthRatio: b.maxWidthRatio,
       fontSizeRatio: b.fontSizeRatio,
+      fontSize: b.fontSize,
+      rotation: boxRotations[b.id] ?? b.rotation ?? 0,
     }));
 
     const res = await saveTemplate({
@@ -1113,12 +1117,14 @@ export default function MemeMaker() {
                   const customFontSize = boxFontSizes[box.id];
                   const effectiveFontSize = customFontSize ?? Math.max(
                     12,
-                    Math.round(fontSize * (box.fontSizeRatio || 1) * scaleFactor)
+                    box.fontSize
+                      ? Math.round(box.fontSize * (box.fontSizeRatio || 1) * scaleFactor)
+                      : Math.round(fontSize * (box.fontSizeRatio || 1) * scaleFactor)
                   );
                   const color = boxColors[box.id] || textColor;
                   const customWidth = boxWidths[box.id];
                   const maxWidthPx = customWidth ?? (box.maxWidthRatio ? displayWidth * box.maxWidthRatio : undefined);
-                  const rotation = boxRotations[box.id] || 0;
+                  const rotation = boxRotations[box.id] ?? box.rotation ?? 0;
                   const isSelected = isFocused || isTransformingThis;
 
                   return (
