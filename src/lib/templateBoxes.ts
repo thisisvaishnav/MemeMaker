@@ -9,7 +9,27 @@ export interface TemplateTextBox {
   fontSizeRatio?: number; // scale multiplier for base font size
   fontSize?: number; // base font size in px
   rotation?: number; // rotation angle in degrees (0 to 360)
+  fontFamily?: string; // CSS font-family string (e.g. Impact, Arial Black, Anton)
 }
+
+export interface MemeFontOption {
+  id: string;
+  name: string;
+  family: string;
+  category: "meme" | "sans" | "serif" | "mono" | "fun";
+}
+
+export const AVAILABLE_MEME_FONTS: MemeFontOption[] = [
+  { id: "impact", name: "Impact", family: "Impact, 'Arial Black', sans-serif", category: "meme" },
+  { id: "arial-black", name: "Arial Black", family: "'Arial Black', sans-serif", category: "sans" },
+  { id: "anton", name: "Anton", family: "Anton, Impact, sans-serif", category: "meme" },
+  { id: "bebas-neue", name: "Bebas Neue", family: "'Bebas Neue', Impact, sans-serif", category: "meme" },
+  { id: "montserrat", name: "Montserrat", family: "Montserrat, sans-serif", category: "sans" },
+  { id: "oswald", name: "Oswald", family: "Oswald, sans-serif", category: "sans" },
+  { id: "comic-sans", name: "Comic Sans", family: "'Comic Sans MS', cursive, sans-serif", category: "fun" },
+  { id: "times", name: "Times New Roman", family: "'Times New Roman', Times, serif", category: "serif" },
+  { id: "mono", name: "JetBrains Mono", family: "'JetBrains Mono', monospace", category: "mono" },
+];
 
 export const DEFAULT_BOXES: TemplateTextBox[] = [
   { id: "top", label: "Top Text", placeholder: "Top Text", x: 0.5, y: 0.12, textAlign: "center" },
