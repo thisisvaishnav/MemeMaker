@@ -24,9 +24,12 @@ Any static assets, like images, can be placed in the `public/` directory.
 
 ## 🛠️ Tech Stack & Integrations
 
-- **Framework**: [Astro v5+](https://astro.build)
+- **Production Domain**: [realmememaker.com](https://realmememaker.com)
+- **Hosting & Analytics**: [Vercel](https://vercel.com) (Speed Insights enabled)
+- **Framework**: [Astro 7](https://astro.build)
 - **UI & Components**: [React 19](https://react.dev) + [shadcn/ui](https://ui.shadcn.com/)
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com)
+- **Database & Auth**: [Supabase](https://supabase.com) (Integrated via Supabase MCP)
 - **Icons**: [Lucide React](https://lucide.dev)
 - **Codebase Knowledge Graph**: [Graphify](https://github.com/safishamsi/graphify)
 

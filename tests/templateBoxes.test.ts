@@ -3,6 +3,8 @@ import {
   TEMPLATE_BOXES,
   DEFAULT_BOXES,
   getTemplateBoxes,
+  calculateHandlePlacement,
+  calculateClampedCoordinate,
 } from "../src/lib/templateBoxes";
 import { TEMPLATE_NAMES } from "../src/components/MemeMaker";
 
@@ -70,5 +72,63 @@ describe("Template Box Positioning (lib/templateBoxes.ts)", () => {
   it("getTemplateBoxes falls back to DEFAULT_BOXES for null or out-of-range IDs", () => {
     expect(getTemplateBoxes(null)).toEqual(DEFAULT_BOXES);
     expect(getTemplateBoxes(999)).toEqual(DEFAULT_BOXES);
+  });
+});
+
+describe("Regression Tests: Edit Page Non-Obscuring Handle Placement & Drag Math", () => {
+  it("places handle outside text baseline when text is present (never dead-center on letters)", () => {
+    // Top text (y <= 0.16): should be placed below text with positive vertical offset
+    const topPlacement = calculateHandlePlacement(0.12, true, 40);
+    expect(topPlacement.placeBelow).toBe(true);
+    expect(topPlacement.verticalOffset).toBeGreaterThanOrEqual(18);
+    expect(topPlacement.isObscuringText).toBe(false);
+    expect(topPlacement.transform).not.toBe("translate(-50%, -50%)");
+    expect(topPlacement.transform).toContain("translate(-50%, ");
+
+    // Bottom text (y > 0.16): should be placed above text with negative/upward offset
+    const bottomPlacement = calculateHandlePlacement(0.88, true, 40);
+    expect(bottomPlacement.placeBelow).toBe(false);
+    expect(bottomPlacement.verticalOffset).toBeGreaterThanOrEqual(18);
+    expect(bottomPlacement.isObscuringText).toBe(false);
+    expect(bottomPlacement.transform).not.toBe("translate(-50%, -50%)");
+    expect(bottomPlacement.transform).toContain("calc(-100% - ");
+
+    // Middle text zone (e.g. Change My Mind board at y = 0.68)
+    const midPlacement = calculateHandlePlacement(0.68, true, 36);
+    expect(midPlacement.placeBelow).toBe(false);
+    expect(midPlacement.isObscuringText).toBe(false);
+    expect(midPlacement.transform).toContain("calc(-100% - ");
+  });
+
+  it("rests at center as guide placeholder only when text is empty", () => {
+    const emptyTop = calculateHandlePlacement(0.12, false, 40);
+    expect(emptyTop.transform).toBe("translate(-50%, -50%)");
+    expect(emptyTop.verticalOffset).toBe(0);
+
+    const emptyBottom = calculateHandlePlacement(0.88, false, 40);
+    expect(emptyBottom.transform).toBe("translate(-50%, -50%)");
+    expect(emptyBottom.verticalOffset).toBe(0);
+  });
+
+  it("calculates clamped coordinates smoothly and prevents overflow out of bounds", () => {
+    // Normal drag: initial 0.50 + 40px on 800px width -> 0.55
+    const moved = calculateClampedCoordinate(0.50, 40, 800);
+    expect(moved).toBe(0.55);
+
+    // Negative drag: initial 0.50 - 40px on 800px width -> 0.45
+    const movedBack = calculateClampedCoordinate(0.50, -40, 800);
+    expect(movedBack).toBe(0.45);
+
+    // Extreme left drag: should clamp to 0.02 (not negative or 0)
+    const clampedMin = calculateClampedCoordinate(0.20, -500, 800);
+    expect(clampedMin).toBe(0.02);
+
+    // Extreme right drag: should clamp to 0.98 (not > 1)
+    const clampedMax = calculateClampedCoordinate(0.80, 500, 800);
+    expect(clampedMax).toBe(0.98);
+
+    // Zero dimension safety: returns initialCoord without NaN or division by zero
+    const safeZero = calculateClampedCoordinate(0.50, 50, 0);
+    expect(safeZero).toBe(0.50);
   });
 });

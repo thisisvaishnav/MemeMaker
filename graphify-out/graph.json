@@ -27,7 +27,7 @@
       "file_type": "code",
       "norm_label": "textlayer",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L28"
+      "source_location": "L37"
     },
     {
       "id": "src_lib_adminauth_adminuser",
@@ -54,6 +54,19 @@
       "norm_label": "customtemplate",
       "source_file": "src/lib/imageStore.ts",
       "source_location": "L9"
+    },
+    {
+      "id": "src_lib_templateboxes_handleplacement",
+      "label": "HandlePlacement",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "handleplacement",
+      "source_file": "src/lib/templateBoxes.ts",
+      "source_location": "L157"
     },
     {
       "id": "src_lib_templateboxes_templatetextbox",
@@ -272,7 +285,7 @@
       "file_type": "code",
       "norm_label": "mememaker()",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L118"
+      "source_location": "L127"
     },
     {
       "id": "src_components_mememaker_textinput",
@@ -284,7 +297,7 @@
       "file_type": "code",
       "norm_label": "textinput()",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L1082"
+      "source_location": "L1133"
     },
     {
       "id": "src_lib_adminauth_adminsignin",
@@ -477,6 +490,30 @@
       "norm_label": "setlocalstoragetemplates()",
       "source_file": "src/lib/imageStore.ts",
       "source_location": "L243"
+    },
+    {
+      "id": "src_lib_templateboxes_calculateclampedcoordinate",
+      "label": "calculateClampedCoordinate()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "calculateclampedcoordinate()",
+      "source_file": "src/lib/templateBoxes.ts",
+      "source_location": "L203"
+    },
+    {
+      "id": "src_lib_templateboxes_calculatehandleplacement",
+      "label": "calculateHandlePlacement()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "calculatehandleplacement()",
+      "source_file": "src/lib/templateBoxes.ts",
+      "source_location": "L171"
     },
     {
       "id": "src_lib_templateboxes_gettemplateboxes",
@@ -8893,6 +8930,54 @@
       "source_location": "L181"
     },
     {
+      "id": "agents_skills_tailwind_4_docs_references_docs_hover_focus_and_other_states_arbitrary_groups",
+      "label": "Arbitrary groups",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "Styling based on parent state",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "arbitrary groups",
+      "source_file": ".agents/skills/tailwind-4-docs/references/docs/hover-focus-and-other-states.mdx",
+      "source_location": "L938"
+    },
+    {
+      "id": "agents_skills_tailwind_4_docs_references_docs_hover_focus_and_other_states_differentiating_nested_groups",
+      "label": "Differentiating nested groups",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "Styling based on parent state",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "differentiating nested groups",
+      "source_file": ".agents/skills/tailwind-4-docs/references/docs/hover-focus-and-other-states.mdx",
+      "source_location": "L794"
+    },
+    {
+      "id": "agents_skills_tailwind_4_docs_references_docs_hover_focus_and_other_states_implicit_groups",
+      "label": "Implicit groups",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "Styling based on parent state",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "implicit groups",
+      "source_file": ".agents/skills/tailwind-4-docs/references/docs/hover-focus-and-other-states.mdx",
+      "source_location": "L992"
+    },
+    {
+      "id": "agents_skills_tailwind_4_docs_references_docs_hover_focus_and_other_states_styling_based_on_parent_state",
+      "label": "Styling based on parent state",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "Styling based on parent state",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "styling based on parent state",
+      "source_file": ".agents/skills/tailwind-4-docs/references/docs/hover-focus-and-other-states.mdx",
+      "source_location": "L737"
+    },
+    {
       "id": "agents_skills_tailwind_4_docs_references_docs_grid_auto_columns",
       "label": "grid-auto-columns.mdx",
       "_origin": "ast",
@@ -11760,6 +11845,30 @@
       "source_location": "L11"
     },
     {
+      "id": "agents_project_architecture_tech_stack_mememaker",
+      "label": "Project Architecture & Tech Stack (MemeMaker)",
+      "_origin": "ast",
+      "community": 230,
+      "community_name": "AGENTS.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "project architecture & tech stack (mememaker)",
+      "source_file": "AGENTS.md",
+      "source_location": "L24"
+    },
+    {
+      "id": "agents_project_specific_commands_verification_workflow",
+      "label": "Project-Specific Commands & Verification Workflow",
+      "_origin": "ast",
+      "community": 230,
+      "community_name": "AGENTS.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "project-specific commands & verification workflow",
+      "source_file": "AGENTS.md",
+      "source_location": "L37"
+    },
+    {
       "id": "agents_rules_graphify",
       "label": "rules/graphify.md",
       "_origin": "ast",
@@ -11892,7 +12001,7 @@
       "file_type": "code",
       "norm_label": "template_alias_map",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L48"
+      "source_location": "L57"
     },
     {
       "id": "src_components_mememaker_template_names",
@@ -11903,7 +12012,7 @@
       "file_type": "code",
       "norm_label": "template_names",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L95"
+      "source_location": "L104"
     },
     {
       "id": "src_components_mememaker_templates",
@@ -11914,7 +12023,7 @@
       "file_type": "code",
       "norm_label": "templates",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L42"
+      "source_location": "L51"
     },
     {
       "id": "src_layouts_layout",
@@ -13273,18 +13382,6 @@
       "source_location": "L461"
     },
     {
-      "id": "agents_skills_tailwind_4_docs_references_docs_hover_focus_and_other_states_arbitrary_groups",
-      "label": "Arbitrary groups",
-      "_origin": "ast",
-      "community": 31,
-      "community_name": "Pseudo-classes",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "arbitrary groups",
-      "source_file": ".agents/skills/tailwind-4-docs/references/docs/hover-focus-and-other-states.mdx",
-      "source_location": "L938"
-    },
-    {
       "id": "agents_skills_tailwind_4_docs_references_docs_hover_focus_and_other_states_arbitrary_peers",
       "label": "Arbitrary peers",
       "_origin": "ast",
@@ -13295,18 +13392,6 @@
       "norm_label": "arbitrary peers",
       "source_file": ".agents/skills/tailwind-4-docs/references/docs/hover-focus-and-other-states.mdx",
       "source_location": "L1143"
-    },
-    {
-      "id": "agents_skills_tailwind_4_docs_references_docs_hover_focus_and_other_states_differentiating_nested_groups",
-      "label": "Differentiating nested groups",
-      "_origin": "ast",
-      "community": 31,
-      "community_name": "Pseudo-classes",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "differentiating nested groups",
-      "source_file": ".agents/skills/tailwind-4-docs/references/docs/hover-focus-and-other-states.mdx",
-      "source_location": "L794"
     },
     {
       "id": "agents_skills_tailwind_4_docs_references_docs_hover_focus_and_other_states_differentiating_peers",
@@ -13357,18 +13442,6 @@
       "source_location": "L90"
     },
     {
-      "id": "agents_skills_tailwind_4_docs_references_docs_hover_focus_and_other_states_implicit_groups",
-      "label": "Implicit groups",
-      "_origin": "ast",
-      "community": 31,
-      "community_name": "Pseudo-classes",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "implicit groups",
-      "source_file": ".agents/skills/tailwind-4-docs/references/docs/hover-focus-and-other-states.mdx",
-      "source_location": "L992"
-    },
-    {
       "id": "agents_skills_tailwind_4_docs_references_docs_hover_focus_and_other_states_not",
       "label": ":not()",
       "_origin": "ast",
@@ -13403,18 +13476,6 @@
       "norm_label": ":required and :disabled",
       "source_file": ".agents/skills/tailwind-4-docs/references/docs/hover-focus-and-other-states.mdx",
       "source_location": "L336"
-    },
-    {
-      "id": "agents_skills_tailwind_4_docs_references_docs_hover_focus_and_other_states_styling_based_on_parent_state",
-      "label": "Styling based on parent state",
-      "_origin": "ast",
-      "community": 31,
-      "community_name": "Pseudo-classes",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "styling based on parent state",
-      "source_file": ".agents/skills/tailwind-4-docs/references/docs/hover-focus-and-other-states.mdx",
-      "source_location": "L737"
     },
     {
       "id": "agents_skills_tailwind_4_docs_references_docs_hover_focus_and_other_states_styling_based_on_sibling_state",
@@ -18418,7 +18479,7 @@
       "node_kind": "heading",
       "norm_label": "\ud83e\udde0 codebase knowledge graph (graphify)",
       "source_file": "README.md",
-      "source_location": "L33"
+      "source_location": "L36"
     },
     {
       "id": "readme_commands",
@@ -18430,7 +18491,7 @@
       "node_kind": "heading",
       "norm_label": "\ud83e\uddde commands",
       "source_file": "README.md",
-      "source_location": "L71"
+      "source_location": "L74"
     },
     {
       "id": "readme_graphify_commands",
@@ -18442,7 +18503,7 @@
       "node_kind": "heading",
       "norm_label": "graphify commands",
       "source_file": "README.md",
-      "source_location": "L41"
+      "source_location": "L44"
     },
     {
       "id": "readme_mememaker_astro",
@@ -18490,7 +18551,7 @@
       "node_kind": "heading",
       "norm_label": "\ud83e\udde9 using shadcn/ui components",
       "source_file": "README.md",
-      "source_location": "L56"
+      "source_location": "L59"
     },
     {
       "id": "readme_want_to_learn_more",
@@ -18502,7 +18563,7 @@
       "node_kind": "heading",
       "norm_label": "\ud83d\udc40 want to learn more?",
       "source_file": "README.md",
-      "source_location": "L88"
+      "source_location": "L91"
     },
     {
       "id": "agents_skills_tailwind_4_docs_references_docs_accent_color",
@@ -22256,7 +22317,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L150",
+      "source_location": "L161",
       "weight": 1.0
     },
     {
@@ -22268,7 +22329,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L287",
+      "source_location": "L298",
       "weight": 1.0
     },
     {
@@ -22280,7 +22341,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L292",
+      "source_location": "L303",
       "weight": 1.0
     },
     {
@@ -22292,7 +22353,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L293",
+      "source_location": "L304",
       "weight": 1.0
     },
     {
@@ -22304,7 +22365,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L295",
+      "source_location": "L306",
       "weight": 1.0
     },
     {
@@ -22316,7 +22377,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L318",
+      "source_location": "L329",
       "weight": 1.0
     },
     {
@@ -22328,7 +22389,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L332",
+      "source_location": "L343",
       "weight": 1.0
     },
     {
@@ -22340,7 +22401,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L349",
+      "source_location": "L360",
       "weight": 1.0
     },
     {
@@ -22352,7 +22413,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L353",
+      "source_location": "L364",
       "weight": 1.0
     },
     {
@@ -22364,7 +22425,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L468",
+      "source_location": "L479",
       "weight": 1.0
     },
     {
@@ -22376,7 +22437,31 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L570",
+      "source_location": "L585",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_mememaker_mememaker",
+      "target": "src_lib_templateboxes_calculateclampedcoordinate",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/components/MemeMaker.tsx",
+      "source_location": "L622",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_mememaker_mememaker",
+      "target": "src_lib_templateboxes_calculatehandleplacement",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/components/MemeMaker.tsx",
+      "source_location": "L776",
       "weight": 1.0
     },
     {
@@ -22856,7 +22941,7 @@
       "confidence_score": 1.0,
       "context": "export",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L25",
+      "source_location": "L28",
       "weight": 1.0
     },
     {
@@ -23365,6 +23450,30 @@
     },
     {
       "source": "src_components_mememaker",
+      "target": "src_lib_templateboxes_calculateclampedcoordinate",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/MemeMaker.tsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_mememaker",
+      "target": "src_lib_templateboxes_calculatehandleplacement",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/MemeMaker.tsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_mememaker",
       "target": "src_lib_templateboxes_default_boxes",
       "relation": "imports",
       "_origin": "ast",
@@ -23378,6 +23487,18 @@
     {
       "source": "src_components_mememaker",
       "target": "src_lib_templateboxes_gettemplateboxes",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/MemeMaker.tsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_mememaker",
+      "target": "src_lib_templateboxes_handleplacement",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -23420,7 +23541,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L18",
+      "source_location": "L21",
       "weight": 1.0
     },
     {
@@ -23432,7 +23553,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L18",
+      "source_location": "L21",
       "weight": 1.0
     },
     {
@@ -23444,7 +23565,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L18",
+      "source_location": "L21",
       "weight": 1.0
     },
     {
@@ -23456,7 +23577,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L23",
+      "source_location": "L26",
       "weight": 1.0
     },
     {
@@ -23977,6 +24098,30 @@
     },
     {
       "source": "tests_templateboxes_test",
+      "target": "src_lib_templateboxes_calculateclampedcoordinate",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "tests/templateBoxes.test.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_templateboxes_test",
+      "target": "src_lib_templateboxes_calculatehandleplacement",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "tests/templateBoxes.test.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_templateboxes_test",
       "target": "src_lib_templateboxes_default_boxes",
       "relation": "imports",
       "_origin": "ast",
@@ -24020,7 +24165,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "tests/templateBoxes.test.ts",
-      "source_location": "L7",
+      "source_location": "L9",
       "weight": 1.0
     },
     {
@@ -24117,7 +24262,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L18",
+      "source_location": "L21",
       "weight": 1.0
     },
     {
@@ -24129,7 +24274,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L23",
+      "source_location": "L26",
       "weight": 1.0
     },
     {
@@ -24369,7 +24514,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "tests/templateBoxes.test.ts",
-      "source_location": "L7",
+      "source_location": "L9",
       "weight": 1.0
     },
     {
@@ -24452,6 +24597,28 @@
       "confidence_score": 1.0,
       "source_file": "AGENTS.md",
       "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "agents",
+      "target": "agents_project_architecture_tech_stack_mememaker",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "agents",
+      "target": "agents_project_specific_commands_verification_workflow",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md",
+      "source_location": "L37",
       "weight": 1.0
     },
     {
@@ -40368,7 +40535,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L41",
+      "source_location": "L44",
       "weight": 1.0
     },
     {
@@ -40390,7 +40557,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L33",
+      "source_location": "L36",
       "weight": 1.0
     },
     {
@@ -40412,7 +40579,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L56",
+      "source_location": "L59",
       "weight": 1.0
     },
     {
@@ -40423,7 +40590,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L71",
+      "source_location": "L74",
       "weight": 1.0
     },
     {
@@ -40434,7 +40601,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L88",
+      "source_location": "L91",
       "weight": 1.0
     },
     {
@@ -40692,13 +40859,24 @@
     },
     {
       "source": "src_components_mememaker",
+      "target": "src_components_mememaker_template_names",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/MemeMaker.tsx",
+      "source_location": "L104",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_mememaker",
       "target": "src_components_mememaker_textinput",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L1082",
+      "source_location": "L1133",
       "weight": 1.0
     },
     {
@@ -40709,7 +40887,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L118",
+      "source_location": "L127",
       "weight": 1.0
     },
     {
@@ -40720,7 +40898,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L28",
+      "source_location": "L37",
       "weight": 1.0
     },
     {
@@ -40731,7 +40909,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L42",
+      "source_location": "L51",
       "weight": 1.0
     },
     {
@@ -40742,18 +40920,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L48",
-      "weight": 1.0
-    },
-    {
-      "source": "src_components_mememaker",
-      "target": "src_components_mememaker_template_names",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L95",
+      "source_location": "L57",
       "weight": 1.0
     },
     {
@@ -41165,6 +41332,17 @@
     },
     {
       "source": "src_lib_templateboxes",
+      "target": "src_lib_templateboxes_handleplacement",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/templateBoxes.ts",
+      "source_location": "L157",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_templateboxes",
       "target": "src_lib_templateboxes_template_boxes",
       "relation": "contains",
       "_origin": "ast",
@@ -41172,6 +41350,28 @@
       "confidence_score": 1.0,
       "source_file": "src/lib/templateBoxes.ts",
       "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_templateboxes",
+      "target": "src_lib_templateboxes_calculatehandleplacement",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/templateBoxes.ts",
+      "source_location": "L171",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_templateboxes",
+      "target": "src_lib_templateboxes_calculateclampedcoordinate",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/templateBoxes.ts",
+      "source_location": "L203",
       "weight": 1.0
     },
     {
@@ -41829,5 +42029,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "f83d32f6aaead285a8df762d9f0572d46f9f1c2d"
+  "built_at_commit": "91581d9696a35a6691bca5018fb7de9bbf714cfc"
 }
