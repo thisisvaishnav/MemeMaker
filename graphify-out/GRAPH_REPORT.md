@@ -1,16 +1,16 @@
 # Graph Report - MemeMaker  (2026-09-10)
 
 ## Corpus Check
-- 260 files · ~298,871 words
+- 260 files · ~299,025 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1855 nodes · 1796 edges · 231 communities (219 shown, 5 thin omitted)
+- 1855 nodes · 1795 edges · 231 communities (219 shown, 5 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `98b10610`
+- Built from commit: `6db72f50`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -244,7 +244,7 @@
 1. `Pseudo-class reference` - 38 edges
 2. `Changes from v3` - 27 edges
 3. `Tailwind Engineering Playbook` - 19 edges
-4. `MemeMaker()` - 14 edges
+4. `MemeMaker()` - 13 edges
 5. `Examples` - 13 edges
 6. `Media and feature queries` - 13 edges
 7. `Examples` - 12 edges

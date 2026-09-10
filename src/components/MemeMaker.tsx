@@ -252,18 +252,18 @@ export default function MemeMaker() {
         });
       };
 
-      // Draw template specific boxes
-      activeBoxes.forEach((box) => {
-        const text =
-          boxTexts[box.id] ??
-          (box.id === "top" ? topText : box.id === "bottom" ? bottomText : "");
-        const color = boxColors[box.id] || textColor;
-        const size = Math.round(fontSize * (box.fontSizeRatio || 1));
-        const maxW = box.maxWidthRatio ? canvas.width * box.maxWidthRatio : undefined;
-        drawText(text, box.x, box.y, size, color, box.textAlign || "center", maxW);
-      });
-
       if (includeLayers) {
+        // Draw template specific boxes
+        activeBoxes.forEach((box) => {
+          const text =
+            boxTexts[box.id] ??
+            (box.id === "top" ? topText : box.id === "bottom" ? bottomText : "");
+          const color = boxColors[box.id] || textColor;
+          const size = Math.round(fontSize * (box.fontSizeRatio || 1));
+          const maxW = box.maxWidthRatio ? canvas.width * box.maxWidthRatio : undefined;
+          drawText(text, box.x, box.y, size, color, box.textAlign || "center", maxW);
+        });
+
         layers.forEach((layer) => {
           drawText(layer.text, layer.x, layer.y, layer.fontSize, layer.color, "center");
         });
@@ -439,6 +439,7 @@ export default function MemeMaker() {
 
       const output = canvas.toDataURL("image/png");
       setGenerated(output);
+      drawMeme(false);
     }, 100);
   };
 
@@ -576,6 +577,8 @@ export default function MemeMaker() {
   ) => {
     e.preventDefault();
     e.stopPropagation();
+    setFocusedBoxId(box.id);
+    document.getElementById(`input-box-${box.id}`)?.focus();
     setDragging({
       id: box.id,
       isLayer: false,
@@ -806,7 +809,7 @@ export default function MemeMaker() {
                   );
                 })}
 
-                {/* DEFAULT TEMPLATE BOX DRAGGABLE HANDLES */}
+                {/* TEMPLATE BOXES: DIRECT DRAGGABLE TEXT OVERLAYS */}
                 {activeBoxes.map((box) => {
                   const canvas = canvasRef.current;
                   const canvasWidth = canvas?.width ?? 1000;
@@ -819,50 +822,45 @@ export default function MemeMaker() {
 
                   const px = box.x * displayWidth;
                   const py = box.y * displayHeight;
-                  const isMoved = Boolean(boxPositions[box.id]);
                   const text =
                     boxTexts[box.id] ??
                     (box.id === "top" ? topText : box.id === "bottom" ? bottomText : "");
                   const hasText = Boolean(text && text.trim().length > 0);
+                  const displayText = hasText ? text : box.placeholder.toUpperCase();
                   const isDraggingThis = dragging?.id === box.id;
                   const isFocused = focusedBoxId === box.id;
                   const isHovered = hoveredBoxId === box.id;
                   const scaleFactor = displayWidth / canvasWidth;
-                  const effectiveFontSize = Math.round(
-                    fontSize * (box.fontSizeRatio || 1) * scaleFactor
+                  const effectiveFontSize = Math.max(
+                    12,
+                    Math.round(fontSize * (box.fontSizeRatio || 1) * scaleFactor)
                   );
-
-                  const placement = calculateHandlePlacement(
-                    box.y,
-                    hasText,
-                    effectiveFontSize
-                  );
+                  const color = boxColors[box.id] || textColor;
+                  const maxWidthPx = box.maxWidthRatio ? displayWidth * box.maxWidthRatio : undefined;
 
                   return (
                     <div
                       key={`box-overlay-${box.id}`}
-                      className={`template-box-wrapper ${placement.placeBelow ? "pos-below" : "pos-above"} ${isMoved ? "is-moved" : ""} ${isDraggingThis ? "is-dragging" : ""} ${isFocused ? "is-focused" : ""} ${isHovered ? "is-hovered" : ""} ${hasText ? "has-text" : "empty-text"}`}
+                      className={`box-text-overlay ${!hasText ? "is-placeholder" : ""} ${isDraggingThis ? "is-dragging" : ""} ${isFocused ? "is-focused" : ""} ${isHovered ? "is-hovered" : ""}`}
                       style={{
                         left: px,
                         top: py,
+                        color: hasText ? color : "rgba(255, 255, 255, 0.45)",
+                        fontSize: `${effectiveFontSize}px`,
+                        maxWidth: maxWidthPx ? `${maxWidthPx}px` : "90%",
+                        textAlign: box.textAlign || "center",
+                        cursor: isDraggingThis ? "grabbing" : "grab",
+                      }}
+                      title={`Touch & hold to drag ${box.label}`}
+                      onPointerDown={(e) => handleBoxPointerDown(e, box)}
+                      onClick={() => {
+                        setFocusedBoxId(box.id);
+                        document.getElementById(`input-box-${box.id}`)?.focus();
                       }}
                       onMouseEnter={() => setHoveredBoxId(box.id)}
                       onMouseLeave={() => setHoveredBoxId(null)}
                     >
-                      <button
-                        type="button"
-                        className="box-drag-handle-tab"
-                        style={{
-                          cursor: isDraggingThis ? "grabbing" : "grab",
-                          transform: placement.transform,
-                        }}
-                        title={`Drag to reposition ${box.label} (${Math.round(box.x * 100)}%, ${Math.round(box.y * 100)}%)`}
-                        onPointerDown={(e) => handleBoxPointerDown(e, box)}
-                      >
-                        <span className="box-drag-grip">⋮⋮</span>
-                        <span className="box-drag-label">{box.label}</span>
-                        {isMoved && <span className="box-moved-dot" title="Custom position active">•</span>}
-                      </button>
+                      {displayText}
                     </div>
                   );
                 })}
@@ -1000,6 +998,7 @@ export default function MemeMaker() {
                 return (
                   <TextInput
                     key={box.id}
+                    id={`input-box-${box.id}`}
                     label={box.label}
                     placeholder={box.placeholder}
                     value={val}
@@ -1190,6 +1189,7 @@ export default function MemeMaker() {
 /* TEXT INPUT COMPONENT */
 
 function TextInput({
+  id,
   label,
   placeholder,
   value,
@@ -1202,6 +1202,7 @@ function TextInput({
   onMouseEnter,
   onMouseLeave,
 }: {
+  id?: string;
   label?: string;
   placeholder: string;
   value: string;
@@ -1221,7 +1222,7 @@ function TextInput({
       onMouseLeave={onMouseLeave}
     >
       <div className="box-label-row">
-        {label && <label className="box-label">{label}</label>}
+        {label && <label className="box-label" htmlFor={id}>{label}</label>}
         {onResetPosition && (
           <button
             type="button"
@@ -1235,6 +1236,7 @@ function TextInput({
       </div>
       <div className="text-row">
         <input
+          id={id}
           className="text-input"
           placeholder={placeholder}
           value={value}
