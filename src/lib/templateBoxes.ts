@@ -10,8 +10,6 @@ export interface TemplateTextBox {
   fontSize?: number; // base font size in px
   rotation?: number; // rotation angle in degrees (0 to 360)
   fontFamily?: string; // CSS font-family string (e.g. Impact, Arial Black, Anton)
-  isPlain?: boolean; // Plain slim text without heavy stroke outline
-  color?: string; // Default text color (e.g. #000000 or #ffffff)
 }
 
 export interface MemeFontOption {
@@ -23,7 +21,6 @@ export interface MemeFontOption {
 
 export const AVAILABLE_MEME_FONTS: MemeFontOption[] = [
   { id: "impact", name: "Impact", family: "Impact, 'Arial Black', sans-serif", category: "meme" },
-  { id: "plain-black", name: "Plain Black (Slim)", family: "Inter, system-ui, -apple-system, sans-serif", category: "sans" },
   { id: "arial-black", name: "Arial Black", family: "'Arial Black', sans-serif", category: "sans" },
   { id: "anton", name: "Anton", family: "Anton, Impact, sans-serif", category: "meme" },
   { id: "bebas-neue", name: "Bebas Neue", family: "'Bebas Neue', Impact, sans-serif", category: "meme" },
@@ -33,16 +30,6 @@ export const AVAILABLE_MEME_FONTS: MemeFontOption[] = [
   { id: "times", name: "Times New Roman", family: "'Times New Roman', Times, serif", category: "serif" },
   { id: "mono", name: "JetBrains Mono", family: "'JetBrains Mono', monospace", category: "mono" },
 ];
-
-export function isPlainBoxStyle(box?: { isPlain?: boolean; fontFamily?: string; color?: string } | null): boolean {
-  if (!box) return false;
-  return Boolean(
-    box.isPlain ||
-    box.fontFamily === "Inter, system-ui, -apple-system, sans-serif" ||
-    box.fontFamily?.includes("Inter") ||
-    box.fontFamily === "plain-black"
-  );
-}
 
 export const DEFAULT_BOXES: TemplateTextBox[] = [
   { id: "top", label: "Top Text", placeholder: "Top Text", x: 0.5, y: 0.12, textAlign: "center" },

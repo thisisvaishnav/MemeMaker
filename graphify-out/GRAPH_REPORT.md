@@ -1,16 +1,16 @@
 # Graph Report - MemeMaker  (2026-09-10)
 
 ## Corpus Check
-- 260 files · ~303,083 words
+- 260 files · ~302,346 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1862 nodes · 1806 edges · 245 communities (220 shown, 18 thin omitted)
+- 1861 nodes · 1805 edges · 230 communities (218 shown, 5 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `e5f468c8`
+- Built from commit: `14cbea51`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -18,7 +18,7 @@
 - Header.astro
 - Changes from v3
 - components.json
-- devDependencies
+- scripts
 - ShadcnDemo.tsx
 - tsconfig.json
 - main
@@ -29,13 +29,8 @@
 - MemeMaker — Design & Architecture Specification
 - templateCache.ts
 - Functional utilities
-- scripts
-- package.json
 - Thinking in utility classes
 - Customizing your theme
-- @astrojs/sitemap
-- clsx
-- @fontsource/inter
 - Container queries
 - Tailwind Engineering Playbook
 - Examples
@@ -129,7 +124,6 @@
 - Examples
 - Examples
 - Examples
-- lucide-react
 - Examples
 - Examples
 - Examples
@@ -242,16 +236,7 @@
 - rules/graphify.md
 - gotchas.md
 - workflows/graphify.md
-- @radix-ui/react-slot
-- @supabase/supabase-js
 - MemeMaker.tsx
-- tailwind-merge
-- tailwindcss
-- @tailwindcss/vite
-- tw-animate
-- tw-colors
-- @types/react
-- @vercel/speed-insights
 - sitemap.xml.ts
 
 ## God Nodes (most connected - your core abstractions)
@@ -281,7 +266,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (245 total, 18 thin omitted)
+## Communities (230 total, 5 thin omitted)
 
 ### Community 0 - "Header.astro"
 Cohesion: 0.09
@@ -295,9 +280,9 @@ Nodes (41): Adding custom utilities, Arbitrary values in grid and object-positio
 Cohesion: 0.12
 Nodes (16): aliases, components, hooks, lib, ui, utils, iconLibrary, rsc (+8 more)
 
-### Community 3 - "devDependencies"
-Cohesion: 0.22
-Nodes (9): fake-indexeddb, jsdom, devDependencies, fake-indexeddb, jsdom, playwright, vitest, playwright (+1 more)
+### Community 3 - "scripts"
+Cohesion: 0.08
+Nodes (23): fake-indexeddb, jsdom, devDependencies, fake-indexeddb, jsdom, playwright, vitest, engines (+15 more)
 
 ### Community 4 - "ShadcnDemo.tsx"
 Cohesion: 0.30
@@ -312,8 +297,8 @@ Cohesion: 0.76
 Nodes (6): clone_repo(), main(), run(), update_repo(), write_source_file(), Path
 
 ### Community 7 - "dependencies"
-Cohesion: 0.12
-Nodes (17): @astrojs/react, @aws-sdk/client-s3, class-variance-authority, @fontsource/jetbrains-mono, dependencies, astro, @astrojs/react, @aws-sdk/client-s3 (+9 more)
+Cohesion: 0.05
+Nodes (43): @astrojs/react, @astrojs/sitemap, @aws-sdk/client-s3, class-variance-authority, clsx, @fontsource/inter, @fontsource/jetbrains-mono, lucide-react (+35 more)
 
 ### Community 9 - "wrangler.json"
 Cohesion: 0.33
@@ -334,14 +319,6 @@ Nodes (5): generateDefaultLayout(), getLandingTemplatesLayout(), getTrendingTemp
 ### Community 18 - "Functional utilities"
 Cohesion: 0.08
 Nodes (24): Adding base styles, Adding component classes, Adding custom utilities, Adding custom variants, Arbitrary properties, Arbitrary values, Arbitrary variants, Bare values (+16 more)
-
-### Community 19 - "scripts"
-Cohesion: 0.22
-Nodes (9): scripts, astro, build, dev, graphify, graphify:export, preview, test (+1 more)
-
-### Community 20 - "package.json"
-Cohesion: 0.33
-Nodes (5): engines, node, name, type, version
 
 ### Community 21 - "Thinking in utility classes"
 Cohesion: 0.09
@@ -1165,16 +1142,16 @@ Nodes (62): AdminLogin(), AdminStudio(), ResizeHandle, TransformState, [], MemeM
 
 ## Knowledge Gaps
 - **1242 isolated node(s):** `colors`, `$schema`, `style`, `rsc`, `tsx` (+1237 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1411 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **18 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1410 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `dependencies` connect `dependencies` to `@radix-ui/react-slot`, `@supabase/supabase-js`, `tailwind-merge`, `tailwindcss`, `@tailwindcss/vite`, `tw-animate`, `tw-colors`, `@types/react`, `@vercel/speed-insights`, `package.json`, `@astrojs/sitemap`, `clsx`, `lucide-react`, `@fontsource/inter`?**
+- **Why does `dependencies` connect `dependencies` to `scripts`?**
   _High betweenness centrality (0.002) - this node is a cross-community bridge._
-- **Why does `devDependencies` connect `devDependencies` to `package.json`?**
-  _High betweenness centrality (0.001) - this node is a cross-community bridge._
+- **Why does `Pseudo-classes` connect `Pseudo-classes` to `hover-focus-and-other-states.mdx`?**
+  _High betweenness centrality (0.000) - this node is a cross-community bridge._
 - **What connects `colors`, `$schema`, `style` to the rest of the system?**
   _1242 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Header.astro` be split into smaller, more focused modules?**
@@ -1183,5 +1160,5 @@ _Questions this graph is uniquely positioned to answer:_
   _Cohesion score 0.047619047619047616 - nodes in this community are weakly interconnected._
 - **Should `components.json` be split into smaller, more focused modules?**
   _Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected._
-- **Should `dependencies` be split into smaller, more focused modules?**
-  _Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected._
+- **Should `scripts` be split into smaller, more focused modules?**
+  _Cohesion score 0.08333333333333333 - nodes in this community are weakly interconnected._

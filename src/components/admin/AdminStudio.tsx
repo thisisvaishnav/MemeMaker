@@ -86,9 +86,8 @@ export default function AdminStudio() {
   };
 
   // Add new box to current template
-  const handleAddBox = (isPlain = false) => {
+  const handleAddBox = () => {
     const nextNum = boxes.length + 1;
-    const isPlainStyle = Boolean(isPlain);
     const newBox: TemplateTextBox = {
       id: `zone-${Date.now()}`,
       label: `Text #${nextNum}`,
@@ -97,14 +96,10 @@ export default function AdminStudio() {
       y: Math.min(0.9, 0.15 * nextNum),
       textAlign: "center",
       maxWidthRatio: 0.5,
-      fontSize: isPlainStyle ? 28 : 36,
+      fontSize: 36,
       fontSizeRatio: 1.0,
       rotation: 0,
-      fontFamily: isPlainStyle
-        ? "Inter, system-ui, -apple-system, sans-serif"
-        : (boxes[0]?.fontFamily || AVAILABLE_MEME_FONTS[0].family),
-      isPlain: isPlainStyle,
-      color: isPlainStyle ? "#000000" : "#ffffff",
+      fontFamily: boxes[0]?.fontFamily || AVAILABLE_MEME_FONTS[0].family,
     };
     const updated = [...boxes, newBox];
     setBoxes(updated);
@@ -127,15 +122,10 @@ export default function AdminStudio() {
     );
   };
 
-  // Apply chosen font and style to all boxes in the current template
-  const handleApplyFontToAllBoxes = (fontFamily: string, isPlain = false) => {
+  // Apply chosen font to all boxes in the current template
+  const handleApplyFontToAllBoxes = (fontFamily: string) => {
     setBoxes((prev) =>
-      prev.map((b) => ({
-        ...b,
-        fontFamily,
-        isPlain,
-        color: isPlain ? "#000000" : (b.color || "#ffffff"),
-      }))
+      prev.map((b) => ({ ...b, fontFamily }))
     );
   };
 
@@ -514,26 +504,15 @@ export default function AdminStudio() {
 
             <div className="flex items-center gap-2">
               <button
-                type="button"
-                onClick={() => handleAddBox(false)}
-                className="rounded-lg border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white hover:bg-white/10 transition cursor-pointer"
-                title="Add a classic outlined all-caps meme text zone"
+                onClick={handleAddBox}
+                className="rounded-lg border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white hover:bg-white/10 transition"
               >
-                + Add Outlined Zone
+                + Add Text Zone
               </button>
               <button
-                type="button"
-                onClick={() => handleAddBox(true)}
-                className="rounded-lg border border-[#19bde7]/40 bg-[#19bde7]/10 px-3 py-1.5 text-xs font-semibold text-[#19bde7] hover:bg-[#19bde7]/20 transition cursor-pointer"
-                title="Add a plain black slim text zone that fits anywhere"
-              >
-                + Add Plain Black Zone
-              </button>
-              <button
-                type="button"
                 onClick={handleSaveLayout}
                 disabled={saving}
-                className="rounded-lg bg-[#19bde7] px-4 py-1.5 text-xs font-bold text-black hover:bg-[#15a8cf] transition disabled:opacity-50 cursor-pointer"
+                className="rounded-lg bg-[#19bde7] px-4 py-1.5 text-xs font-bold text-black hover:bg-[#15a8cf] transition disabled:opacity-50"
               >
                 {saving ? "Saving..." : "💾 Save Layout"}
               </button>
@@ -568,12 +547,6 @@ export default function AdminStudio() {
               const fontSizeRatio = box.fontSizeRatio || 1;
               const maxWidthRatio = box.maxWidthRatio || 0.5;
               const currentFontSize = box.fontSize || Math.round(36 * fontSizeRatio);
-              const isPlain = Boolean(
-                box.isPlain ||
-                box.fontFamily === "Inter, system-ui, -apple-system, sans-serif" ||
-                box.fontFamily?.includes("Inter") ||
-                box.fontFamily === "plain-black"
-              );
 
               return (
                 <div
@@ -596,12 +569,12 @@ export default function AdminStudio() {
                   onMouseLeave={() => setHoveredBoxId(null)}
                 >
                   <div
-                    className={`box-text-content ${isPlain ? "is-plain" : ""}`}
+                    className="box-text-content"
                     style={{
                       fontSize: `${currentFontSize}px`,
                       textAlign: box.textAlign || "center",
-                      fontFamily: box.fontFamily || (isPlain ? "Inter, system-ui, -apple-system, sans-serif" : "Impact, 'Arial Black', sans-serif"),
-                      color: isPlain ? (box.color || "#000000") : (box.color || "#ffffff"),
+                      fontFamily: box.fontFamily || "Impact, 'Arial Black', sans-serif",
+                      color: "#ffffff",
                       cursor: isTransformingThis ? "grabbing" : "grab",
                     }}
                   >
@@ -622,7 +595,7 @@ export default function AdminStudio() {
 
                       {/* Floating Font & Size Tag */}
                       <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-black/85 backdrop-blur-sm border border-[#19bde7]/40 text-[#19bde7] text-[10px] font-bold px-1.5 py-0.5 rounded shadow pointer-events-none whitespace-nowrap z-20">
-                        {isPlain ? "Plain Black • " : box.fontFamily ? `${AVAILABLE_MEME_FONTS.find((f) => f.family === box.fontFamily)?.name || "Font"} • ` : ""}{currentFontSize}px
+                        {box.fontFamily ? `${AVAILABLE_MEME_FONTS.find((f) => f.family === box.fontFamily)?.name || "Font"} • ` : ""}{currentFontSize}px
                       </div>
 
                       <div
@@ -902,105 +875,47 @@ export default function AdminStudio() {
                 </div>
               </div>
 
-              {/* TEXT STYLE & FONT CONTROLS */}
+              {/* FONT FAMILY CONTROLS */}
               <div className="rounded-xl border border-white/10 bg-[#161616] p-3 space-y-2.5">
                 <div className="flex items-center justify-between">
                   <label className="text-[11px] font-semibold text-gray-400">
-                    Text Format & Style:
+                    Font Family:
                   </label>
                   {boxes.length > 1 && (
                     <button
                       type="button"
-                      onClick={() => handleApplyFontToAllBoxes(
-                        selectedBox.fontFamily || AVAILABLE_MEME_FONTS[0].family,
-                        Boolean(selectedBox.isPlain)
-                      )}
+                      onClick={() => handleApplyFontToAllBoxes(selectedBox.fontFamily || AVAILABLE_MEME_FONTS[0].family)}
                       className="text-[10px] text-[#19bde7] hover:underline font-semibold cursor-pointer"
-                      title="Apply this text format to all text zones on this template"
+                      title="Apply this font family to all text zones on this template"
                     >
-                      Apply format to all
+                      Apply to all zones
                     </button>
                   )}
                 </div>
 
-                {/* Style Format Pill Buttons */}
-                <div className="grid grid-cols-2 gap-1.5 p-1 bg-[#121212] rounded-lg border border-white/5">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      handleUpdateBox(selectedBox.id, "isPlain", false);
-                      handleUpdateBox(selectedBox.id, "color", "#ffffff");
-                      if (selectedBox.fontFamily === "Inter, system-ui, -apple-system, sans-serif") {
-                        handleUpdateBox(selectedBox.id, "fontFamily", AVAILABLE_MEME_FONTS[0].family);
-                      }
-                    }}
-                    className={`py-1.5 px-2 rounded text-[11px] font-semibold transition cursor-pointer text-center ${
-                      !selectedBox.isPlain && selectedBox.fontFamily !== "Inter, system-ui, -apple-system, sans-serif"
-                        ? "bg-[#19bde7] text-black font-bold"
-                        : "text-gray-400 hover:text-white"
-                    }`}
-                  >
-                    🏷️ Classic Outlined
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      handleUpdateBox(selectedBox.id, "isPlain", true);
-                      handleUpdateBox(selectedBox.id, "color", "#000000");
-                      handleUpdateBox(selectedBox.id, "fontFamily", "Inter, system-ui, -apple-system, sans-serif");
-                    }}
-                    className={`py-1.5 px-2 rounded text-[11px] font-semibold transition cursor-pointer text-center ${
-                      selectedBox.isPlain || selectedBox.fontFamily === "Inter, system-ui, -apple-system, sans-serif"
-                        ? "bg-[#19bde7] text-black font-bold"
-                        : "text-gray-400 hover:text-white"
-                    }`}
-                  >
-                    📝 Plain Black (Slim)
-                  </button>
-                </div>
-
                 {/* Dropdown selector */}
-                <div>
-                  <label className="block text-[10px] text-gray-500 mb-1">Font Family</label>
-                  <select
-                    value={selectedBox.fontFamily || (selectedBox.isPlain ? "Inter, system-ui, -apple-system, sans-serif" : AVAILABLE_MEME_FONTS[0].family)}
-                    onChange={(e) => {
-                      const val = e.target.value;
-                      const isPlainFont = val.includes("Inter") || val === "plain-black";
-                      handleUpdateBox(selectedBox.id, "fontFamily", val);
-                      if (isPlainFont) {
-                        handleUpdateBox(selectedBox.id, "isPlain", true);
-                        handleUpdateBox(selectedBox.id, "color", "#000000");
-                      }
-                    }}
-                    className="w-full rounded-lg border border-white/15 bg-[#141414] px-3 py-2 text-xs text-white outline-none focus:border-[#19bde7] cursor-pointer"
-                  >
-                    {AVAILABLE_MEME_FONTS.map((f) => (
-                      <option key={f.id} value={f.family}>
-                        {f.name} ({f.category})
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                <select
+                  value={selectedBox.fontFamily || AVAILABLE_MEME_FONTS[0].family}
+                  onChange={(e) => handleUpdateBox(selectedBox.id, "fontFamily", e.target.value)}
+                  className="w-full rounded-lg border border-white/15 bg-[#141414] px-3 py-2 text-xs text-white outline-none focus:border-[#19bde7] cursor-pointer"
+                >
+                  {AVAILABLE_MEME_FONTS.map((f) => (
+                    <option key={f.id} value={f.family}>
+                      {f.name} ({f.category})
+                    </option>
+                  ))}
+                </select>
 
                 {/* Quick preset buttons */}
                 <div className="grid grid-cols-3 gap-1 pt-0.5">
                   {AVAILABLE_MEME_FONTS.slice(0, 6).map((f) => {
-                    const currentFont = selectedBox.fontFamily || (selectedBox.isPlain ? "Inter, system-ui, -apple-system, sans-serif" : AVAILABLE_MEME_FONTS[0].family);
+                    const currentFont = selectedBox.fontFamily || AVAILABLE_MEME_FONTS[0].family;
                     const isSelected = currentFont === f.family;
                     return (
                       <button
                         key={f.id}
                         type="button"
-                        onClick={() => {
-                          handleUpdateBox(selectedBox.id, "fontFamily", f.family);
-                          if (f.id === "plain-black" || f.family.includes("Inter")) {
-                            handleUpdateBox(selectedBox.id, "isPlain", true);
-                            handleUpdateBox(selectedBox.id, "color", "#000000");
-                          } else {
-                            handleUpdateBox(selectedBox.id, "isPlain", false);
-                          }
-                        }}
+                        onClick={() => handleUpdateBox(selectedBox.id, "fontFamily", f.family)}
                         className={`py-1 px-1 rounded text-[10px] font-semibold truncate transition cursor-pointer ${
                           isSelected
                             ? "bg-[#19bde7] text-black font-bold"
