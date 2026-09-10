@@ -261,7 +261,7 @@ export default function MemeMaker() {
         ctx.font = `900 ${size}px Impact, Arial Black, sans-serif`;
         ctx.fillStyle = color;
         ctx.strokeStyle = "#000";
-        ctx.lineWidth = Math.max(4, size / 10);
+        ctx.lineWidth = Math.max(2.5, Math.round(size / 13));
         ctx.textAlign = align;
         ctx.textBaseline = "middle";
 
