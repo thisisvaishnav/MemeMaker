@@ -1,16 +1,16 @@
 # Graph Report - MemeMaker  (2026-09-10)
 
 ## Corpus Check
-- 260 files · ~301,886 words
+- 260 files · ~302,346 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1859 nodes · 1800 edges · 230 communities (218 shown, 5 thin omitted)
+- 1861 nodes · 1805 edges · 230 communities (218 shown, 5 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `6cf00cda`
+- Built from commit: `14cbea51`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -1137,8 +1137,8 @@ Cohesion: 0.40
 Nodes (4): Development, Documentation, Project Architecture & Tech Stack (MemeMaker), Project-Specific Commands & Verification Workflow
 
 ### Community 236 - "MemeMaker.tsx"
-Cohesion: 0.06
-Nodes (60): AdminLogin(), AdminStudio(), ResizeHandle, TransformState, [], MemeMaker(), ResizeHandle, TEMPLATE_ALIAS_MAP (+52 more)
+Cohesion: 0.05
+Nodes (62): AdminLogin(), AdminStudio(), ResizeHandle, TransformState, [], MemeMaker(), ResizeHandle, TEMPLATE_ALIAS_MAP (+54 more)
 
 ## Knowledge Gaps
 - **1242 isolated node(s):** `colors`, `$schema`, `style`, `rsc`, `tsx` (+1237 more)
@@ -1150,6 +1150,8 @@ _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `dependencies` connect `dependencies` to `scripts`?**
   _High betweenness centrality (0.002) - this node is a cross-community bridge._
+- **Why does `Pseudo-classes` connect `Pseudo-classes` to `hover-focus-and-other-states.mdx`?**
+  _High betweenness centrality (0.000) - this node is a cross-community bridge._
 - **What connects `colors`, `$schema`, `style` to the rest of the system?**
   _1242 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Header.astro` be split into smaller, more focused modules?**
@@ -1160,5 +1162,3 @@ _Questions this graph is uniquely positioned to answer:_
   _Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected._
 - **Should `scripts` be split into smaller, more focused modules?**
   _Cohesion score 0.08333333333333333 - nodes in this community are weakly interconnected._
-- **Should `dependencies` be split into smaller, more focused modules?**
-  _Cohesion score 0.046511627906976744 - nodes in this community are weakly interconnected._

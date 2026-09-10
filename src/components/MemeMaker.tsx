@@ -245,7 +245,8 @@ export default function MemeMaker() {
         color: string = textColor,
         align: CanvasTextAlign = "center",
         maxWidthPx?: number,
-        rotationDeg: number = 0
+        rotationDeg: number = 0,
+        fontFamily: string = "Impact, Arial Black, sans-serif"
       ) => {
         if (!text || !text.trim()) return;
 
@@ -258,7 +259,7 @@ export default function MemeMaker() {
           ctx.rotate((rotationDeg * Math.PI) / 180);
         }
 
-        ctx.font = `900 ${size}px Impact, Arial Black, sans-serif`;
+        ctx.font = `900 ${size}px ${fontFamily}`;
         ctx.fillStyle = color;
         ctx.strokeStyle = "#000";
         ctx.lineWidth = Math.max(2.5, Math.round(size / 13));
@@ -326,7 +327,8 @@ export default function MemeMaker() {
             ? canvas.width * box.maxWidthRatio
             : undefined;
           const rot = boxRotations[box.id] ?? box.rotation ?? 0;
-          drawText(text, box.x, box.y, size, color, box.textAlign || "center", maxW, rot);
+          const fontFam = box.fontFamily || "Impact, Arial Black, sans-serif";
+          drawText(text, box.x, box.y, size, color, box.textAlign || "center", maxW, rot, fontFam);
         });
 
         layers.forEach((layer) => {
@@ -756,6 +758,7 @@ export default function MemeMaker() {
       maxWidthRatio: b.maxWidthRatio,
       fontSizeRatio: b.fontSizeRatio,
       fontSize: b.fontSize,
+      fontFamily: b.fontFamily,
       rotation: boxRotations[b.id] ?? b.rotation ?? 0,
     }));
 
@@ -1154,6 +1157,7 @@ export default function MemeMaker() {
                           color,
                           fontSize: `${effectiveFontSize}px`,
                           textAlign: box.textAlign || "center",
+                          fontFamily: box.fontFamily || "Impact, 'Arial Black', sans-serif",
                           cursor: isTransformingThis ? "grabbing" : "grab",
                         }}
                       >

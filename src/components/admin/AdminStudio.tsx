@@ -8,7 +8,11 @@ import {
   type DbTemplate,
 } from "../../lib/templatesDb";
 import { getAdminSession, adminSignOut, type AdminUser } from "../../lib/adminAuth";
-import type { TemplateTextBox } from "../../lib/templateBoxes";
+import {
+  type TemplateTextBox,
+  AVAILABLE_MEME_FONTS,
+  type MemeFontOption,
+} from "../../lib/templateBoxes";
 
 type ResizeHandle = "nw" | "n" | "ne" | "e" | "se" | "s" | "sw" | "w";
 
@@ -95,6 +99,7 @@ export default function AdminStudio() {
       fontSize: 36,
       fontSizeRatio: 1.0,
       rotation: 0,
+      fontFamily: boxes[0]?.fontFamily || AVAILABLE_MEME_FONTS[0].family,
     };
     const updated = [...boxes, newBox];
     setBoxes(updated);
@@ -114,6 +119,13 @@ export default function AdminStudio() {
   const handleUpdateBox = (id: string, field: keyof TemplateTextBox, value: any) => {
     setBoxes((prev) =>
       prev.map((b) => (b.id === id ? { ...b, [field]: value } : b))
+    );
+  };
+
+  // Apply chosen font to all boxes in the current template
+  const handleApplyFontToAllBoxes = (fontFamily: string) => {
+    setBoxes((prev) =>
+      prev.map((b) => ({ ...b, fontFamily }))
     );
   };
 
@@ -561,6 +573,7 @@ export default function AdminStudio() {
                     style={{
                       fontSize: `${currentFontSize}px`,
                       textAlign: box.textAlign || "center",
+                      fontFamily: box.fontFamily || "Impact, 'Arial Black', sans-serif",
                       color: "#ffffff",
                       cursor: isTransformingThis ? "grabbing" : "grab",
                     }}
@@ -580,9 +593,9 @@ export default function AdminStudio() {
                         ↺
                       </button>
 
-                      {/* Floating Font Size Tag */}
+                      {/* Floating Font & Size Tag */}
                       <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-black/85 backdrop-blur-sm border border-[#19bde7]/40 text-[#19bde7] text-[10px] font-bold px-1.5 py-0.5 rounded shadow pointer-events-none whitespace-nowrap z-20">
-                        {currentFontSize}px
+                        {box.fontFamily ? `${AVAILABLE_MEME_FONTS.find((f) => f.family === box.fontFamily)?.name || "Font"} • ` : ""}{currentFontSize}px
                       </div>
 
                       <div
@@ -856,6 +869,62 @@ export default function AdminStudio() {
                         title={`Set font size to ${preset.size}px`}
                       >
                         {preset.label} ({preset.size})
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* FONT FAMILY CONTROLS */}
+              <div className="rounded-xl border border-white/10 bg-[#161616] p-3 space-y-2.5">
+                <div className="flex items-center justify-between">
+                  <label className="text-[11px] font-semibold text-gray-400">
+                    Font Family:
+                  </label>
+                  {boxes.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => handleApplyFontToAllBoxes(selectedBox.fontFamily || AVAILABLE_MEME_FONTS[0].family)}
+                      className="text-[10px] text-[#19bde7] hover:underline font-semibold cursor-pointer"
+                      title="Apply this font family to all text zones on this template"
+                    >
+                      Apply to all zones
+                    </button>
+                  )}
+                </div>
+
+                {/* Dropdown selector */}
+                <select
+                  value={selectedBox.fontFamily || AVAILABLE_MEME_FONTS[0].family}
+                  onChange={(e) => handleUpdateBox(selectedBox.id, "fontFamily", e.target.value)}
+                  className="w-full rounded-lg border border-white/15 bg-[#141414] px-3 py-2 text-xs text-white outline-none focus:border-[#19bde7] cursor-pointer"
+                >
+                  {AVAILABLE_MEME_FONTS.map((f) => (
+                    <option key={f.id} value={f.family}>
+                      {f.name} ({f.category})
+                    </option>
+                  ))}
+                </select>
+
+                {/* Quick preset buttons */}
+                <div className="grid grid-cols-3 gap-1 pt-0.5">
+                  {AVAILABLE_MEME_FONTS.slice(0, 6).map((f) => {
+                    const currentFont = selectedBox.fontFamily || AVAILABLE_MEME_FONTS[0].family;
+                    const isSelected = currentFont === f.family;
+                    return (
+                      <button
+                        key={f.id}
+                        type="button"
+                        onClick={() => handleUpdateBox(selectedBox.id, "fontFamily", f.family)}
+                        className={`py-1 px-1 rounded text-[10px] font-semibold truncate transition cursor-pointer ${
+                          isSelected
+                            ? "bg-[#19bde7] text-black font-bold"
+                            : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
+                        }`}
+                        style={{ fontFamily: f.family }}
+                        title={`Set font to ${f.name}`}
+                      >
+                        {f.name}
                       </button>
                     );
                   })}
