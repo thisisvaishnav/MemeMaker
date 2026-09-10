@@ -115,4 +115,48 @@ describe("Admin & Database Templates (lib/templatesDb.ts & lib/adminAuth.ts)", (
     expect(isPlainBoxStyle({ fontFamily: "Inter, system-ui, -apple-system, sans-serif" })).toBe(true);
     expect(isPlainBoxStyle({ fontFamily: "Impact, 'Arial Black', sans-serif" })).toBe(false);
   });
+
+  it("fetchTemplates returns admin updated position and font size for user editing", async () => {
+    const { saveTemplate, fetchTemplates } = await import("../src/lib/templatesDb");
+    const testBoxes = [
+      {
+        id: "top",
+        label: "Top Text",
+        placeholder: "Top Text",
+        x: 0.52,
+        y: 0.35,
+        textAlign: "center" as const,
+        fontSizeRatio: 1.8,
+        fontSize: 65,
+        maxWidthRatio: 0.9,
+      },
+      {
+        id: "bottom",
+        label: "Bottom Text",
+        placeholder: "Bottom Text",
+        x: 0.5,
+        y: 0.72,
+        textAlign: "center" as const,
+        fontSizeRatio: 1.6,
+        fontSize: 58,
+        maxWidthRatio: 0.9,
+      },
+    ];
+
+    await saveTemplate({
+      id: 2,
+      name: "Left Exit 12 - Car Swerving",
+      boxes: testBoxes,
+    });
+
+    const templates = await fetchTemplates();
+    const tpl2 = templates.find((t) => t.id === 2);
+    expect(tpl2).toBeDefined();
+    expect(tpl2?.boxes).toHaveLength(2);
+    expect(tpl2?.boxes[0].x).toBe(0.52);
+    expect(tpl2?.boxes[0].y).toBe(0.35);
+    expect(tpl2?.boxes[0].fontSizeRatio).toBe(1.8);
+    expect(tpl2?.boxes[1].y).toBe(0.72);
+  });
 });
+

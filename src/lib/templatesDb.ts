@@ -57,7 +57,7 @@ export const FALLBACK_TEMPLATES: DbTemplate[] = Object.entries(TEMPLATE_BOXES).m
 async function queryWithTimeout<T>(
   queryFn: () => Promise<T>,
   fallback: T,
-  timeoutMs = 1500
+  timeoutMs = 5000
 ): Promise<T> {
   const isPlaceholder = (supabase as any).supabaseUrl?.includes("placeholder");
   if (isPlaceholder) return fallback;

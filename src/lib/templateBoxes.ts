@@ -247,3 +247,30 @@ export function calculateClampedCoordinate(
   return Math.round(Math.max(min, Math.min(max, initialCoord + delta)) * 100) / 100;
 }
 
+/**
+ * Calculates the effective font size in pixels for a template text box.
+ * Avoids double-scaling when both fontSize and fontSizeRatio are present.
+ */
+export function calculateEffectiveFontSize({
+  box,
+  baseFontSize = 52,
+  scaleFactor = 1,
+  customFontSize,
+  minFontSize = 12,
+}: {
+  box?: Partial<TemplateTextBox> | null;
+  baseFontSize?: number;
+  scaleFactor?: number;
+  customFontSize?: number;
+  minFontSize?: number;
+}): number {
+  if (customFontSize !== undefined && customFontSize !== null && customFontSize > 0) {
+    return Math.max(minFontSize, Math.round(customFontSize * scaleFactor));
+  }
+
+  const ratio = box?.fontSizeRatio ?? (box?.fontSize ? box.fontSize / 36 : 1.0);
+  const effectiveBase = baseFontSize * (ratio > 0 ? ratio : 1.0);
+
+  return Math.max(minFontSize, Math.round(effectiveBase * scaleFactor));
+}
+

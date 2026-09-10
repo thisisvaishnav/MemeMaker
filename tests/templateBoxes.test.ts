@@ -5,6 +5,7 @@ import {
   getTemplateBoxes,
   calculateHandlePlacement,
   calculateClampedCoordinate,
+  calculateEffectiveFontSize,
 } from "../src/lib/templateBoxes";
 import { TEMPLATE_NAMES } from "../src/components/MemeMaker";
 
@@ -201,6 +202,75 @@ describe("Regression Tests: Edit Page Non-Obscuring Handle Placement & Drag Math
     expect(normalizeRotation(0, 182)).toBe(180); // snap to 180
     expect(normalizeRotation(0, 268)).toBe(270); // snap to 270
     expect(normalizeRotation(0, 2)).toBe(0); // snap to 0
+  });
+
+  describe("calculateEffectiveFontSize helper", () => {
+    it("scales baseFontSize cleanly by fontSizeRatio without double multiplication", () => {
+      const box = {
+        id: "top",
+        label: "Top",
+        placeholder: "Top",
+        x: 0.5,
+        y: 0.2,
+        fontSizeRatio: 2.0,
+        fontSize: 72, // 72 is 36 * 2.0
+      };
+
+      // On canvas (base 52, scaleFactor 1)
+      const canvasSize = calculateEffectiveFontSize({ box, baseFontSize: 52, scaleFactor: 1 });
+      expect(canvasSize).toBe(104); // 52 * 2.0, NOT 72 * 2.0 = 144
+
+      // On screen DOM overlay (base 52, scaleFactor 0.5)
+      const domSize = calculateEffectiveFontSize({ box, baseFontSize: 52, scaleFactor: 0.5 });
+      expect(domSize).toBe(52); // 104 * 0.5
+    });
+
+    it("falls back to fontSize / 36 ratio when fontSizeRatio is absent", () => {
+      const box = {
+        id: "board",
+        label: "Board",
+        placeholder: "Board",
+        x: 0.5,
+        y: 0.5,
+        fontSize: 54, // 54 / 36 = 1.5
+      };
+
+      const size = calculateEffectiveFontSize({ box, baseFontSize: 52, scaleFactor: 1 });
+      expect(size).toBe(78); // 52 * 1.5
+    });
+
+    it("uses user customFontSize override when provided", () => {
+      const box = {
+        id: "custom",
+        label: "Custom",
+        placeholder: "Custom",
+        x: 0.5,
+        y: 0.5,
+        fontSizeRatio: 1.0,
+      };
+
+      const size = calculateEffectiveFontSize({
+        box,
+        baseFontSize: 52,
+        customFontSize: 80,
+        scaleFactor: 0.75,
+      });
+      expect(size).toBe(60); // 80 * 0.75
+    });
+
+    it("clamps to minimum font size", () => {
+      const box = {
+        id: "tiny",
+        label: "Tiny",
+        placeholder: "Tiny",
+        x: 0.5,
+        y: 0.5,
+        fontSizeRatio: 0.1,
+      };
+
+      const size = calculateEffectiveFontSize({ box, baseFontSize: 30, scaleFactor: 1, minFontSize: 12 });
+      expect(size).toBe(12);
+    });
   });
 });
 

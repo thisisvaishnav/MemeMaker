@@ -54,10 +54,10 @@
     "semantic_hash": ""
   },
   "src/components/AuthModal.astro": {
-    "mtime": 1788280656.386049,
-    "seen": 1788370344.285554,
-    "ast_hash": "9e090f88da25d696abe7757cfe5525f1",
-    "semantic_hash": "9e090f88da25d696abe7757cfe5525f1"
+    "mtime": 1789039053.4324152,
+    "seen": 1789039075.375247,
+    "ast_hash": "d8436c03fabe102e74aab83c4d32adaf",
+    "semantic_hash": ""
   },
   "src/components/Footer.astro": {
     "mtime": 1788937245.1047852,
@@ -72,9 +72,9 @@
     "semantic_hash": ""
   },
   "src/components/MemeMaker.tsx": {
-    "mtime": 1789038198.0455034,
-    "seen": 1789038265.770585,
-    "ast_hash": "948926396e072b24796d91b0c00db27b",
+    "mtime": 1789039724.874256,
+    "seen": 1789039755.40474,
+    "ast_hash": "9efa5160b3ee1244c3e953fbe94246d1",
     "semantic_hash": ""
   },
   "src/components/ShadcnDemo.tsx": {
@@ -108,9 +108,9 @@
     "semantic_hash": ""
   },
   "src/lib/supabase.ts": {
-    "mtime": 1789019564.438658,
-    "seen": 1789021326.3779042,
-    "ast_hash": "7c32e9d00dba804f7cc458bf8c14000d",
+    "mtime": 1789038990.3809001,
+    "seen": 1789039075.375463,
+    "ast_hash": "c36504b0ee5de83ea41fb846152be5bc",
     "semantic_hash": ""
   },
   "src/lib/utils.ts": {
@@ -1926,15 +1926,15 @@
     "semantic_hash": ""
   },
   "src/lib/templateBoxes.ts": {
-    "mtime": 1789038012.4430482,
-    "seen": 1789038265.770735,
-    "ast_hash": "aff020411688686ec9b115a5b6146fda",
+    "mtime": 1789039539.1248608,
+    "seen": 1789039686.5922298,
+    "ast_hash": "c4c4eea19515c1f7712f4d13c984aca2",
     "semantic_hash": ""
   },
   "tests/templateBoxes.test.ts": {
-    "mtime": 1789037563.5564058,
-    "seen": 1789038265.77106,
-    "ast_hash": "50d3cbe02443a836fdbaff452f5a9178",
+    "mtime": 1789039659.1300473,
+    "seen": 1789039686.592606,
+    "ast_hash": "498c2b12888d8ce32743133376f296f4",
     "semantic_hash": ""
   },
   "wrangler.json": {
@@ -1950,9 +1950,9 @@
     "semantic_hash": ""
   },
   "src/components/admin/AdminStudio.tsx": {
-    "mtime": 1789038236.062679,
-    "seen": 1789038265.7706199,
-    "ast_hash": "7d4b7fbfca232b1ee93fbc1e3c177b21",
+    "mtime": 1789039579.4073944,
+    "seen": 1789039686.592084,
+    "ast_hash": "3a81ff9e33a424d82bca2d3dcc039e24",
     "semantic_hash": ""
   },
   "src/lib/adminAuth.ts": {
@@ -1962,9 +1962,9 @@
     "semantic_hash": ""
   },
   "src/lib/templatesDb.ts": {
-    "mtime": 1789019564.438984,
-    "seen": 1789021326.377939,
-    "ast_hash": "78ef6893172dcec48a230f3e4f25c797",
+    "mtime": 1789039545.6334608,
+    "seen": 1789039686.5922492,
+    "ast_hash": "cca40abd67c86c5ff0e6980ccca50607",
     "semantic_hash": ""
   },
   "src/pages/admin/index.astro": {
@@ -1986,9 +1986,21 @@
     "semantic_hash": ""
   },
   "tests/adminTemplates.test.ts": {
-    "mtime": 1789038246.3266706,
-    "seen": 1789038265.770988,
-    "ast_hash": "438bcc9506a8bf045152a558f8355bf8",
+    "mtime": 1789039673.11949,
+    "seen": 1789039686.5925062,
+    "ast_hash": "9c72b4b8ee2da65e8756159d7400a893",
+    "semantic_hash": ""
+  },
+  "src/lib/authUtils.ts": {
+    "mtime": 1789039002.8453884,
+    "seen": 1789039075.3754299,
+    "ast_hash": "5b147e790c33e06de21a91220cc991e4",
+    "semantic_hash": ""
+  },
+  "tests/auth.test.ts": {
+    "mtime": 1789039059.0201511,
+    "seen": 1789039075.375821,
+    "ast_hash": "2cf60ef48731379e4775ac18e82466f2",
     "semantic_hash": ""
   }
 }

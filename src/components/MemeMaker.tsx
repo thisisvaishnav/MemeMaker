@@ -15,6 +15,7 @@ import {
   getTemplateBoxes,
   calculateHandlePlacement,
   calculateClampedCoordinate,
+  calculateEffectiveFontSize,
   isPlainBoxStyle,
   type TemplateTextBox,
   type HandlePlacement,
@@ -334,11 +335,12 @@ export default function MemeMaker() {
           const defaultColor = isPlain ? "#000000" : textColor;
           const color = boxColors[box.id] || (box.color ? box.color : defaultColor);
           const customFont = boxFontSizes[box.id];
-          const size = customFont
-            ? Math.round(customFont * scaleFactor)
-            : box.fontSize
-            ? Math.round(box.fontSize * (box.fontSizeRatio || 1))
-            : Math.round(fontSize * (box.fontSizeRatio || 1));
+          const size = calculateEffectiveFontSize({
+            box,
+            baseFontSize: fontSize,
+            scaleFactor: 1,
+            customFontSize: customFont ? Math.round(customFont * scaleFactor) : undefined,
+          });
           const customW = boxWidths[box.id];
           const maxW = customW
             ? customW * scaleFactor
@@ -442,13 +444,10 @@ export default function MemeMaker() {
         }
       });
       window.history.replaceState({}, "", "/edit");
-      return;
-    }
-
-    if (templateId) {
+    } else if (templateId) {
       const aliasId = TEMPLATE_ALIAS_MAP[templateId.toLowerCase()];
       const parsedNum = parseInt(templateId, 10);
-      const resolvedId = aliasId ?? (parsedNum >= 1 && parsedNum <= 20 ? parsedNum : 1);
+      const resolvedId = aliasId ?? (!isNaN(parsedNum) && parsedNum > 0 ? parsedNum : 1);
       const fullImageUrl = `/templates/cdn/${resolvedId}.webp`;
       setSelectedTemplateId(resolvedId);
       setImage(fullImageUrl);
@@ -456,33 +455,32 @@ export default function MemeMaker() {
       saveTemplateUrl(fullImageUrl);
       saveImage(fullImageUrl);
       window.history.replaceState({}, "", "/edit");
-      return;
-    }
-
-    // Restore persisted template/image across page changes
-    loadImage().then((pendingImage) => {
-      if (pendingImage && (pendingImage.startsWith("data:") || pendingImage.startsWith("blob:"))) {
-        setSelectedTemplateId(null);
-        setImage(pendingImage);
-        setTemplateTitle("Custom Template");
-        return;
-      }
-      loadTemplateUrl().then((pendingTemplate) => {
-        if (pendingTemplate) {
-          setImage(pendingTemplate);
-          const match = pendingTemplate.match(/\/templates\/cdn\/(\d+)\.webp/);
-          if (match) {
-            const id = parseInt(match[1], 10);
-            setSelectedTemplateId(id);
-            setTemplateTitle(TEMPLATE_NAMES[id] || `Template ${id}`);
-          }
-        } else if (pendingImage) {
+    } else {
+      // Restore persisted template/image across page changes
+      loadImage().then((pendingImage) => {
+        if (pendingImage && (pendingImage.startsWith("data:") || pendingImage.startsWith("blob:"))) {
           setSelectedTemplateId(null);
           setImage(pendingImage);
           setTemplateTitle("Custom Template");
+          return;
         }
+        loadTemplateUrl().then((pendingTemplate) => {
+          if (pendingTemplate) {
+            setImage(pendingTemplate);
+            const match = pendingTemplate.match(/\/templates\/cdn\/(\d+)\.webp/);
+            if (match) {
+              const id = parseInt(match[1], 10);
+              setSelectedTemplateId(id);
+              setTemplateTitle(TEMPLATE_NAMES[id] || `Template ${id}`);
+            }
+          } else if (pendingImage) {
+            setSelectedTemplateId(null);
+            setImage(pendingImage);
+            setTemplateTitle("Custom Template");
+          }
+        });
       });
-    });
+    }
 
     getAdminSession().then((session) => {
       setIsAdmin(Boolean(session));
@@ -491,6 +489,17 @@ export default function MemeMaker() {
     fetchTemplates().then((tpls) => {
       if (tpls && tpls.length > 0) {
         setDbTemplates(tpls);
+        if (templateId) {
+          const aliasId = TEMPLATE_ALIAS_MAP[templateId.toLowerCase()];
+          const parsedNum = parseInt(templateId, 10);
+          const targetId = aliasId ?? (!isNaN(parsedNum) ? parsedNum : null);
+          const matched = tpls.find((t) => t.id === targetId || t.slug === templateId);
+          if (matched) {
+            setSelectedTemplateId(matched.id);
+            setImage(matched.image_url);
+            setTemplateTitle(matched.name);
+          }
+        }
       }
     });
   }, []);
@@ -500,6 +509,7 @@ export default function MemeMaker() {
   }, [
     image,
     selectedTemplateId,
+    dbTemplates,
     boxPositions,
     boxTexts,
     boxColors,
@@ -1145,21 +1155,23 @@ export default function MemeMaker() {
                     boxTexts[box.id] ??
                     (box.id === "top" ? topText : box.id === "bottom" ? bottomText : "");
 
-                  // ONLY render on image if user has written text (template image starts completely plain)
-                  if (!text || !text.trim()) return null;
-
+                  const hasText = Boolean(text && text.trim());
                   const isTransformingThis = transformState?.id === box.id;
                   const isFocused = focusedBoxId === box.id;
                   const isHovered = hoveredBoxId === box.id;
-                  const scaleFactor = displayWidth / canvasWidth;
+                  const isSelected = isFocused || isTransformingThis;
 
+                  // Render if text is typed, or if user is focusing/hovering this text zone
+                  if (!hasText && !isSelected && !isHovered) return null;
+
+                  const scaleFactor = displayWidth / canvasWidth;
                   const customFontSize = boxFontSizes[box.id];
-                  const effectiveFontSize = customFontSize ?? Math.max(
-                    12,
-                    box.fontSize
-                      ? Math.round(box.fontSize * (box.fontSizeRatio || 1) * scaleFactor)
-                      : Math.round(fontSize * (box.fontSizeRatio || 1) * scaleFactor)
-                  );
+                  const effectiveFontSize = calculateEffectiveFontSize({
+                    box,
+                    baseFontSize: fontSize,
+                    scaleFactor,
+                    customFontSize,
+                  });
                   const isPlain = boxPlainOverrides[box.id] !== undefined
                     ? boxPlainOverrides[box.id]
                     : (box.isPlain ?? (globalFontStyle === "slim-black" || isPlainBoxStyle(box)));
@@ -1168,7 +1180,6 @@ export default function MemeMaker() {
                   const customWidth = boxWidths[box.id];
                   const maxWidthPx = customWidth ?? (box.maxWidthRatio ? displayWidth * box.maxWidthRatio : undefined);
                   const rotation = boxRotations[box.id] ?? box.rotation ?? 0;
-                  const isSelected = isFocused || isTransformingThis;
 
                   return (
                     <div
@@ -1181,7 +1192,7 @@ export default function MemeMaker() {
                         maxWidth: displayWidth * 0.95,
                         transform: `translate(-50%, -50%) rotate(${rotation}deg)`,
                       }}
-                      title={`Text #${index + 1} (Touch & hold to drag, use handles to resize or rotate)`}
+                      title={`${box.label || `Text #${index + 1}`} (Touch & hold to drag, use handles to resize or rotate)`}
                       onPointerDown={(e) => handleBoxPointerDown(e, box)}
                       onClick={(e) => {
                         e.stopPropagation();
@@ -1192,16 +1203,16 @@ export default function MemeMaker() {
                       onMouseLeave={() => setHoveredBoxId(null)}
                     >
                       <div
-                        className={`box-text-content ${isPlain ? "is-slim-black" : ""}`}
+                        className={`box-text-content ${isPlain ? "is-slim-black" : ""} ${!hasText ? "opacity-70 italic" : ""}`}
                         style={{
-                          color,
+                          color: hasText ? color : (isPlain ? "rgba(0, 0, 0, 0.6)" : "rgba(255, 255, 255, 0.75)"),
                           fontSize: `${effectiveFontSize}px`,
                           textAlign: box.textAlign || "center",
                           fontFamily: box.fontFamily || (isPlain ? "Inter, system-ui, -apple-system, sans-serif" : "Impact, 'Arial Black', sans-serif"),
                           cursor: isTransformingThis ? "grabbing" : "grab",
                         }}
                       >
-                        {text}
+                        {hasText ? text : (box.placeholder || box.label || `Text #${index + 1}`)}
                       </div>
 
                       {(isSelected || isHovered) && (
@@ -1420,7 +1431,7 @@ export default function MemeMaker() {
                   boxTexts[box.id] ??
                   (box.id === "top" ? topText : box.id === "bottom" ? bottomText : "");
                 const col = boxColors[box.id] || textColor;
-                const genericLabel = `Text #${index + 1}`;
+                const genericLabel = box.label || box.placeholder || `Text #${index + 1}`;
                 const hasCustomTransform = Boolean(
                   boxPositions[box.id] ||
                     boxRotations[box.id] ||
@@ -1433,7 +1444,7 @@ export default function MemeMaker() {
                     key={box.id}
                     id={`input-box-${box.id}`}
                     label={genericLabel}
-                    placeholder={genericLabel}
+                    placeholder={box.placeholder || genericLabel}
                     value={val}
                     onChange={(text) => {
                       setBoxTexts((prev) => ({ ...prev, [box.id]: text }));
@@ -1456,34 +1467,6 @@ export default function MemeMaker() {
               })}
             </div>
 
-            {/* FONT STYLE SELECTOR */}
-            <div className="font-style-control">
-              <span className="font-style-title">Font Style</span>
-              <div className="font-style-toggle-group">
-                <button
-                  type="button"
-                  className={`font-style-btn ${globalFontStyle === "classic" ? "active" : ""}`}
-                  onClick={() => {
-                    setGlobalFontStyle("classic");
-                    setTextColor("#ffffff");
-                  }}
-                  title="Classic Bold White Impact Meme font"
-                >
-                  🔤 Bold White
-                </button>
-                <button
-                  type="button"
-                  className={`font-style-btn ${globalFontStyle === "slim-black" ? "active" : ""}`}
-                  onClick={() => {
-                    setGlobalFontStyle("slim-black");
-                    setTextColor("#000000");
-                  }}
-                  title="Modern Slim Black caption font"
-                >
-                  📝 Slim Black
-                </button>
-              </div>
-            </div>
 
             {/* FONT CONTROLS */}
             <div className="font-controls">
@@ -1645,6 +1628,12 @@ export default function MemeMaker() {
                 onClick={() => {
                   setSelectedTemplateId(template.id);
                   setBoxPositions({});
+                  setBoxRotations({});
+                  setBoxWidths({});
+                  setBoxFontSizes({});
+                  setBoxTexts({});
+                  setTopText("");
+                  setBottomText("");
                   setImage(template.image_url);
                   setTemplateTitle(template.name);
                   saveTemplateUrl(template.image_url);

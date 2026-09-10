@@ -42,6 +42,7 @@ export default function AdminStudio() {
   const [selectedBoxId, setSelectedBoxId] = useState<string | null>(null);
   const [hoveredBoxId, setHoveredBoxId] = useState<string | null>(null);
   const [transformState, setTransformState] = useState<TransformState | null>(null);
+  const [imageAspect, setImageAspect] = useState<number | null>(null);
   const rafIdRef = useRef<number | null>(null);
   const canvasRef = useRef<HTMLDivElement>(null);
 
@@ -81,6 +82,7 @@ export default function AdminStudio() {
 
   const handleSelectTemplate = (tpl: DbTemplate) => {
     setSelectedTemplate(tpl);
+    setImageAspect(null);
     setBoxes(tpl.boxes || []);
     setSelectedBoxId(tpl.boxes?.[0]?.id || null);
     setMessage(null);
@@ -521,23 +523,33 @@ export default function AdminStudio() {
           </div>
 
           {/* INTERACTIVE WORKSPACE CANVAS */}
-          <div
-            ref={canvasRef}
-            onPointerMove={handlePointerMove}
-            onPointerUp={handlePointerUp}
-            onPointerLeave={handlePointerUp}
-            className="relative w-full max-w-[550px] aspect-square rounded-xl bg-black/50 border border-white/15 flex items-center justify-center select-none"
-            style={{ touchAction: "none" }}
-          >
-            {selectedTemplate && (
-              <div className="w-full h-full rounded-xl overflow-hidden flex items-center justify-center pointer-events-none">
+          <div className="flex items-center justify-center w-full min-h-[380px] max-h-[580px] bg-black/40 rounded-2xl border border-white/10 p-3 overflow-hidden">
+            <div
+              ref={canvasRef}
+              onPointerMove={handlePointerMove}
+              onPointerUp={handlePointerUp}
+              onPointerLeave={handlePointerUp}
+              className="relative max-w-full max-h-[540px] rounded-xl overflow-hidden bg-black/60 border border-white/20 select-none shadow-2xl flex items-center justify-center"
+              style={{
+                aspectRatio: imageAspect ? `${imageAspect}` : undefined,
+                width: imageAspect && imageAspect >= 1 ? "100%" : "auto",
+                height: imageAspect && imageAspect < 1 ? "540px" : "auto",
+                touchAction: "none",
+              }}
+            >
+              {selectedTemplate && (
                 <img
                   src={selectedTemplate.image_url}
                   alt={selectedTemplate.name}
-                  className="w-full h-full object-contain pointer-events-none"
+                  onLoad={(e) => {
+                    const img = e.currentTarget;
+                    if (img.naturalWidth && img.naturalHeight) {
+                      setImageAspect(img.naturalWidth / img.naturalHeight);
+                    }
+                  }}
+                  className="w-full h-full object-contain block pointer-events-none select-none"
                 />
-              </div>
-            )}
+              )}
 
             {/* DRAGGABLE, RESIZABLE, AND ROTATABLE TEXT BOX OVERLAYS */}
             {boxes.map((box, idx) => {
@@ -660,6 +672,7 @@ export default function AdminStudio() {
                 </div>
               );
             })}
+            </div>
           </div>
 
           <div className="w-full mt-4 flex items-center justify-between text-xs text-gray-400">

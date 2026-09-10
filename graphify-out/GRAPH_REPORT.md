@@ -1,24 +1,24 @@
 # Graph Report - MemeMaker  (2026-09-10)
 
 ## Corpus Check
-- 260 files · ~302,930 words
+- 262 files · ~304,372 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1862 nodes · 1810 edges · 245 communities (220 shown, 18 thin omitted)
+- 1875 nodes · 1835 edges · 230 communities (218 shown, 5 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `19177902`
+- Built from commit: `6cdcc969`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
-- Header.astro
+- AuthModal.astro
 - Changes from v3
 - components.json
-- devDependencies
+- scripts
 - ShadcnDemo.tsx
 - tsconfig.json
 - main
@@ -29,13 +29,8 @@
 - MemeMaker — Design & Architecture Specification
 - templateCache.ts
 - Functional utilities
-- scripts
-- package.json
 - Thinking in utility classes
 - Customizing your theme
-- @astrojs/sitemap
-- clsx
-- @fontsource/inter
 - Container queries
 - Tailwind Engineering Playbook
 - Examples
@@ -129,7 +124,6 @@
 - Examples
 - Examples
 - Examples
-- lucide-react
 - Examples
 - Examples
 - Examples
@@ -242,23 +236,14 @@
 - rules/graphify.md
 - gotchas.md
 - workflows/graphify.md
-- @radix-ui/react-slot
-- @supabase/supabase-js
 - MemeMaker.tsx
-- tailwind-merge
-- tailwindcss
-- @tailwindcss/vite
-- tw-animate
-- tw-colors
-- @types/react
-- @vercel/speed-insights
 - sitemap.xml.ts
 
 ## God Nodes (most connected - your core abstractions)
 1. `Pseudo-class reference` - 38 edges
 2. `Changes from v3` - 27 edges
 3. `Tailwind Engineering Playbook` - 19 edges
-4. `MemeMaker()` - 14 edges
+4. `MemeMaker()` - 15 edges
 5. `Examples` - 13 edges
 6. `Media and feature queries` - 13 edges
 7. `Examples` - 12 edges
@@ -269,23 +254,23 @@
 ## Surprising Connections (you probably didn't know these)
 - `updateUserUI()` --calls--> `getUserAvatarUrl()`  [EXTRACTED]
   src/components/Header.astro → src/lib/avatar.ts
+- `checkOAuthUrlParams()` --calls--> `getOAuthErrorMessage()`  [EXTRACTED]
+  src/components/AuthModal.astro → src/lib/authUtils.ts
+- `checkOAuthUrlParams()` --calls--> `parseOAuthUrlParams()`  [EXTRACTED]
+  src/components/AuthModal.astro → src/lib/authUtils.ts
 - `MemeMaker()` --calls--> `getAdminSession()`  [EXTRACTED]
   src/components/MemeMaker.tsx → src/lib/adminAuth.ts
 - `MemeMaker()` --calls--> `clearImage()`  [EXTRACTED]
-  src/components/MemeMaker.tsx → src/lib/imageStore.ts
-- `MemeMaker()` --calls--> `clearTemplateUrl()`  [EXTRACTED]
-  src/components/MemeMaker.tsx → src/lib/imageStore.ts
-- `MemeMaker()` --calls--> `getCustomTemplateById()`  [EXTRACTED]
   src/components/MemeMaker.tsx → src/lib/imageStore.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (245 total, 18 thin omitted)
+## Communities (230 total, 5 thin omitted)
 
-### Community 0 - "Header.astro"
-Cohesion: 0.09
-Nodes (23): alertBox, clearAlert(), closeBtn, googleBtn, modal, nameField, setMode(), submitText (+15 more)
+### Community 0 - "AuthModal.astro"
+Cohesion: 0.08
+Nodes (31): alertBox, checkOAuthUrlParams(), clearAlert(), closeBtn, googleIcon, googleSpinner, googleText, modal (+23 more)
 
 ### Community 1 - "Changes from v3"
 Cohesion: 0.05
@@ -295,9 +280,9 @@ Nodes (41): Adding custom utilities, Arbitrary values in grid and object-positio
 Cohesion: 0.12
 Nodes (16): aliases, components, hooks, lib, ui, utils, iconLibrary, rsc (+8 more)
 
-### Community 3 - "devDependencies"
-Cohesion: 0.22
-Nodes (9): fake-indexeddb, jsdom, devDependencies, fake-indexeddb, jsdom, playwright, vitest, playwright (+1 more)
+### Community 3 - "scripts"
+Cohesion: 0.08
+Nodes (23): fake-indexeddb, jsdom, devDependencies, fake-indexeddb, jsdom, playwright, vitest, engines (+15 more)
 
 ### Community 4 - "ShadcnDemo.tsx"
 Cohesion: 0.30
@@ -312,8 +297,8 @@ Cohesion: 0.76
 Nodes (6): clone_repo(), main(), run(), update_repo(), write_source_file(), Path
 
 ### Community 7 - "dependencies"
-Cohesion: 0.12
-Nodes (17): @astrojs/react, @aws-sdk/client-s3, class-variance-authority, @fontsource/jetbrains-mono, dependencies, astro, @astrojs/react, @aws-sdk/client-s3 (+9 more)
+Cohesion: 0.05
+Nodes (43): @astrojs/react, @astrojs/sitemap, @aws-sdk/client-s3, class-variance-authority, clsx, @fontsource/inter, @fontsource/jetbrains-mono, lucide-react (+35 more)
 
 ### Community 9 - "wrangler.json"
 Cohesion: 0.33
@@ -334,14 +319,6 @@ Nodes (5): generateDefaultLayout(), getLandingTemplatesLayout(), getTrendingTemp
 ### Community 18 - "Functional utilities"
 Cohesion: 0.08
 Nodes (24): Adding base styles, Adding component classes, Adding custom utilities, Adding custom variants, Arbitrary properties, Arbitrary values, Arbitrary variants, Bare values (+16 more)
-
-### Community 19 - "scripts"
-Cohesion: 0.22
-Nodes (9): scripts, astro, build, dev, graphify, graphify:export, preview, test (+1 more)
-
-### Community 20 - "package.json"
-Cohesion: 0.33
-Nodes (5): engines, node, name, type, version
 
 ### Community 21 - "Thinking in utility classes"
 Cohesion: 0.09
@@ -1161,27 +1138,27 @@ Nodes (4): Development, Documentation, Project Architecture & Tech Stack (MemeMa
 
 ### Community 236 - "MemeMaker.tsx"
 Cohesion: 0.05
-Nodes (63): AdminLogin(), AdminStudio(), ResizeHandle, TransformState, [], MemeMaker(), ResizeHandle, TEMPLATE_ALIAS_MAP (+55 more)
+Nodes (66): AdminLogin(), AdminStudio(), ResizeHandle, TransformState, [], MemeMaker(), ResizeHandle, TEMPLATE_ALIAS_MAP (+58 more)
 
 ## Knowledge Gaps
-- **1242 isolated node(s):** `colors`, `$schema`, `style`, `rsc`, `tsx` (+1237 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1410 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **18 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **1247 isolated node(s):** `colors`, `$schema`, `style`, `rsc`, `tsx` (+1242 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1415 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `dependencies` connect `dependencies` to `@radix-ui/react-slot`, `@supabase/supabase-js`, `tailwind-merge`, `tailwindcss`, `@tailwindcss/vite`, `tw-animate`, `tw-colors`, `@types/react`, `@vercel/speed-insights`, `package.json`, `@astrojs/sitemap`, `clsx`, `lucide-react`, `@fontsource/inter`?**
+- **Why does `dependencies` connect `dependencies` to `scripts`?**
   _High betweenness centrality (0.002) - this node is a cross-community bridge._
-- **Why does `devDependencies` connect `devDependencies` to `package.json`?**
-  _High betweenness centrality (0.001) - this node is a cross-community bridge._
+- **Why does `Pseudo-class reference` connect `Pseudo-class reference` to `hover-focus-and-other-states.mdx`?**
+  _High betweenness centrality (0.000) - this node is a cross-community bridge._
 - **What connects `colors`, `$schema`, `style` to the rest of the system?**
-  _1242 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `Header.astro` be split into smaller, more focused modules?**
-  _Cohesion score 0.08994708994708994 - nodes in this community are weakly interconnected._
+  _1247 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `AuthModal.astro` be split into smaller, more focused modules?**
+  _Cohesion score 0.07539118065433854 - nodes in this community are weakly interconnected._
 - **Should `Changes from v3` be split into smaller, more focused modules?**
   _Cohesion score 0.047619047619047616 - nodes in this community are weakly interconnected._
 - **Should `components.json` be split into smaller, more focused modules?**
   _Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected._
-- **Should `dependencies` be split into smaller, more focused modules?**
-  _Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected._
+- **Should `scripts` be split into smaller, more focused modules?**
+  _Cohesion score 0.08333333333333333 - nodes in this community are weakly interconnected._
