@@ -131,4 +131,36 @@ describe("Regression Tests: Edit Page Non-Obscuring Handle Placement & Drag Math
     const safeZero = calculateClampedCoordinate(0.50, 50, 0);
     expect(safeZero).toBe(0.50);
   });
+
+  it("ensures direct text dragging provides smooth sub-pixel tracking and clamped bounds", () => {
+    // Sub-pixel movement (small finger touch on mobile screen)
+    const smallStep = calculateClampedCoordinate(0.50, 3.4, 375); // 375px mobile viewport
+    expect(smallStep).toBe(0.51);
+
+    // Negative small step
+    const smallStepBack = calculateClampedCoordinate(0.50, -3.4, 375);
+    expect(smallStepBack).toBe(0.49);
+
+    // Full screen swipe up: clamps to top boundary safely
+    const topClamp = calculateClampedCoordinate(0.50, -600, 667);
+    expect(topClamp).toBe(0.02);
+
+    // Full screen swipe down: clamps to bottom boundary safely
+    const bottomClamp = calculateClampedCoordinate(0.50, 600, 667);
+    expect(bottomClamp).toBe(0.98);
+  });
+
+  it("verifies all template boxes have uppercase placeholders suitable for ghost overlay", () => {
+    for (let i = 1; i <= 20; i++) {
+      const boxes = getTemplateBoxes(i);
+      for (const box of boxes) {
+        expect(box.placeholder).toBeDefined();
+        expect(box.placeholder.trim().length).toBeGreaterThan(0);
+        // Ensure placeholder can be safely uppercased for the DOM ghost text overlay
+        const uppercase = box.placeholder.toUpperCase();
+        expect(uppercase.length).toBeGreaterThan(0);
+      }
+    }
+  });
 });
+

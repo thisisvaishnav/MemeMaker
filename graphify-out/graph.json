@@ -297,7 +297,7 @@
       "file_type": "code",
       "norm_label": "textinput()",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L1192"
+      "source_location": "L1191"
     },
     {
       "id": "src_lib_adminauth_adminsignin",
@@ -22425,7 +22425,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L505",
+      "source_location": "L506",
       "weight": 1.0
     },
     {
@@ -22437,7 +22437,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L611",
+      "source_location": "L614",
       "weight": 1.0
     },
     {
@@ -22449,19 +22449,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L648",
-      "weight": 1.0
-    },
-    {
-      "source": "src_components_mememaker_mememaker",
-      "target": "src_lib_templateboxes_calculatehandleplacement",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L835",
+      "source_location": "L651",
       "weight": 1.0
     },
     {
@@ -40876,7 +40864,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L1192",
+      "source_location": "L1191",
       "weight": 1.0
     },
     {
@@ -42029,5 +42017,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "98b10610b8625de6ecf4a56d8a6b4f3d023dc04a"
+  "built_at_commit": "6db72f505cafa1053442ffaf98d58a8f617cdf0b"
 }
