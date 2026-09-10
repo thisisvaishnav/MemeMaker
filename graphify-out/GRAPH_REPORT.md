@@ -1,16 +1,16 @@
 # Graph Report - MemeMaker  (2026-09-10)
 
 ## Corpus Check
-- 260 files · ~299,025 words
+- 260 files · ~300,360 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1855 nodes · 1795 edges · 231 communities (219 shown, 5 thin omitted)
+- 1857 nodes · 1797 edges · 230 communities (218 shown, 5 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `6db72f50`
+- Built from commit: `f87a1212`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -29,7 +29,6 @@
 - MemeMaker — Design & Architecture Specification
 - templateCache.ts
 - Functional utilities
-- Styling based on parent state
 - Thinking in utility classes
 - Customizing your theme
 - Container queries
@@ -267,7 +266,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (231 total, 5 thin omitted)
+## Communities (230 total, 5 thin omitted)
 
 ### Community 0 - "Header.astro"
 Cohesion: 0.09
@@ -321,10 +320,6 @@ Nodes (5): generateDefaultLayout(), getLandingTemplatesLayout(), getTrendingTemp
 Cohesion: 0.08
 Nodes (24): Adding base styles, Adding component classes, Adding custom utilities, Adding custom variants, Arbitrary properties, Arbitrary values, Arbitrary variants, Bare values (+16 more)
 
-### Community 19 - "Styling based on parent state"
-Cohesion: 0.50
-Nodes (4): Arbitrary groups, Differentiating nested groups, Implicit groups, Styling based on parent state
-
 ### Community 21 - "Thinking in utility classes"
 Cohesion: 0.09
 Nodes (21): Complex selectors, Conflicting utility classes, How does this even work?, Managing duplication, Managing style conflicts, Media queries and breakpoints, Overview, Styling hover and focus states (+13 more)
@@ -346,8 +341,8 @@ Cohesion: 0.11
 Nodes (17): Adding a ring, Adding an inset ring, Adding an inset shadow, Basic example, Changing the opacity, Customizing inset shadows, Customizing shadow colors, Customizing shadows (+9 more)
 
 ### Community 31 - "Pseudo-classes"
-Cohesion: 0.18
-Nodes (10): Arbitrary peers, Differentiating peers, :first, :last, :odd, and :even, :has(), :hover, :focus, and :active, Pseudo-classes, :required and :disabled, Styling based on sibling state (+2 more)
+Cohesion: 0.13
+Nodes (14): Arbitrary groups, Arbitrary peers, Differentiating nested groups, Differentiating peers, :first, :last, :odd, and :even, :has(), :hover, :focus, and :active, Implicit groups (+6 more)
 
 ### Community 32 - "Examples"
 Cohesion: 0.14
@@ -1143,11 +1138,11 @@ Nodes (4): Development, Documentation, Project Architecture & Tech Stack (MemeMa
 
 ### Community 236 - "MemeMaker.tsx"
 Cohesion: 0.06
-Nodes (56): AdminLogin(), AdminStudio(), [], MemeMaker(), TEMPLATE_ALIAS_MAP, TEMPLATE_NAMES, templates, TextLayer (+48 more)
+Nodes (58): AdminLogin(), AdminStudio(), [], MemeMaker(), ResizeHandle, TEMPLATE_ALIAS_MAP, TEMPLATE_NAMES, templates (+50 more)
 
 ## Knowledge Gaps
-- **1238 isolated node(s):** `colors`, `$schema`, `style`, `rsc`, `tsx` (+1233 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1406 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **1240 isolated node(s):** `colors`, `$schema`, `style`, `rsc`, `tsx` (+1235 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1408 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
@@ -1155,10 +1150,10 @@ _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `dependencies` connect `dependencies` to `scripts`?**
   _High betweenness centrality (0.002) - this node is a cross-community bridge._
-- **Why does `Pseudo-classes` connect `Pseudo-classes` to `Styling based on parent state`, `hover-focus-and-other-states.mdx`?**
+- **Why does `Pseudo-classes` connect `Pseudo-classes` to `hover-focus-and-other-states.mdx`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
 - **What connects `colors`, `$schema`, `style` to the rest of the system?**
-  _1238 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _1240 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Header.astro` be split into smaller, more focused modules?**
   _Cohesion score 0.08994708994708994 - nodes in this community are weakly interconnected._
 - **Should `Changes from v3` be split into smaller, more focused modules?**

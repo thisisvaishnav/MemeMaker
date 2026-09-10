@@ -41,7 +41,43 @@ type TextLayer = {
   fontSize: number;
   x: number;
   y: number;
+  rotation?: number;
+  width?: number;
 };
+
+type ResizeHandle = "nw" | "n" | "ne" | "e" | "se" | "s" | "sw" | "w";
+
+type TransformState =
+  | {
+      mode: "drag";
+      id: number | string;
+      isLayer: boolean;
+      startX: number;
+      startY: number;
+      initialX: number;
+      initialY: number;
+    }
+  | {
+      mode: "rotate";
+      id: number | string;
+      isLayer: boolean;
+      centerX: number;
+      centerY: number;
+      initialRotation: number;
+      startAngle: number;
+    }
+  | {
+      mode: "resize";
+      id: number | string;
+      isLayer: boolean;
+      handle: ResizeHandle;
+      startX: number;
+      startY: number;
+      initialWidth: number;
+      initialFontSize: number;
+      centerX: number;
+      centerY: number;
+    };
 
 const DEFAULT_IMAGE = "/templates/cdn/1.webp";
 
@@ -144,6 +180,10 @@ export default function MemeMaker() {
   const [boxTexts, setBoxTexts] = useState<Record<string, string>>({});
   const [boxColors, setBoxColors] = useState<Record<string, string>>({});
   const [boxPositions, setBoxPositions] = useState<Record<string, { x: number; y: number }>>({});
+  const [boxRotations, setBoxRotations] = useState<Record<string, number>>({});
+  const [boxWidths, setBoxWidths] = useState<Record<string, number>>({});
+  const [boxFontSizes, setBoxFontSizes] = useState<Record<string, number>>({});
+  const [transformState, setTransformState] = useState<TransformState | null>(null);
 
   const [isAdmin, setIsAdmin] = useState(false);
   const [dbTemplates, setDbTemplates] = useState<DbTemplate[]>([]);
@@ -152,7 +192,7 @@ export default function MemeMaker() {
   const [textColor, setTextColor] = useState("#ffffff");
   const [fontSize, setFontSize] = useState(52);
 
-  const [watermark, setWatermark] = useState(true);
+  const [watermark, setWatermark] = useState(false);
   const [privateMeme, setPrivateMeme] = useState(false);
   const [anonymous, setAnonymous] = useState(false);
 
@@ -204,9 +244,19 @@ export default function MemeMaker() {
         size: number = fontSize,
         color: string = textColor,
         align: CanvasTextAlign = "center",
-        maxWidthPx?: number
+        maxWidthPx?: number,
+        rotationDeg: number = 0
       ) => {
         if (!text || !text.trim()) return;
+
+        const px = canvas.width * x;
+        const py = canvas.height * y;
+
+        ctx.save();
+        ctx.translate(px, py);
+        if (rotationDeg) {
+          ctx.rotate((rotationDeg * Math.PI) / 180);
+        }
 
         ctx.font = `900 ${size}px Impact, Arial Black, sans-serif`;
         ctx.fillStyle = color;
@@ -215,10 +265,7 @@ export default function MemeMaker() {
         ctx.textAlign = align;
         ctx.textBaseline = "middle";
 
-        const px = canvas.width * x;
-        const py = canvas.height * y;
-
-        // Word-wrap and newline handling
+        // Word-wrap and newline handling relative to local (0, 0)
         const lines: string[] = [];
         const rawLines = text.split("\n");
 
@@ -243,29 +290,56 @@ export default function MemeMaker() {
         }
 
         const lineHeight = size * 1.15;
-        const startY = py - ((lines.length - 1) * lineHeight) / 2;
+        const startY = -((lines.length - 1) * lineHeight) / 2;
 
         lines.forEach((line, idx) => {
           const lineY = startY + idx * lineHeight;
-          ctx.strokeText(line, px, lineY);
-          ctx.fillText(line, px, lineY);
+          ctx.strokeText(line, 0, lineY);
+          ctx.fillText(line, 0, lineY);
         });
+
+        ctx.restore();
       };
 
       if (includeLayers) {
+        const displayWidth = canvasRef.current?.getBoundingClientRect().width ?? canvas.width;
+        const scaleFactor = displayWidth > 0 ? canvas.width / displayWidth : 1;
+
         // Draw template specific boxes
         activeBoxes.forEach((box) => {
           const text =
             boxTexts[box.id] ??
             (box.id === "top" ? topText : box.id === "bottom" ? bottomText : "");
+          if (!text || !text.trim()) return;
+
           const color = boxColors[box.id] || textColor;
-          const size = Math.round(fontSize * (box.fontSizeRatio || 1));
-          const maxW = box.maxWidthRatio ? canvas.width * box.maxWidthRatio : undefined;
-          drawText(text, box.x, box.y, size, color, box.textAlign || "center", maxW);
+          const customFont = boxFontSizes[box.id];
+          const size = customFont
+            ? Math.round(customFont * scaleFactor)
+            : Math.round(fontSize * (box.fontSizeRatio || 1));
+          const customW = boxWidths[box.id];
+          const maxW = customW
+            ? customW * scaleFactor
+            : box.maxWidthRatio
+            ? canvas.width * box.maxWidthRatio
+            : undefined;
+          const rot = boxRotations[box.id] || 0;
+          drawText(text, box.x, box.y, size, color, box.textAlign || "center", maxW, rot);
         });
 
         layers.forEach((layer) => {
-          drawText(layer.text, layer.x, layer.y, layer.fontSize, layer.color, "center");
+          if (!layer.text || !layer.text.trim()) return;
+          const maxW = layer.width ? layer.width * scaleFactor : undefined;
+          drawText(
+            layer.text,
+            layer.x,
+            layer.y,
+            Math.round(layer.fontSize * scaleFactor),
+            layer.color,
+            "center",
+            maxW,
+            layer.rotation || 0
+          );
         });
       }
 
@@ -490,13 +564,16 @@ export default function MemeMaker() {
   const reset = () => {
     setSelectedTemplateId(1);
     setBoxPositions({});
+    setBoxRotations({});
+    setBoxWidths({});
+    setBoxFontSizes({});
     setBoxTexts({});
     setBoxColors({});
     setTopText("");
     setBottomText("");
     setTextColor("#ffffff");
     setFontSize(52);
-    setWatermark(true);
+    setWatermark(false);
     setPrivateMeme(false);
     setAnonymous(false);
     setLayers([]);
@@ -506,15 +583,6 @@ export default function MemeMaker() {
     clearImage();
     clearTemplateUrl();
   };
-
-  const [dragging, setDragging] = useState<{
-    id: number | string;
-    isLayer: boolean;
-    startX: number;
-    startY: number;
-    initialX: number;
-    initialY: number;
-  } | null>(null);
 
   const addTextLayer = () => {
     setLayers((current) => [
@@ -541,7 +609,7 @@ export default function MemeMaker() {
           ? {
               ...layer,
               [field]:
-                field === "fontSize" || field === "y" || field === "x"
+                field === "fontSize" || field === "y" || field === "x" || field === "rotation" || field === "width"
                   ? Number(value)
                   : value,
             }
@@ -560,7 +628,9 @@ export default function MemeMaker() {
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    setDragging({
+    setFocusedBoxId(`layer-${layer.id}`);
+    setTransformState({
+      mode: "drag",
       id: layer.id,
       isLayer: true,
       startX: e.clientX,
@@ -579,7 +649,8 @@ export default function MemeMaker() {
     e.stopPropagation();
     setFocusedBoxId(box.id);
     document.getElementById(`input-box-${box.id}`)?.focus();
-    setDragging({
+    setTransformState({
+      mode: "drag",
       id: box.id,
       isLayer: false,
       startX: e.clientX,
@@ -590,8 +661,81 @@ export default function MemeMaker() {
     (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
   };
 
+  const handleRotatePointerDown = (
+    e: React.PointerEvent,
+    id: string | number,
+    isLayer: boolean,
+    currentRotation: number
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const parentBox = (e.currentTarget as HTMLElement).closest(".transform-box");
+    if (!parentBox) return;
+    const rect = parentBox.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const startAngle = Math.atan2(e.clientY - centerY, e.clientX - centerX) * (180 / Math.PI);
+
+    setTransformState({
+      mode: "rotate",
+      id,
+      isLayer,
+      centerX,
+      centerY,
+      initialRotation: currentRotation,
+      startAngle,
+    });
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+  };
+
+  const handleResizePointerDown = (
+    e: React.PointerEvent,
+    id: string | number,
+    isLayer: boolean,
+    handle: ResizeHandle,
+    currentWidth: number,
+    currentFontSize: number
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const parentBox = (e.currentTarget as HTMLElement).closest(".transform-box");
+    if (!parentBox) return;
+    const rect = parentBox.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    setTransformState({
+      mode: "resize",
+      id,
+      isLayer,
+      handle,
+      startX: e.clientX,
+      startY: e.clientY,
+      initialWidth: currentWidth || rect.width,
+      initialFontSize: currentFontSize,
+      centerX,
+      centerY,
+    });
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+  };
+
   const resetBoxPosition = (boxId: string) => {
     setBoxPositions((prev) => {
+      const next = { ...prev };
+      delete next[boxId];
+      return next;
+    });
+    setBoxRotations((prev) => {
+      const next = { ...prev };
+      delete next[boxId];
+      return next;
+    });
+    setBoxWidths((prev) => {
+      const next = { ...prev };
+      delete next[boxId];
+      return next;
+    });
+    setBoxFontSizes((prev) => {
       const next = { ...prev };
       delete next[boxId];
       return next;
@@ -637,7 +781,7 @@ export default function MemeMaker() {
   };
 
   const handlePointerMove = (e: React.PointerEvent) => {
-    if (!dragging) return;
+    if (!transformState) return;
 
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -645,45 +789,105 @@ export default function MemeMaker() {
     const canvasRect = canvas.getBoundingClientRect();
     if (!canvasRect.width || !canvasRect.height) return;
 
-    const deltaX = e.clientX - dragging.startX;
-    const deltaY = e.clientY - dragging.startY;
+    if (transformState.mode === "drag") {
+      const deltaX = e.clientX - transformState.startX;
+      const deltaY = e.clientY - transformState.startY;
 
-    const clampedX = calculateClampedCoordinate(
-      dragging.initialX,
-      deltaX,
-      canvasRect.width
-    );
-    const clampedY = calculateClampedCoordinate(
-      dragging.initialY,
-      deltaY,
-      canvasRect.height
-    );
+      const clampedX = calculateClampedCoordinate(
+        transformState.initialX,
+        deltaX,
+        canvasRect.width
+      );
+      const clampedY = calculateClampedCoordinate(
+        transformState.initialY,
+        deltaY,
+        canvasRect.height
+      );
 
-    pendingDragCoordsRef.current = {
-      id: dragging.id,
-      isLayer: dragging.isLayer,
-      x: clampedX,
-      y: clampedY,
-    };
+      if (transformState.isLayer) {
+        setLayers((current) =>
+          current.map((layer) =>
+            layer.id === transformState.id ? { ...layer, x: clampedX, y: clampedY } : layer
+          )
+        );
+      } else {
+        setBoxPositions((prev) => ({
+          ...prev,
+          [transformState.id]: { x: clampedX, y: clampedY },
+        }));
+      }
+    } else if (transformState.mode === "rotate") {
+      const currentAngle =
+        Math.atan2(e.clientY - transformState.centerY, e.clientX - transformState.centerX) *
+        (180 / Math.PI);
+      const diff = currentAngle - transformState.startAngle;
+      let angle = Math.round((transformState.initialRotation + diff) % 360);
+      if (angle < 0) angle += 360;
 
-    if (rafIdRef.current === null) {
-      rafIdRef.current = requestAnimationFrame(() => {
-        rafIdRef.current = null;
-        const coords = pendingDragCoordsRef.current;
-        if (!coords) return;
-        if (coords.isLayer) {
+      // Snap assist within ±4 degrees of cardinal angles
+      if (Math.abs(angle) < 4 || Math.abs(angle - 360) < 4) angle = 0;
+      else if (Math.abs(angle - 90) < 4) angle = 90;
+      else if (Math.abs(angle - 180) < 4) angle = 180;
+      else if (Math.abs(angle - 270) < 4) angle = 270;
+
+      if (transformState.isLayer) {
+        setLayers((current) =>
+          current.map((layer) =>
+            layer.id === transformState.id ? { ...layer, rotation: angle } : layer
+          )
+        );
+      } else {
+        setBoxRotations((prev) => ({
+          ...prev,
+          [transformState.id]: angle,
+        }));
+      }
+    } else if (transformState.mode === "resize") {
+      const { handle, centerX, centerY, initialWidth, initialFontSize } = transformState;
+      const displayWidth = canvasRect.width;
+
+      if (handle === "e" || handle === "w") {
+        const distX = Math.abs(e.clientX - centerX);
+        const newWidth = Math.max(60, Math.min(displayWidth * 0.95, Math.round(distX * 2)));
+        if (transformState.isLayer) {
           setLayers((current) =>
-            current.map((layer) =>
-              layer.id === coords.id ? { ...layer, x: coords.x, y: coords.y } : layer
+            current.map((l) => (l.id === transformState.id ? { ...l, width: newWidth } : l))
+          );
+        } else {
+          setBoxWidths((prev) => ({ ...prev, [transformState.id]: newWidth }));
+        }
+      } else if (handle === "n" || handle === "s") {
+        const distY = Math.abs(e.clientY - centerY);
+        const ratio = distY / Math.max(15, initialFontSize * 0.65);
+        const newFontSize = Math.max(14, Math.min(130, Math.round(initialFontSize * ratio)));
+        if (transformState.isLayer) {
+          setLayers((current) =>
+            current.map((l) => (l.id === transformState.id ? { ...l, fontSize: newFontSize } : l))
+          );
+        } else {
+          setBoxFontSizes((prev) => ({ ...prev, [transformState.id]: newFontSize }));
+        }
+      } else {
+        const dist = Math.hypot(e.clientX - centerX, e.clientY - centerY);
+        const initialDist = Math.hypot(
+          transformState.startX - centerX,
+          transformState.startY - centerY
+        );
+        const ratio = dist / Math.max(10, initialDist);
+        const newWidth = Math.max(60, Math.min(displayWidth * 0.95, Math.round(initialWidth * ratio)));
+        const newFontSize = Math.max(14, Math.min(130, Math.round(initialFontSize * ratio)));
+
+        if (transformState.isLayer) {
+          setLayers((current) =>
+            current.map((l) =>
+              l.id === transformState.id ? { ...l, width: newWidth, fontSize: newFontSize } : l
             )
           );
         } else {
-          setBoxPositions((prev) => ({
-            ...prev,
-            [coords.id]: { x: coords.x, y: coords.y },
-          }));
+          setBoxWidths((prev) => ({ ...prev, [transformState.id]: newWidth }));
+          setBoxFontSizes((prev) => ({ ...prev, [transformState.id]: newFontSize }));
         }
-      });
+      }
     }
   };
 
@@ -692,23 +896,7 @@ export default function MemeMaker() {
       cancelAnimationFrame(rafIdRef.current);
       rafIdRef.current = null;
     }
-    const coords = pendingDragCoordsRef.current;
-    if (coords) {
-      if (coords.isLayer) {
-        setLayers((current) =>
-          current.map((layer) =>
-            layer.id === coords.id ? { ...layer, x: coords.x, y: coords.y } : layer
-          )
-        );
-      } else {
-        setBoxPositions((prev) => ({
-          ...prev,
-          [coords.id]: { x: coords.x, y: coords.y },
-        }));
-      }
-      pendingDragCoordsRef.current = null;
-    }
-    setDragging(null);
+    setTransformState(null);
   };
 
   const searchLower = search.trim().toLowerCase();
@@ -764,11 +952,13 @@ export default function MemeMaker() {
               onPointerMove={handlePointerMove}
               onPointerUp={handlePointerUp}
               onPointerCancel={handlePointerUp}
+              onClick={() => setFocusedBoxId(null)}
             >
               <div className="canvas-stage">
                 <canvas ref={canvasRef} />
 
                 {layers.map((layer) => {
+                  if (!layer.text || !layer.text.trim()) return null;
                   const canvas = canvasRef.current;
                   const canvasWidth = canvas?.width ?? 1000;
                   const canvasHeight = canvas?.height ?? 600;
@@ -782,35 +972,121 @@ export default function MemeMaker() {
                   const py = layer.y * displayHeight;
 
                   const scaleFactor = displayWidth / canvasWidth;
-                  const displayFontSize = layer.fontSize * scaleFactor;
+                  const displayFontSize = Math.round(layer.fontSize * scaleFactor);
+                  const isTransformingThis = transformState?.id === layer.id;
+                  const isFocused = focusedBoxId === `layer-${layer.id}`;
+                  const isHovered = hoveredBoxId === `layer-${layer.id}`;
+                  const isSelected = isFocused || isTransformingThis;
+                  const rotation = layer.rotation || 0;
+                  const width = layer.width;
 
                   return (
                     <div
                       key={layer.id}
-                      className="text-overlay"
+                      className={`transform-box ${isSelected ? "is-selected" : ""} ${isHovered ? "is-hovered" : ""} ${isTransformingThis ? "is-transforming" : ""}`}
                       style={{
                         left: px,
                         top: py,
-                        color: layer.color,
-                        fontSize: displayFontSize,
-                        fontWeight: 900,
-                        fontFamily: 'Impact, "Arial Black", sans-serif',
-                        textShadow:
-                          "2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000",
-                        whiteSpace: "nowrap",
-                        transform: "translate(-50%, -50%)",
-                        cursor:
-                          dragging?.id === layer.id ? "grabbing" : "grab",
+                        width: width ? `${width}px` : "max-content",
+                        maxWidth: displayWidth * 0.95,
+                        transform: `translate(-50%, -50%) rotate(${rotation}deg)`,
                       }}
                       onPointerDown={(e) => handlePointerDown(e, layer)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setFocusedBoxId(`layer-${layer.id}`);
+                      }}
+                      onMouseEnter={() => setHoveredBoxId(`layer-${layer.id}`)}
+                      onMouseLeave={() => setHoveredBoxId(null)}
                     >
-                      {layer.text}
+                      <div
+                        className="box-text-content"
+                        style={{
+                          color: layer.color,
+                          fontSize: `${displayFontSize}px`,
+                          textAlign: "center",
+                          cursor: isTransformingThis ? "grabbing" : "grab",
+                        }}
+                      >
+                        {layer.text}
+                      </div>
+
+                      {(isSelected || isHovered) && (
+                        <>
+                          <div className="rotate-stem" />
+                          <button
+                            type="button"
+                            className="rotate-handle"
+                            title="Drag to rotate"
+                            onPointerDown={(e) => handleRotatePointerDown(e, layer.id, true, rotation)}
+                          >
+                            ↺
+                          </button>
+
+                          <div
+                            className="resize-handle handle-nw"
+                            title="Resize corner"
+                            onPointerDown={(e) =>
+                              handleResizePointerDown(e, layer.id, true, "nw", width || 120, displayFontSize)
+                            }
+                          />
+                          <div
+                            className="resize-handle handle-n"
+                            title="Resize font size"
+                            onPointerDown={(e) =>
+                              handleResizePointerDown(e, layer.id, true, "n", width || 120, displayFontSize)
+                            }
+                          />
+                          <div
+                            className="resize-handle handle-ne"
+                            title="Resize corner"
+                            onPointerDown={(e) =>
+                              handleResizePointerDown(e, layer.id, true, "ne", width || 120, displayFontSize)
+                            }
+                          />
+                          <div
+                            className="resize-handle handle-e"
+                            title="Resize width"
+                            onPointerDown={(e) =>
+                              handleResizePointerDown(e, layer.id, true, "e", width || 120, displayFontSize)
+                            }
+                          />
+                          <div
+                            className="resize-handle handle-se"
+                            title="Resize corner"
+                            onPointerDown={(e) =>
+                              handleResizePointerDown(e, layer.id, true, "se", width || 120, displayFontSize)
+                            }
+                          />
+                          <div
+                            className="resize-handle handle-s"
+                            title="Resize font size"
+                            onPointerDown={(e) =>
+                              handleResizePointerDown(e, layer.id, true, "s", width || 120, displayFontSize)
+                            }
+                          />
+                          <div
+                            className="resize-handle handle-sw"
+                            title="Resize corner"
+                            onPointerDown={(e) =>
+                              handleResizePointerDown(e, layer.id, true, "sw", width || 120, displayFontSize)
+                            }
+                          />
+                          <div
+                            className="resize-handle handle-w"
+                            title="Resize width"
+                            onPointerDown={(e) =>
+                              handleResizePointerDown(e, layer.id, true, "w", width || 120, displayFontSize)
+                            }
+                          />
+                        </>
+                      )}
                     </div>
                   );
                 })}
 
-                {/* TEMPLATE BOXES: DIRECT DRAGGABLE TEXT OVERLAYS */}
-                {activeBoxes.map((box) => {
+                {/* TEMPLATE BOXES: DIRECT DRAGGABLE & RESIZABLE/ROTATABLE TEXT OVERLAYS */}
+                {activeBoxes.map((box, index) => {
                   const canvas = canvasRef.current;
                   const canvasWidth = canvas?.width ?? 1000;
                   const canvasHeight = canvas?.height ?? 600;
@@ -825,42 +1101,129 @@ export default function MemeMaker() {
                   const text =
                     boxTexts[box.id] ??
                     (box.id === "top" ? topText : box.id === "bottom" ? bottomText : "");
-                  const hasText = Boolean(text && text.trim().length > 0);
-                  const displayText = hasText ? text : box.placeholder.toUpperCase();
-                  const isDraggingThis = dragging?.id === box.id;
+
+                  // ONLY render on image if user has written text (template image starts completely plain)
+                  if (!text || !text.trim()) return null;
+
+                  const isTransformingThis = transformState?.id === box.id;
                   const isFocused = focusedBoxId === box.id;
                   const isHovered = hoveredBoxId === box.id;
                   const scaleFactor = displayWidth / canvasWidth;
-                  const effectiveFontSize = Math.max(
+
+                  const customFontSize = boxFontSizes[box.id];
+                  const effectiveFontSize = customFontSize ?? Math.max(
                     12,
                     Math.round(fontSize * (box.fontSizeRatio || 1) * scaleFactor)
                   );
                   const color = boxColors[box.id] || textColor;
-                  const maxWidthPx = box.maxWidthRatio ? displayWidth * box.maxWidthRatio : undefined;
+                  const customWidth = boxWidths[box.id];
+                  const maxWidthPx = customWidth ?? (box.maxWidthRatio ? displayWidth * box.maxWidthRatio : undefined);
+                  const rotation = boxRotations[box.id] || 0;
+                  const isSelected = isFocused || isTransformingThis;
 
                   return (
                     <div
                       key={`box-overlay-${box.id}`}
-                      className={`box-text-overlay ${!hasText ? "is-placeholder" : ""} ${isDraggingThis ? "is-dragging" : ""} ${isFocused ? "is-focused" : ""} ${isHovered ? "is-hovered" : ""}`}
+                      className={`transform-box ${isSelected ? "is-selected" : ""} ${isHovered ? "is-hovered" : ""} ${isTransformingThis ? "is-transforming" : ""}`}
                       style={{
                         left: px,
                         top: py,
-                        color: hasText ? color : "rgba(255, 255, 255, 0.45)",
-                        fontSize: `${effectiveFontSize}px`,
-                        maxWidth: maxWidthPx ? `${maxWidthPx}px` : "90%",
-                        textAlign: box.textAlign || "center",
-                        cursor: isDraggingThis ? "grabbing" : "grab",
+                        width: maxWidthPx ? `${maxWidthPx}px` : "max-content",
+                        maxWidth: displayWidth * 0.95,
+                        transform: `translate(-50%, -50%) rotate(${rotation}deg)`,
                       }}
-                      title={`Touch & hold to drag ${box.label}`}
+                      title={`Text #${index + 1} (Touch & hold to drag, use handles to resize or rotate)`}
                       onPointerDown={(e) => handleBoxPointerDown(e, box)}
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation();
                         setFocusedBoxId(box.id);
                         document.getElementById(`input-box-${box.id}`)?.focus();
                       }}
                       onMouseEnter={() => setHoveredBoxId(box.id)}
                       onMouseLeave={() => setHoveredBoxId(null)}
                     >
-                      {displayText}
+                      <div
+                        className="box-text-content"
+                        style={{
+                          color,
+                          fontSize: `${effectiveFontSize}px`,
+                          textAlign: box.textAlign || "center",
+                          cursor: isTransformingThis ? "grabbing" : "grab",
+                        }}
+                      >
+                        {text}
+                      </div>
+
+                      {(isSelected || isHovered) && (
+                        <>
+                          <div className="rotate-stem" />
+                          <button
+                            type="button"
+                            className="rotate-handle"
+                            title="Drag to rotate"
+                            onPointerDown={(e) => handleRotatePointerDown(e, box.id, false, rotation)}
+                          >
+                            ↺
+                          </button>
+
+                          <div
+                            className="resize-handle handle-nw"
+                            title="Resize corner"
+                            onPointerDown={(e) =>
+                              handleResizePointerDown(e, box.id, false, "nw", maxWidthPx || 120, effectiveFontSize)
+                            }
+                          />
+                          <div
+                            className="resize-handle handle-n"
+                            title="Resize font size"
+                            onPointerDown={(e) =>
+                              handleResizePointerDown(e, box.id, false, "n", maxWidthPx || 120, effectiveFontSize)
+                            }
+                          />
+                          <div
+                            className="resize-handle handle-ne"
+                            title="Resize corner"
+                            onPointerDown={(e) =>
+                              handleResizePointerDown(e, box.id, false, "ne", maxWidthPx || 120, effectiveFontSize)
+                            }
+                          />
+                          <div
+                            className="resize-handle handle-e"
+                            title="Resize width"
+                            onPointerDown={(e) =>
+                              handleResizePointerDown(e, box.id, false, "e", maxWidthPx || 120, effectiveFontSize)
+                            }
+                          />
+                          <div
+                            className="resize-handle handle-se"
+                            title="Resize corner"
+                            onPointerDown={(e) =>
+                              handleResizePointerDown(e, box.id, false, "se", maxWidthPx || 120, effectiveFontSize)
+                            }
+                          />
+                          <div
+                            className="resize-handle handle-s"
+                            title="Resize font size"
+                            onPointerDown={(e) =>
+                              handleResizePointerDown(e, box.id, false, "s", maxWidthPx || 120, effectiveFontSize)
+                            }
+                          />
+                          <div
+                            className="resize-handle handle-sw"
+                            title="Resize corner"
+                            onPointerDown={(e) =>
+                              handleResizePointerDown(e, box.id, false, "sw", maxWidthPx || 120, effectiveFontSize)
+                            }
+                          />
+                          <div
+                            className="resize-handle handle-w"
+                            title="Resize width"
+                            onPointerDown={(e) =>
+                              handleResizePointerDown(e, box.id, false, "w", maxWidthPx || 120, effectiveFontSize)
+                            }
+                          />
+                        </>
+                      )}
                     </div>
                   );
                 })}
@@ -948,6 +1311,12 @@ export default function MemeMaker() {
                 onClick={() => {
                   setSelectedTemplateId(null);
                   setBoxPositions({});
+                  setBoxRotations({});
+                  setBoxWidths({});
+                  setBoxFontSizes({});
+                  setBoxTexts({});
+                  setTopText("");
+                  setBottomText("");
                   setImage(DEFAULT_IMAGE);
                   setTemplateTitle("Blank Template");
                   saveImage(DEFAULT_IMAGE);
@@ -974,6 +1343,12 @@ export default function MemeMaker() {
                     onClick={() => {
                       setSelectedTemplateId(template.id);
                       setBoxPositions({});
+                      setBoxRotations({});
+                      setBoxWidths({});
+                      setBoxFontSizes({});
+                      setBoxTexts({});
+                      setTopText("");
+                      setBottomText("");
                       setImage(template.image_url);
                       setTemplateTitle(template.name);
                       saveTemplateUrl(template.image_url);
@@ -990,17 +1365,25 @@ export default function MemeMaker() {
 
             {/* TEXT INPUTS */}
             <div className="template-text-boxes">
-              {activeBoxes.map((box) => {
+              {activeBoxes.map((box, index) => {
                 const val =
                   boxTexts[box.id] ??
                   (box.id === "top" ? topText : box.id === "bottom" ? bottomText : "");
                 const col = boxColors[box.id] || textColor;
+                const genericLabel = `Text #${index + 1}`;
+                const hasCustomTransform = Boolean(
+                  boxPositions[box.id] ||
+                    boxRotations[box.id] ||
+                    boxWidths[box.id] ||
+                    boxFontSizes[box.id]
+                );
+
                 return (
                   <TextInput
                     key={box.id}
                     id={`input-box-${box.id}`}
-                    label={box.label}
-                    placeholder={box.placeholder}
+                    label={genericLabel}
+                    placeholder={genericLabel}
                     value={val}
                     onChange={(text) => {
                       setBoxTexts((prev) => ({ ...prev, [box.id]: text }));
@@ -1012,9 +1395,7 @@ export default function MemeMaker() {
                       setBoxColors((prev) => ({ ...prev, [box.id]: newColor }));
                     }}
                     onResetPosition={
-                      boxPositions[box.id]
-                        ? () => resetBoxPosition(box.id)
-                        : undefined
+                      hasCustomTransform ? () => resetBoxPosition(box.id) : undefined
                     }
                     onFocus={() => setFocusedBoxId(box.id)}
                     onBlur={() => setFocusedBoxId(null)}

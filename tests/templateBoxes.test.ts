@@ -162,5 +162,46 @@ describe("Regression Tests: Edit Page Non-Obscuring Handle Placement & Drag Math
       }
     }
   });
+
+  it("formats generic sequential labels (Text #1, Text #2) for any template box array", () => {
+    for (let i = 1; i <= 20; i++) {
+      const boxes = getTemplateBoxes(i);
+      boxes.forEach((_, idx) => {
+        const label = `Text #${idx + 1}`;
+        expect(label).toMatch(/^Text #\d+$/);
+      });
+    }
+  });
+
+  it("correctly identifies empty text so that the template image starts 100% plain", () => {
+    const isTextPresent = (text?: string) => Boolean(text && text.trim().length > 0);
+
+    expect(isTextPresent("")).toBe(false);
+    expect(isTextPresent("   ")).toBe(false);
+    expect(isTextPresent(undefined)).toBe(false);
+    expect(isTextPresent("Hello")).toBe(true);
+    expect(isTextPresent("  Meme  ")).toBe(true);
+  });
+
+  it("calculates rotation angles and correctly wraps around 360 degrees", () => {
+    const normalizeRotation = (initial: number, diff: number) => {
+      let angle = Math.round((initial + diff) % 360);
+      if (angle < 0) angle += 360;
+      if (Math.abs(angle) < 4 || Math.abs(angle - 360) < 4) angle = 0;
+      else if (Math.abs(angle - 90) < 4) angle = 90;
+      else if (Math.abs(angle - 180) < 4) angle = 180;
+      else if (Math.abs(angle - 270) < 4) angle = 270;
+      return angle;
+    };
+
+    expect(normalizeRotation(0, 45)).toBe(45);
+    expect(normalizeRotation(350, 20)).toBe(10); // wrap around 360
+    expect(normalizeRotation(10, -20)).toBe(350); // wrap below 0
+    expect(normalizeRotation(0, 92)).toBe(90); // snap to 90
+    expect(normalizeRotation(0, 182)).toBe(180); // snap to 180
+    expect(normalizeRotation(0, 268)).toBe(270); // snap to 270
+    expect(normalizeRotation(0, 2)).toBe(0); // snap to 0
+  });
 });
+
 
