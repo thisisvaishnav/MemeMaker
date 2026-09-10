@@ -15,6 +15,7 @@ import {
   getTemplateBoxes,
   calculateHandlePlacement,
   calculateClampedCoordinate,
+  isPlainBoxStyle,
   type TemplateTextBox,
   type HandlePlacement,
 } from "../lib/templateBoxes";
@@ -43,6 +44,8 @@ type TextLayer = {
   y: number;
   rotation?: number;
   width?: number;
+  fontFamily?: string;
+  isPlain?: boolean;
 };
 
 type ResizeHandle = "nw" | "n" | "ne" | "e" | "se" | "s" | "sw" | "w";
@@ -189,6 +192,9 @@ export default function MemeMaker() {
   const [dbTemplates, setDbTemplates] = useState<DbTemplate[]>([]);
   const [adminSaveMessage, setAdminSaveMessage] = useState<string | null>(null);
 
+  const [globalFontStyle, setGlobalFontStyle] = useState<"classic" | "slim-black">("classic");
+  const [boxPlainOverrides, setBoxPlainOverrides] = useState<Record<string, boolean>>({});
+
   const [textColor, setTextColor] = useState("#ffffff");
   const [fontSize, setFontSize] = useState(52);
 
@@ -246,7 +252,8 @@ export default function MemeMaker() {
         align: CanvasTextAlign = "center",
         maxWidthPx?: number,
         rotationDeg: number = 0,
-        fontFamily: string = "Impact, Arial Black, sans-serif"
+        fontFamily: string = "Impact, Arial Black, sans-serif",
+        isPlain: boolean = false
       ) => {
         if (!text || !text.trim()) return;
 
@@ -259,12 +266,18 @@ export default function MemeMaker() {
           ctx.rotate((rotationDeg * Math.PI) / 180);
         }
 
-        ctx.font = `900 ${size}px ${fontFamily}`;
-        ctx.fillStyle = color;
-        ctx.strokeStyle = "#000";
-        ctx.lineWidth = Math.max(2.5, Math.round(size / 13));
         ctx.textAlign = align;
         ctx.textBaseline = "middle";
+
+        if (isPlain) {
+          ctx.font = `600 ${size}px ${fontFamily}`;
+          ctx.fillStyle = color;
+        } else {
+          ctx.font = `900 ${size}px ${fontFamily}`;
+          ctx.fillStyle = color;
+          ctx.strokeStyle = "#000";
+          ctx.lineWidth = Math.max(2.5, Math.round(size / 13));
+        }
 
         // Word-wrap and newline handling relative to local (0, 0)
         const lines: string[] = [];
@@ -295,7 +308,9 @@ export default function MemeMaker() {
 
         lines.forEach((line, idx) => {
           const lineY = startY + idx * lineHeight;
-          ctx.strokeText(line, 0, lineY);
+          if (!isPlain) {
+            ctx.strokeText(line, 0, lineY);
+          }
           ctx.fillText(line, 0, lineY);
         });
 
@@ -313,7 +328,11 @@ export default function MemeMaker() {
             (box.id === "top" ? topText : box.id === "bottom" ? bottomText : "");
           if (!text || !text.trim()) return;
 
-          const color = boxColors[box.id] || textColor;
+          const isPlain = boxPlainOverrides[box.id] !== undefined
+            ? boxPlainOverrides[box.id]
+            : (box.isPlain ?? (globalFontStyle === "slim-black" || isPlainBoxStyle(box)));
+          const defaultColor = isPlain ? "#000000" : textColor;
+          const color = boxColors[box.id] || (box.color ? box.color : defaultColor);
           const customFont = boxFontSizes[box.id];
           const size = customFont
             ? Math.round(customFont * scaleFactor)
@@ -327,12 +346,14 @@ export default function MemeMaker() {
             ? canvas.width * box.maxWidthRatio
             : undefined;
           const rot = boxRotations[box.id] ?? box.rotation ?? 0;
-          const fontFam = box.fontFamily || "Impact, Arial Black, sans-serif";
-          drawText(text, box.x, box.y, size, color, box.textAlign || "center", maxW, rot, fontFam);
+          const fontFam = box.fontFamily || (isPlain ? "Inter, system-ui, -apple-system, sans-serif" : "Impact, Arial Black, sans-serif");
+          drawText(text, box.x, box.y, size, color, box.textAlign || "center", maxW, rot, fontFam, isPlain);
         });
 
         layers.forEach((layer) => {
           if (!layer.text || !layer.text.trim()) return;
+          const isPlain = Boolean(layer.isPlain ?? (globalFontStyle === "slim-black"));
+          const fontFam = layer.fontFamily || (isPlain ? "Inter, system-ui, -apple-system, sans-serif" : "Impact, Arial Black, sans-serif");
           const maxW = layer.width ? layer.width * scaleFactor : undefined;
           drawText(
             layer.text,
@@ -342,7 +363,9 @@ export default function MemeMaker() {
             layer.color,
             "center",
             maxW,
-            layer.rotation || 0
+            layer.rotation || 0,
+            fontFam,
+            isPlain
           );
         });
       }
@@ -480,6 +503,8 @@ export default function MemeMaker() {
     boxPositions,
     boxTexts,
     boxColors,
+    boxPlainOverrides,
+    globalFontStyle,
     topText,
     bottomText,
     textColor,
@@ -573,6 +598,8 @@ export default function MemeMaker() {
     setBoxFontSizes({});
     setBoxTexts({});
     setBoxColors({});
+    setBoxPlainOverrides({});
+    setGlobalFontStyle("classic");
     setTopText("");
     setBottomText("");
     setTextColor("#ffffff");
@@ -588,16 +615,19 @@ export default function MemeMaker() {
     clearTemplateUrl();
   };
 
-  const addTextLayer = () => {
+  const addTextLayer = (isPlain?: boolean) => {
+    const usePlain = isPlain !== undefined ? isPlain : (globalFontStyle === "slim-black");
     setLayers((current) => [
       ...current,
       {
         id: Date.now(),
-        text: "New Text",
-        color: "#ffffff",
-        fontSize: 40,
+        text: usePlain ? "Caption text" : "New Text",
+        color: usePlain ? "#000000" : "#ffffff",
+        fontSize: usePlain ? 34 : 40,
         x: 0.5,
         y: 0.5,
+        fontFamily: usePlain ? "Inter, system-ui, -apple-system, sans-serif" : undefined,
+        isPlain: usePlain,
       },
     ]);
   };
@@ -1006,17 +1036,23 @@ export default function MemeMaker() {
                       onMouseEnter={() => setHoveredBoxId(`layer-${layer.id}`)}
                       onMouseLeave={() => setHoveredBoxId(null)}
                     >
-                      <div
-                        className="box-text-content"
-                        style={{
-                          color: layer.color,
-                          fontSize: `${displayFontSize}px`,
-                          textAlign: "center",
-                          cursor: isTransformingThis ? "grabbing" : "grab",
-                        }}
-                      >
-                        {layer.text}
-                      </div>
+                      {(() => {
+                        const isPlain = Boolean(layer.isPlain ?? (globalFontStyle === "slim-black"));
+                        return (
+                          <div
+                            className={`box-text-content ${isPlain ? "is-slim-black" : ""}`}
+                            style={{
+                              color: layer.color,
+                              fontSize: `${displayFontSize}px`,
+                              textAlign: "center",
+                              fontFamily: layer.fontFamily || (isPlain ? "Inter, system-ui, -apple-system, sans-serif" : undefined),
+                              cursor: isTransformingThis ? "grabbing" : "grab",
+                            }}
+                          >
+                            {layer.text}
+                          </div>
+                        );
+                      })()}
 
                       {(isSelected || isHovered) && (
                         <>
@@ -1124,7 +1160,11 @@ export default function MemeMaker() {
                       ? Math.round(box.fontSize * (box.fontSizeRatio || 1) * scaleFactor)
                       : Math.round(fontSize * (box.fontSizeRatio || 1) * scaleFactor)
                   );
-                  const color = boxColors[box.id] || textColor;
+                  const isPlain = boxPlainOverrides[box.id] !== undefined
+                    ? boxPlainOverrides[box.id]
+                    : (box.isPlain ?? (globalFontStyle === "slim-black" || isPlainBoxStyle(box)));
+                  const defaultColor = isPlain ? "#000000" : textColor;
+                  const color = boxColors[box.id] || (box.color ? box.color : defaultColor);
                   const customWidth = boxWidths[box.id];
                   const maxWidthPx = customWidth ?? (box.maxWidthRatio ? displayWidth * box.maxWidthRatio : undefined);
                   const rotation = boxRotations[box.id] ?? box.rotation ?? 0;
@@ -1152,12 +1192,12 @@ export default function MemeMaker() {
                       onMouseLeave={() => setHoveredBoxId(null)}
                     >
                       <div
-                        className="box-text-content"
+                        className={`box-text-content ${isPlain ? "is-slim-black" : ""}`}
                         style={{
                           color,
                           fontSize: `${effectiveFontSize}px`,
                           textAlign: box.textAlign || "center",
-                          fontFamily: box.fontFamily || "Impact, 'Arial Black', sans-serif",
+                          fontFamily: box.fontFamily || (isPlain ? "Inter, system-ui, -apple-system, sans-serif" : "Impact, 'Arial Black', sans-serif"),
                           cursor: isTransformingThis ? "grabbing" : "grab",
                         }}
                       >
@@ -1416,6 +1456,35 @@ export default function MemeMaker() {
               })}
             </div>
 
+            {/* FONT STYLE SELECTOR */}
+            <div className="font-style-control">
+              <span className="font-style-title">Font Style</span>
+              <div className="font-style-toggle-group">
+                <button
+                  type="button"
+                  className={`font-style-btn ${globalFontStyle === "classic" ? "active" : ""}`}
+                  onClick={() => {
+                    setGlobalFontStyle("classic");
+                    setTextColor("#ffffff");
+                  }}
+                  title="Classic Bold White Impact Meme font"
+                >
+                  🔤 Bold White
+                </button>
+                <button
+                  type="button"
+                  className={`font-style-btn ${globalFontStyle === "slim-black" ? "active" : ""}`}
+                  onClick={() => {
+                    setGlobalFontStyle("slim-black");
+                    setTextColor("#000000");
+                  }}
+                  title="Modern Slim Black caption font"
+                >
+                  📝 Slim Black
+                </button>
+              </div>
+            </div>
+
             {/* FONT CONTROLS */}
             <div className="font-controls">
               <label>
@@ -1449,6 +1518,25 @@ export default function MemeMaker() {
                     updateLayer(layer.id, "color", e.target.value)
                   }
                 />
+
+                <button
+                  type="button"
+                  className={`layer-style-toggle-btn ${layer.isPlain ? "is-slim" : ""}`}
+                  title={layer.isPlain ? "Switch to Bold White Meme Font" : "Switch to Slim Black Font"}
+                  onClick={() => {
+                    const nextPlain = !layer.isPlain;
+                    updateLayer(layer.id, "isPlain" as any, nextPlain as any);
+                    if (nextPlain) {
+                      updateLayer(layer.id, "color", "#000000");
+                      updateLayer(layer.id, "fontFamily" as any, "Inter, system-ui, -apple-system, sans-serif");
+                    } else {
+                      updateLayer(layer.id, "color", "#ffffff");
+                      updateLayer(layer.id, "fontFamily" as any, "Impact, Arial Black, sans-serif");
+                    }
+                  }}
+                >
+                  {layer.isPlain ? "Slim Black" : "Bold White"}
+                </button>
 
                 <button onClick={() => removeLayer(layer.id)}>×</button>
               </div>
@@ -1494,14 +1582,20 @@ export default function MemeMaker() {
 
             {showOptions && (
               <div className="advanced-options">
-                <button type="button" onClick={addTextLayer}>+ Add Text</button>
+                <button type="button" onClick={() => addTextLayer(false)}>+ Add Bold White</button>
+                <button type="button" onClick={() => addTextLayer(true)}>+ Add Slim Black</button>
               </div>
             )}
 
             {/* DESKTOP ADD TEXT */}
-            <button className="add-text-btn" onClick={addTextLayer}>
-              + Add Text
-            </button>
+            <div className="add-text-btn-group">
+              <button className="add-text-btn" type="button" onClick={() => addTextLayer(false)} title="Add classic bold white meme text">
+                + Add Bold White Text
+              </button>
+              <button className="add-text-btn add-plain-btn" type="button" onClick={() => addTextLayer(true)} title="Add modern slim black text">
+                + Add Slim Black Text
+              </button>
+            </div>
 
             {/* ACTIONS */}
             <div className="main-actions">

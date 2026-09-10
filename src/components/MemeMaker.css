@@ -491,6 +491,15 @@ button {
     0 1.5px 3px rgba(0, 0, 0, 0.6);
 }
 
+.box-text-content.is-slim-black {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  paint-order: normal !important;
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
+}
+
 /* ROTATION STEM & KNOB */
 .rotate-stem {
   position: absolute;
@@ -719,12 +728,64 @@ button {
 }
 
 /* =========================
+   FONT STYLE SELECTOR
+========================= */
+
+.font-style-control {
+  margin: 10px 0 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.font-style-title {
+  color: #aaa;
+  font-size: 11px;
+}
+
+.font-style-toggle-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.font-style-btn {
+  background: #202020;
+  color: #bbb;
+  border: 1px solid #4a4a4a;
+  border-radius: 4px;
+  padding: 8px 6px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.font-style-btn:hover {
+  background: #2a2a2a;
+  color: #fff;
+  border-color: #666;
+}
+
+.font-style-btn.active {
+  background: #19bde7;
+  color: #051016;
+  border-color: #19bde7;
+  font-weight: 700;
+}
+
+/* =========================
    EXTRA LAYERS
 ========================= */
 
 .extra-layer {
   display: grid;
-  grid-template-columns: 1fr 38px 32px;
+  grid-template-columns: 1fr 38px 74px 32px;
   gap: 5px;
 
   margin-bottom: 6px;
@@ -741,11 +802,55 @@ button {
   padding: 8px;
 }
 
-.extra-layer button {
+.layer-style-toggle-btn {
+  font-size: 10px;
+  padding: 2px 4px;
+  border-radius: 3px;
+  border: 1px solid #555;
+  background: #272727;
+  color: #bbb;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.layer-style-toggle-btn.is-slim {
+  background: #19bde7;
+  color: #051016;
+  border-color: #19bde7;
+  font-weight: 700;
+}
+
+.extra-layer button:last-child {
   background: #3b2222;
   color: #ff7777;
 
   border: 1px solid #633;
+}
+
+.add-text-btn-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.add-text-btn-group .add-text-btn {
+  margin-bottom: 0;
+  width: 100%;
+}
+
+.add-plain-btn {
+  background: #252a30 !important;
+  border-color: #3b4652 !important;
+  color: #9cdbf0 !important;
+}
+
+.add-plain-btn:hover {
+  background: #2e353e !important;
+  border-color: #19bde7 !important;
+  color: #fff !important;
 }
 
 /* =========================

@@ -12,6 +12,7 @@ import {
   type TemplateTextBox,
   AVAILABLE_MEME_FONTS,
   type MemeFontOption,
+  isPlainBoxStyle,
 } from "../../lib/templateBoxes";
 
 type ResizeHandle = "nw" | "n" | "ne" | "e" | "se" | "s" | "sw" | "w";
@@ -569,12 +570,12 @@ export default function AdminStudio() {
                   onMouseLeave={() => setHoveredBoxId(null)}
                 >
                   <div
-                    className="box-text-content"
+                    className={`box-text-content ${isPlainBoxStyle(box) ? "is-slim-black" : ""}`}
                     style={{
                       fontSize: `${currentFontSize}px`,
                       textAlign: box.textAlign || "center",
-                      fontFamily: box.fontFamily || "Impact, 'Arial Black', sans-serif",
-                      color: "#ffffff",
+                      fontFamily: box.fontFamily || (isPlainBoxStyle(box) ? "Inter, system-ui, -apple-system, sans-serif" : "Impact, 'Arial Black', sans-serif"),
+                      color: isPlainBoxStyle(box) ? (box.color || "#000000") : (box.color || "#ffffff"),
                       cursor: isTransformingThis ? "grabbing" : "grab",
                     }}
                   >
@@ -895,8 +896,18 @@ export default function AdminStudio() {
 
                 {/* Dropdown selector */}
                 <select
-                  value={selectedBox.fontFamily || AVAILABLE_MEME_FONTS[0].family}
-                  onChange={(e) => handleUpdateBox(selectedBox.id, "fontFamily", e.target.value)}
+                  value={selectedBox.fontFamily || (isPlainBoxStyle(selectedBox) ? "Inter, system-ui, -apple-system, sans-serif" : AVAILABLE_MEME_FONTS[0].family)}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    const isPlain = val.includes("Inter") || val === "plain-black";
+                    handleUpdateBox(selectedBox.id, "fontFamily", val);
+                    if (isPlain) {
+                      handleUpdateBox(selectedBox.id, "isPlain", true);
+                      handleUpdateBox(selectedBox.id, "color", "#000000");
+                    } else {
+                      handleUpdateBox(selectedBox.id, "isPlain", false);
+                    }
+                  }}
                   className="w-full rounded-lg border border-white/15 bg-[#141414] px-3 py-2 text-xs text-white outline-none focus:border-[#19bde7] cursor-pointer"
                 >
                   {AVAILABLE_MEME_FONTS.map((f) => (
@@ -909,13 +920,21 @@ export default function AdminStudio() {
                 {/* Quick preset buttons */}
                 <div className="grid grid-cols-3 gap-1 pt-0.5">
                   {AVAILABLE_MEME_FONTS.slice(0, 6).map((f) => {
-                    const currentFont = selectedBox.fontFamily || AVAILABLE_MEME_FONTS[0].family;
+                    const currentFont = selectedBox.fontFamily || (isPlainBoxStyle(selectedBox) ? "Inter, system-ui, -apple-system, sans-serif" : AVAILABLE_MEME_FONTS[0].family);
                     const isSelected = currentFont === f.family;
                     return (
                       <button
                         key={f.id}
                         type="button"
-                        onClick={() => handleUpdateBox(selectedBox.id, "fontFamily", f.family)}
+                        onClick={() => {
+                          handleUpdateBox(selectedBox.id, "fontFamily", f.family);
+                          if (f.id === "plain-black" || f.family.includes("Inter")) {
+                            handleUpdateBox(selectedBox.id, "isPlain", true);
+                            handleUpdateBox(selectedBox.id, "color", "#000000");
+                          } else {
+                            handleUpdateBox(selectedBox.id, "isPlain", false);
+                          }
+                        }}
                         className={`py-1 px-1 rounded text-[10px] font-semibold truncate transition cursor-pointer ${
                           isSelected
                             ? "bg-[#19bde7] text-black font-bold"
