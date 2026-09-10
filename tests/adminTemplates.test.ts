@@ -55,6 +55,7 @@ describe("Admin & Database Templates (lib/templatesDb.ts & lib/adminAuth.ts)", (
         rotation: 45,
         maxWidthRatio: 0.65,
         fontSizeRatio: 1.25,
+        fontSize: 48,
         textAlign: "center" as const,
       },
       {
@@ -66,6 +67,7 @@ describe("Admin & Database Templates (lib/templatesDb.ts & lib/adminAuth.ts)", (
         rotation: 0,
         maxWidthRatio: 0.8,
         fontSizeRatio: 1.0,
+        fontSize: 32,
         textAlign: "center" as const,
       },
     ];
@@ -87,6 +89,7 @@ describe("Admin & Database Templates (lib/templatesDb.ts & lib/adminAuth.ts)", (
     expect(rotBox?.rotation).toBe(45);
     expect(rotBox?.maxWidthRatio).toBe(0.65);
     expect(rotBox?.fontSizeRatio).toBe(1.25);
+    expect(rotBox?.fontSize).toBe(48);
     expect(rotBox?.label).toBe("Text #1");
   });
 });

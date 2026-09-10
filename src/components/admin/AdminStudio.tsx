@@ -26,6 +26,7 @@ interface TransformState {
   handle?: ResizeHandle;
   initialWidthRatio?: number;
   initialFontSizeRatio?: number;
+  initialFontSize?: number;
 }
 
 export default function AdminStudio() {
@@ -91,6 +92,7 @@ export default function AdminStudio() {
       y: Math.min(0.9, 0.15 * nextNum),
       textAlign: "center",
       maxWidthRatio: 0.5,
+      fontSize: 36,
       fontSizeRatio: 1.0,
       rotation: 0,
     };
@@ -166,7 +168,7 @@ export default function AdminStudio() {
     boxId: string,
     handle: ResizeHandle,
     currentWidthRatio: number,
-    currentFontSizeRatio: number
+    currentFontSize: number
   ) => {
     e.preventDefault();
     e.stopPropagation();
@@ -184,7 +186,8 @@ export default function AdminStudio() {
       startX: e.clientX,
       startY: e.clientY,
       initialWidthRatio: currentWidthRatio || 0.5,
-      initialFontSizeRatio: currentFontSizeRatio || 1,
+      initialFontSize: currentFontSize || 36,
+      initialFontSizeRatio: Math.round(((currentFontSize || 36) / 36) * 100) / 100,
       centerX,
       centerY,
     });
@@ -245,7 +248,7 @@ export default function AdminStudio() {
         transformState.centerY !== undefined &&
         transformState.handle
       ) {
-        const { handle, centerX, centerY, initialWidthRatio = 0.5, initialFontSizeRatio = 1 } = transformState;
+        const { handle, centerX, centerY, initialWidthRatio = 0.5, initialFontSize = 36 } = transformState;
 
         if (handle === "e" || handle === "w") {
           const distX = Math.abs(clientX - centerX);
@@ -255,11 +258,16 @@ export default function AdminStudio() {
           );
         } else if (handle === "n" || handle === "s") {
           const distY = Math.abs(clientY - centerY);
-          const initialHalfH = Math.max(12, 24 * initialFontSizeRatio * 0.65);
+          const initialHalfH = Math.max(12, initialFontSize * 0.65);
           const ratio = distY / initialHalfH;
-          const newFontRatio = Math.round(Math.max(0.4, Math.min(3.0, initialFontSizeRatio * ratio)) * 100) / 100;
+          const newFontSize = Math.max(14, Math.min(120, Math.round(initialFontSize * ratio)));
+          const newFontRatio = Math.round((newFontSize / 36) * 100) / 100;
           setBoxes((prev) =>
-            prev.map((b) => (b.id === transformState.id ? { ...b, fontSizeRatio: newFontRatio } : b))
+            prev.map((b) =>
+              b.id === transformState.id
+                ? { ...b, fontSize: newFontSize, fontSizeRatio: newFontRatio }
+                : b
+            )
           );
         } else {
           // Corners: nw, ne, se, sw
@@ -270,11 +278,12 @@ export default function AdminStudio() {
           );
           const ratio = dist / Math.max(10, initialDist);
           const newWidthRatio = Math.round(Math.max(0.15, Math.min(0.95, initialWidthRatio * ratio)) * 100) / 100;
-          const newFontRatio = Math.round(Math.max(0.4, Math.min(3.0, initialFontSizeRatio * ratio)) * 100) / 100;
+          const newFontSize = Math.max(14, Math.min(120, Math.round(initialFontSize * ratio)));
+          const newFontRatio = Math.round((newFontSize / 36) * 100) / 100;
           setBoxes((prev) =>
             prev.map((b) =>
               b.id === transformState.id
-                ? { ...b, maxWidthRatio: newWidthRatio, fontSizeRatio: newFontRatio }
+                ? { ...b, maxWidthRatio: newWidthRatio, fontSize: newFontSize, fontSizeRatio: newFontRatio }
                 : b
             )
           );
@@ -525,6 +534,7 @@ export default function AdminStudio() {
               const rotation = box.rotation || 0;
               const fontSizeRatio = box.fontSizeRatio || 1;
               const maxWidthRatio = box.maxWidthRatio || 0.5;
+              const currentFontSize = box.fontSize || Math.round(36 * fontSizeRatio);
 
               return (
                 <div
@@ -537,7 +547,7 @@ export default function AdminStudio() {
                     maxWidth: "95%",
                     transform: `translate(-50%, -50%) rotate(${rotation}deg)`,
                   }}
-                  title={`Text #${idx + 1} (Touch & hold to drag, use handles to resize or rotate)`}
+                  title={`Text #${idx + 1} (${currentFontSize}px) - Touch & hold to drag, use handles to resize or rotate`}
                   onPointerDown={(e) => handleBoxPointerDown(e, box)}
                   onClick={(e) => {
                     e.stopPropagation();
@@ -549,7 +559,7 @@ export default function AdminStudio() {
                   <div
                     className="box-text-content"
                     style={{
-                      fontSize: `${Math.round(24 * fontSizeRatio)}px`,
+                      fontSize: `${currentFontSize}px`,
                       textAlign: box.textAlign || "center",
                       color: "#ffffff",
                       cursor: isTransformingThis ? "grabbing" : "grab",
@@ -570,60 +580,65 @@ export default function AdminStudio() {
                         ↺
                       </button>
 
+                      {/* Floating Font Size Tag */}
+                      <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-black/85 backdrop-blur-sm border border-[#19bde7]/40 text-[#19bde7] text-[10px] font-bold px-1.5 py-0.5 rounded shadow pointer-events-none whitespace-nowrap z-20">
+                        {currentFontSize}px
+                      </div>
+
                       <div
                         className="resize-handle handle-nw"
-                        title="Resize corner"
+                        title="Resize corner & font size"
                         onPointerDown={(e) =>
-                          handleResizePointerDown(e, box.id, "nw", maxWidthRatio, fontSizeRatio)
+                          handleResizePointerDown(e, box.id, "nw", maxWidthRatio, currentFontSize)
                         }
                       />
                       <div
                         className="resize-handle handle-n"
                         title="Resize font size"
                         onPointerDown={(e) =>
-                          handleResizePointerDown(e, box.id, "n", maxWidthRatio, fontSizeRatio)
+                          handleResizePointerDown(e, box.id, "n", maxWidthRatio, currentFontSize)
                         }
                       />
                       <div
                         className="resize-handle handle-ne"
-                        title="Resize corner"
+                        title="Resize corner & font size"
                         onPointerDown={(e) =>
-                          handleResizePointerDown(e, box.id, "ne", maxWidthRatio, fontSizeRatio)
+                          handleResizePointerDown(e, box.id, "ne", maxWidthRatio, currentFontSize)
                         }
                       />
                       <div
                         className="resize-handle handle-e"
                         title="Resize width"
                         onPointerDown={(e) =>
-                          handleResizePointerDown(e, box.id, "e", maxWidthRatio, fontSizeRatio)
+                          handleResizePointerDown(e, box.id, "e", maxWidthRatio, currentFontSize)
                         }
                       />
                       <div
                         className="resize-handle handle-se"
-                        title="Resize corner"
+                        title="Resize corner & font size"
                         onPointerDown={(e) =>
-                          handleResizePointerDown(e, box.id, "se", maxWidthRatio, fontSizeRatio)
+                          handleResizePointerDown(e, box.id, "se", maxWidthRatio, currentFontSize)
                         }
                       />
                       <div
                         className="resize-handle handle-s"
                         title="Resize font size"
                         onPointerDown={(e) =>
-                          handleResizePointerDown(e, box.id, "s", maxWidthRatio, fontSizeRatio)
+                          handleResizePointerDown(e, box.id, "s", maxWidthRatio, currentFontSize)
                         }
                       />
                       <div
                         className="resize-handle handle-sw"
-                        title="Resize corner"
+                        title="Resize corner & font size"
                         onPointerDown={(e) =>
-                          handleResizePointerDown(e, box.id, "sw", maxWidthRatio, fontSizeRatio)
+                          handleResizePointerDown(e, box.id, "sw", maxWidthRatio, currentFontSize)
                         }
                       />
                       <div
                         className="resize-handle handle-w"
                         title="Resize width"
                         onPointerDown={(e) =>
-                          handleResizePointerDown(e, box.id, "w", maxWidthRatio, fontSizeRatio)
+                          handleResizePointerDown(e, box.id, "w", maxWidthRatio, currentFontSize)
                         }
                       />
                     </>
@@ -729,35 +744,121 @@ export default function AdminStudio() {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-2">
-                <div>
-                  <label className="block text-[11px] font-semibold text-gray-400 mb-1">
-                    Max Width: {Math.round((selectedBox.maxWidthRatio || 0.5) * 100)}%
+              <div>
+                <label className="block text-[11px] font-semibold text-gray-400 mb-1">
+                  Max Width: {Math.round((selectedBox.maxWidthRatio || 0.5) * 100)}%
+                </label>
+                <input
+                  type="range"
+                  min="0.15"
+                  max="0.95"
+                  step="0.05"
+                  value={selectedBox.maxWidthRatio || 0.5}
+                  onChange={(e) => handleUpdateBox(selectedBox.id, "maxWidthRatio", parseFloat(e.target.value))}
+                  className="w-full accent-[#19bde7]"
+                />
+              </div>
+
+              {/* FONT SIZE CONTROLS */}
+              <div className="rounded-xl border border-white/10 bg-[#161616] p-3 space-y-2">
+                <div className="flex items-center justify-between">
+                  <label className="text-[11px] font-semibold text-gray-400 flex items-center gap-1.5">
+                    Font Size:
+                    <span className="text-[#19bde7] font-bold text-xs">
+                      {selectedBox.fontSize || Math.round(36 * (selectedBox.fontSizeRatio || 1))}px
+                    </span>
                   </label>
-                  <input
-                    type="range"
-                    min="0.15"
-                    max="0.95"
-                    step="0.05"
-                    value={selectedBox.maxWidthRatio || 0.5}
-                    onChange={(e) => handleUpdateBox(selectedBox.id, "maxWidthRatio", parseFloat(e.target.value))}
-                    className="w-full accent-[#19bde7]"
-                  />
+
+                  {/* Stepper buttons & number input */}
+                  <div className="flex items-center gap-1">
+                    <button
+                      type="button"
+                      title="Decrease by 2px"
+                      onClick={() => {
+                        const cur = selectedBox.fontSize || Math.round(36 * (selectedBox.fontSizeRatio || 1));
+                        const next = Math.max(12, cur - 2);
+                        handleUpdateBox(selectedBox.id, "fontSize", next);
+                        handleUpdateBox(selectedBox.id, "fontSizeRatio", Math.round((next / 36) * 100) / 100);
+                      }}
+                      className="h-6 w-6 rounded bg-white/5 hover:bg-white/15 text-xs font-bold text-gray-300 flex items-center justify-center transition cursor-pointer"
+                    >
+                      -
+                    </button>
+                    <input
+                      type="number"
+                      min="12"
+                      max="120"
+                      value={selectedBox.fontSize || Math.round(36 * (selectedBox.fontSizeRatio || 1))}
+                      onChange={(e) => {
+                        const val = parseInt(e.target.value, 10);
+                        if (!isNaN(val) && val >= 10 && val <= 140) {
+                          handleUpdateBox(selectedBox.id, "fontSize", val);
+                          handleUpdateBox(selectedBox.id, "fontSizeRatio", Math.round((val / 36) * 100) / 100);
+                        }
+                      }}
+                      className="w-12 h-6 text-center text-xs font-bold bg-[#141414] border border-white/20 rounded text-white outline-none focus:border-[#19bde7]"
+                    />
+                    <button
+                      type="button"
+                      title="Increase by 2px"
+                      onClick={() => {
+                        const cur = selectedBox.fontSize || Math.round(36 * (selectedBox.fontSizeRatio || 1));
+                        const next = Math.min(120, cur + 2);
+                        handleUpdateBox(selectedBox.id, "fontSize", next);
+                        handleUpdateBox(selectedBox.id, "fontSizeRatio", Math.round((next / 36) * 100) / 100);
+                      }}
+                      className="h-6 w-6 rounded bg-white/5 hover:bg-white/15 text-xs font-bold text-gray-300 flex items-center justify-center transition cursor-pointer"
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
 
-                <div>
-                  <label className="block text-[11px] font-semibold text-gray-400 mb-1">
-                    Font Scale: {(selectedBox.fontSizeRatio || 1).toFixed(1)}x
-                  </label>
-                  <input
-                    type="range"
-                    min="0.4"
-                    max="2.5"
-                    step="0.05"
-                    value={selectedBox.fontSizeRatio || 1}
-                    onChange={(e) => handleUpdateBox(selectedBox.id, "fontSizeRatio", parseFloat(e.target.value))}
-                    className="w-full accent-[#19bde7]"
-                  />
+                {/* Range Slider for Font Size */}
+                <input
+                  type="range"
+                  min="14"
+                  max="100"
+                  step="1"
+                  value={selectedBox.fontSize || Math.round(36 * (selectedBox.fontSizeRatio || 1))}
+                  onChange={(e) => {
+                    const next = parseInt(e.target.value, 10);
+                    handleUpdateBox(selectedBox.id, "fontSize", next);
+                    handleUpdateBox(selectedBox.id, "fontSizeRatio", Math.round((next / 36) * 100) / 100);
+                  }}
+                  className="w-full accent-[#19bde7]"
+                />
+
+                {/* Quick Presets */}
+                <div className="grid grid-cols-5 gap-1 pt-1">
+                  {[
+                    { label: "S", size: 24 },
+                    { label: "M", size: 32 },
+                    { label: "L", size: 42 },
+                    { label: "XL", size: 54 },
+                    { label: "XXL", size: 68 },
+                  ].map((preset) => {
+                    const cur = selectedBox.fontSize || Math.round(36 * (selectedBox.fontSizeRatio || 1));
+                    const isActive = cur === preset.size;
+                    return (
+                      <button
+                        key={preset.label}
+                        type="button"
+                        onClick={() => {
+                          handleUpdateBox(selectedBox.id, "fontSize", preset.size);
+                          handleUpdateBox(selectedBox.id, "fontSizeRatio", Math.round((preset.size / 36) * 100) / 100);
+                        }}
+                        className={`py-1 rounded text-[10px] font-semibold transition cursor-pointer ${
+                          isActive
+                            ? "bg-[#19bde7] text-black font-bold"
+                            : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
+                        }`}
+                        title={`Set font size to ${preset.size}px`}
+                      >
+                        {preset.label} ({preset.size})
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 
