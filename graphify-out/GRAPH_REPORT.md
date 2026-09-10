@@ -1,7 +1,7 @@
 # Graph Report - MemeMaker  (2026-09-10)
 
 ## Corpus Check
-- 262 files · ~304,908 words
+- 262 files · ~304,969 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `048a516b`
+- Built from commit: `2c112cec`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 

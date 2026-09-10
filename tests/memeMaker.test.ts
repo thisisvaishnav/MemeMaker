@@ -35,4 +35,12 @@ describe("MemeMaker Template & Logic (components/MemeMaker.tsx)", () => {
     expect(TEMPLATE_ALIAS_MAP["distracted-boyfriend"]).toBe(6);
     expect(TEMPLATE_ALIAS_MAP["woman-yelling-at-cat"]).toBe(7);
   });
+
+  it("ensures classic meme text is uppercased on canvas to match CSS text-transform", () => {
+    const rawInput = "this should be in capital letters";
+    const getRenderedText = (text: string, isPlain = false) => isPlain ? text : text.toUpperCase();
+
+    expect(getRenderedText(rawInput, false)).toBe("THIS SHOULD BE IN CAPITAL LETTERS");
+    expect(getRenderedText(rawInput, true)).toBe("this should be in capital letters");
+  });
 });

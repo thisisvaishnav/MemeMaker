@@ -258,6 +258,8 @@ export default function MemeMaker() {
       ) => {
         if (!text || !text.trim()) return;
 
+        const renderedText = isPlain ? text : text.toUpperCase();
+
         const px = canvas.width * x;
         const py = canvas.height * y;
 
@@ -282,7 +284,7 @@ export default function MemeMaker() {
 
         // Word-wrap and newline handling relative to local (0, 0)
         const lines: string[] = [];
-        const rawLines = text.split("\n");
+        const rawLines = renderedText.split("\n");
 
         if (maxWidthPx) {
           for (const rawLine of rawLines) {
