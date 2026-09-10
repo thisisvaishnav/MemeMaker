@@ -1,16 +1,16 @@
 # Graph Report - MemeMaker  (2026-09-10)
 
 ## Corpus Check
-- 260 files · ~300,360 words
+- 260 files · ~301,442 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1857 nodes · 1797 edges · 230 communities (218 shown, 5 thin omitted)
+- 1859 nodes · 1800 edges · 230 communities (218 shown, 5 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `f87a1212`
+- Built from commit: `4053b5a3`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -1138,11 +1138,11 @@ Nodes (4): Development, Documentation, Project Architecture & Tech Stack (MemeMa
 
 ### Community 236 - "MemeMaker.tsx"
 Cohesion: 0.06
-Nodes (58): AdminLogin(), AdminStudio(), [], MemeMaker(), ResizeHandle, TEMPLATE_ALIAS_MAP, TEMPLATE_NAMES, templates (+50 more)
+Nodes (60): AdminLogin(), AdminStudio(), ResizeHandle, TransformState, [], MemeMaker(), ResizeHandle, TEMPLATE_ALIAS_MAP (+52 more)
 
 ## Knowledge Gaps
-- **1240 isolated node(s):** `colors`, `$schema`, `style`, `rsc`, `tsx` (+1235 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1408 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **1242 isolated node(s):** `colors`, `$schema`, `style`, `rsc`, `tsx` (+1237 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1410 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
@@ -1150,10 +1150,8 @@ _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `dependencies` connect `dependencies` to `scripts`?**
   _High betweenness centrality (0.002) - this node is a cross-community bridge._
-- **Why does `Pseudo-classes` connect `Pseudo-classes` to `hover-focus-and-other-states.mdx`?**
-  _High betweenness centrality (0.001) - this node is a cross-community bridge._
 - **What connects `colors`, `$schema`, `style` to the rest of the system?**
-  _1240 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _1242 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Header.astro` be split into smaller, more focused modules?**
   _Cohesion score 0.08994708994708994 - nodes in this community are weakly interconnected._
 - **Should `Changes from v3` be split into smaller, more focused modules?**
@@ -1162,3 +1160,5 @@ _Questions this graph is uniquely positioned to answer:_
   _Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected._
 - **Should `scripts` be split into smaller, more focused modules?**
   _Cohesion score 0.08333333333333333 - nodes in this community are weakly interconnected._
+- **Should `dependencies` be split into smaller, more focused modules?**
+  _Cohesion score 0.046511627906976744 - nodes in this community are weakly interconnected._
