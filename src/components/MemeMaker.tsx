@@ -15,6 +15,12 @@ import {
   getTemplateBoxes,
   type TemplateTextBox,
 } from "../lib/templateBoxes";
+import {
+  fetchTemplates,
+  saveTemplate,
+  type DbTemplate,
+} from "../lib/templatesDb";
+import { getAdminSession } from "../lib/adminAuth";
 
 export { TEMPLATE_BOXES, DEFAULT_BOXES, getTemplateBoxes };
 export type { TemplateTextBox };
@@ -120,6 +126,11 @@ export default function MemeMaker() {
   const [bottomText, setBottomText] = useState("");
   const [boxTexts, setBoxTexts] = useState<Record<string, string>>({});
   const [boxColors, setBoxColors] = useState<Record<string, string>>({});
+  const [boxPositions, setBoxPositions] = useState<Record<string, { x: number; y: number }>>({});
+
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [dbTemplates, setDbTemplates] = useState<DbTemplate[]>([]);
+  const [adminSaveMessage, setAdminSaveMessage] = useState<string | null>(null);
 
   const [textColor, setTextColor] = useState("#ffffff");
   const [fontSize, setFontSize] = useState(52);
@@ -135,7 +146,14 @@ export default function MemeMaker() {
 
   const [search, setSearch] = useState("");
 
-  const activeBoxes = getTemplateBoxes(selectedTemplateId);
+  const currentDbTemplate = dbTemplates.find((t) => t.id === selectedTemplateId);
+  const baseBoxes = currentDbTemplate?.boxes || getTemplateBoxes(selectedTemplateId);
+
+  const activeBoxes = baseBoxes.map((box) => ({
+    ...box,
+    x: boxPositions[box.id]?.x ?? box.x,
+    y: boxPositions[box.id]?.y ?? box.y,
+  }));
 
   const drawMeme = (includeLayers = false) => {
     const canvas = canvasRef.current;
@@ -327,6 +345,16 @@ export default function MemeMaker() {
         }
       });
     });
+
+    getAdminSession().then((session) => {
+      setIsAdmin(Boolean(session));
+    });
+
+    fetchTemplates().then((tpls) => {
+      if (tpls && tpls.length > 0) {
+        setDbTemplates(tpls);
+      }
+    });
   }, []);
 
   useEffect(() => {
@@ -334,6 +362,7 @@ export default function MemeMaker() {
   }, [
     image,
     selectedTemplateId,
+    boxPositions,
     boxTexts,
     boxColors,
     topText,
@@ -422,6 +451,7 @@ export default function MemeMaker() {
 
   const reset = () => {
     setSelectedTemplateId(1);
+    setBoxPositions({});
     setBoxTexts({});
     setBoxColors({});
     setTopText("");
@@ -440,7 +470,8 @@ export default function MemeMaker() {
   };
 
   const [dragging, setDragging] = useState<{
-    id: number;
+    id: number | string;
+    isLayer: boolean;
     offsetX: number;
     offsetY: number;
   } | null>(null);
@@ -492,10 +523,73 @@ export default function MemeMaker() {
     const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
     setDragging({
       id: layer.id,
+      isLayer: true,
       offsetX: e.clientX - rect.left,
       offsetY: e.clientY - rect.top,
     });
     (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+  };
+
+  const handleBoxPointerDown = (
+    e: React.PointerEvent,
+    boxId: string
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    setDragging({
+      id: boxId,
+      isLayer: false,
+      offsetX: e.clientX - rect.left,
+      offsetY: e.clientY - rect.top,
+    });
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+  };
+
+  const resetBoxPosition = (boxId: string) => {
+    setBoxPositions((prev) => {
+      const next = { ...prev };
+      delete next[boxId];
+      return next;
+    });
+  };
+
+  const handleAdminSavePositions = async () => {
+    if (!selectedTemplateId) return;
+    const updatedBoxes = activeBoxes.map((b) => ({
+      id: b.id,
+      label: b.label,
+      placeholder: b.placeholder,
+      x: Math.round(b.x * 100) / 100,
+      y: Math.round(b.y * 100) / 100,
+      textAlign: b.textAlign,
+      maxWidthRatio: b.maxWidthRatio,
+      fontSizeRatio: b.fontSizeRatio,
+    }));
+
+    const res = await saveTemplate({
+      id: selectedTemplateId,
+      name: templateTitle,
+      image_url: image,
+      boxes: updatedBoxes,
+    });
+
+    if (res.success) {
+      setAdminSaveMessage("✅ Positions saved to database for all users!");
+      setDbTemplates((prev) =>
+        prev.map((t) => (t.id === selectedTemplateId ? { ...t, boxes: updatedBoxes } : t))
+      );
+      setTimeout(() => setAdminSaveMessage(null), 4000);
+    } else if (res.savedLocally) {
+      setAdminSaveMessage("💾 Saved to your browser! (Run Supabase SQL to sync globally)");
+      setDbTemplates((prev) =>
+        prev.map((t) => (t.id === selectedTemplateId ? { ...t, boxes: updatedBoxes } : t))
+      );
+      setTimeout(() => setAdminSaveMessage(null), 5000);
+    } else {
+      setAdminSaveMessage("❌ Error: " + (res.error || "Save failed"));
+      setTimeout(() => setAdminSaveMessage(null), 5000);
+    }
   };
 
   const handlePointerMove = (e: React.PointerEvent) => {
@@ -517,16 +611,23 @@ export default function MemeMaker() {
       (e.clientY - wrapperRect.top - dragging.offsetY) /
       canvasRect.height;
 
-    const clampedX = Math.max(0, Math.min(1, relX));
-    const clampedY = Math.max(0, Math.min(1, relY));
+    const clampedX = Math.round(Math.max(0.02, Math.min(0.98, relX)) * 100) / 100;
+    const clampedY = Math.round(Math.max(0.02, Math.min(0.98, relY)) * 100) / 100;
 
-    setLayers((current) =>
-      current.map((layer) =>
-        layer.id === dragging.id
-          ? { ...layer, x: clampedX, y: clampedY }
-          : layer
-      )
-    );
+    if (dragging.isLayer) {
+      setLayers((current) =>
+        current.map((layer) =>
+          layer.id === dragging.id
+            ? { ...layer, x: clampedX, y: clampedY }
+            : layer
+        )
+      );
+    } else {
+      setBoxPositions((prev) => ({
+        ...prev,
+        [dragging.id]: { x: clampedX, y: clampedY },
+      }));
+    }
   };
 
   const handlePointerUp = () => {
@@ -628,6 +729,38 @@ export default function MemeMaker() {
                   </div>
                 );
               })}
+
+              {/* DEFAULT TEMPLATE BOX DRAGGABLE HANDLES */}
+              {activeBoxes.map((box) => {
+                const canvas = canvasRef.current;
+                const canvasWidth = canvas?.width ?? 1000;
+                const canvasHeight = canvas?.height ?? 600;
+
+                const displayWidth =
+                  canvas?.getBoundingClientRect().width ?? canvasWidth;
+                const displayHeight =
+                  canvas?.getBoundingClientRect().height ?? canvasHeight;
+
+                const px = box.x * displayWidth;
+                const py = box.y * displayHeight;
+                const isMoved = Boolean(boxPositions[box.id]);
+
+                return (
+                  <div
+                    key={`box-overlay-${box.id}`}
+                    className={`template-box-overlay ${isMoved ? "is-moved" : ""}`}
+                    style={{
+                      left: px,
+                      top: py,
+                      cursor: dragging?.id === box.id ? "grabbing" : "grab",
+                    }}
+                    title={`Drag to reposition ${box.label} (${Math.round(box.x * 100)}%, ${Math.round(box.y * 100)}%)`}
+                    onPointerDown={(e) => handleBoxPointerDown(e, box.id)}
+                  >
+                    <span className="box-drag-label">⋮⋮ {box.label}</span>
+                  </div>
+                );
+              })}
             </div>
 
             <input
@@ -669,6 +802,26 @@ export default function MemeMaker() {
               />
             </div>
 
+            {/* ADMIN BAR (Visible if Admin logged in) */}
+            {isAdmin && selectedTemplateId && (
+              <div className="admin-editor-bar">
+                <div className="admin-bar-header">
+                  <span className="admin-badge">⚡ Admin Mode Active</span>
+                  <a href="/admin/templates" className="admin-link">Open Studio ↗</a>
+                </div>
+                <button
+                  type="button"
+                  className="admin-save-pos-btn"
+                  onClick={handleAdminSavePositions}
+                >
+                  💾 Save Current Positions as Default
+                </button>
+                {adminSaveMessage && (
+                  <span className="admin-save-msg">{adminSaveMessage}</span>
+                )}
+              </div>
+            )}
+
             <div className="template-title">
               <span>{templateTitle}</span>
 
@@ -690,6 +843,7 @@ export default function MemeMaker() {
                 className="blank-template"
                 onClick={() => {
                   setSelectedTemplateId(null);
+                  setBoxPositions({});
                   setImage(DEFAULT_IMAGE);
                   setTemplateTitle("Blank Template");
                   saveImage(DEFAULT_IMAGE);
@@ -699,24 +853,32 @@ export default function MemeMaker() {
                 Blank
               </button>
 
-              {templates
+              {(dbTemplates.length > 0
+                ? dbTemplates
+                : templates.map((t) => ({
+                    id: t.id,
+                    name: TEMPLATE_NAMES[t.id] || `Template ${t.id}`,
+                    image_url: t.full,
+                  }))
+              )
                 .filter((item) => matchesSearch(item.id))
                 .map((template) => (
                   <button
                     className="template"
                     key={template.id}
-                    title={TEMPLATE_NAMES[template.id] || `Template ${template.id}`}
+                    title={template.name}
                     onClick={() => {
                       setSelectedTemplateId(template.id);
-                      setImage(template.full);
-                      setTemplateTitle(TEMPLATE_NAMES[template.id] || `Template ${template.id}`);
-                      saveTemplateUrl(template.full);
-                      saveImage(template.full);
+                      setBoxPositions({});
+                      setImage(template.image_url);
+                      setTemplateTitle(template.name);
+                      saveTemplateUrl(template.image_url);
+                      saveImage(template.image_url);
                     }}
                   >
                     <img
-                      src={template.thumbnail}
-                      alt={TEMPLATE_NAMES[template.id] || `Template ${template.id}`}
+                      src={template.image_url}
+                      alt={template.name}
                     />
                   </button>
                 ))}
@@ -744,6 +906,11 @@ export default function MemeMaker() {
                     setColor={(newColor) => {
                       setBoxColors((prev) => ({ ...prev, [box.id]: newColor }));
                     }}
+                    onResetPosition={
+                      boxPositions[box.id]
+                        ? () => resetBoxPosition(box.id)
+                        : undefined
+                    }
                   />
                 );
               })}
@@ -870,27 +1037,35 @@ export default function MemeMaker() {
           </div>
 
           <div className="featured-grid">
-            {templates.map((template) => (
+            {(dbTemplates.length > 0
+              ? dbTemplates
+              : templates.map((t) => ({
+                  id: t.id,
+                  name: TEMPLATE_NAMES[t.id] || `Template ${t.id}`,
+                  image_url: t.full,
+                }))
+            ).slice(0, 20).map((template) => (
               <div
                 className="featured-card"
                 key={template.id}
                 onClick={() => {
                   setSelectedTemplateId(template.id);
-                  setImage(template.full);
-                  setTemplateTitle(TEMPLATE_NAMES[template.id] || `Template ${template.id}`);
-                  saveTemplateUrl(template.full);
-                  saveImage(template.full);
+                  setBoxPositions({});
+                  setImage(template.image_url);
+                  setTemplateTitle(template.name);
+                  saveTemplateUrl(template.image_url);
+                  saveImage(template.image_url);
                   window.scrollTo({ top: 0, behavior: "smooth" });
                 }}
                 style={{ cursor: "pointer" }}
               >
                 <img
-                  src={template.thumbnail}
-                  alt={TEMPLATE_NAMES[template.id] || `Featured meme ${template.id}`}
+                  src={template.image_url}
+                  alt={template.name}
                 />
 
                 <div className="featured-info">
-                  <span>{TEMPLATE_NAMES[template.id] || `Template ${template.id}`}</span>
+                  <span>{template.name}</span>
                   <small>🔥 Trending</small>
                 </div>
               </div>
@@ -911,6 +1086,7 @@ function TextInput({
   onChange,
   color,
   setColor,
+  onResetPosition,
 }: {
   label?: string;
   placeholder: string;
@@ -918,10 +1094,23 @@ function TextInput({
   onChange: (value: string) => void;
   color: string;
   setColor: (value: string) => void;
+  onResetPosition?: () => void;
 }) {
   return (
     <div className="box-input-wrapper">
-      {label && <label className="box-label">{label}</label>}
+      <div className="box-label-row">
+        {label && <label className="box-label">{label}</label>}
+        {onResetPosition && (
+          <button
+            type="button"
+            className="box-reset-pos-btn"
+            onClick={onResetPosition}
+            title="Reset to default position"
+          >
+            Reset pos
+          </button>
+        )}
+      </div>
       <div className="text-row">
         <input
           className="text-input"

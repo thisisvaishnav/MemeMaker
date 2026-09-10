@@ -1,0 +1,10 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import AdminLogin from "../../components/admin/AdminLogin";
+---
+
+<Layout title="Admin Login — MemeMaker" showFooter={false}>
+  <main class="py-12">
+    <AdminLogin client:load />
+  </main>
+</Layout>

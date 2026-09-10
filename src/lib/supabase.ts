@@ -1,12 +1,13 @@
 import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
+const supabaseUrl =
+  import.meta.env.PUBLIC_SUPABASE_URL ||
+  (typeof process !== "undefined" ? process.env.PUBLIC_SUPABASE_URL : "") ||
+  "https://placeholder.supabase.co";
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error(
-    "[Supabase] Missing PUBLIC_SUPABASE_URL or PUBLIC_SUPABASE_ANON_KEY. Save them in the project-root .env file, then restart Astro."
-  );
-}
+const supabaseAnonKey =
+  import.meta.env.PUBLIC_SUPABASE_ANON_KEY ||
+  (typeof process !== "undefined" ? process.env.PUBLIC_SUPABASE_ANON_KEY : "") ||
+  "placeholder-anon-key";
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);

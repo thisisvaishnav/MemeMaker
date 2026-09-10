@@ -1,16 +1,16 @@
 # Graph Report - MemeMaker  (2026-09-10)
 
 ## Corpus Check
-- 250 files · ~292,937 words
+- 260 files · ~297,801 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1825 nodes · 1707 edges · 228 communities (216 shown, 6 thin omitted)
+- 1850 nodes · 1784 edges · 230 communities (217 shown, 6 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `15f6f817`
+- Built from commit: `f83d32f6`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -27,6 +27,7 @@
 - wrangler.json
 - Pseudo-class reference
 - MemeMaker — Design & Architecture Specification
+- templateCache.ts
 - Functional utilities
 - Thinking in utility classes
 - Customizing your theme
@@ -244,32 +245,32 @@
 3. `Tailwind Engineering Playbook` - 19 edges
 4. `Examples` - 13 edges
 5. `Media and feature queries` - 13 edges
-6. `Examples` - 12 edges
+6. `MemeMaker()` - 12 edges
 7. `Examples` - 12 edges
-8. `openDB()` - 11 edges
-9. `Examples` - 11 edges
-10. `cn()` - 10 edges
+8. `Examples` - 12 edges
+9. `openDB()` - 11 edges
+10. `Examples` - 11 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `updateUserUI()` --calls--> `getUserAvatarUrl()`  [EXTRACTED]
   src/components/Header.astro → src/lib/avatar.ts
+- `MemeMaker()` --calls--> `getAdminSession()`  [EXTRACTED]
+  src/components/MemeMaker.tsx → src/lib/adminAuth.ts
 - `MemeMaker()` --calls--> `clearImage()`  [EXTRACTED]
   src/components/MemeMaker.tsx → src/lib/imageStore.ts
 - `MemeMaker()` --calls--> `clearTemplateUrl()`  [EXTRACTED]
   src/components/MemeMaker.tsx → src/lib/imageStore.ts
 - `MemeMaker()` --calls--> `getCustomTemplateById()`  [EXTRACTED]
   src/components/MemeMaker.tsx → src/lib/imageStore.ts
-- `MemeMaker()` --calls--> `loadImage()`  [EXTRACTED]
-  src/components/MemeMaker.tsx → src/lib/imageStore.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (228 total, 6 thin omitted)
+## Communities (230 total, 6 thin omitted)
 
 ### Community 0 - "Header.astro"
-Cohesion: 0.05
-Nodes (32): alertBox, clearAlert(), closeBtn, googleBtn, modal, nameField, setMode(), submitText (+24 more)
+Cohesion: 0.09
+Nodes (23): alertBox, clearAlert(), closeBtn, googleBtn, modal, nameField, setMode(), submitText (+15 more)
 
 ### Community 1 - "Changes from v3"
 Cohesion: 0.05
@@ -310,6 +311,10 @@ Nodes (34): :active, :autofill, :checked, :default, :details-content, :disabled,
 ### Community 16 - "MemeMaker — Design & Architecture Specification"
 Cohesion: 0.10
 Nodes (19): 1. UX Principles & Interaction Architecture, 2.1 Color Palette & Theme Tokens, 2.2 Atmospheric Brand Mesh Gradient, 2.3 Typography Matrix, 2. Visual Design System, 3.1 Stack Breakdown, 3. Technology Stack & Directory Structure, 4.1 Home Page (`/` — `src/pages/index.astro`) (+11 more)
+
+### Community 17 - "templateCache.ts"
+Cohesion: 0.48
+Nodes (5): generateDefaultLayout(), getLandingTemplatesLayout(), getTrendingTemplates(), LandingCardLayout, randomBetween()
 
 ### Community 18 - "Functional utilities"
 Cohesion: 0.08
@@ -1128,11 +1133,11 @@ Cohesion: 0.50
 Nodes (3): Examples, Optimizing with will change, Using a custom value
 
 ### Community 236 - "MemeMaker.tsx"
-Cohesion: 0.12
-Nodes (32): MemeMaker(), TEMPLATE_ALIAS_MAP, TEMPLATE_NAMES, templates, TextLayer, clearImage(), clearTemplateUrl(), CustomTemplate (+24 more)
+Cohesion: 0.06
+Nodes (53): AdminLogin(), AdminStudio(), [], MemeMaker(), TEMPLATE_ALIAS_MAP, TEMPLATE_NAMES, templates, TextLayer (+45 more)
 
 ## Knowledge Gaps
-- **1237 isolated node(s):** `colors`, `$schema`, `style`, `rsc`, `tsx` (+1232 more)
+- **1236 isolated node(s):** `colors`, `$schema`, `style`, `rsc`, `tsx` (+1231 more)
   These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1404 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **6 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -1141,12 +1146,12 @@ _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `dependencies` connect `dependencies` to `scripts`?**
   _High betweenness centrality (0.002) - this node is a cross-community bridge._
-- **Why does `Appendix` connect `hover-focus-and-other-states.mdx` to `Pseudo-class reference`?**
+- **Why does `Pseudo-classes` connect `Pseudo-classes` to `hover-focus-and-other-states.mdx`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
 - **What connects `colors`, `$schema`, `style` to the rest of the system?**
-  _1237 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _1236 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Header.astro` be split into smaller, more focused modules?**
-  _Cohesion score 0.05142857142857143 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.08994708994708994 - nodes in this community are weakly interconnected._
 - **Should `Changes from v3` be split into smaller, more focused modules?**
   _Cohesion score 0.047619047619047616 - nodes in this community are weakly interconnected._
 - **Should `components.json` be split into smaller, more focused modules?**
