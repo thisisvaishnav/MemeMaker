@@ -322,6 +322,8 @@ export default function MemeMaker() {
         const displayWidth = canvasRef.current?.getBoundingClientRect().width ?? canvas.width;
         const scaleFactor = displayWidth > 0 ? canvas.width / displayWidth : 1;
 
+        const canvasScale = canvas.width / 1000;
+
         // Draw template specific boxes
         activeBoxes.forEach((box) => {
           const text =
@@ -338,7 +340,7 @@ export default function MemeMaker() {
           const size = calculateEffectiveFontSize({
             box,
             baseFontSize: fontSize,
-            scaleFactor: 1,
+            scaleFactor: canvasScale,
             customFontSize: customFont ? Math.round(customFont * scaleFactor) : undefined,
           });
           const customW = boxWidths[box.id];
@@ -788,19 +790,33 @@ export default function MemeMaker() {
 
   const handleAdminSavePositions = async () => {
     if (!selectedTemplateId) return;
-    const updatedBoxes = activeBoxes.map((b) => ({
-      id: b.id,
-      label: b.label,
-      placeholder: b.placeholder,
-      x: Math.round(b.x * 100) / 100,
-      y: Math.round(b.y * 100) / 100,
-      textAlign: b.textAlign,
-      maxWidthRatio: b.maxWidthRatio,
-      fontSizeRatio: b.fontSizeRatio,
-      fontSize: b.fontSize,
-      fontFamily: b.fontFamily,
-      rotation: boxRotations[b.id] ?? b.rotation ?? 0,
-    }));
+    const canvas = canvasRef.current;
+    const displayWidth = canvas?.getBoundingClientRect().width ?? 1000;
+
+    const updatedBoxes = activeBoxes.map((b) => {
+      const customW = boxWidths[b.id];
+      const customFont = boxFontSizes[b.id];
+      const widthRatio = customW && displayWidth > 0
+        ? Math.round((customW / displayWidth) * 100) / 100
+        : b.maxWidthRatio;
+      const fontRatio = customFont
+        ? Math.round((customFont / (36 * (displayWidth / 1000))) * 100) / 100
+        : b.fontSizeRatio;
+
+      return {
+        id: b.id,
+        label: b.label,
+        placeholder: b.placeholder,
+        x: Math.round(b.x * 100) / 100,
+        y: Math.round(b.y * 100) / 100,
+        textAlign: b.textAlign,
+        maxWidthRatio: widthRatio,
+        fontSizeRatio: fontRatio,
+        fontSize: b.fontSize,
+        fontFamily: b.fontFamily,
+        rotation: boxRotations[b.id] ?? b.rotation ?? 0,
+      };
+    });
 
     const res = await saveTemplate({
       id: selectedTemplateId,
@@ -1002,42 +1018,37 @@ export default function MemeMaker() {
               onClick={() => setFocusedBoxId(null)}
             >
               <div className="canvas-stage">
-                <canvas ref={canvasRef} />
+                <div className="canvas-frame">
+                  <canvas ref={canvasRef} />
 
-                {layers.map((layer) => {
-                  if (!layer.text || !layer.text.trim()) return null;
-                  const canvas = canvasRef.current;
-                  const canvasWidth = canvas?.width ?? 1000;
-                  const canvasHeight = canvas?.height ?? 600;
+                  {layers.map((layer) => {
+                    if (!layer.text || !layer.text.trim()) return null;
+                    const canvas = canvasRef.current;
+                    const canvasWidth = canvas?.width ?? 1000;
 
-                  const displayWidth =
-                    canvas?.getBoundingClientRect().width ?? canvasWidth;
-                  const displayHeight =
-                    canvas?.getBoundingClientRect().height ?? canvasHeight;
+                    const displayWidth =
+                      canvas?.getBoundingClientRect().width ?? canvasWidth;
 
-                  const px = layer.x * displayWidth;
-                  const py = layer.y * displayHeight;
+                    const scaleFactor = displayWidth / canvasWidth;
+                    const displayFontSize = Math.round(layer.fontSize * scaleFactor);
+                    const isTransformingThis = transformState?.id === layer.id;
+                    const isFocused = focusedBoxId === `layer-${layer.id}`;
+                    const isHovered = hoveredBoxId === `layer-${layer.id}`;
+                    const isSelected = isFocused || isTransformingThis;
+                    const rotation = layer.rotation || 0;
+                    const width = layer.width;
 
-                  const scaleFactor = displayWidth / canvasWidth;
-                  const displayFontSize = Math.round(layer.fontSize * scaleFactor);
-                  const isTransformingThis = transformState?.id === layer.id;
-                  const isFocused = focusedBoxId === `layer-${layer.id}`;
-                  const isHovered = hoveredBoxId === `layer-${layer.id}`;
-                  const isSelected = isFocused || isTransformingThis;
-                  const rotation = layer.rotation || 0;
-                  const width = layer.width;
-
-                  return (
-                    <div
-                      key={layer.id}
-                      className={`transform-box ${isSelected ? "is-selected" : ""} ${isHovered ? "is-hovered" : ""} ${isTransformingThis ? "is-transforming" : ""}`}
-                      style={{
-                        left: px,
-                        top: py,
-                        width: width ? `${width}px` : "max-content",
-                        maxWidth: displayWidth * 0.95,
-                        transform: `translate(-50%, -50%) rotate(${rotation}deg)`,
-                      }}
+                    return (
+                      <div
+                        key={layer.id}
+                        className={`transform-box ${isSelected ? "is-selected" : ""} ${isHovered ? "is-hovered" : ""} ${isTransformingThis ? "is-transforming" : ""}`}
+                        style={{
+                          left: `${layer.x * 100}%`,
+                          top: `${layer.y * 100}%`,
+                          width: width ? `${width}px` : "max-content",
+                          maxWidth: "96%",
+                          transform: `translate(-50%, -50%) rotate(${rotation}deg)`,
+                        }}
                       onPointerDown={(e) => handlePointerDown(e, layer)}
                       onClick={(e) => {
                         e.stopPropagation();
@@ -1142,15 +1153,10 @@ export default function MemeMaker() {
                 {activeBoxes.map((box, index) => {
                   const canvas = canvasRef.current;
                   const canvasWidth = canvas?.width ?? 1000;
-                  const canvasHeight = canvas?.height ?? 600;
 
                   const displayWidth =
                     canvas?.getBoundingClientRect().width ?? canvasWidth;
-                  const displayHeight =
-                    canvas?.getBoundingClientRect().height ?? canvasHeight;
 
-                  const px = box.x * displayWidth;
-                  const py = box.y * displayHeight;
                   const text =
                     boxTexts[box.id] ??
                     (box.id === "top" ? topText : box.id === "bottom" ? bottomText : "");
@@ -1186,10 +1192,14 @@ export default function MemeMaker() {
                       key={`box-overlay-${box.id}`}
                       className={`transform-box ${isSelected ? "is-selected" : ""} ${isHovered ? "is-hovered" : ""} ${isTransformingThis ? "is-transforming" : ""}`}
                       style={{
-                        left: px,
-                        top: py,
-                        width: maxWidthPx ? `${maxWidthPx}px` : "max-content",
-                        maxWidth: displayWidth * 0.95,
+                        left: `${box.x * 100}%`,
+                        top: `${box.y * 100}%`,
+                        width: customWidth
+                          ? `${customWidth}px`
+                          : box.maxWidthRatio
+                          ? `${box.maxWidthRatio * 100}%`
+                          : "max-content",
+                        maxWidth: "96%",
                         transform: `translate(-50%, -50%) rotate(${rotation}deg)`,
                       }}
                       title={`${box.label || `Text #${index + 1}`} (Touch & hold to drag, use handles to resize or rotate)`}
@@ -1288,6 +1298,7 @@ export default function MemeMaker() {
                     </div>
                   );
                 })}
+                </div>
               </div>
             </div>
 

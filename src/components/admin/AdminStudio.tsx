@@ -44,7 +44,7 @@ export default function AdminStudio() {
   const [transformState, setTransformState] = useState<TransformState | null>(null);
   const [imageAspect, setImageAspect] = useState<number | null>(null);
   const rafIdRef = useRef<number | null>(null);
-  const canvasRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -56,6 +56,52 @@ export default function AdminStudio() {
   const [newSlug, setNewSlug] = useState("");
   const [newFile, setNewFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
+
+  useEffect(() => {
+    if (!selectedTemplate?.image_url) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const img = new Image();
+    const isDataOrBlob =
+      selectedTemplate.image_url.startsWith("data:") ||
+      selectedTemplate.image_url.startsWith("blob:");
+    const isLocal =
+      selectedTemplate.image_url.startsWith("/") ||
+      (typeof window !== "undefined" &&
+        selectedTemplate.image_url.startsWith(window.location.origin));
+    if (!isDataOrBlob && !isLocal) {
+      img.crossOrigin = "anonymous";
+    }
+
+    img.onload = () => {
+      const maxWidth = 1000;
+      const scale = Math.min(1, maxWidth / img.width);
+      const targetWidth = Math.round(img.width * scale);
+      const targetHeight = Math.round(img.height * scale);
+
+      if (canvas.width !== targetWidth || canvas.height !== targetHeight) {
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
+      } else {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      setImageAspect(img.width / img.height);
+    };
+
+    img.onerror = (e) => {
+      console.error("Failed to load template image onto AdminStudio canvas:", e);
+      if (img.crossOrigin) {
+        img.removeAttribute("crossorigin");
+        img.src = selectedTemplate.image_url;
+      }
+    };
+
+    img.src = selectedTemplate.image_url;
+  }, [selectedTemplate?.image_url]);
 
   useEffect(() => {
     getAdminSession().then((session) => {
@@ -525,31 +571,20 @@ export default function AdminStudio() {
           {/* INTERACTIVE WORKSPACE CANVAS */}
           <div className="flex items-center justify-center w-full min-h-[380px] max-h-[580px] bg-black/40 rounded-2xl border border-white/10 p-3 overflow-hidden">
             <div
-              ref={canvasRef}
               onPointerMove={handlePointerMove}
               onPointerUp={handlePointerUp}
               onPointerLeave={handlePointerUp}
-              className="relative max-w-full max-h-[540px] rounded-xl overflow-hidden bg-black/60 border border-white/20 select-none shadow-2xl flex items-center justify-center"
+              className="canvas-frame relative max-w-full max-h-[540px] rounded-xl overflow-hidden bg-black/60 border border-white/20 select-none shadow-2xl flex items-center justify-center"
               style={{
-                aspectRatio: imageAspect ? `${imageAspect}` : undefined,
-                width: imageAspect && imageAspect >= 1 ? "100%" : "auto",
-                height: imageAspect && imageAspect < 1 ? "540px" : "auto",
                 touchAction: "none",
+                display: "inline-block",
+                lineHeight: 0,
               }}
             >
-              {selectedTemplate && (
-                <img
-                  src={selectedTemplate.image_url}
-                  alt={selectedTemplate.name}
-                  onLoad={(e) => {
-                    const img = e.currentTarget;
-                    if (img.naturalWidth && img.naturalHeight) {
-                      setImageAspect(img.naturalWidth / img.naturalHeight);
-                    }
-                  }}
-                  className="w-full h-full object-contain block pointer-events-none select-none"
-                />
-              )}
+              <canvas
+                ref={canvasRef}
+                className="block max-w-full max-h-[540px] w-auto h-auto object-contain pointer-events-none select-none"
+              />
 
             {/* DRAGGABLE, RESIZABLE, AND ROTATABLE TEXT BOX OVERLAYS */}
             {boxes.map((box, idx) => {

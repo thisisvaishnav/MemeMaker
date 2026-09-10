@@ -229,6 +229,18 @@ button {
   user-select: none;
 }
 
+.canvas-frame {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  max-height: 100%;
+  line-height: 0;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.canvas-frame canvas,
 .canvas-stage canvas {
   width: 100%;
   height: auto;
@@ -1092,6 +1104,7 @@ button {
     justify-content: center;
   }
 
+  .canvas-frame canvas,
   .canvas-stage canvas {
     max-height: min(340px, 36vh);
     width: auto;
@@ -1261,6 +1274,7 @@ button {
     max-height: min(300px, 34vh);
   }
 
+  .canvas-frame canvas,
   .canvas-stage canvas {
     max-height: min(300px, 34vh);
   }

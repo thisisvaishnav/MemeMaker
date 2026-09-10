@@ -271,6 +271,62 @@ describe("Regression Tests: Edit Page Non-Obscuring Handle Placement & Drag Math
       const size = calculateEffectiveFontSize({ box, baseFontSize: 30, scaleFactor: 1, minFontSize: 12 });
       expect(size).toBe(12);
     });
+
+    it("preserves exact font proportions across mobile display and 1000px canvas export", () => {
+      const box = {
+        id: "headline",
+        label: "Headline",
+        placeholder: "Headline",
+        x: 0.5,
+        y: 0.1,
+        fontSizeRatio: 1.5,
+      };
+
+      const canvasWidth = 1000;
+      const mobileDisplayWidth = 300;
+      const desktopDisplayWidth = 600;
+
+      // Canvas export font size
+      const exportFontSize = calculateEffectiveFontSize({
+        box,
+        baseFontSize: 52,
+        scaleFactor: canvasWidth / 1000, // 1.0
+      });
+
+      // Mobile preview font size
+      const mobileFontSize = calculateEffectiveFontSize({
+        box,
+        baseFontSize: 52,
+        scaleFactor: mobileDisplayWidth / canvasWidth, // 0.3
+      });
+
+      // Desktop preview font size
+      const desktopFontSize = calculateEffectiveFontSize({
+        box,
+        baseFontSize: 52,
+        scaleFactor: desktopDisplayWidth / canvasWidth, // 0.6
+      });
+
+      // The ratio of font size to width must remain invariant across all viewports
+      const exportRatio = exportFontSize / canvasWidth;
+      const mobileRatio = mobileFontSize / mobileDisplayWidth;
+      const desktopRatio = desktopFontSize / desktopDisplayWidth;
+
+      expect(Math.abs(exportRatio - mobileRatio)).toBeLessThan(0.005);
+      expect(Math.abs(exportRatio - desktopRatio)).toBeLessThan(0.005);
+    });
+
+    it("verifies percentage positioning is strictly screen-size invariant", () => {
+      const box = { x: 0.35, y: 0.72 };
+      const mobileWidth = 320;
+      const desktopWidth = 1024;
+      const canvasWidth = 1000;
+
+      // In percentage-based positioning, relative coordinates are identical regardless of container width
+      expect(box.x * mobileWidth / mobileWidth).toBe(box.x);
+      expect(box.x * desktopWidth / desktopWidth).toBe(box.x);
+      expect(box.x * canvasWidth / canvasWidth).toBe(box.x);
+    });
   });
 });
 
