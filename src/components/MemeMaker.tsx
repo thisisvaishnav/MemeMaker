@@ -127,6 +127,14 @@ export const TEMPLATE_NAMES: Record<number, string> = {
 export default function MemeMaker() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const loadedImageRef = useRef<{ src: string; img: HTMLImageElement } | null>(null);
+  const rafIdRef = useRef<number | null>(null);
+  const pendingDragCoordsRef = useRef<{
+    id: string | number;
+    isLayer: boolean;
+    x: number;
+    y: number;
+  } | null>(null);
 
   const [selectedTemplateId, setSelectedTemplateId] = useState<number | null>(1);
   const [image, setImage] = useState(DEFAULT_IMAGE);
@@ -173,19 +181,19 @@ export default function MemeMaker() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const img = new Image();
-    const isDataOrBlob = image.startsWith("data:") || image.startsWith("blob:");
-    const isLocal = image.startsWith("/") || (typeof window !== "undefined" && image.startsWith(window.location.origin));
-    if (!isDataOrBlob && !isLocal) {
-      img.crossOrigin = "anonymous";
-    }
-
-    img.onload = () => {
+    const renderOnImage = (img: HTMLImageElement) => {
       const maxWidth = 1000;
       const scale = Math.min(1, maxWidth / img.width);
+      const targetWidth = Math.round(img.width * scale);
+      const targetHeight = Math.round(img.height * scale);
 
-      canvas.width = img.width * scale;
-      canvas.height = img.height * scale;
+      // Only reallocate canvas buffer if dimensions actually changed
+      if (canvas.width !== targetWidth || canvas.height !== targetHeight) {
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
+      } else {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
 
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
@@ -269,6 +277,24 @@ export default function MemeMaker() {
         ctx.fillStyle = "rgba(255,255,255,0.75)";
         ctx.fillText("MemeMaker", 12, canvas.height - 12);
       }
+    };
+
+    // Fast synchronous path: reuse already decoded image without re-allocation
+    if (loadedImageRef.current && loadedImageRef.current.src === image) {
+      renderOnImage(loadedImageRef.current.img);
+      return;
+    }
+
+    const img = new Image();
+    const isDataOrBlob = image.startsWith("data:") || image.startsWith("blob:");
+    const isLocal = image.startsWith("/") || (typeof window !== "undefined" && image.startsWith(window.location.origin));
+    if (!isDataOrBlob && !isLocal) {
+      img.crossOrigin = "anonymous";
+    }
+
+    img.onload = () => {
+      loadedImageRef.current = { src: image, img };
+      renderOnImage(img);
     };
 
     img.onerror = (e) => {
@@ -630,23 +656,55 @@ export default function MemeMaker() {
       canvasRect.height
     );
 
-    if (dragging.isLayer) {
-      setLayers((current) =>
-        current.map((layer) =>
-          layer.id === dragging.id
-            ? { ...layer, x: clampedX, y: clampedY }
-            : layer
-        )
-      );
-    } else {
-      setBoxPositions((prev) => ({
-        ...prev,
-        [dragging.id]: { x: clampedX, y: clampedY },
-      }));
+    pendingDragCoordsRef.current = {
+      id: dragging.id,
+      isLayer: dragging.isLayer,
+      x: clampedX,
+      y: clampedY,
+    };
+
+    if (rafIdRef.current === null) {
+      rafIdRef.current = requestAnimationFrame(() => {
+        rafIdRef.current = null;
+        const coords = pendingDragCoordsRef.current;
+        if (!coords) return;
+        if (coords.isLayer) {
+          setLayers((current) =>
+            current.map((layer) =>
+              layer.id === coords.id ? { ...layer, x: coords.x, y: coords.y } : layer
+            )
+          );
+        } else {
+          setBoxPositions((prev) => ({
+            ...prev,
+            [coords.id]: { x: coords.x, y: coords.y },
+          }));
+        }
+      });
     }
   };
 
   const handlePointerUp = () => {
+    if (rafIdRef.current !== null) {
+      cancelAnimationFrame(rafIdRef.current);
+      rafIdRef.current = null;
+    }
+    const coords = pendingDragCoordsRef.current;
+    if (coords) {
+      if (coords.isLayer) {
+        setLayers((current) =>
+          current.map((layer) =>
+            layer.id === coords.id ? { ...layer, x: coords.x, y: coords.y } : layer
+          )
+        );
+      } else {
+        setBoxPositions((prev) => ({
+          ...prev,
+          [coords.id]: { x: coords.x, y: coords.y },
+        }));
+      }
+      pendingDragCoordsRef.current = null;
+    }
     setDragging(null);
   };
 
@@ -702,6 +760,7 @@ export default function MemeMaker() {
               className="canvas-wrapper"
               onPointerMove={handlePointerMove}
               onPointerUp={handlePointerUp}
+              onPointerCancel={handlePointerUp}
             >
               <div className="canvas-stage">
                 <canvas ref={canvasRef} />

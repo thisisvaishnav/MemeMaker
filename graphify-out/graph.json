@@ -297,7 +297,7 @@
       "file_type": "code",
       "norm_label": "textinput()",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L1133"
+      "source_location": "L1192"
     },
     {
       "id": "src_lib_adminauth_adminsignin",
@@ -22317,7 +22317,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L161",
+      "source_location": "L169",
       "weight": 1.0
     },
     {
@@ -22329,7 +22329,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L298",
+      "source_location": "L324",
       "weight": 1.0
     },
     {
@@ -22341,7 +22341,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L303",
+      "source_location": "L329",
       "weight": 1.0
     },
     {
@@ -22353,7 +22353,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L304",
+      "source_location": "L330",
       "weight": 1.0
     },
     {
@@ -22365,7 +22365,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L306",
+      "source_location": "L332",
       "weight": 1.0
     },
     {
@@ -22377,7 +22377,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L329",
+      "source_location": "L355",
       "weight": 1.0
     },
     {
@@ -22389,7 +22389,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L343",
+      "source_location": "L369",
       "weight": 1.0
     },
     {
@@ -22401,7 +22401,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L360",
+      "source_location": "L386",
       "weight": 1.0
     },
     {
@@ -22413,7 +22413,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L364",
+      "source_location": "L390",
       "weight": 1.0
     },
     {
@@ -22425,7 +22425,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L479",
+      "source_location": "L505",
       "weight": 1.0
     },
     {
@@ -22437,7 +22437,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L585",
+      "source_location": "L611",
       "weight": 1.0
     },
     {
@@ -22449,7 +22449,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L622",
+      "source_location": "L648",
       "weight": 1.0
     },
     {
@@ -22461,7 +22461,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L776",
+      "source_location": "L835",
       "weight": 1.0
     },
     {
@@ -40876,7 +40876,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L1133",
+      "source_location": "L1192",
       "weight": 1.0
     },
     {
@@ -42029,5 +42029,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "91581d9696a35a6691bca5018fb7de9bbf714cfc"
+  "built_at_commit": "98b10610b8625de6ecf4a56d8a6b4f3d023dc04a"
 }
