@@ -9,8 +9,8 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 0,
-      "community_name": "Header.astro",
+      "community": 17,
+      "community_name": "templateCache.ts",
       "file_type": "code",
       "norm_label": "landingcardlayout",
       "source_file": "src/lib/templateCache.ts",
@@ -27,7 +27,20 @@
       "file_type": "code",
       "norm_label": "textlayer",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L22"
+      "source_location": "L28"
+    },
+    {
+      "id": "src_lib_adminauth_adminuser",
+      "label": "AdminUser",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "adminuser",
+      "source_file": "src/lib/adminAuth.ts",
+      "source_location": "L3"
     },
     {
       "id": "src_lib_imagestore_customtemplate",
@@ -54,6 +67,19 @@
       "norm_label": "templatetextbox",
       "source_file": "src/lib/templateBoxes.ts",
       "source_location": "L1"
+    },
+    {
+      "id": "src_lib_templatesdb_dbtemplate",
+      "label": "DbTemplate",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "dbtemplate",
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L8"
     },
     {
       "id": "src_components_ui_button_buttonprops",
@@ -153,66 +179,6 @@
       "source_location": "L45"
     },
     {
-      "id": "src_lib_templatecache_generatedefaultlayout",
-      "label": "generateDefaultLayout()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "Header.astro",
-      "file_type": "code",
-      "norm_label": "generatedefaultlayout()",
-      "source_file": "src/lib/templateCache.ts",
-      "source_location": "L51"
-    },
-    {
-      "id": "src_lib_templatecache_getlandingtemplateslayout",
-      "label": "getLandingTemplatesLayout()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "Header.astro",
-      "file_type": "code",
-      "norm_label": "getlandingtemplateslayout()",
-      "source_file": "src/lib/templateCache.ts",
-      "source_location": "L25"
-    },
-    {
-      "id": "src_lib_templatecache_gettrendingtemplates",
-      "label": "getTrendingTemplates()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "Header.astro",
-      "file_type": "code",
-      "norm_label": "gettrendingtemplates()",
-      "source_file": "src/lib/templateCache.ts",
-      "source_location": "L85"
-    },
-    {
-      "id": "src_lib_templatecache_randombetween",
-      "label": "randomBetween()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "Header.astro",
-      "file_type": "code",
-      "norm_label": "randombetween()",
-      "source_file": "src/lib/templateCache.ts",
-      "source_location": "L17"
-    },
-    {
-      "id": "src_pages_index_if",
-      "label": "if()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "Header.astro",
-      "file_type": "code",
-      "norm_label": "if()",
-      "source_file": "src/pages/index.astro",
-      "source_location": "L711"
-    },
-    {
       "id": "tests_setup_htmlcanvaselement_todataurl",
       "label": ".toDataURL()",
       "_callable": true,
@@ -225,6 +191,78 @@
       "source_location": "L30"
     },
     {
+      "id": "src_lib_templatecache_generatedefaultlayout",
+      "label": "generateDefaultLayout()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "templateCache.ts",
+      "file_type": "code",
+      "norm_label": "generatedefaultlayout()",
+      "source_file": "src/lib/templateCache.ts",
+      "source_location": "L51"
+    },
+    {
+      "id": "src_lib_templatecache_getlandingtemplateslayout",
+      "label": "getLandingTemplatesLayout()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "templateCache.ts",
+      "file_type": "code",
+      "norm_label": "getlandingtemplateslayout()",
+      "source_file": "src/lib/templateCache.ts",
+      "source_location": "L25"
+    },
+    {
+      "id": "src_lib_templatecache_gettrendingtemplates",
+      "label": "getTrendingTemplates()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "templateCache.ts",
+      "file_type": "code",
+      "norm_label": "gettrendingtemplates()",
+      "source_file": "src/lib/templateCache.ts",
+      "source_location": "L85"
+    },
+    {
+      "id": "src_lib_templatecache_randombetween",
+      "label": "randomBetween()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "templateCache.ts",
+      "file_type": "code",
+      "norm_label": "randombetween()",
+      "source_file": "src/lib/templateCache.ts",
+      "source_location": "L17"
+    },
+    {
+      "id": "src_components_admin_adminlogin_adminlogin",
+      "label": "AdminLogin()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "adminlogin()",
+      "source_file": "src/components/admin/AdminLogin.tsx",
+      "source_location": "L4"
+    },
+    {
+      "id": "src_components_admin_adminstudio_adminstudio",
+      "label": "AdminStudio()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "adminstudio()",
+      "source_file": "src/components/admin/AdminStudio.tsx",
+      "source_location": "L12"
+    },
+    {
       "id": "src_components_mememaker_mememaker",
       "label": "MemeMaker()",
       "_callable": true,
@@ -234,7 +272,7 @@
       "file_type": "code",
       "norm_label": "mememaker()",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L112"
+      "source_location": "L118"
     },
     {
       "id": "src_components_mememaker_textinput",
@@ -246,7 +284,43 @@
       "file_type": "code",
       "norm_label": "textinput()",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L907"
+      "source_location": "L1082"
+    },
+    {
+      "id": "src_lib_adminauth_adminsignin",
+      "label": "adminSignIn()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "adminsignin()",
+      "source_file": "src/lib/adminAuth.ts",
+      "source_location": "L11"
+    },
+    {
+      "id": "src_lib_adminauth_adminsignout",
+      "label": "adminSignOut()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "adminsignout()",
+      "source_file": "src/lib/adminAuth.ts",
+      "source_location": "L70"
+    },
+    {
+      "id": "src_lib_adminauth_getadminsession",
+      "label": "getAdminSession()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "getadminsession()",
+      "source_file": "src/lib/adminAuth.ts",
+      "source_location": "L80"
     },
     {
       "id": "src_lib_imagestore_clearimage",
@@ -415,6 +489,126 @@
       "norm_label": "gettemplateboxes()",
       "source_file": "src/lib/templateBoxes.ts",
       "source_location": "L150"
+    },
+    {
+      "id": "src_lib_templatesdb_applylocaloverrides",
+      "label": "applyLocalOverrides()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "applylocaloverrides()",
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L107"
+    },
+    {
+      "id": "src_lib_templatesdb_createtemplate",
+      "label": "createTemplate()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "createtemplate()",
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L198"
+    },
+    {
+      "id": "src_lib_templatesdb_fetchalladmintemplates",
+      "label": "fetchAllAdminTemplates()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "fetchalladmintemplates()",
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L141"
+    },
+    {
+      "id": "src_lib_templatesdb_fetchtemplates",
+      "label": "fetchTemplates()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "fetchtemplates()",
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L120"
+    },
+    {
+      "id": "src_lib_templatesdb_getlocaloverrides",
+      "label": "getLocalOverrides()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "getlocaloverrides()",
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L86"
+    },
+    {
+      "id": "src_lib_templatesdb_querywithtimeout",
+      "label": "queryWithTimeout()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "querywithtimeout()",
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L57"
+    },
+    {
+      "id": "src_lib_templatesdb_savelocaloverride",
+      "label": "saveLocalOverride()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "savelocaloverride()",
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L96"
+    },
+    {
+      "id": "src_lib_templatesdb_savetemplate",
+      "label": "saveTemplate()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "savetemplate()",
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L161"
+    },
+    {
+      "id": "src_lib_templatesdb_uploadtemplateimage",
+      "label": "uploadTemplateImage()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "uploadtemplateimage()",
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L240"
+    },
+    {
+      "id": "src_pages_index_if",
+      "label": "if()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "if()",
+      "source_file": "src/pages/index.astro",
+      "source_location": "L711"
     },
     {
       "id": "src_pages_templates_activatetab",
@@ -648,17 +842,6 @@
       "source_location": "L177"
     },
     {
-      "id": "src_components_footer",
-      "label": "[]",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "Header.astro",
-      "file_type": "code",
-      "norm_label": "[]",
-      "source_file": "src/components/Footer.astro",
-      "source_location": "L15"
-    },
-    {
       "id": "src_components_header",
       "label": "Header.astro",
       "_origin": "ast",
@@ -758,28 +941,6 @@
       "source_location": "L148"
     },
     {
-      "id": "src_layouts_layout",
-      "label": "Layout.astro",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "Header.astro",
-      "file_type": "code",
-      "norm_label": "layout.astro",
-      "source_file": "src/layouts/Layout.astro",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_layouts_layout_ogimageurl",
-      "label": "ogImageURL",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "Header.astro",
-      "file_type": "code",
-      "norm_label": "ogimageurl",
-      "source_file": "src/layouts/Layout.astro",
-      "source_location": "L27"
-    },
-    {
       "id": "src_lib_avatar",
       "label": "avatar.ts",
       "_origin": "ast",
@@ -802,138 +963,6 @@
       "source_location": "L6"
     },
     {
-      "id": "src_lib_supabase",
-      "label": "supabase.ts",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "Header.astro",
-      "file_type": "code",
-      "norm_label": "supabase.ts",
-      "source_file": "src/lib/supabase.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_lib_supabase_supabase",
-      "label": "supabase",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "Header.astro",
-      "file_type": "code",
-      "norm_label": "supabase",
-      "source_file": "src/lib/supabase.ts",
-      "source_location": "L12"
-    },
-    {
-      "id": "src_lib_templatecache",
-      "label": "templateCache.ts",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "Header.astro",
-      "file_type": "code",
-      "norm_label": "templatecache.ts",
-      "source_file": "src/lib/templateCache.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_pages_404",
-      "label": "404.astro",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "Header.astro",
-      "file_type": "code",
-      "norm_label": "404.astro",
-      "source_file": "src/pages/404.astro",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_pages_500",
-      "label": "500.astro",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "Header.astro",
-      "file_type": "code",
-      "norm_label": "500.astro",
-      "source_file": "src/pages/500.astro",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_pages_about",
-      "label": "about.astro",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "Header.astro",
-      "file_type": "code",
-      "norm_label": "about.astro",
-      "source_file": "src/pages/about.astro",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_pages_contact",
-      "label": "contact.astro",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "Header.astro",
-      "file_type": "code",
-      "norm_label": "contact.astro",
-      "source_file": "src/pages/contact.astro",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_pages_edit",
-      "label": "edit.astro",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "Header.astro",
-      "file_type": "code",
-      "norm_label": "edit.astro",
-      "source_file": "src/pages/edit.astro",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_pages_index",
-      "label": "index.astro",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "Header.astro",
-      "file_type": "code",
-      "norm_label": "index.astro",
-      "source_file": "src/pages/index.astro",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_pages_index_templateslots",
-      "label": "templateSlots",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "Header.astro",
-      "file_type": "code",
-      "norm_label": "templateslots",
-      "source_file": "src/pages/index.astro",
-      "source_location": "L4"
-    },
-    {
-      "id": "src_pages_privacy",
-      "label": "privacy.astro",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "Header.astro",
-      "file_type": "code",
-      "norm_label": "privacy.astro",
-      "source_file": "src/pages/privacy.astro",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_pages_terms",
-      "label": "terms.astro",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "Header.astro",
-      "file_type": "code",
-      "norm_label": "terms.astro",
-      "source_file": "src/pages/terms.astro",
-      "source_location": "L1"
-    },
-    {
       "id": "tests_avatar_test",
       "label": "avatar.test.ts",
       "_origin": "ast",
@@ -942,17 +971,6 @@
       "file_type": "code",
       "norm_label": "avatar.test.ts",
       "source_file": "tests/avatar.test.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "tests_templatecache_test",
-      "label": "templateCache.test.ts",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "Header.astro",
-      "file_type": "code",
-      "norm_label": "templatecache.test.ts",
-      "source_file": "tests/templateCache.test.ts",
       "source_location": "L1"
     },
     {
@@ -5729,6 +5747,17 @@
       "source_location": "L108"
     },
     {
+      "id": "src_pages_admin_index",
+      "label": "admin/index.astro",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "admin/index.astro",
+      "file_type": "code",
+      "norm_label": "admin/index.astro",
+      "source_file": "src/pages/admin/index.astro",
+      "source_location": "L1"
+    },
+    {
       "id": "agents_skills_tailwind_4_docs_references_docs_scroll_snap_align",
       "label": "scroll-snap-align.mdx",
       "_origin": "ast",
@@ -7340,6 +7369,28 @@
       "norm_label": "using a custom value",
       "source_file": ".agents/skills/tailwind-4-docs/references/docs/backdrop-filter-opacity.mdx",
       "source_location": "L88"
+    },
+    {
+      "id": "src_lib_templatecache",
+      "label": "templateCache.ts",
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "templateCache.ts",
+      "file_type": "code",
+      "norm_label": "templatecache.ts",
+      "source_file": "src/lib/templateCache.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "tests_templatecache_test",
+      "label": "templateCache.test.ts",
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "templateCache.ts",
+      "file_type": "code",
+      "norm_label": "templatecache.test.ts",
+      "source_file": "tests/templateCache.test.ts",
+      "source_location": "L1"
     },
     {
       "id": "agents_skills_tailwind_4_docs_references_docs_backdrop_filter_saturate",
@@ -11789,6 +11840,39 @@
       "source_location": "L6"
     },
     {
+      "id": "src_components_admin_adminlogin",
+      "label": "AdminLogin.tsx",
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "adminlogin.tsx",
+      "source_file": "src/components/admin/AdminLogin.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_components_admin_adminstudio",
+      "label": "AdminStudio.tsx",
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "adminstudio.tsx",
+      "source_file": "src/components/admin/AdminStudio.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_components_footer",
+      "label": "[]",
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "[]",
+      "source_file": "src/components/Footer.astro",
+      "source_location": "L15"
+    },
+    {
       "id": "src_components_mememaker",
       "label": "MemeMaker.tsx",
       "_origin": "ast",
@@ -11808,7 +11892,7 @@
       "file_type": "code",
       "norm_label": "template_alias_map",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L42"
+      "source_location": "L48"
     },
     {
       "id": "src_components_mememaker_template_names",
@@ -11819,7 +11903,7 @@
       "file_type": "code",
       "norm_label": "template_names",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L89"
+      "source_location": "L95"
     },
     {
       "id": "src_components_mememaker_templates",
@@ -11830,7 +11914,40 @@
       "file_type": "code",
       "norm_label": "templates",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L36"
+      "source_location": "L42"
+    },
+    {
+      "id": "src_layouts_layout",
+      "label": "Layout.astro",
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "layout.astro",
+      "source_file": "src/layouts/Layout.astro",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_layouts_layout_ogimageurl",
+      "label": "ogImageURL",
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "ogimageurl",
+      "source_file": "src/layouts/Layout.astro",
+      "source_location": "L27"
+    },
+    {
+      "id": "src_lib_adminauth",
+      "label": "adminAuth.ts",
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "adminauth.ts",
+      "source_file": "src/lib/adminAuth.ts",
+      "source_location": "L1"
     },
     {
       "id": "src_lib_imagestore",
@@ -11842,6 +11959,28 @@
       "norm_label": "imagestore.ts",
       "source_file": "src/lib/imageStore.ts",
       "source_location": "L1"
+    },
+    {
+      "id": "src_lib_supabase",
+      "label": "supabase.ts",
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "supabase.ts",
+      "source_file": "src/lib/supabase.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_lib_supabase_supabase",
+      "label": "supabase",
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "supabase",
+      "source_file": "src/lib/supabase.ts",
+      "source_location": "L13"
     },
     {
       "id": "src_lib_templateboxes",
@@ -11877,13 +12016,145 @@
       "source_location": "L17"
     },
     {
-      "id": "src_pages_templates",
-      "label": "templates.astro",
+      "id": "src_lib_templatesdb",
+      "label": "templatesDb.ts",
       "_origin": "ast",
       "community": 236,
       "community_name": "MemeMaker.tsx",
       "file_type": "code",
-      "norm_label": "templates.astro",
+      "norm_label": "templatesdb.ts",
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_lib_templatesdb_fallback_templates",
+      "label": "FALLBACK_TEMPLATES",
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "fallback_templates",
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L20"
+    },
+    {
+      "id": "src_pages_404",
+      "label": "404.astro",
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "404.astro",
+      "source_file": "src/pages/404.astro",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_pages_500",
+      "label": "500.astro",
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "500.astro",
+      "source_file": "src/pages/500.astro",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_pages_about",
+      "label": "about.astro",
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "about.astro",
+      "source_file": "src/pages/about.astro",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_pages_admin_login",
+      "label": "login.astro",
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "login.astro",
+      "source_file": "src/pages/admin/login.astro",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_pages_admin_templates",
+      "label": "admin/templates.astro",
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "admin/templates.astro",
+      "source_file": "src/pages/admin/templates.astro",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_pages_contact",
+      "label": "contact.astro",
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "contact.astro",
+      "source_file": "src/pages/contact.astro",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_pages_edit",
+      "label": "edit.astro",
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "edit.astro",
+      "source_file": "src/pages/edit.astro",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_pages_index",
+      "label": "pages/index.astro",
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "pages/index.astro",
+      "source_file": "src/pages/index.astro",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_pages_index_templateslots",
+      "label": "templateSlots",
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "templateslots",
+      "source_file": "src/pages/index.astro",
+      "source_location": "L4"
+    },
+    {
+      "id": "src_pages_privacy",
+      "label": "privacy.astro",
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "privacy.astro",
+      "source_file": "src/pages/privacy.astro",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_pages_templates",
+      "label": "pages/templates.astro",
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "pages/templates.astro",
       "source_file": "src/pages/templates.astro",
       "source_location": "L1"
     },
@@ -11963,6 +12234,28 @@
       "norm_label": "zonetitle",
       "source_file": "src/pages/templates.astro",
       "source_location": "L333"
+    },
+    {
+      "id": "src_pages_terms",
+      "label": "terms.astro",
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "terms.astro",
+      "source_file": "src/pages/terms.astro",
+      "source_location": "L1"
+    },
+    {
+      "id": "tests_admintemplates_test",
+      "label": "adminTemplates.test.ts",
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "admintemplates.test.ts",
+      "source_file": "tests/adminTemplates.test.ts",
+      "source_location": "L1"
     },
     {
       "id": "tests_imagestore_test",
@@ -21835,6 +22128,102 @@
       "weight": 1.0
     },
     {
+      "source": "src_components_admin_adminlogin_adminlogin",
+      "target": "src_lib_adminauth_getadminsession",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/components/admin/AdminLogin.tsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_admin_adminlogin_adminlogin",
+      "target": "src_lib_adminauth_adminsignin",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/components/admin/AdminLogin.tsx",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_admin_adminstudio_adminstudio",
+      "target": "src_lib_templatesdb_savetemplate",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/components/admin/AdminStudio.tsx",
+      "source_location": "L130",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_admin_adminstudio_adminstudio",
+      "target": "src_lib_templatesdb_uploadtemplateimage",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/components/admin/AdminStudio.tsx",
+      "source_location": "L170",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_admin_adminstudio_adminstudio",
+      "target": "src_lib_templatesdb_createtemplate",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/components/admin/AdminStudio.tsx",
+      "source_location": "L179",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_admin_adminstudio_adminstudio",
+      "target": "src_lib_adminauth_adminsignout",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/components/admin/AdminStudio.tsx",
+      "source_location": "L250",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_admin_adminstudio_adminstudio",
+      "target": "src_lib_adminauth_getadminsession",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/components/admin/AdminStudio.tsx",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_admin_adminstudio_adminstudio",
+      "target": "src_lib_templatesdb_fetchalladmintemplates",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/components/admin/AdminStudio.tsx",
+      "source_location": "L47",
+      "weight": 1.0
+    },
+    {
       "source": "src_components_authmodal_setmode",
       "target": "src_components_authmodal_clearalert",
       "relation": "calls",
@@ -21867,7 +22256,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L138",
+      "source_location": "L150",
       "weight": 1.0
     },
     {
@@ -21879,7 +22268,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L269",
+      "source_location": "L287",
       "weight": 1.0
     },
     {
@@ -21891,7 +22280,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L274",
+      "source_location": "L292",
       "weight": 1.0
     },
     {
@@ -21903,7 +22292,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L275",
+      "source_location": "L293",
       "weight": 1.0
     },
     {
@@ -21915,7 +22304,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L277",
+      "source_location": "L295",
       "weight": 1.0
     },
     {
@@ -21927,7 +22316,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L300",
+      "source_location": "L318",
       "weight": 1.0
     },
     {
@@ -21939,7 +22328,31 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L314",
+      "source_location": "L332",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_mememaker_mememaker",
+      "target": "src_lib_adminauth_getadminsession",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/components/MemeMaker.tsx",
+      "source_location": "L349",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_mememaker_mememaker",
+      "target": "src_lib_templatesdb_fetchtemplates",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/components/MemeMaker.tsx",
+      "source_location": "L353",
       "weight": 1.0
     },
     {
@@ -21951,7 +22364,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L438",
+      "source_location": "L468",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_mememaker_mememaker",
+      "target": "src_lib_templatesdb_savetemplate",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/components/MemeMaker.tsx",
+      "source_location": "L570",
       "weight": 1.0
     },
     {
@@ -22303,6 +22728,90 @@
       "weight": 1.0
     },
     {
+      "source": "src_lib_templatesdb_applylocaloverrides",
+      "target": "src_lib_templatesdb_getlocaloverrides",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L108",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_templatesdb_fetchalladmintemplates",
+      "target": "src_lib_templatesdb_querywithtimeout",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L142",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_templatesdb_fetchalladmintemplates",
+      "target": "src_lib_templatesdb_applylocaloverrides",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L155",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_templatesdb_fetchtemplates",
+      "target": "src_lib_templatesdb_querywithtimeout",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L121",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_templatesdb_fetchtemplates",
+      "target": "src_lib_templatesdb_applylocaloverrides",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L135",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_templatesdb_savelocaloverride",
+      "target": "src_lib_templatesdb_getlocaloverrides",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L99",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_templatesdb_savetemplate",
+      "target": "src_lib_templatesdb_savelocaloverride",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L165",
+      "weight": 1.0
+    },
+    {
       "source": "src_pages_templates_handlefile",
       "target": "src_pages_templates_isacceptedimage",
       "relation": "calls",
@@ -22347,7 +22856,19 @@
       "confidence_score": 1.0,
       "context": "export",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L19",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_templatesdb_dbtemplate",
+      "target": "src_lib_templateboxes_templatetextbox",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L13",
       "weight": 1.0
     },
     {
@@ -22699,6 +23220,138 @@
       "weight": 1.0
     },
     {
+      "source": "src_components_admin_adminlogin",
+      "target": "src_lib_adminauth_adminsignin",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/admin/AdminLogin.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_admin_adminlogin",
+      "target": "src_lib_adminauth_getadminsession",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/admin/AdminLogin.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_admin_adminstudio",
+      "target": "src_lib_templateboxes_templatetextbox",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/admin/AdminStudio.tsx",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_admin_adminstudio",
+      "target": "src_lib_templatesdb_createtemplate",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/admin/AdminStudio.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_admin_adminstudio",
+      "target": "src_lib_templatesdb_dbtemplate",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/admin/AdminStudio.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_admin_adminstudio",
+      "target": "src_lib_templatesdb_fetchalladmintemplates",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/admin/AdminStudio.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_admin_adminstudio",
+      "target": "src_lib_templatesdb_savetemplate",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/admin/AdminStudio.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_admin_adminstudio",
+      "target": "src_lib_templatesdb_uploadtemplateimage",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/admin/AdminStudio.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_admin_adminstudio",
+      "target": "src_lib_adminauth_adminsignout",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/admin/AdminStudio.tsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_admin_adminstudio",
+      "target": "src_lib_adminauth_adminuser",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/admin/AdminStudio.tsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_admin_adminstudio",
+      "target": "src_lib_adminauth_getadminsession",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/admin/AdminStudio.tsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
       "source": "src_components_header",
       "target": "src_lib_avatar_getuseravatarurl",
       "relation": "imports",
@@ -22756,6 +23409,54 @@
       "context": "import",
       "source_file": "src/components/MemeMaker.tsx",
       "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_mememaker",
+      "target": "src_lib_templatesdb_dbtemplate",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/MemeMaker.tsx",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_mememaker",
+      "target": "src_lib_templatesdb_fetchtemplates",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/MemeMaker.tsx",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_mememaker",
+      "target": "src_lib_templatesdb_savetemplate",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/MemeMaker.tsx",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_mememaker",
+      "target": "src_lib_adminauth_getadminsession",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/MemeMaker.tsx",
+      "source_location": "L23",
       "weight": 1.0
     },
     {
@@ -22948,6 +23649,138 @@
       "context": "import",
       "source_file": "src/components/ui/card.tsx",
       "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_adminauth",
+      "target": "src_lib_supabase_supabase",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/lib/adminAuth.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_templatesdb",
+      "target": "src_lib_supabase_supabase",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_templatesdb",
+      "target": "src_lib_templateboxes_default_boxes",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_templatesdb",
+      "target": "src_lib_templateboxes_template_boxes",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_templatesdb",
+      "target": "src_lib_templateboxes_templatetextbox",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_admintemplates_test",
+      "target": "src_lib_templatesdb_fallback_templates",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "tests/adminTemplates.test.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_admintemplates_test",
+      "target": "src_lib_templatesdb_fetchalladmintemplates",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "tests/adminTemplates.test.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_admintemplates_test",
+      "target": "src_lib_templatesdb_fetchtemplates",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "tests/adminTemplates.test.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_admintemplates_test",
+      "target": "src_lib_adminauth_adminsignin",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "tests/adminTemplates.test.ts",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_admintemplates_test",
+      "target": "src_lib_adminauth_adminsignout",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "tests/adminTemplates.test.ts",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_admintemplates_test",
+      "target": "src_lib_adminauth_getadminsession",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "tests/adminTemplates.test.ts",
+      "source_location": "L7",
       "weight": 1.0
     },
     {
@@ -23215,6 +24048,55 @@
       "weight": 1.0
     },
     {
+      "source": "src_components_admin_adminlogin",
+      "target": "src_lib_adminauth",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/admin/AdminLogin.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_admin_adminstudio",
+      "target": "src_lib_templateboxes",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/admin/AdminStudio.tsx",
+      "source_location": "L10",
+      "type_only": true,
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_admin_adminstudio",
+      "target": "src_lib_templatesdb",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/admin/AdminStudio.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_admin_adminstudio",
+      "target": "src_lib_adminauth",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/admin/AdminStudio.tsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
       "source": "src_components_header",
       "target": "src_lib_avatar",
       "relation": "imports_from",
@@ -23224,6 +24106,30 @@
       "context": "import",
       "source_file": "src/components/Header.astro",
       "source_location": "L136",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_mememaker",
+      "target": "src_lib_templatesdb",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/MemeMaker.tsx",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_mememaker",
+      "target": "src_lib_adminauth",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/MemeMaker.tsx",
+      "source_location": "L23",
       "weight": 1.0
     },
     {
@@ -23299,6 +24205,66 @@
       "weight": 1.0
     },
     {
+      "source": "src_lib_adminauth",
+      "target": "src_lib_supabase",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/lib/adminAuth.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_templatesdb",
+      "target": "src_lib_supabase",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_templatesdb",
+      "target": "src_lib_templateboxes",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_admin_login",
+      "target": "src_components_admin_adminlogin",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/pages/admin/login.astro",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_admin_templates",
+      "target": "src_components_admin_adminstudio",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/pages/admin/templates.astro",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
       "source": "src_pages_edit",
       "target": "src_components_mememaker",
       "relation": "imports_from",
@@ -23308,6 +24274,30 @@
       "context": "import",
       "source_file": "src/pages/edit.astro",
       "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_admintemplates_test",
+      "target": "src_lib_templatesdb",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "tests/adminTemplates.test.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_admintemplates_test",
+      "target": "src_lib_adminauth",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "tests/adminTemplates.test.ts",
+      "source_location": "L7",
       "weight": 1.0
     },
     {
@@ -39448,6 +40438,28 @@
       "weight": 1.0
     },
     {
+      "source": "src_components_admin_adminlogin",
+      "target": "src_components_admin_adminlogin_adminlogin",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/admin/AdminLogin.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_admin_adminstudio",
+      "target": "src_components_admin_adminstudio_adminstudio",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/admin/AdminStudio.tsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
       "source": "src_components_authmodal",
       "target": "src_components_authmodal_modal",
       "relation": "contains",
@@ -39680,13 +40692,24 @@
     },
     {
       "source": "src_components_mememaker",
+      "target": "src_components_mememaker_textinput",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/MemeMaker.tsx",
+      "source_location": "L1082",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_mememaker",
       "target": "src_components_mememaker_mememaker",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L112",
+      "source_location": "L118",
       "weight": 1.0
     },
     {
@@ -39697,7 +40720,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L22",
+      "source_location": "L28",
       "weight": 1.0
     },
     {
@@ -39708,7 +40731,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L36",
+      "source_location": "L42",
       "weight": 1.0
     },
     {
@@ -39719,7 +40742,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L42",
+      "source_location": "L48",
       "weight": 1.0
     },
     {
@@ -39730,18 +40753,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L89",
-      "weight": 1.0
-    },
-    {
-      "source": "src_components_mememaker",
-      "target": "src_components_mememaker_textinput",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L907",
+      "source_location": "L95",
       "weight": 1.0
     },
     {
@@ -39863,6 +40875,50 @@
       "confidence_score": 1.0,
       "source_file": "src/layouts/Layout.astro",
       "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_adminauth",
+      "target": "src_lib_adminauth_adminsignin",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/adminAuth.ts",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_adminauth",
+      "target": "src_lib_adminauth_adminuser",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/adminAuth.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_adminauth",
+      "target": "src_lib_adminauth_adminsignout",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/adminAuth.ts",
+      "source_location": "L70",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_adminauth",
+      "target": "src_lib_adminauth_getadminsession",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/adminAuth.ts",
+      "source_location": "L80",
       "weight": 1.0
     },
     {
@@ -40071,7 +41127,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/supabase.ts",
-      "source_location": "L12",
+      "source_location": "L13",
       "weight": 1.0
     },
     {
@@ -40171,6 +41227,127 @@
       "confidence_score": 1.0,
       "source_file": "src/lib/templateCache.ts",
       "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_templatesdb",
+      "target": "src_lib_templatesdb_applylocaloverrides",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L107",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_templatesdb",
+      "target": "src_lib_templatesdb_fetchtemplates",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L120",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_templatesdb",
+      "target": "src_lib_templatesdb_fetchalladmintemplates",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L141",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_templatesdb",
+      "target": "src_lib_templatesdb_savetemplate",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L161",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_templatesdb",
+      "target": "src_lib_templatesdb_createtemplate",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L198",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_templatesdb",
+      "target": "src_lib_templatesdb_fallback_templates",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_templatesdb",
+      "target": "src_lib_templatesdb_uploadtemplateimage",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L240",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_templatesdb",
+      "target": "src_lib_templatesdb_querywithtimeout",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L57",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_templatesdb",
+      "target": "src_lib_templatesdb_dbtemplate",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_templatesdb",
+      "target": "src_lib_templatesdb_getlocaloverrides",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L86",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_templatesdb",
+      "target": "src_lib_templatesdb_savelocaloverride",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/templatesDb.ts",
+      "source_location": "L96",
       "weight": 1.0
     },
     {
@@ -40534,6 +41711,24 @@
       "source_file": "src/pages/about.astro"
     },
     {
+      "source": "src_pages_admin_login",
+      "target": "src_layouts_layout",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/admin/login.astro"
+    },
+    {
+      "source": "src_pages_admin_templates",
+      "target": "src_layouts_layout",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/admin/templates.astro"
+    },
+    {
       "source": "src_pages_contact",
       "target": "src_layouts_layout",
       "relation": "imports_from",
@@ -40634,5 +41829,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "15f6f817d7f19a53d21ebbdf207adf6cac8395d1"
+  "built_at_commit": "f83d32f6aaead285a8df762d9f0572d46f9f1c2d"
 }
