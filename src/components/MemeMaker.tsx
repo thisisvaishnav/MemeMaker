@@ -9,6 +9,15 @@ import {
   clearTemplateUrl,
   getCustomTemplateById,
 } from "../lib/imageStore";
+import {
+  TEMPLATE_BOXES,
+  DEFAULT_BOXES,
+  getTemplateBoxes,
+  type TemplateTextBox,
+} from "../lib/templateBoxes";
+
+export { TEMPLATE_BOXES, DEFAULT_BOXES, getTemplateBoxes };
+export type { TemplateTextBox };
 
 type TextLayer = {
   id: number;
@@ -104,10 +113,13 @@ export default function MemeMaker() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const [selectedTemplateId, setSelectedTemplateId] = useState<number | null>(1);
   const [image, setImage] = useState(DEFAULT_IMAGE);
   const [templateTitle, setTemplateTitle] = useState(TEMPLATE_NAMES[1]);
   const [topText, setTopText] = useState("");
   const [bottomText, setBottomText] = useState("");
+  const [boxTexts, setBoxTexts] = useState<Record<string, string>>({});
+  const [boxColors, setBoxColors] = useState<Record<string, string>>({});
 
   const [textColor, setTextColor] = useState("#ffffff");
   const [fontSize, setFontSize] = useState(52);
@@ -122,6 +134,8 @@ export default function MemeMaker() {
   const [showOptions, setShowOptions] = useState(false);
 
   const [search, setSearch] = useState("");
+
+  const activeBoxes = getTemplateBoxes(selectedTemplateId);
 
   const drawMeme = (includeLayers = false) => {
     const canvas = canvasRef.current;
@@ -146,36 +160,75 @@ export default function MemeMaker() {
 
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-
       const drawText = (
         text: string,
         x: number,
         y: number,
         size: number = fontSize,
-        color: string = textColor
+        color: string = textColor,
+        align: CanvasTextAlign = "center",
+        maxWidthPx?: number
       ) => {
-        if (!text.trim()) return;
+        if (!text || !text.trim()) return;
 
         ctx.font = `900 ${size}px Impact, Arial Black, sans-serif`;
         ctx.fillStyle = color;
         ctx.strokeStyle = "#000";
         ctx.lineWidth = Math.max(4, size / 10);
+        ctx.textAlign = align;
+        ctx.textBaseline = "middle";
 
         const px = canvas.width * x;
         const py = canvas.height * y;
 
-        ctx.strokeText(text, px, py);
-        ctx.fillText(text, px, py);
+        // Word-wrap and newline handling
+        const lines: string[] = [];
+        const rawLines = text.split("\n");
+
+        if (maxWidthPx) {
+          for (const rawLine of rawLines) {
+            const words = rawLine.split(" ");
+            let currentLine = "";
+            for (const word of words) {
+              const testLine = currentLine ? `${currentLine} ${word}` : word;
+              const testWidth = ctx.measureText(testLine).width;
+              if (testWidth > maxWidthPx && currentLine) {
+                lines.push(currentLine);
+                currentLine = word;
+              } else {
+                currentLine = testLine;
+              }
+            }
+            if (currentLine) lines.push(currentLine);
+          }
+        } else {
+          lines.push(...rawLines);
+        }
+
+        const lineHeight = size * 1.15;
+        const startY = py - ((lines.length - 1) * lineHeight) / 2;
+
+        lines.forEach((line, idx) => {
+          const lineY = startY + idx * lineHeight;
+          ctx.strokeText(line, px, lineY);
+          ctx.fillText(line, px, lineY);
+        });
       };
 
-      drawText(topText, 0.5, 0.12, fontSize, textColor);
-      drawText(bottomText, 0.5, 0.88, fontSize, textColor);
+      // Draw template specific boxes
+      activeBoxes.forEach((box) => {
+        const text =
+          boxTexts[box.id] ??
+          (box.id === "top" ? topText : box.id === "bottom" ? bottomText : "");
+        const color = boxColors[box.id] || textColor;
+        const size = Math.round(fontSize * (box.fontSizeRatio || 1));
+        const maxW = box.maxWidthRatio ? canvas.width * box.maxWidthRatio : undefined;
+        drawText(text, box.x, box.y, size, color, box.textAlign || "center", maxW);
+      });
 
       if (includeLayers) {
         layers.forEach((layer) => {
-          drawText(layer.text, layer.x, layer.y, layer.fontSize, layer.color);
+          drawText(layer.text, layer.x, layer.y, layer.fontSize, layer.color, "center");
         });
       }
 
@@ -215,6 +268,7 @@ export default function MemeMaker() {
     if (customId) {
       getCustomTemplateById(customId).then((tpl) => {
         if (tpl) {
+          setSelectedTemplateId(null);
           setImage(tpl.dataUrl);
           setTemplateTitle(tpl.name || "Custom Template");
           saveImage(tpl.dataUrl);
@@ -222,6 +276,7 @@ export default function MemeMaker() {
         } else {
           loadImage().then((pending) => {
             if (pending) {
+              setSelectedTemplateId(null);
               setImage(pending);
               setTemplateTitle("Custom Template");
               saveImage(pending);
@@ -239,6 +294,7 @@ export default function MemeMaker() {
       const parsedNum = parseInt(templateId, 10);
       const resolvedId = aliasId ?? (parsedNum >= 1 && parsedNum <= 20 ? parsedNum : 1);
       const fullImageUrl = `/templates/cdn/${resolvedId}.webp`;
+      setSelectedTemplateId(resolvedId);
       setImage(fullImageUrl);
       setTemplateTitle(TEMPLATE_NAMES[resolvedId] || `Template ${resolvedId}`);
       saveTemplateUrl(fullImageUrl);
@@ -250,6 +306,7 @@ export default function MemeMaker() {
     // Restore persisted template/image across page changes
     loadImage().then((pendingImage) => {
       if (pendingImage && (pendingImage.startsWith("data:") || pendingImage.startsWith("blob:"))) {
+        setSelectedTemplateId(null);
         setImage(pendingImage);
         setTemplateTitle("Custom Template");
         return;
@@ -260,9 +317,11 @@ export default function MemeMaker() {
           const match = pendingTemplate.match(/\/templates\/cdn\/(\d+)\.webp/);
           if (match) {
             const id = parseInt(match[1], 10);
+            setSelectedTemplateId(id);
             setTemplateTitle(TEMPLATE_NAMES[id] || `Template ${id}`);
           }
         } else if (pendingImage) {
+          setSelectedTemplateId(null);
           setImage(pendingImage);
           setTemplateTitle("Custom Template");
         }
@@ -274,6 +333,9 @@ export default function MemeMaker() {
     drawMeme();
   }, [
     image,
+    selectedTemplateId,
+    boxTexts,
+    boxColors,
     topText,
     bottomText,
     textColor,
@@ -290,6 +352,7 @@ export default function MemeMaker() {
     const reader = new FileReader();
     reader.onload = () => {
       if (typeof reader.result === "string") {
+        setSelectedTemplateId(null);
         setImage(reader.result);
         setTemplateTitle(file.name.replace(/\.[^/.]+$/, "") || "Custom Upload");
         saveImage(reader.result);
@@ -358,6 +421,9 @@ export default function MemeMaker() {
   };
 
   const reset = () => {
+    setSelectedTemplateId(1);
+    setBoxTexts({});
+    setBoxColors({});
     setTopText("");
     setBottomText("");
     setTextColor("#ffffff");
@@ -623,6 +689,7 @@ export default function MemeMaker() {
               <button
                 className="blank-template"
                 onClick={() => {
+                  setSelectedTemplateId(null);
                   setImage(DEFAULT_IMAGE);
                   setTemplateTitle("Blank Template");
                   saveImage(DEFAULT_IMAGE);
@@ -640,6 +707,7 @@ export default function MemeMaker() {
                     key={template.id}
                     title={TEMPLATE_NAMES[template.id] || `Template ${template.id}`}
                     onClick={() => {
+                      setSelectedTemplateId(template.id);
                       setImage(template.full);
                       setTemplateTitle(TEMPLATE_NAMES[template.id] || `Template ${template.id}`);
                       saveTemplateUrl(template.full);
@@ -655,21 +723,31 @@ export default function MemeMaker() {
             </div>
 
             {/* TEXT INPUTS */}
-            <TextInput
-              placeholder="Top Text"
-              value={topText}
-              onChange={setTopText}
-              color={textColor}
-              setColor={setTextColor}
-            />
-
-            <TextInput
-              placeholder="Bottom Text"
-              value={bottomText}
-              onChange={setBottomText}
-              color={textColor}
-              setColor={setTextColor}
-            />
+            <div className="template-text-boxes">
+              {activeBoxes.map((box) => {
+                const val =
+                  boxTexts[box.id] ??
+                  (box.id === "top" ? topText : box.id === "bottom" ? bottomText : "");
+                const col = boxColors[box.id] || textColor;
+                return (
+                  <TextInput
+                    key={box.id}
+                    label={box.label}
+                    placeholder={box.placeholder}
+                    value={val}
+                    onChange={(text) => {
+                      setBoxTexts((prev) => ({ ...prev, [box.id]: text }));
+                      if (box.id === "top") setTopText(text);
+                      if (box.id === "bottom") setBottomText(text);
+                    }}
+                    color={col}
+                    setColor={(newColor) => {
+                      setBoxColors((prev) => ({ ...prev, [box.id]: newColor }));
+                    }}
+                  />
+                );
+              })}
+            </div>
 
             {/* FONT CONTROLS */}
             <div className="font-controls">
@@ -797,6 +875,7 @@ export default function MemeMaker() {
                 className="featured-card"
                 key={template.id}
                 onClick={() => {
+                  setSelectedTemplateId(template.id);
                   setImage(template.full);
                   setTemplateTitle(TEMPLATE_NAMES[template.id] || `Template ${template.id}`);
                   saveTemplateUrl(template.full);
@@ -826,12 +905,14 @@ export default function MemeMaker() {
 /* TEXT INPUT COMPONENT */
 
 function TextInput({
+  label,
   placeholder,
   value,
   onChange,
   color,
   setColor,
 }: {
+  label?: string;
   placeholder: string;
   value: string;
   onChange: (value: string) => void;
@@ -839,22 +920,25 @@ function TextInput({
   setColor: (value: string) => void;
 }) {
   return (
-    <div className="text-row">
-      <input
-        className="text-input"
-        placeholder={placeholder}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-      />
+    <div className="box-input-wrapper">
+      {label && <label className="box-label">{label}</label>}
+      <div className="text-row">
+        <input
+          className="text-input"
+          placeholder={placeholder}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+        />
 
-      <input
-        className="color-picker"
-        type="color"
-        value={color}
-        onChange={(e) => setColor(e.target.value)}
-      />
+        <input
+          className="color-picker"
+          type="color"
+          value={color}
+          onChange={(e) => setColor(e.target.value)}
+        />
 
-      <button className="settings-btn">⚙</button>
+        <button className="settings-btn" type="button" title="Text settings">⚙</button>
+      </div>
     </div>
   );
 }

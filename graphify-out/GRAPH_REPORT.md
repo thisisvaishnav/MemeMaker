@@ -1,16 +1,16 @@
-# Graph Report - MemeMaker  (2026-09-08)
+# Graph Report - MemeMaker  (2026-09-10)
 
 ## Corpus Check
-- 247 files · ~291,075 words
+- 250 files · ~292,937 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1810 nodes · 1684 edges · 228 communities (217 shown, 6 thin omitted)
+- 1825 nodes · 1707 edges · 228 communities (216 shown, 6 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `a28e1330`
+- Built from commit: `15f6f817`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -24,9 +24,8 @@
 - main
 - dependencies
 - colors.ts
-- templateCache.ts
+- wrangler.json
 - Pseudo-class reference
-- Styling based on parent state
 - MemeMaker — Design & Architecture Specification
 - Functional utilities
 - Thinking in utility classes
@@ -236,7 +235,7 @@
 - rules/graphify.md
 - gotchas.md
 - workflows/graphify.md
-- imageStore.ts
+- MemeMaker.tsx
 - sitemap.xml.ts
 
 ## God Nodes (most connected - your core abstractions)
@@ -269,8 +268,8 @@
 ## Communities (228 total, 6 thin omitted)
 
 ### Community 0 - "Header.astro"
-Cohesion: 0.09
-Nodes (23): alertBox, clearAlert(), closeBtn, googleBtn, modal, nameField, setMode(), submitText (+15 more)
+Cohesion: 0.05
+Nodes (32): alertBox, clearAlert(), closeBtn, googleBtn, modal, nameField, setMode(), submitText (+24 more)
 
 ### Community 1 - "Changes from v3"
 Cohesion: 0.05
@@ -298,19 +297,15 @@ Nodes (6): clone_repo(), main(), run(), update_repo(), write_source_file(), Path
 
 ### Community 7 - "dependencies"
 Cohesion: 0.05
-Nodes (41): astro, @astrojs/react, @astrojs/sitemap, @aws-sdk/client-s3, class-variance-authority, clsx, @fontsource/inter, @fontsource/jetbrains-mono (+33 more)
+Nodes (43): @astrojs/react, @astrojs/sitemap, @aws-sdk/client-s3, class-variance-authority, clsx, @fontsource/inter, @fontsource/jetbrains-mono, lucide-react (+35 more)
 
-### Community 9 - "templateCache.ts"
-Cohesion: 0.48
-Nodes (5): generateDefaultLayout(), getLandingTemplatesLayout(), getTrendingTemplates(), LandingCardLayout, randomBetween()
+### Community 9 - "wrangler.json"
+Cohesion: 0.33
+Nodes (5): assets, directory, compatibility_date, name, $schema
 
 ### Community 13 - "Pseudo-class reference"
 Cohesion: 0.05
 Nodes (34): :active, :autofill, :checked, :default, :details-content, :disabled, :empty, :enabled (+26 more)
-
-### Community 14 - "Styling based on parent state"
-Cohesion: 0.50
-Nodes (4): Arbitrary groups, Differentiating nested groups, Implicit groups, Styling based on parent state
 
 ### Community 16 - "MemeMaker — Design & Architecture Specification"
 Cohesion: 0.10
@@ -341,8 +336,8 @@ Cohesion: 0.11
 Nodes (17): Adding a ring, Adding an inset ring, Adding an inset shadow, Basic example, Changing the opacity, Customizing inset shadows, Customizing shadow colors, Customizing shadows (+9 more)
 
 ### Community 31 - "Pseudo-classes"
-Cohesion: 0.18
-Nodes (10): Arbitrary peers, Differentiating peers, :first, :last, :odd, and :even, :has(), :hover, :focus, and :active, Pseudo-classes, :required and :disabled, Styling based on sibling state (+2 more)
+Cohesion: 0.13
+Nodes (14): Arbitrary groups, Arbitrary peers, Differentiating nested groups, Differentiating peers, :first, :last, :odd, and :even, :has(), :hover, :focus, and :active, Implicit groups (+6 more)
 
 ### Community 32 - "Examples"
 Cohesion: 0.14
@@ -1132,13 +1127,13 @@ Nodes (3): Basic example, Examples, Responsive design
 Cohesion: 0.50
 Nodes (3): Examples, Optimizing with will change, Using a custom value
 
-### Community 236 - "imageStore.ts"
-Cohesion: 0.08
-Nodes (32): [], MemeMaker(), TEMPLATE_ALIAS_MAP, TEMPLATE_NAMES, templates, TextLayer, ogImageURL, clearImage() (+24 more)
+### Community 236 - "MemeMaker.tsx"
+Cohesion: 0.12
+Nodes (32): MemeMaker(), TEMPLATE_ALIAS_MAP, TEMPLATE_NAMES, templates, TextLayer, clearImage(), clearTemplateUrl(), CustomTemplate (+24 more)
 
 ## Knowledge Gaps
-- **1232 isolated node(s):** `colors`, `$schema`, `style`, `rsc`, `tsx` (+1227 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1398 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **1237 isolated node(s):** `colors`, `$schema`, `style`, `rsc`, `tsx` (+1232 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1404 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **6 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
@@ -1146,15 +1141,15 @@ _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `dependencies` connect `dependencies` to `scripts`?**
   _High betweenness centrality (0.002) - this node is a cross-community bridge._
-- **Why does `Pseudo-class reference` connect `Pseudo-class reference` to `hover-focus-and-other-states.mdx`?**
-  _High betweenness centrality (0.001) - this node is a cross-community bridge._
 - **Why does `Appendix` connect `hover-focus-and-other-states.mdx` to `Pseudo-class reference`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
 - **What connects `colors`, `$schema`, `style` to the rest of the system?**
-  _1232 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _1237 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Header.astro` be split into smaller, more focused modules?**
-  _Cohesion score 0.08994708994708994 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.05142857142857143 - nodes in this community are weakly interconnected._
 - **Should `Changes from v3` be split into smaller, more focused modules?**
   _Cohesion score 0.047619047619047616 - nodes in this community are weakly interconnected._
 - **Should `components.json` be split into smaller, more focused modules?**
   _Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected._
+- **Should `scripts` be split into smaller, more focused modules?**
+  _Cohesion score 0.08333333333333333 - nodes in this community are weakly interconnected._

@@ -42,9 +42,9 @@
     "semantic_hash": "47384a2c6e43af3dd8d920a44043a65d"
   },
   "package.json": {
-    "mtime": 1788882642.0908241,
-    "seen": 1788937271.632143,
-    "ast_hash": "4a5f2cfc1cedb1884c99c686e6ef20e0",
+    "mtime": 1789012896.9380202,
+    "seen": 1789012920.777215,
+    "ast_hash": "a1953d989dc23c623bed9bbc9a6818ad",
     "semantic_hash": ""
   },
   "skills-lock.json": {
@@ -72,9 +72,9 @@
     "semantic_hash": ""
   },
   "src/components/MemeMaker.tsx": {
-    "mtime": 1788882642.0912583,
-    "seen": 1788937271.632191,
-    "ast_hash": "3868af1f4454d75e8a9f888fcd5609a9",
+    "mtime": 1789012630.9643185,
+    "seen": 1789012672.868018,
+    "ast_hash": "8f04b0ef9e19d4789c30b5a9cfcde1bc",
     "semantic_hash": ""
   },
   "src/components/ShadcnDemo.tsx": {
@@ -96,9 +96,9 @@
     "semantic_hash": "95a31ddfbb8d460f8b90409681856156"
   },
   "src/layouts/Layout.astro": {
-    "mtime": 1788937203.6677113,
-    "seen": 1788937271.632242,
-    "ast_hash": "152aad2a394f008e40095614e9c783d2",
+    "mtime": 1789012904.9051208,
+    "seen": 1789012920.7773561,
+    "ast_hash": "9e71376a073f7a911588ff592b5f0df4",
     "semantic_hash": ""
   },
   "src/lib/imageStore.ts": {
@@ -1923,6 +1923,24 @@
     "mtime": 1788882642.0953546,
     "seen": 1788937271.632392,
     "ast_hash": "2ce5b8256efbad176d3a21952cc0a6dd",
+    "semantic_hash": ""
+  },
+  "src/lib/templateBoxes.ts": {
+    "mtime": 1789012544.378484,
+    "seen": 1789012672.868149,
+    "ast_hash": "9fafcf8c6e0ef1929c238296d50395fe",
+    "semantic_hash": ""
+  },
+  "tests/templateBoxes.test.ts": {
+    "mtime": 1789012650.3283904,
+    "seen": 1789012672.868482,
+    "ast_hash": "32ea7c63fc7c3076a2ad39b5c6f24dd9",
+    "semantic_hash": ""
+  },
+  "wrangler.json": {
+    "mtime": 1788963144.5513513,
+    "seen": 1789012672.868531,
+    "ast_hash": "5f85f8a2ed0d135efe2d012db2dd201d",
     "semantic_hash": ""
   }
 }
