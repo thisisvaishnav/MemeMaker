@@ -489,6 +489,19 @@ button {
     0 1.5px 3px rgba(0, 0, 0, 0.6);
 }
 
+/* PLAIN BLACK SLIM TEXT (Clean modern text without heavy outline) */
+.box-text-content.is-plain,
+.box-text-content.plain-text {
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  font-weight: 600;
+  text-transform: none;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
+  color: #000000;
+}
+
 /* ROTATION STEM & KNOB */
 .rotate-stem {
   position: absolute;
@@ -802,9 +815,36 @@ button {
   border-radius: 3px;
 }
 
-.add-text-btn {
+.add-text-btn-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
   width: 100%;
   margin-bottom: 10px;
+}
+
+.add-text-btn {
+  width: 100%;
+  margin-bottom: 0;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.add-text-btn:hover {
+  background: #444;
+  border-color: #666;
+}
+
+.add-text-btn.add-plain-btn {
+  background: rgba(25, 189, 231, 0.08);
+  color: #19bde7;
+  border-color: rgba(25, 189, 231, 0.35);
+  font-weight: 600;
+}
+
+.add-text-btn.add-plain-btn:hover {
+  background: rgba(25, 189, 231, 0.18);
+  border-color: #19bde7;
 }
 
 /* =========================
@@ -1073,11 +1113,19 @@ button {
     margin-bottom: 8px;
   }
 
-  .add-text-btn {
+  .add-text-btn-group {
     order: 3;
-    min-height: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
     margin-top: 0;
     margin-bottom: 8px;
+  }
+
+  .add-text-btn {
+    min-height: 40px;
+    margin-top: 0;
+    margin-bottom: 0;
   }
 
   .main-actions {

@@ -69,7 +69,9 @@ describe("Admin & Database Templates (lib/templatesDb.ts & lib/adminAuth.ts)", (
         maxWidthRatio: 0.8,
         fontSizeRatio: 1.0,
         fontSize: 32,
-        fontFamily: "'Comic Sans MS', cursive, sans-serif",
+        fontFamily: "Inter, system-ui, -apple-system, sans-serif",
+        isPlain: true,
+        color: "#000000",
         textAlign: "center" as const,
       },
     ];
@@ -96,18 +98,25 @@ describe("Admin & Database Templates (lib/templatesDb.ts & lib/adminAuth.ts)", (
     expect(rotBox?.label).toBe("Text #1");
 
     const straightBox = updated?.boxes.find((b) => b.id === "box-straight");
-    expect(straightBox?.fontFamily).toBe("'Comic Sans MS', cursive, sans-serif");
+    expect(straightBox?.fontFamily).toBe("Inter, system-ui, -apple-system, sans-serif");
+    expect(straightBox?.isPlain).toBe(true);
+    expect(straightBox?.color).toBe("#000000");
   });
 
-  it("AVAILABLE_MEME_FONTS provides curated meme and typography fonts", async () => {
-    const { AVAILABLE_MEME_FONTS } = await import("../src/lib/templateBoxes");
+  it("AVAILABLE_MEME_FONTS provides curated meme and typography fonts including plain black slim text", async () => {
+    const { AVAILABLE_MEME_FONTS, isPlainBoxStyle } = await import("../src/lib/templateBoxes");
     expect(AVAILABLE_MEME_FONTS).toBeDefined();
-    expect(AVAILABLE_MEME_FONTS.length).toBeGreaterThanOrEqual(8);
+    expect(AVAILABLE_MEME_FONTS.length).toBeGreaterThanOrEqual(9);
     const fontIds = AVAILABLE_MEME_FONTS.map((f) => f.id);
     expect(fontIds).toContain("impact");
+    expect(fontIds).toContain("plain-black");
     expect(fontIds).toContain("anton");
     expect(fontIds).toContain("bebas-neue");
     expect(fontIds).toContain("montserrat");
     expect(fontIds).toContain("comic-sans");
+
+    expect(isPlainBoxStyle({ isPlain: true })).toBe(true);
+    expect(isPlainBoxStyle({ fontFamily: "Inter, system-ui, -apple-system, sans-serif" })).toBe(true);
+    expect(isPlainBoxStyle({ fontFamily: "Impact, 'Arial Black', sans-serif" })).toBe(false);
   });
 });

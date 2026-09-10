@@ -53,7 +53,7 @@
       "file_type": "code",
       "norm_label": "resizehandle",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L48"
+      "source_location": "L50"
     },
     {
       "id": "src_components_mememaker_textlayer",
@@ -79,7 +79,7 @@
       "file_type": "code",
       "norm_label": "transformstate",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L50"
+      "source_location": "L52"
     },
     {
       "id": "src_lib_adminauth_adminuser",
@@ -118,7 +118,7 @@
       "file_type": "code",
       "norm_label": "handleplacement",
       "source_file": "src/lib/templateBoxes.ts",
-      "source_location": "L179"
+      "source_location": "L192"
     },
     {
       "id": "src_lib_templateboxes_memefontoption",
@@ -131,7 +131,7 @@
       "file_type": "code",
       "norm_label": "memefontoption",
       "source_file": "src/lib/templateBoxes.ts",
-      "source_location": "L15"
+      "source_location": "L17"
     },
     {
       "id": "src_lib_templateboxes_templatetextbox",
@@ -350,7 +350,7 @@
       "file_type": "code",
       "norm_label": "mememaker()",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L163"
+      "source_location": "L165"
     },
     {
       "id": "src_components_mememaker_textinput",
@@ -362,7 +362,7 @@
       "file_type": "code",
       "norm_label": "textinput()",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L1582"
+      "source_location": "L1649"
     },
     {
       "id": "src_lib_adminauth_adminsignin",
@@ -566,7 +566,7 @@
       "file_type": "code",
       "norm_label": "calculateclampedcoordinate()",
       "source_file": "src/lib/templateBoxes.ts",
-      "source_location": "L225"
+      "source_location": "L238"
     },
     {
       "id": "src_lib_templateboxes_calculatehandleplacement",
@@ -578,7 +578,7 @@
       "file_type": "code",
       "norm_label": "calculatehandleplacement()",
       "source_file": "src/lib/templateBoxes.ts",
-      "source_location": "L193"
+      "source_location": "L206"
     },
     {
       "id": "src_lib_templateboxes_gettemplateboxes",
@@ -590,7 +590,19 @@
       "file_type": "code",
       "norm_label": "gettemplateboxes()",
       "source_file": "src/lib/templateBoxes.ts",
-      "source_location": "L172"
+      "source_location": "L185"
+    },
+    {
+      "id": "src_lib_templateboxes_isplainboxstyle",
+      "label": "isPlainBoxStyle()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 236,
+      "community_name": "MemeMaker.tsx",
+      "file_type": "code",
+      "norm_label": "isplainboxstyle()",
+      "source_file": "src/lib/templateBoxes.ts",
+      "source_location": "L37"
     },
     {
       "id": "src_lib_templatesdb_applylocaloverrides",
@@ -3364,6 +3376,28 @@
       "norm_label": "using auto select behavior",
       "source_file": ".agents/skills/tailwind-4-docs/references/docs/user-select.mdx",
       "source_location": "L89"
+    },
+    {
+      "id": "package_dependencies_lucide_react",
+      "label": "lucide-react",
+      "_origin": "ast",
+      "community": 121,
+      "community_name": "lucide-react",
+      "file_type": "code",
+      "norm_label": "lucide-react",
+      "source_file": "package.json",
+      "source_location": "L33"
+    },
+    {
+      "id": "lucide_react",
+      "label": "lucide-react",
+      "_origin": "ast",
+      "community": 121,
+      "community_name": "lucide-react",
+      "file_type": "concept",
+      "norm_label": "lucide-react",
+      "source_file": "package.json",
+      "source_location": "L33"
     },
     {
       "id": "agents_skills_tailwind_4_docs_references_docs_backdrop_filter_blur",
@@ -8995,6 +9029,105 @@
       "source_location": "L181"
     },
     {
+      "id": "package_scripts",
+      "label": "scripts",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "scripts",
+      "file_type": "code",
+      "norm_label": "scripts",
+      "source_file": "package.json",
+      "source_location": "L8"
+    },
+    {
+      "id": "package_scripts_astro",
+      "label": "astro",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "scripts",
+      "file_type": "code",
+      "norm_label": "astro",
+      "source_file": "package.json",
+      "source_location": "L12"
+    },
+    {
+      "id": "package_scripts_build",
+      "label": "build",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "scripts",
+      "file_type": "code",
+      "norm_label": "build",
+      "source_file": "package.json",
+      "source_location": "L10"
+    },
+    {
+      "id": "package_scripts_dev",
+      "label": "dev",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "scripts",
+      "file_type": "code",
+      "norm_label": "dev",
+      "source_file": "package.json",
+      "source_location": "L9"
+    },
+    {
+      "id": "package_scripts_graphify",
+      "label": "graphify",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "scripts",
+      "file_type": "code",
+      "norm_label": "graphify",
+      "source_file": "package.json",
+      "source_location": "L15"
+    },
+    {
+      "id": "package_scripts_graphify_export",
+      "label": "graphify:export",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "scripts",
+      "file_type": "code",
+      "norm_label": "graphify:export",
+      "source_file": "package.json",
+      "source_location": "L16"
+    },
+    {
+      "id": "package_scripts_preview",
+      "label": "preview",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "scripts",
+      "file_type": "code",
+      "norm_label": "preview",
+      "source_file": "package.json",
+      "source_location": "L11"
+    },
+    {
+      "id": "package_scripts_test",
+      "label": "test",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "scripts",
+      "file_type": "code",
+      "norm_label": "test",
+      "source_file": "package.json",
+      "source_location": "L13"
+    },
+    {
+      "id": "package_scripts_test_watch",
+      "label": "test:watch",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "scripts",
+      "file_type": "code",
+      "norm_label": "test:watch",
+      "source_file": "package.json",
+      "source_location": "L14"
+    },
+    {
       "id": "agents_skills_tailwind_4_docs_references_docs_grid_auto_columns",
       "label": "grid-auto-columns.mdx",
       "_origin": "ast",
@@ -9780,6 +9913,72 @@
       "norm_label": "tsx",
       "source_file": "components.json",
       "source_location": "L5"
+    },
+    {
+      "id": "package",
+      "label": "package.json",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "package.json",
+      "source_file": "package.json",
+      "source_location": "L1"
+    },
+    {
+      "id": "package_engines",
+      "label": "engines",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "engines",
+      "source_file": "package.json",
+      "source_location": "L5"
+    },
+    {
+      "id": "package_engines_node",
+      "label": "node",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "node",
+      "source_file": "package.json",
+      "source_location": "L6"
+    },
+    {
+      "id": "package_name",
+      "label": "name",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "name",
+      "source_file": "package.json",
+      "source_location": "L2"
+    },
+    {
+      "id": "package_type",
+      "label": "type",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "type",
+      "source_file": "package.json",
+      "source_location": "L3"
+    },
+    {
+      "id": "package_version",
+      "label": "version",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "version",
+      "source_file": "package.json",
+      "source_location": "L4"
     },
     {
       "id": "agents_skills_tailwind_4_docs_references_docs_tab_size",
@@ -11826,6 +12025,28 @@
       "source_location": "L36"
     },
     {
+      "id": "package_dependencies_astrojs_sitemap",
+      "label": "@astrojs/sitemap",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "@astrojs/sitemap",
+      "file_type": "code",
+      "norm_label": "@astrojs/sitemap",
+      "source_file": "package.json",
+      "source_location": "L20"
+    },
+    {
+      "id": "astrojs_sitemap",
+      "label": "@astrojs/sitemap",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "@astrojs/sitemap",
+      "file_type": "concept",
+      "norm_label": "@astrojs/sitemap",
+      "source_file": "package.json",
+      "source_location": "L20"
+    },
+    {
       "id": "agents",
       "label": "AGENTS.md",
       "_origin": "ast",
@@ -11966,6 +12187,50 @@
       "source_location": "L6"
     },
     {
+      "id": "package_dependencies_radix_ui_react_slot",
+      "label": "@radix-ui/react-slot",
+      "_origin": "ast",
+      "community": 234,
+      "community_name": "@radix-ui/react-slot",
+      "file_type": "code",
+      "norm_label": "@radix-ui/react-slot",
+      "source_file": "package.json",
+      "source_location": "L24"
+    },
+    {
+      "id": "radix_ui_react_slot",
+      "label": "@radix-ui/react-slot",
+      "_origin": "ast",
+      "community": 234,
+      "community_name": "@radix-ui/react-slot",
+      "file_type": "concept",
+      "norm_label": "@radix-ui/react-slot",
+      "source_file": "package.json",
+      "source_location": "L24"
+    },
+    {
+      "id": "package_dependencies_supabase_supabase_js",
+      "label": "@supabase/supabase-js",
+      "_origin": "ast",
+      "community": 235,
+      "community_name": "@supabase/supabase-js",
+      "file_type": "code",
+      "norm_label": "@supabase/supabase-js",
+      "source_file": "package.json",
+      "source_location": "L25"
+    },
+    {
+      "id": "supabase_supabase_js",
+      "label": "@supabase/supabase-js",
+      "_origin": "ast",
+      "community": 235,
+      "community_name": "@supabase/supabase-js",
+      "file_type": "concept",
+      "norm_label": "@supabase/supabase-js",
+      "source_file": "package.json",
+      "source_location": "L25"
+    },
+    {
       "id": "src_components_admin_adminlogin",
       "label": "AdminLogin.tsx",
       "_origin": "ast",
@@ -12018,7 +12283,7 @@
       "file_type": "code",
       "norm_label": "template_alias_map",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L93"
+      "source_location": "L95"
     },
     {
       "id": "src_components_mememaker_template_names",
@@ -12029,7 +12294,7 @@
       "file_type": "code",
       "norm_label": "template_names",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L140"
+      "source_location": "L142"
     },
     {
       "id": "src_components_mememaker_templates",
@@ -12040,7 +12305,7 @@
       "file_type": "code",
       "norm_label": "templates",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L87"
+      "source_location": "L89"
     },
     {
       "id": "src_layouts_layout",
@@ -12128,7 +12393,7 @@
       "file_type": "code",
       "norm_label": "available_meme_fonts",
       "source_file": "src/lib/templateBoxes.ts",
-      "source_location": "L22"
+      "source_location": "L24"
     },
     {
       "id": "src_lib_templateboxes_default_boxes",
@@ -12139,7 +12404,7 @@
       "file_type": "code",
       "norm_label": "default_boxes",
       "source_file": "src/lib/templateBoxes.ts",
-      "source_location": "L34"
+      "source_location": "L47"
     },
     {
       "id": "src_lib_templateboxes_template_boxes",
@@ -12150,7 +12415,7 @@
       "file_type": "code",
       "norm_label": "template_boxes",
       "source_file": "src/lib/templateBoxes.ts",
-      "source_location": "L39"
+      "source_location": "L52"
     },
     {
       "id": "src_lib_templatesdb",
@@ -12428,6 +12693,182 @@
       "source_location": "L1"
     },
     {
+      "id": "package_dependencies_tailwind_merge",
+      "label": "tailwind-merge",
+      "_origin": "ast",
+      "community": 237,
+      "community_name": "tailwind-merge",
+      "file_type": "code",
+      "norm_label": "tailwind-merge",
+      "source_file": "package.json",
+      "source_location": "L36"
+    },
+    {
+      "id": "tailwind_merge",
+      "label": "tailwind-merge",
+      "_origin": "ast",
+      "community": 237,
+      "community_name": "tailwind-merge",
+      "file_type": "concept",
+      "norm_label": "tailwind-merge",
+      "source_file": "package.json",
+      "source_location": "L36"
+    },
+    {
+      "id": "package_dependencies_tailwindcss",
+      "label": "tailwindcss",
+      "_origin": "ast",
+      "community": 238,
+      "community_name": "tailwindcss",
+      "file_type": "code",
+      "norm_label": "tailwindcss",
+      "source_file": "package.json",
+      "source_location": "L37"
+    },
+    {
+      "id": "tailwindcss",
+      "label": "tailwindcss",
+      "_origin": "ast",
+      "community": 238,
+      "community_name": "tailwindcss",
+      "file_type": "concept",
+      "norm_label": "tailwindcss",
+      "source_file": "package.json",
+      "source_location": "L37"
+    },
+    {
+      "id": "package_dependencies_tailwindcss_vite",
+      "label": "@tailwindcss/vite",
+      "_origin": "ast",
+      "community": 239,
+      "community_name": "@tailwindcss/vite",
+      "file_type": "code",
+      "norm_label": "@tailwindcss/vite",
+      "source_file": "package.json",
+      "source_location": "L26"
+    },
+    {
+      "id": "tailwindcss_vite",
+      "label": "@tailwindcss/vite",
+      "_origin": "ast",
+      "community": 239,
+      "community_name": "@tailwindcss/vite",
+      "file_type": "concept",
+      "norm_label": "@tailwindcss/vite",
+      "source_file": "package.json",
+      "source_location": "L26"
+    },
+    {
+      "id": "package_dependencies_clsx",
+      "label": "clsx",
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "clsx",
+      "file_type": "code",
+      "norm_label": "clsx",
+      "source_file": "package.json",
+      "source_location": "L32"
+    },
+    {
+      "id": "clsx",
+      "label": "clsx",
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "clsx",
+      "file_type": "concept",
+      "norm_label": "clsx",
+      "source_file": "package.json",
+      "source_location": "L32"
+    },
+    {
+      "id": "package_dependencies_tw_animate",
+      "label": "tw-animate",
+      "_origin": "ast",
+      "community": 240,
+      "community_name": "tw-animate",
+      "file_type": "code",
+      "norm_label": "tw-animate",
+      "source_file": "package.json",
+      "source_location": "L38"
+    },
+    {
+      "id": "tw_animate",
+      "label": "tw-animate",
+      "_origin": "ast",
+      "community": 240,
+      "community_name": "tw-animate",
+      "file_type": "concept",
+      "norm_label": "tw-animate",
+      "source_file": "package.json",
+      "source_location": "L38"
+    },
+    {
+      "id": "package_dependencies_tw_colors",
+      "label": "tw-colors",
+      "_origin": "ast",
+      "community": 241,
+      "community_name": "tw-colors",
+      "file_type": "code",
+      "norm_label": "tw-colors",
+      "source_file": "package.json",
+      "source_location": "L39"
+    },
+    {
+      "id": "tw_colors",
+      "label": "tw-colors",
+      "_origin": "ast",
+      "community": 241,
+      "community_name": "tw-colors",
+      "file_type": "concept",
+      "norm_label": "tw-colors",
+      "source_file": "package.json",
+      "source_location": "L39"
+    },
+    {
+      "id": "package_dependencies_types_react",
+      "label": "@types/react",
+      "_origin": "ast",
+      "community": 242,
+      "community_name": "@types/react",
+      "file_type": "code",
+      "norm_label": "@types/react",
+      "source_file": "package.json",
+      "source_location": "L27"
+    },
+    {
+      "id": "types_react",
+      "label": "@types/react",
+      "_origin": "ast",
+      "community": 242,
+      "community_name": "@types/react",
+      "file_type": "concept",
+      "norm_label": "@types/react",
+      "source_file": "package.json",
+      "source_location": "L27"
+    },
+    {
+      "id": "package_dependencies_vercel_speed_insights",
+      "label": "@vercel/speed-insights",
+      "_origin": "ast",
+      "community": 243,
+      "community_name": "@vercel/speed-insights",
+      "file_type": "code",
+      "norm_label": "@vercel/speed-insights",
+      "source_file": "package.json",
+      "source_location": "L29"
+    },
+    {
+      "id": "vercel_speed_insights",
+      "label": "@vercel/speed-insights",
+      "_origin": "ast",
+      "community": 243,
+      "community_name": "@vercel/speed-insights",
+      "file_type": "concept",
+      "norm_label": "@vercel/speed-insights",
+      "source_file": "package.json",
+      "source_location": "L29"
+    },
+    {
       "id": "agents_skills_tailwind_4_docs_references_docs_index",
       "label": "docs-index.tsx",
       "_origin": "ast",
@@ -12448,6 +12889,28 @@
       "norm_label": "astro.config.mjs",
       "source_file": "astro.config.mjs",
       "source_location": "L1"
+    },
+    {
+      "id": "package_dependencies_fontsource_inter",
+      "label": "@fontsource/inter",
+      "_origin": "ast",
+      "community": 27,
+      "community_name": "@fontsource/inter",
+      "file_type": "code",
+      "norm_label": "@fontsource/inter",
+      "source_file": "package.json",
+      "source_location": "L22"
+    },
+    {
+      "id": "fontsource_inter",
+      "label": "@fontsource/inter",
+      "_origin": "ast",
+      "community": 27,
+      "community_name": "@fontsource/inter",
+      "file_type": "concept",
+      "norm_label": "@fontsource/inter",
+      "source_file": "package.json",
+      "source_location": "L22"
     },
     {
       "id": "agents_skills_tailwind_4_docs_references_docs_responsive_design",
@@ -12930,22 +13393,11 @@
       "source_location": "L30"
     },
     {
-      "id": "package",
-      "label": "package.json",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "package.json",
-      "source_file": "package.json",
-      "source_location": "L1"
-    },
-    {
       "id": "package_devdependencies",
       "label": "devDependencies",
       "_origin": "ast",
       "community": 3,
-      "community_name": "scripts",
+      "community_name": "devDependencies",
       "file_type": "code",
       "norm_label": "devdependencies",
       "source_file": "package.json",
@@ -12956,7 +13408,7 @@
       "label": "fake-indexeddb",
       "_origin": "ast",
       "community": 3,
-      "community_name": "scripts",
+      "community_name": "devDependencies",
       "file_type": "code",
       "norm_label": "fake-indexeddb",
       "source_file": "package.json",
@@ -12967,7 +13419,7 @@
       "label": "jsdom",
       "_origin": "ast",
       "community": 3,
-      "community_name": "scripts",
+      "community_name": "devDependencies",
       "file_type": "code",
       "norm_label": "jsdom",
       "source_file": "package.json",
@@ -12978,7 +13430,7 @@
       "label": "playwright",
       "_origin": "ast",
       "community": 3,
-      "community_name": "scripts",
+      "community_name": "devDependencies",
       "file_type": "code",
       "norm_label": "playwright",
       "source_file": "package.json",
@@ -12989,172 +13441,18 @@
       "label": "vitest",
       "_origin": "ast",
       "community": 3,
-      "community_name": "scripts",
+      "community_name": "devDependencies",
       "file_type": "code",
       "norm_label": "vitest",
       "source_file": "package.json",
       "source_location": "L45"
     },
     {
-      "id": "package_engines",
-      "label": "engines",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "engines",
-      "source_file": "package.json",
-      "source_location": "L5"
-    },
-    {
-      "id": "package_engines_node",
-      "label": "node",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "node",
-      "source_file": "package.json",
-      "source_location": "L6"
-    },
-    {
-      "id": "package_name",
-      "label": "name",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "name",
-      "source_file": "package.json",
-      "source_location": "L2"
-    },
-    {
-      "id": "package_scripts",
-      "label": "scripts",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "scripts",
-      "source_file": "package.json",
-      "source_location": "L8"
-    },
-    {
-      "id": "package_scripts_astro",
-      "label": "astro",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "astro",
-      "source_file": "package.json",
-      "source_location": "L12"
-    },
-    {
-      "id": "package_scripts_build",
-      "label": "build",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "build",
-      "source_file": "package.json",
-      "source_location": "L10"
-    },
-    {
-      "id": "package_scripts_dev",
-      "label": "dev",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "dev",
-      "source_file": "package.json",
-      "source_location": "L9"
-    },
-    {
-      "id": "package_scripts_graphify",
-      "label": "graphify",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "graphify",
-      "source_file": "package.json",
-      "source_location": "L15"
-    },
-    {
-      "id": "package_scripts_graphify_export",
-      "label": "graphify:export",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "graphify:export",
-      "source_file": "package.json",
-      "source_location": "L16"
-    },
-    {
-      "id": "package_scripts_preview",
-      "label": "preview",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "preview",
-      "source_file": "package.json",
-      "source_location": "L11"
-    },
-    {
-      "id": "package_scripts_test",
-      "label": "test",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "test",
-      "source_file": "package.json",
-      "source_location": "L13"
-    },
-    {
-      "id": "package_scripts_test_watch",
-      "label": "test:watch",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "test:watch",
-      "source_file": "package.json",
-      "source_location": "L14"
-    },
-    {
-      "id": "package_type",
-      "label": "type",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "type",
-      "source_file": "package.json",
-      "source_location": "L3"
-    },
-    {
-      "id": "package_version",
-      "label": "version",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "version",
-      "source_file": "package.json",
-      "source_location": "L4"
-    },
-    {
       "id": "fake_indexeddb",
       "label": "fake-indexeddb",
       "_origin": "ast",
       "community": 3,
-      "community_name": "scripts",
+      "community_name": "devDependencies",
       "file_type": "concept",
       "norm_label": "fake-indexeddb",
       "source_file": "package.json",
@@ -13165,7 +13463,7 @@
       "label": "jsdom",
       "_origin": "ast",
       "community": 3,
-      "community_name": "scripts",
+      "community_name": "devDependencies",
       "file_type": "concept",
       "norm_label": "jsdom",
       "source_file": "package.json",
@@ -13176,7 +13474,7 @@
       "label": "playwright",
       "_origin": "ast",
       "community": 3,
-      "community_name": "scripts",
+      "community_name": "devDependencies",
       "file_type": "concept",
       "norm_label": "playwright",
       "source_file": "package.json",
@@ -13187,7 +13485,7 @@
       "label": "vitest",
       "_origin": "ast",
       "community": 3,
-      "community_name": "scripts",
+      "community_name": "devDependencies",
       "file_type": "concept",
       "norm_label": "vitest",
       "source_file": "package.json",
@@ -18867,17 +19165,6 @@
       "source_location": "L19"
     },
     {
-      "id": "package_dependencies_astrojs_sitemap",
-      "label": "@astrojs/sitemap",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "@astrojs/sitemap",
-      "source_file": "package.json",
-      "source_location": "L20"
-    },
-    {
       "id": "package_dependencies_aws_sdk_client_s3",
       "label": "@aws-sdk/client-s3",
       "_origin": "ast",
@@ -18900,28 +19187,6 @@
       "source_location": "L31"
     },
     {
-      "id": "package_dependencies_clsx",
-      "label": "clsx",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "clsx",
-      "source_file": "package.json",
-      "source_location": "L32"
-    },
-    {
-      "id": "package_dependencies_fontsource_inter",
-      "label": "@fontsource/inter",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "@fontsource/inter",
-      "source_file": "package.json",
-      "source_location": "L22"
-    },
-    {
       "id": "package_dependencies_fontsource_jetbrains_mono",
       "label": "@fontsource/jetbrains-mono",
       "_origin": "ast",
@@ -18931,28 +19196,6 @@
       "norm_label": "@fontsource/jetbrains-mono",
       "source_file": "package.json",
       "source_location": "L23"
-    },
-    {
-      "id": "package_dependencies_lucide_react",
-      "label": "lucide-react",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "lucide-react",
-      "source_file": "package.json",
-      "source_location": "L33"
-    },
-    {
-      "id": "package_dependencies_radix_ui_react_slot",
-      "label": "@radix-ui/react-slot",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "@radix-ui/react-slot",
-      "source_file": "package.json",
-      "source_location": "L24"
     },
     {
       "id": "package_dependencies_react",
@@ -18977,83 +19220,6 @@
       "source_location": "L35"
     },
     {
-      "id": "package_dependencies_supabase_supabase_js",
-      "label": "@supabase/supabase-js",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "@supabase/supabase-js",
-      "source_file": "package.json",
-      "source_location": "L25"
-    },
-    {
-      "id": "package_dependencies_tailwind_merge",
-      "label": "tailwind-merge",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "tailwind-merge",
-      "source_file": "package.json",
-      "source_location": "L36"
-    },
-    {
-      "id": "package_dependencies_tailwindcss",
-      "label": "tailwindcss",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "tailwindcss",
-      "source_file": "package.json",
-      "source_location": "L37"
-    },
-    {
-      "id": "package_dependencies_tailwindcss_vite",
-      "label": "@tailwindcss/vite",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "@tailwindcss/vite",
-      "source_file": "package.json",
-      "source_location": "L26"
-    },
-    {
-      "id": "package_dependencies_tw_animate",
-      "label": "tw-animate",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "tw-animate",
-      "source_file": "package.json",
-      "source_location": "L38"
-    },
-    {
-      "id": "package_dependencies_tw_colors",
-      "label": "tw-colors",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "tw-colors",
-      "source_file": "package.json",
-      "source_location": "L39"
-    },
-    {
-      "id": "package_dependencies_types_react",
-      "label": "@types/react",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "@types/react",
-      "source_file": "package.json",
-      "source_location": "L27"
-    },
-    {
       "id": "package_dependencies_types_react_dom",
       "label": "@types/react-dom",
       "_origin": "ast",
@@ -19065,17 +19231,6 @@
       "source_location": "L28"
     },
     {
-      "id": "package_dependencies_vercel_speed_insights",
-      "label": "@vercel/speed-insights",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "@vercel/speed-insights",
-      "source_file": "package.json",
-      "source_location": "L29"
-    },
-    {
       "id": "astrojs_react",
       "label": "@astrojs/react",
       "_origin": "ast",
@@ -19085,17 +19240,6 @@
       "norm_label": "@astrojs/react",
       "source_file": "package.json",
       "source_location": "L19"
-    },
-    {
-      "id": "astrojs_sitemap",
-      "label": "@astrojs/sitemap",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "concept",
-      "norm_label": "@astrojs/sitemap",
-      "source_file": "package.json",
-      "source_location": "L20"
     },
     {
       "id": "aws_sdk_client_s3",
@@ -19120,28 +19264,6 @@
       "source_location": "L31"
     },
     {
-      "id": "clsx",
-      "label": "clsx",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "concept",
-      "norm_label": "clsx",
-      "source_file": "package.json",
-      "source_location": "L32"
-    },
-    {
-      "id": "fontsource_inter",
-      "label": "@fontsource/inter",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "concept",
-      "norm_label": "@fontsource/inter",
-      "source_file": "package.json",
-      "source_location": "L22"
-    },
-    {
       "id": "fontsource_jetbrains_mono",
       "label": "@fontsource/jetbrains-mono",
       "_origin": "ast",
@@ -19153,17 +19275,6 @@
       "source_location": "L23"
     },
     {
-      "id": "lucide_react",
-      "label": "lucide-react",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "concept",
-      "norm_label": "lucide-react",
-      "source_file": "package.json",
-      "source_location": "L33"
-    },
-    {
       "id": "package_json_astro",
       "label": "astro",
       "_origin": "ast",
@@ -19173,17 +19284,6 @@
       "norm_label": "astro",
       "source_file": "package.json",
       "source_location": "L30"
-    },
-    {
-      "id": "radix_ui_react_slot",
-      "label": "@radix-ui/react-slot",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "concept",
-      "norm_label": "@radix-ui/react-slot",
-      "source_file": "package.json",
-      "source_location": "L24"
     },
     {
       "id": "react",
@@ -19208,83 +19308,6 @@
       "source_location": "L35"
     },
     {
-      "id": "supabase_supabase_js",
-      "label": "@supabase/supabase-js",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "concept",
-      "norm_label": "@supabase/supabase-js",
-      "source_file": "package.json",
-      "source_location": "L25"
-    },
-    {
-      "id": "tailwind_merge",
-      "label": "tailwind-merge",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "concept",
-      "norm_label": "tailwind-merge",
-      "source_file": "package.json",
-      "source_location": "L36"
-    },
-    {
-      "id": "tailwindcss",
-      "label": "tailwindcss",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "concept",
-      "norm_label": "tailwindcss",
-      "source_file": "package.json",
-      "source_location": "L37"
-    },
-    {
-      "id": "tailwindcss_vite",
-      "label": "@tailwindcss/vite",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "concept",
-      "norm_label": "@tailwindcss/vite",
-      "source_file": "package.json",
-      "source_location": "L26"
-    },
-    {
-      "id": "tw_animate",
-      "label": "tw-animate",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "concept",
-      "norm_label": "tw-animate",
-      "source_file": "package.json",
-      "source_location": "L38"
-    },
-    {
-      "id": "tw_colors",
-      "label": "tw-colors",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "concept",
-      "norm_label": "tw-colors",
-      "source_file": "package.json",
-      "source_location": "L39"
-    },
-    {
-      "id": "types_react",
-      "label": "@types/react",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "concept",
-      "norm_label": "@types/react",
-      "source_file": "package.json",
-      "source_location": "L27"
-    },
-    {
       "id": "types_react_dom",
       "label": "@types/react-dom",
       "_origin": "ast",
@@ -19294,17 +19317,6 @@
       "norm_label": "@types/react-dom",
       "source_file": "package.json",
       "source_location": "L28"
-    },
-    {
-      "id": "vercel_speed_insights",
-      "label": "@vercel/speed-insights",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "concept",
-      "norm_label": "@vercel/speed-insights",
-      "source_file": "package.json",
-      "source_location": "L29"
     },
     {
       "id": "agents_skills_tailwind_4_docs_references_docs_clear",
@@ -22297,7 +22309,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/admin/AdminStudio.tsx",
-      "source_location": "L321",
+      "source_location": "L331",
       "weight": 1.0
     },
     {
@@ -22309,7 +22321,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/admin/AdminStudio.tsx",
-      "source_location": "L361",
+      "source_location": "L371",
       "weight": 1.0
     },
     {
@@ -22321,7 +22333,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/admin/AdminStudio.tsx",
-      "source_location": "L370",
+      "source_location": "L380",
       "weight": 1.0
     },
     {
@@ -22333,7 +22345,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/admin/AdminStudio.tsx",
-      "source_location": "L441",
+      "source_location": "L451",
       "weight": 1.0
     },
     {
@@ -22393,7 +22405,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L209",
+      "source_location": "L211",
       "weight": 1.0
     },
     {
@@ -22405,7 +22417,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L402",
+      "source_location": "L420",
       "weight": 1.0
     },
     {
@@ -22417,7 +22429,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L407",
+      "source_location": "L425",
       "weight": 1.0
     },
     {
@@ -22429,7 +22441,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L408",
+      "source_location": "L426",
       "weight": 1.0
     },
     {
@@ -22441,7 +22453,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L410",
+      "source_location": "L428",
       "weight": 1.0
     },
     {
@@ -22453,7 +22465,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L433",
+      "source_location": "L451",
       "weight": 1.0
     },
     {
@@ -22465,7 +22477,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L447",
+      "source_location": "L465",
       "weight": 1.0
     },
     {
@@ -22477,7 +22489,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L464",
+      "source_location": "L482",
       "weight": 1.0
     },
     {
@@ -22489,7 +22501,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L468",
+      "source_location": "L486",
       "weight": 1.0
     },
     {
@@ -22501,7 +22513,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L587",
+      "source_location": "L605",
       "weight": 1.0
     },
     {
@@ -22513,7 +22525,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L765",
+      "source_location": "L787",
       "weight": 1.0
     },
     {
@@ -22525,7 +22537,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L803",
+      "source_location": "L825",
       "weight": 1.0
     },
     {
@@ -40986,7 +40998,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L140",
+      "source_location": "L142",
       "weight": 1.0
     },
     {
@@ -40997,7 +41009,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L1582",
+      "source_location": "L1649",
       "weight": 1.0
     },
     {
@@ -41008,7 +41020,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L163",
+      "source_location": "L165",
       "weight": 1.0
     },
     {
@@ -41030,7 +41042,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L48",
+      "source_location": "L50",
       "weight": 1.0
     },
     {
@@ -41041,7 +41053,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L50",
+      "source_location": "L52",
       "weight": 1.0
     },
     {
@@ -41052,7 +41064,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L87",
+      "source_location": "L89",
       "weight": 1.0
     },
     {
@@ -41063,7 +41075,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/MemeMaker.tsx",
-      "source_location": "L93",
+      "source_location": "L95",
       "weight": 1.0
     },
     {
@@ -41459,7 +41471,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/templateBoxes.ts",
-      "source_location": "L15",
+      "source_location": "L17",
       "weight": 1.0
     },
     {
@@ -41470,7 +41482,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/templateBoxes.ts",
-      "source_location": "L172",
+      "source_location": "L185",
       "weight": 1.0
     },
     {
@@ -41481,7 +41493,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/templateBoxes.ts",
-      "source_location": "L179",
+      "source_location": "L192",
       "weight": 1.0
     },
     {
@@ -41492,18 +41504,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/templateBoxes.ts",
-      "source_location": "L193",
-      "weight": 1.0
-    },
-    {
-      "source": "src_lib_templateboxes",
-      "target": "src_lib_templateboxes_available_meme_fonts",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/lib/templateBoxes.ts",
-      "source_location": "L22",
+      "source_location": "L206",
       "weight": 1.0
     },
     {
@@ -41514,7 +41515,29 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/templateBoxes.ts",
-      "source_location": "L225",
+      "source_location": "L238",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_templateboxes",
+      "target": "src_lib_templateboxes_available_meme_fonts",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/templateBoxes.ts",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_templateboxes",
+      "target": "src_lib_templateboxes_isplainboxstyle",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/templateBoxes.ts",
+      "source_location": "L37",
       "weight": 1.0
     },
     {
@@ -41525,7 +41548,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/templateBoxes.ts",
-      "source_location": "L34",
+      "source_location": "L47",
       "weight": 1.0
     },
     {
@@ -41536,7 +41559,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/templateBoxes.ts",
-      "source_location": "L39",
+      "source_location": "L52",
       "weight": 1.0
     },
     {
@@ -42203,5 +42226,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "14cbea517569cedadc3a6e811976a72fbf28d545"
+  "built_at_commit": "e5f468c836f90a66b4589660698bc24d1ad4285c"
 }
