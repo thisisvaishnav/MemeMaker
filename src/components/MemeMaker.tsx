@@ -164,6 +164,46 @@ export const TEMPLATE_NAMES: Record<number, string> = {
   20: "Hide the Pain Harold",
 };
 
+/** Animated arrow overlay that points at the Download button after Generate is clicked */
+function DownloadHint({
+  x,
+  y,
+  onDismiss,
+}: {
+  x: number;
+  y: number;
+  onDismiss: () => void;
+}) {
+  useEffect(() => {
+    const t = setTimeout(onDismiss, 4500);
+    return () => clearTimeout(t);
+  }, [onDismiss]);
+
+  return (
+    <div
+      className="download-hint-overlay"
+      style={{ left: x, top: y + 28 }}
+      onClick={onDismiss}
+    >
+      <svg
+        className="download-hint-arrow"
+        viewBox="0 0 24 24"
+        width="32"
+        height="32"
+        fill="none"
+        stroke="#19bde7"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <polyline points="18 15 12 9 6 15" />
+      </svg>
+      <span className="download-hint-label">Save your meme!</span>
+    </div>
+  );
+}
+
 export default function MemeMaker() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -211,6 +251,11 @@ export default function MemeMaker() {
   const [search, setSearch] = useState("");
   const [focusedBoxId, setFocusedBoxId] = useState<string | null>(null);
   const [hoveredBoxId, setHoveredBoxId] = useState<string | null>(null);
+
+  const downloadBtnRef = useRef<HTMLButtonElement>(null);
+  const [showHint, setShowHint] = useState(false);
+  const [hintPos, setHintPos] = useState<{ x: number; y: number } | null>(null);
+
 
   const currentDbTemplate = dbTemplates.find((t) => t.id === selectedTemplateId);
   const baseBoxes = currentDbTemplate?.boxes || getTemplateBoxes(selectedTemplateId);
@@ -530,6 +575,22 @@ export default function MemeMaker() {
 
     if (!file) return;
 
+    // Validate MIME type — reject anything that isn't a known safe image format
+    const ALLOWED_MIME_TYPES = /^image\/(png|jpe?g|webp|gif|x-png)$/i;
+    if (!ALLOWED_MIME_TYPES.test(file.type)) {
+      alert("Only PNG, JPEG, WEBP, and GIF images are supported.");
+      e.target.value = "";
+      return;
+    }
+
+    // Cap file size at 20 MB to prevent memory exhaustion from huge base64 data URLs
+    const MAX_SIZE_BYTES = 20 * 1024 * 1024;
+    if (file.size > MAX_SIZE_BYTES) {
+      alert("Image file is too large. Please use a file under 20 MB.");
+      e.target.value = "";
+      return;
+    }
+
     const reader = new FileReader();
     reader.onload = () => {
       if (typeof reader.result === "string") {
@@ -555,10 +616,24 @@ export default function MemeMaker() {
       const output = canvas.toDataURL("image/png");
       setGenerated(output);
       drawMeme(false);
+
+      // Wait for React to re-render and paint the Download button, then measure it
+      setTimeout(() => {
+        if (downloadBtnRef.current) {
+          const rect = downloadBtnRef.current.getBoundingClientRect();
+          setHintPos({
+            x: rect.left + rect.width / 2,
+            y: rect.top + rect.height / 2,
+          });
+          setShowHint(true);
+        }
+      }, 150);
     }, 100);
   };
 
+
   const downloadMeme = () => {
+    setShowHint(false);
     if (!generated) return;
 
     const link = document.createElement("a");
@@ -566,6 +641,7 @@ export default function MemeMaker() {
     link.href = generated;
     link.click();
   };
+
 
   const shareMeme = async () => {
     if (!generated) return;
@@ -621,11 +697,13 @@ export default function MemeMaker() {
     setAnonymous(false);
     setLayers([]);
     setGenerated(null);
+    setShowHint(false);
     setImage(DEFAULT_IMAGE);
     setTemplateTitle(TEMPLATE_NAMES[1]);
     clearImage();
     clearTemplateUrl();
   };
+
 
   const addTextLayer = (isPlain?: boolean) => {
     const usePlain = isPlain !== undefined ? isPlain : (globalFontStyle === "slim-black");
@@ -1321,7 +1399,7 @@ export default function MemeMaker() {
 
             {generated && (
               <div className="generated-actions">
-                <button className="download-btn" onClick={downloadMeme}>
+                <button ref={downloadBtnRef} className="download-btn" onClick={downloadMeme}>
                   Download
                 </button>
 
@@ -1612,6 +1690,15 @@ export default function MemeMaker() {
             </div>
           </aside>
         </section>
+
+        {/* DOWNLOAD HINT OVERLAY */}
+        {showHint && hintPos && (
+          <DownloadHint
+            x={hintPos.x}
+            y={hintPos.y}
+            onDismiss={() => setShowHint(false)}
+          />
+        )}
 
         {/* AI BANNER */}
         <section className="ai-banner">
