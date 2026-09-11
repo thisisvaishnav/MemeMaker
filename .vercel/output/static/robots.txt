@@ -1,0 +1,10 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Disallow editing query parameter URLs
+Disallow: /edit?*
+
+# Sitemaps
+Sitemap: https://realmememaker.com/sitemap.xml
+Sitemap: https://realmememaker.com/sitemap-index.xml

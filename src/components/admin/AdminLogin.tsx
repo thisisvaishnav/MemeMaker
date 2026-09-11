@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { adminSignIn, getAdminSession } from "../../lib/adminAuth";
+
+const MAX_ATTEMPTS = 5;
+const LOCKOUT_SECONDS = 60;
 
 export default function AdminLogin() {
   const [email, setEmail] = useState("");
@@ -7,6 +10,10 @@ export default function AdminLogin() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isChecking, setIsChecking] = useState(true);
+  const [attempts, setAttempts] = useState(0);
+  const [lockedUntil, setLockedUntil] = useState<number | null>(null);
+  const [countdown, setCountdown] = useState(0);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
     getAdminSession().then((session) => {
@@ -18,15 +25,58 @@ export default function AdminLogin() {
     });
   }, []);
 
+  // Countdown timer tick when locked out
+  useEffect(() => {
+    if (lockedUntil === null) return;
+
+    const tick = () => {
+      const remaining = Math.ceil((lockedUntil - Date.now()) / 1000);
+      if (remaining <= 0) {
+        setLockedUntil(null);
+        setAttempts(0);
+        setCountdown(0);
+        setError(null);
+        if (intervalRef.current) clearInterval(intervalRef.current);
+      } else {
+        setCountdown(remaining);
+      }
+    };
+
+    tick();
+    intervalRef.current = setInterval(tick, 1000);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [lockedUntil]);
+
+  const isLocked = lockedUntil !== null && Date.now() < lockedUntil;
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isLocked) return;
+
     setError(null);
     setLoading(true);
 
     try {
       const res = await adminSignIn(email, password);
+
       if (!res.success) {
-        setError(res.error || "Login failed. Check your email and password.");
+        const newAttempts = attempts + 1;
+        setAttempts(newAttempts);
+
+        if (newAttempts >= MAX_ATTEMPTS) {
+          const until = Date.now() + LOCKOUT_SECONDS * 1000;
+          setLockedUntil(until);
+          setError(
+            `Too many failed attempts. Please wait ${LOCKOUT_SECONDS} seconds before trying again.`
+          );
+        } else {
+          const remaining = MAX_ATTEMPTS - newAttempts;
+          setError(
+            `${res.error || "Login failed."} ${remaining} attempt${remaining === 1 ? "" : "s"} remaining.`
+          );
+        }
         setLoading(false);
         return;
       }
@@ -64,6 +114,9 @@ export default function AdminLogin() {
         {error && (
           <div className="mb-6 rounded-lg border border-red-500/30 bg-red-500/10 p-3.5 text-xs text-red-400">
             {error}
+            {isLocked && countdown > 0 && (
+              <span className="ml-1 font-semibold">({countdown}s)</span>
+            )}
           </div>
         )}
 
@@ -77,8 +130,9 @@ export default function AdminLogin() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              disabled={isLocked}
               placeholder="admin@mememaker.com"
-              className="w-full rounded-lg border border-white/15 bg-[#151515] px-3.5 py-2.5 text-sm text-white placeholder-gray-600 outline-none focus:border-[#19bde7] transition-colors"
+              className="w-full rounded-lg border border-white/15 bg-[#151515] px-3.5 py-2.5 text-sm text-white placeholder-gray-600 outline-none focus:border-[#19bde7] transition-colors disabled:opacity-40"
             />
           </div>
 
@@ -91,17 +145,22 @@ export default function AdminLogin() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              disabled={isLocked}
               placeholder="••••••••••••"
-              className="w-full rounded-lg border border-white/15 bg-[#151515] px-3.5 py-2.5 text-sm text-white placeholder-gray-600 outline-none focus:border-[#19bde7] transition-colors"
+              className="w-full rounded-lg border border-white/15 bg-[#151515] px-3.5 py-2.5 text-sm text-white placeholder-gray-600 outline-none focus:border-[#19bde7] transition-colors disabled:opacity-40"
             />
           </div>
 
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || isLocked}
             className="w-full mt-2 rounded-lg bg-[#19bde7] px-4 py-2.5 text-sm font-semibold text-black transition-all hover:bg-[#15a8cf] disabled:opacity-50"
           >
-            {loading ? "Verifying..." : "Sign In to Admin Panel"}
+            {loading
+              ? "Verifying..."
+              : isLocked
+                ? `Locked — wait ${countdown}s`
+                : "Sign In to Admin Panel"}
           </button>
         </form>
 

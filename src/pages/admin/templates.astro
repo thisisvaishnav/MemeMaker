@@ -1,6 +1,24 @@
 ---
+export const prerender = false;
+
 import Layout from "../../layouts/Layout.astro";
 import AdminStudio from "../../components/admin/AdminStudio";
+import { createClient } from "@supabase/supabase-js";
+
+// Server-side auth guard — runs before any HTML is sent to the client
+const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
+const supabaseKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
+
+if (supabaseUrl && supabaseKey && !supabaseUrl.includes("placeholder")) {
+  const supabase = createClient(supabaseUrl, supabaseKey);
+  const authHeader = Astro.request.headers.get("cookie") || "";
+
+  const { data: { session } } = await supabase.auth.getSession();
+
+  if (!session) {
+    return Astro.redirect("/admin/login");
+  }
+}
 ---
 
 <Layout title="Admin Template Studio — MemeMaker" showFooter={false}>

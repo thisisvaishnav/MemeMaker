@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="675" viewBox="0 0 900 675" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="900" height="675" fill="#fff4e8"/>
+  <rect x="0" y="0" width="900" height="121.5" fill="#fafafa"/>
+  <rect x="0" y="553.5" width="900" height="121.5" fill="#fafafa"/>
+
+  <rect x="380" y="340" width="140" height="110" rx="32" fill="#f5f5f5"/>
+
+  <rect x="270" y="466" width="16" height="70" rx="8" fill="#171717"/>
+  <rect x="614" y="466" width="16" height="70" rx="8" fill="#171717"/>
+  <rect x="250" y="440" width="400" height="26" rx="13" fill="#f5a623"/>
+
+  <circle cx="340" cy="430" r="34" fill="#ffffff" stroke="#171717" stroke-width="3"/>
+  <circle cx="560" cy="430" r="34" fill="#ffffff" stroke="#171717" stroke-width="3"/>
+  <circle cx="330" cy="425" r="10" fill="#f5a623"/>
+  <circle cx="350" cy="435" r="8" fill="#50e3c2"/>
+  <circle cx="552" cy="428" r="10" fill="#ff0080"/>
+  <circle cx="572" cy="436" r="8" fill="#50e3c2"/>
+
+  <polygon points="385,240 405,170 435,235" fill="#e5e5e5"/>
+  <polygon points="465,235 495,170 515,240" fill="#e5e5e5"/>
+  <circle cx="450" cy="290" r="80" fill="#f5f5f5"/>
+
+  <ellipse cx="425" cy="285" rx="8" ry="12" fill="#171717"/>
+  <ellipse cx="475" cy="285" rx="8" ry="12" fill="#171717"/>
+  <polygon points="440,310 460,310 450,322" fill="#ff0080"/>
+
+  <line x1="400" y1="315" x2="358" y2="308" stroke="#171717" stroke-width="2"/>
+  <line x1="400" y1="322" x2="358" y2="326" stroke="#171717" stroke-width="2"/>
+  <line x1="500" y1="315" x2="542" y2="308" stroke="#171717" stroke-width="2"/>
+  <line x1="500" y1="322" x2="542" y2="326" stroke="#171717" stroke-width="2"/>
+
+  <path d="M435 322 Q450 332 450 322" fill="none" stroke="#171717" stroke-width="3" stroke-linecap="round"/>
+  <path d="M450 322 Q450 332 465 322" fill="none" stroke="#171717" stroke-width="3" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="675" viewBox="0 0 900 675" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="900" height="675" fill="#f5a623"/>
+  <rect x="0" y="0" width="900" height="121.5" fill="#fff3d6"/>
+  <rect x="0" y="553.5" width="900" height="121.5" fill="#fff3d6"/>
+
+  <polygon points="260,260 320,140 360,260" fill="#d98a1f"/>
+  <polygon points="540,260 580,140 640,260" fill="#d98a1f"/>
+  <polygon points="285,250 320,175 345,250" fill="#ffffff"/>
+  <polygon points="555,250 580,175 605,250" fill="#ffffff"/>
+
+  <ellipse cx="450" cy="400" rx="220" ry="160" fill="#ffffff"/>
+
+  <circle cx="340" cy="420" r="18" fill="#ff0080"/>
+  <circle cx="560" cy="420" r="18" fill="#ff0080"/>
+
+  <ellipse cx="450" cy="460" rx="90" ry="60" fill="#fafafa"/>
+  <circle cx="390" cy="370" r="14" fill="#171717"/>
+  <circle cx="510" cy="370" r="14" fill="#171717"/>
+  <circle cx="394" cy="366" r="4" fill="#ffffff"/>
+  <circle cx="514" cy="366" r="4" fill="#ffffff"/>
+
+  <rect x="430" y="430" width="40" height="28" rx="14" fill="#171717"/>
+  <path d="M410 500 Q450 520 490 500" fill="none" stroke="#171717" stroke-width="4" stroke-linecap="round"/>
+</svg>

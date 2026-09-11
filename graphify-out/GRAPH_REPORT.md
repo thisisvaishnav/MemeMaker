@@ -1,16 +1,16 @@
-# Graph Report - MemeMaker  (2026-09-10)
+# Graph Report - MemeMaker  (2026-09-11)
 
 ## Corpus Check
-- 262 files · ~304,968 words
+- 262 files · ~305,213 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1875 nodes · 1835 edges · 230 communities (218 shown, 5 thin omitted)
+- 1878 nodes · 1838 edges · 231 communities (219 shown, 5 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `7342003b`
+- Built from commit: `5ed0ae37`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -29,6 +29,7 @@
 - MemeMaker — Design & Architecture Specification
 - templateCache.ts
 - Functional utilities
+- Styling based on parent state
 - Thinking in utility classes
 - Customizing your theme
 - Container queries
@@ -266,7 +267,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (230 total, 5 thin omitted)
+## Communities (231 total, 5 thin omitted)
 
 ### Community 0 - "AuthModal.astro"
 Cohesion: 0.08
@@ -297,8 +298,8 @@ Cohesion: 0.76
 Nodes (6): clone_repo(), main(), run(), update_repo(), write_source_file(), Path
 
 ### Community 7 - "dependencies"
-Cohesion: 0.05
-Nodes (43): @astrojs/react, @astrojs/sitemap, @aws-sdk/client-s3, class-variance-authority, clsx, @fontsource/inter, @fontsource/jetbrains-mono, lucide-react (+35 more)
+Cohesion: 0.04
+Nodes (45): @astrojs/react, @astrojs/sitemap, @astrojs/vercel, @aws-sdk/client-s3, class-variance-authority, clsx, @fontsource/inter, @fontsource/jetbrains-mono (+37 more)
 
 ### Community 9 - "wrangler.json"
 Cohesion: 0.33
@@ -319,6 +320,10 @@ Nodes (5): generateDefaultLayout(), getLandingTemplatesLayout(), getTrendingTemp
 ### Community 18 - "Functional utilities"
 Cohesion: 0.08
 Nodes (24): Adding base styles, Adding component classes, Adding custom utilities, Adding custom variants, Arbitrary properties, Arbitrary values, Arbitrary variants, Bare values (+16 more)
+
+### Community 19 - "Styling based on parent state"
+Cohesion: 0.50
+Nodes (4): Arbitrary groups, Differentiating nested groups, Implicit groups, Styling based on parent state
 
 ### Community 21 - "Thinking in utility classes"
 Cohesion: 0.09
@@ -341,8 +346,8 @@ Cohesion: 0.11
 Nodes (17): Adding a ring, Adding an inset ring, Adding an inset shadow, Basic example, Changing the opacity, Customizing inset shadows, Customizing shadow colors, Customizing shadows (+9 more)
 
 ### Community 31 - "Pseudo-classes"
-Cohesion: 0.13
-Nodes (14): Arbitrary groups, Arbitrary peers, Differentiating nested groups, Differentiating peers, :first, :last, :odd, and :even, :has(), :hover, :focus, and :active, Implicit groups (+6 more)
+Cohesion: 0.18
+Nodes (10): Arbitrary peers, Differentiating peers, :first, :last, :odd, and :even, :has(), :hover, :focus, and :active, Pseudo-classes, :required and :disabled, Styling based on sibling state (+2 more)
 
 ### Community 32 - "Examples"
 Cohesion: 0.14
@@ -1141,8 +1146,8 @@ Cohesion: 0.05
 Nodes (66): AdminLogin(), AdminStudio(), ResizeHandle, TransformState, [], MemeMaker(), ResizeHandle, TEMPLATE_ALIAS_MAP (+58 more)
 
 ## Knowledge Gaps
-- **1247 isolated node(s):** `colors`, `$schema`, `style`, `rsc`, `tsx` (+1242 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1415 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **1248 isolated node(s):** `colors`, `$schema`, `style`, `rsc`, `tsx` (+1243 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1417 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
@@ -1153,7 +1158,7 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `Pseudo-class reference` connect `Pseudo-class reference` to `hover-focus-and-other-states.mdx`?**
   _High betweenness centrality (0.000) - this node is a cross-community bridge._
 - **What connects `colors`, `$schema`, `style` to the rest of the system?**
-  _1247 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _1248 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `AuthModal.astro` be split into smaller, more focused modules?**
   _Cohesion score 0.07539118065433854 - nodes in this community are weakly interconnected._
 - **Should `Changes from v3` be split into smaller, more focused modules?**

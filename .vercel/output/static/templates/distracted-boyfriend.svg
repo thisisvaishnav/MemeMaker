@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="675" viewBox="0 0 900 675" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="900" height="675" fill="#fafafa"/>
+  <rect x="0" y="545" width="900" height="6" fill="#e5e5e5"/>
+
+  <!-- LEFT: girlfriend, arms crossed, unhappy -->
+  <g>
+    <rect x="138" y="485" width="26" height="70" rx="12" fill="#171717"/>
+    <rect x="176" y="485" width="26" height="70" rx="12" fill="#171717"/>
+    <rect x="125" y="345" width="90" height="140" rx="24" fill="#ebebeb"/>
+    <rect x="118" y="375" width="104" height="26" rx="13" fill="#171717"/>
+    <circle cx="170" cy="300" r="48" fill="#ffffff" stroke="#171717" stroke-width="4"/>
+    <circle cx="157" cy="298" r="5" fill="#171717"/>
+    <circle cx="183" cy="298" r="5" fill="#171717"/>
+    <path d="M150 316 Q170 326 190 316" fill="none" stroke="#171717" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <!-- MIDDLE: boyfriend, walking, head turned back -->
+  <g>
+    <rect x="395" y="485" width="26" height="70" rx="12" fill="#171717" transform="rotate(8 408 520)"/>
+    <rect x="433" y="485" width="26" height="70" rx="12" fill="#171717" transform="rotate(-6 446 520)"/>
+    <rect x="470" y="360" width="20" height="90" rx="10" fill="#171717"/>
+    <rect x="385" y="345" width="90" height="140" rx="24" fill="#0070f3"/>
+    <circle cx="430" cy="300" r="48" fill="#ffffff" stroke="#171717" stroke-width="4"/>
+    <circle cx="432" cy="296" r="5" fill="#171717"/>
+    <circle cx="452" cy="296" r="5" fill="#171717"/>
+    <circle cx="452" cy="316" r="7" fill="#171717"/>
+  </g>
+
+  <!-- RIGHT: colorful distraction -->
+  <g>
+    <rect x="665" y="480" width="24" height="60" rx="12" fill="#171717"/>
+    <rect x="701" y="480" width="24" height="60" rx="12" fill="#171717"/>
+    <polygon points="630,480 750,480 700,400 680,400" fill="#ff0080"/>
+    <rect x="660" y="350" width="60" height="90" rx="20" fill="#ff0080"/>
+    <rect x="650" y="258" width="80" height="32" rx="16" fill="#7928ca"/>
+    <circle cx="690" cy="305" r="46" fill="#ffffff" stroke="#171717" stroke-width="4"/>
+    <circle cx="678" cy="302" r="5" fill="#171717"/>
+    <circle cx="702" cy="302" r="5" fill="#171717"/>
+    <path d="M672 322 Q690 332 708 322" fill="none" stroke="#171717" stroke-width="3" stroke-linecap="round"/>
+    <rect x="750" y="320" width="16" height="16" fill="#f5a623" transform="rotate(45 758 328)"/>
+    <rect x="622" y="255" width="14" height="14" fill="#50e3c2" transform="rotate(45 629 262)"/>
+  </g>
+</svg>

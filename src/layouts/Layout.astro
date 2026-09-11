@@ -25,7 +25,7 @@ const {
 const siteUrl = Astro.site?.toString() || "https://realmememaker.com";
 const canonicalURL = canonical ? new URL(canonical, siteUrl) : new URL(Astro.url.pathname, siteUrl);
 const ogImageURL = new URL(image, siteUrl);
-const gaId = import.meta.env.PUBLIC_GA_ID || "G-3SML7PZ2TL";
+const gaId = import.meta.env.PUBLIC_GA_ID;
 ---
 
 <!doctype html>
@@ -64,14 +64,18 @@ const gaId = import.meta.env.PUBLIC_GA_ID || "G-3SML7PZ2TL";
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={ogImageURL} />
 
-        <!-- Google tag (gtag.js) -->
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
-        <script is:inline define:vars={{ gaId }}>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', gaId);
-        </script>
+        {/* Google Analytics — only loads when PUBLIC_GA_ID env var is set */}
+        {gaId && (
+            <>
+                <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+                <script is:inline define:vars={{ gaId }}>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', gaId);
+                </script>
+            </>
+        )}
 
         <!-- Structured Data -->
         <script type="application/ld+json" is:inline>

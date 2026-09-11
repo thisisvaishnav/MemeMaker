@@ -18,6 +18,7 @@
   "dependencies": {
     "@astrojs/react": "^6.0.3",
     "@astrojs/sitemap": "^3.7.4",
+    "@astrojs/vercel": "^11.0.10",
     "@aws-sdk/client-s3": "^3.1113.0",
     "@fontsource/inter": "^5.3.0",
     "@fontsource/jetbrains-mono": "^5.3.0",

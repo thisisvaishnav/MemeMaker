@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="675" viewBox="0 0 900 675" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="900" height="337.5" fill="#ffe4f1"/>
+  <rect x="0" y="337.5" width="900" height="337.5" fill="#e0f7f4"/>
+  <rect x="0" y="333" width="900" height="7" fill="#171717"/>
+
+  <!-- TOP PANEL: reject pose -->
+  <g>
+    <rect x="560" y="205" width="170" height="150" rx="30" fill="#7928ca"/>
+    <circle cx="645" cy="210" r="58" fill="#ffffff" stroke="#171717" stroke-width="4"/>
+    <circle cx="628" cy="205" r="6" fill="#171717"/>
+    <circle cx="662" cy="205" r="6" fill="#171717"/>
+    <path d="M622 235 Q645 224 668 235" fill="none" stroke="#171717" stroke-width="4" stroke-linecap="round"/>
+    <rect x="468" y="150" width="34" height="118" rx="16" fill="#ffffff" stroke="#171717" stroke-width="4"/>
+    <rect x="498" y="228" width="88" height="34" rx="16" fill="#ffffff" stroke="#171717" stroke-width="4"/>
+  </g>
+
+  <!-- BOTTOM PANEL: approve pose -->
+  <g>
+    <rect x="560" y="420" width="170" height="150" rx="30" fill="#7928ca"/>
+    <circle cx="645" cy="425" r="58" fill="#ffffff" stroke="#171717" stroke-width="4"/>
+    <circle cx="628" cy="420" r="6" fill="#171717"/>
+    <circle cx="662" cy="420" r="6" fill="#171717"/>
+    <path d="M620 448 Q645 466 670 448" fill="none" stroke="#171717" stroke-width="4" stroke-linecap="round"/>
+    <rect x="438" y="470" width="132" height="34" rx="16" fill="#ffffff" stroke="#171717" stroke-width="4"/>
+    <polygon points="428,469 460,487 428,505" fill="#171717"/>
+  </g>
+</svg>

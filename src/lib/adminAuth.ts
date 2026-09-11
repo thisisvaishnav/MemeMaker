@@ -48,10 +48,6 @@ export async function adminSignIn(
       }
     }
 
-    if (typeof window !== "undefined") {
-      localStorage.setItem("mememaker_admin_logged_in", "true");
-    }
-
     return {
       success: true,
       user: {
@@ -68,9 +64,6 @@ export async function adminSignIn(
  * Signs out admin
  */
 export async function adminSignOut(): Promise<void> {
-  if (typeof window !== "undefined") {
-    localStorage.removeItem("mememaker_admin_logged_in");
-  }
   await supabase.auth.signOut();
 }
 
@@ -84,9 +77,6 @@ export async function getAdminSession(): Promise<AdminUser | null> {
     } = await supabase.auth.getSession();
 
     if (!session || !session.user) {
-      if (typeof window !== "undefined") {
-        localStorage.removeItem("mememaker_admin_logged_in");
-      }
       return null;
     }
 

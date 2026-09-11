@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="675" viewBox="0 0 900 675" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="900" height="675" fill="#fff8ec"/>
+  <rect x="0" y="0" width="900" height="121.5" fill="#fafafa"/>
+  <rect x="0" y="553.5" width="900" height="121.5" fill="#fff3d6"/>
+
+  <!-- flames -->
+  <path d="M120,360 Q95,300 120,240 Q145,300 120,360 Z" fill="#f5a623"/>
+  <path d="M160,450 Q140,410 160,370 Q180,410 160,450 Z" fill="#ee0000"/>
+  <path d="M780,360 Q755,300 780,240 Q805,300 780,360 Z" fill="#ee0000"/>
+  <path d="M740,450 Q720,410 740,370 Q760,410 740,450 Z" fill="#f5a623"/>
+  <path d="M230,510 Q212,478 230,446 Q248,478 230,510 Z" fill="#f5a623"/>
+  <path d="M670,510 Q652,478 670,446 Q688,478 670,510 Z" fill="#ee0000"/>
+  <path d="M450,540 Q432,510 450,480 Q468,510 450,540 Z" fill="#ee0000"/>
+
+  <!-- table -->
+  <rect x="310" y="454" width="14" height="60" rx="6" fill="#171717"/>
+  <rect x="576" y="454" width="14" height="60" rx="6" fill="#171717"/>
+  <rect x="300" y="430" width="300" height="24" rx="12" fill="#171717"/>
+
+  <!-- coffee cup -->
+  <rect x="415" y="408" width="34" height="26" rx="8" fill="#ffffff" stroke="#171717" stroke-width="3"/>
+  <path d="M449 414 Q464 414 464 422 Q464 430 449 430" fill="none" stroke="#171717" stroke-width="3"/>
+
+  <!-- dog body -->
+  <rect x="380" y="380" width="140" height="110" rx="28" fill="#ffffff" stroke="#171717" stroke-width="3"/>
+
+  <!-- dog head -->
+  <circle cx="395" cy="255" r="28" fill="#f5a623"/>
+  <circle cx="505" cy="255" r="28" fill="#f5a623"/>
+  <circle cx="450" cy="300" r="90" fill="#ffffff" stroke="#171717" stroke-width="3"/>
+
+  <circle cx="425" cy="292" r="6" fill="#171717"/>
+  <circle cx="475" cy="292" r="6" fill="#171717"/>
+  <polygon points="440,330 460,330 450,342" fill="#171717"/>
+  <path d="M420 352 Q450 370 480 352" fill="none" stroke="#171717" stroke-width="4" stroke-linecap="round"/>
+</svg>
