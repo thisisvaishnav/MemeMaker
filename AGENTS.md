@@ -30,9 +30,22 @@ Consult these guides before working on related tasks:
 - **Database & Auth**: Supabase (`@supabase/supabase-js`, migrations in `supabase/migrations/`).
 - **MCP Integrations**:
   - **Supabase MCP**: Active via `~/.gemini/config/mcp_config.json` (`project_ref=xmlcrgqhyxzmxwzuyaum`) for database inspection, docs, migrations, and SQL execution.
-  - **Vercel**: Active hosting platform for `realmememaker.com` (Vercel MCP available for deployment workflows).
+  - **Vercel MCP**: Not currently configured in `mcp_config.json`. Use the Vercel dashboard or CLI for deployment workflows.
 - **Test Suite**: Vitest 5 (`vitest.config.ts`, test files in `tests/`).
 - **Knowledge Graph**: Graphify (`graphify extract . --code-only`, graph in `graphify-out/`).
+
+## DNS & Hosting Configuration
+
+| Record | Type | Value | Managed In |
+|--------|------|-------|-----------|
+| `@` (root) | `A` | `76.76.21.21` | GoDaddy |
+| `www` | `CNAME` | `cname.vercel-dns.com` | GoDaddy |
+
+- **Registrar**: GoDaddy (`ns59.domaincontrol.com`, `ns60.domaincontrol.com`)
+- **SSL**: Auto-provisioned by Vercel via Let's Encrypt
+- **HSTS**: Enabled (`max-age=63072000; includeSubDomains; preload`) in `vercel.json`
+
+> If `ERR_CERT_COMMON_NAME_INVALID` appears: check GoDaddy → DNS → `A` record for `@` is `76.76.21.21`. See `DEPLOYMENT.md` for the full runbook.
 
 ## Project-Specific Commands & Verification Workflow
 
