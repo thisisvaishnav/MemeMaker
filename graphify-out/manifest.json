@@ -66,15 +66,15 @@
     "semantic_hash": ""
   },
   "src/components/Header.astro": {
-    "mtime": 1789666116.6797845,
-    "seen": 1789666796.0995882,
-    "ast_hash": "b035d8ae3ff04b3ffe0e307c943dbb87",
+    "mtime": 1789668484.1671991,
+    "seen": 1789668600.591757,
+    "ast_hash": "0ad445830d0a1b9b3929da4415e725a0",
     "semantic_hash": ""
   },
   "src/components/MemeMaker.tsx": {
-    "mtime": 1789666741.692827,
-    "seen": 1789666796.099589,
-    "ast_hash": "b66f9fd105bb1adbaadbd327f52bdde8",
+    "mtime": 1789668468.707154,
+    "seen": 1789668600.591757,
+    "ast_hash": "84d27445246709be738bdcb8fb1e4c59",
     "semantic_hash": ""
   },
   "src/layouts/Layout.astro": {
@@ -1938,9 +1938,9 @@
     "semantic_hash": ""
   },
   "src/lib/templatesDb.ts": {
-    "mtime": 1789666632.8019972,
-    "seen": 1789666796.099714,
-    "ast_hash": "6cadc1738eb562c4ca5d23e5c80526db",
+    "mtime": 1789668543.1495454,
+    "seen": 1789668600.591908,
+    "ast_hash": "a255b38f81e8fed3a453e5a539802a42",
     "semantic_hash": ""
   },
   "src/pages/admin/index.astro": {
@@ -1968,9 +1968,9 @@
     "semantic_hash": ""
   },
   "src/lib/authUtils.ts": {
-    "mtime": 1789039002.8453884,
-    "seen": 1789039075.3754299,
-    "ast_hash": "5b147e790c33e06de21a91220cc991e4",
+    "mtime": 1789668449.6302838,
+    "seen": 1789668600.591831,
+    "ast_hash": "ad98b8cf7a7903be02e48a2cedf16e2f",
     "semantic_hash": ""
   },
   "tests/auth.test.ts": {
@@ -1980,327 +1980,297 @@
     "semantic_hash": ""
   },
   ".vercel/output/_functions/chunks/Layout_PsX6-VGx.mjs": {
-    "mtime": 1789666787.7794363,
-    "seen": 1789666796.099463,
+    "mtime": 1789668575.7190952,
+    "seen": 1789668600.591603,
     "ast_hash": "ea3da7b7c009623515801d26fe6b9fcd",
     "semantic_hash": ""
   },
   ".vercel/output/_functions/chunks/_virtual_astro_server-island-manifest_C1Q2srgE.mjs": {
-    "mtime": 1789666787.7787378,
-    "seen": 1789666796.099464,
+    "mtime": 1789668575.718322,
+    "seen": 1789668600.591605,
     "ast_hash": "12c30764b53753906816cb8c9bd742e2",
     "semantic_hash": ""
   },
   ".vercel/output/_functions/chunks/_virtual_astro_session-driver_C-PI1Pas.mjs": {
-    "mtime": 1789666787.7791634,
-    "seen": 1789666796.099465,
+    "mtime": 1789668575.7188108,
+    "seen": 1789668600.591606,
     "ast_hash": "0335d37678e2566bf764a992783278df",
     "semantic_hash": ""
   },
   ".vercel/output/_functions/chunks/compiler_BSRKz0BZ.mjs": {
-    "mtime": 1789666787.7786126,
-    "seen": 1789666796.099466,
+    "mtime": 1789668575.718126,
+    "seen": 1789668600.591607,
     "ast_hash": "6674a62fa3b7330ce75791266b7fd142",
     "semantic_hash": ""
   },
   ".vercel/output/_functions/chunks/errors-data_BJ4JQ9fH.mjs": {
-    "mtime": 1789666787.778885,
-    "seen": 1789666796.099467,
+    "mtime": 1789668575.718481,
+    "seen": 1789668600.591607,
     "ast_hash": "867d4378e24f246269c15e1db3f34e6f",
     "semantic_hash": ""
   },
   ".vercel/output/_functions/chunks/generic_6l7pTrPF.mjs": {
-    "mtime": 1789666787.7802289,
-    "seen": 1789666796.099468,
+    "mtime": 1789668575.7200136,
+    "seen": 1789668600.591608,
     "ast_hash": "c4d7fce5c474697c412e5792cc5ae7fd",
     "semantic_hash": ""
   },
   ".vercel/output/_functions/chunks/index_CxZtBEyF.mjs": {
-    "mtime": 1789666787.7798886,
-    "seen": 1789666796.099468,
+    "mtime": 1789668575.7196221,
+    "seen": 1789668600.591608,
     "ast_hash": "27b6dbe0ee0cb6612b36d428d096bf3d",
     "semantic_hash": ""
   },
   ".vercel/output/_functions/chunks/login_DS2KJSIY.mjs": {
-    "mtime": 1789666787.7796984,
-    "seen": 1789666796.099469,
+    "mtime": 1789668575.7193856,
+    "seen": 1789668600.591609,
     "ast_hash": "12f85c5cd0199b358185e91a22ce94d5",
     "semantic_hash": ""
   },
   ".vercel/output/_functions/chunks/noop-entrypoint_Z3zFhrGC.mjs": {
-    "mtime": 1789666787.7795715,
-    "seen": 1789666796.0994701,
+    "mtime": 1789668575.7192314,
+    "seen": 1789668600.5916102,
     "ast_hash": "25299ebcfd1819e78dc827c009121051",
     "semantic_hash": ""
   },
   ".vercel/output/_functions/chunks/path_s5bQmA_7.mjs": {
-    "mtime": 1789666787.7784634,
-    "seen": 1789666796.099471,
+    "mtime": 1789668575.7179716,
+    "seen": 1789668600.5916102,
     "ast_hash": "0c3832b77ec9a3b9c24a1bf2c2795c32",
     "semantic_hash": ""
   },
   ".vercel/output/_functions/chunks/server_DKvTTH34.mjs": {
-    "mtime": 1789666787.7800848,
-    "seen": 1789666796.099471,
+    "mtime": 1789668575.719856,
+    "seen": 1789668600.591611,
     "ast_hash": "5a61e147a1b8b85eb1c0e9597dac0307",
     "semantic_hash": ""
   },
   ".vercel/output/_functions/chunks/service_SU8pz4H7.mjs": {
-    "mtime": 1789666787.7790263,
-    "seen": 1789666796.0994718,
+    "mtime": 1789668575.7186425,
+    "seen": 1789668600.5916119,
     "ast_hash": "d719ea6991bea9cb8ca0ffbd3d5de655",
     "semantic_hash": ""
   },
   ".vercel/output/_functions/chunks/sharp_CMfN-Awy.mjs": {
-    "mtime": 1789666787.7782857,
-    "seen": 1789666796.099475,
+    "mtime": 1789668575.7177837,
+    "seen": 1789668600.5916119,
     "ast_hash": "56c29eafcac5b1ff3b72462fe42864ef",
     "semantic_hash": ""
   },
   ".vercel/output/_functions/chunks/templates_BrDJGxmY.mjs": {
-    "mtime": 1789666787.779292,
-    "seen": 1789666796.0994759,
+    "mtime": 1789668575.7189493,
+    "seen": 1789668600.5916128,
     "ast_hash": "5e75bc65ce0f78e13db3ed49a4c7ad56",
     "semantic_hash": ""
   },
   ".vercel/output/_functions/chunks/vnode-children_B6vVcKTz.mjs": {
-    "mtime": 1789666787.7803535,
-    "seen": 1789666796.0994759,
+    "mtime": 1789668575.7202039,
+    "seen": 1789668600.591614,
     "ast_hash": "aa2e705214e8ac0b70f7d7b2342fbcf4",
     "semantic_hash": ""
   },
   ".vercel/output/_functions/entry.mjs": {
-    "mtime": 1789666787.7778637,
-    "seen": 1789666796.099477,
-    "ast_hash": "a74c3ff94f1e9821a5469942c15abd2c",
+    "mtime": 1789668575.7173345,
+    "seen": 1789668600.591615,
+    "ast_hash": "5a724e939425c58546188e05d75145fa",
     "semantic_hash": ""
   },
   ".vercel/output/_functions/virtual_astro_middleware.mjs": {
-    "mtime": 1789666787.777486,
-    "seen": 1789666796.099477,
+    "mtime": 1789668575.716953,
+    "seen": 1789668600.591616,
     "ast_hash": "8081105e82a94f2dcf260a6ee98aa617",
     "semantic_hash": ""
   },
   ".vercel/output/config.json": {
-    "mtime": 1789666789.2070656,
-    "seen": 1789666796.099478,
+    "mtime": 1789668577.246017,
+    "seen": 1789668600.591616,
     "ast_hash": "92db57581adf92c4686b2153b923efd8",
     "semantic_hash": ""
   },
   ".vercel/output/functions/_render.func/.vc-config.json": {
-    "mtime": 1789666789.20654,
-    "seen": 1789666796.099478,
+    "mtime": 1789668577.2454882,
+    "seen": 1789668600.591617,
     "ast_hash": "1202618136ea1351340aaef4138f921b",
     "semantic_hash": ""
   },
   ".vercel/output/functions/_render.func/.vercel/output/server/chunks/Layout_PsX6-VGx.mjs": {
-    "mtime": 1789666789.118883,
-    "seen": 1789666796.099479,
+    "mtime": 1789668577.0714953,
+    "seen": 1789668600.591618,
     "ast_hash": "ea3da7b7c009623515801d26fe6b9fcd",
     "semantic_hash": ""
   },
   ".vercel/output/functions/_render.func/.vercel/output/server/chunks/_virtual_astro_server-island-manifest_C1Q2srgE.mjs": {
-    "mtime": 1789666789.1178253,
-    "seen": 1789666796.0994802,
+    "mtime": 1789668577.0705433,
+    "seen": 1789668600.591619,
     "ast_hash": "12c30764b53753906816cb8c9bd742e2",
     "semantic_hash": ""
   },
   ".vercel/output/functions/_render.func/.vercel/output/server/chunks/_virtual_astro_session-driver_C-PI1Pas.mjs": {
-    "mtime": 1789666789.1176236,
-    "seen": 1789666796.0994802,
+    "mtime": 1789668577.0703578,
+    "seen": 1789668600.591619,
     "ast_hash": "0335d37678e2566bf764a992783278df",
     "semantic_hash": ""
   },
   ".vercel/output/functions/_render.func/.vercel/output/server/chunks/compiler_BSRKz0BZ.mjs": {
-    "mtime": 1789666789.1182048,
-    "seen": 1789666796.099481,
+    "mtime": 1789668577.0709312,
+    "seen": 1789668600.5916202,
     "ast_hash": "6674a62fa3b7330ce75791266b7fd142",
     "semantic_hash": ""
   },
   ".vercel/output/functions/_render.func/.vercel/output/server/chunks/errors-data_BJ4JQ9fH.mjs": {
-    "mtime": 1789666789.1158493,
-    "seen": 1789666796.099481,
+    "mtime": 1789668577.0685415,
+    "seen": 1789668600.5916212,
     "ast_hash": "867d4378e24f246269c15e1db3f34e6f",
     "semantic_hash": ""
   },
   ".vercel/output/functions/_render.func/.vercel/output/server/chunks/generic_6l7pTrPF.mjs": {
-    "mtime": 1789666789.116811,
-    "seen": 1789666796.099482,
+    "mtime": 1789668577.0690413,
+    "seen": 1789668600.5916212,
     "ast_hash": "c4d7fce5c474697c412e5792cc5ae7fd",
     "semantic_hash": ""
   },
   ".vercel/output/functions/_render.func/.vercel/output/server/chunks/index_CxZtBEyF.mjs": {
-    "mtime": 1789666789.1170006,
-    "seen": 1789666796.0994828,
+    "mtime": 1789668577.0700157,
+    "seen": 1789668600.5916219,
     "ast_hash": "27b6dbe0ee0cb6612b36d428d096bf3d",
     "semantic_hash": ""
   },
   ".vercel/output/functions/_render.func/.vercel/output/server/chunks/login_DS2KJSIY.mjs": {
-    "mtime": 1789666789.117412,
-    "seen": 1789666796.0994828,
+    "mtime": 1789668577.0695944,
+    "seen": 1789668600.5916228,
     "ast_hash": "12f85c5cd0199b358185e91a22ce94d5",
     "semantic_hash": ""
   },
   ".vercel/output/functions/_render.func/.vercel/output/server/chunks/noop-entrypoint_Z3zFhrGC.mjs": {
-    "mtime": 1789666789.1172042,
-    "seen": 1789666796.099484,
+    "mtime": 1789668577.0701852,
+    "seen": 1789668600.5916228,
     "ast_hash": "25299ebcfd1819e78dc827c009121051",
     "semantic_hash": ""
   },
   ".vercel/output/functions/_render.func/.vercel/output/server/chunks/path_s5bQmA_7.mjs": {
-    "mtime": 1789666789.1165912,
-    "seen": 1789666796.099484,
+    "mtime": 1789668577.070748,
+    "seen": 1789668600.591624,
     "ast_hash": "0c3832b77ec9a3b9c24a1bf2c2795c32",
     "semantic_hash": ""
   },
   ".vercel/output/functions/_render.func/.vercel/output/server/chunks/server_DKvTTH34.mjs": {
-    "mtime": 1789666789.116129,
-    "seen": 1789666796.099485,
+    "mtime": 1789668577.0693426,
+    "seen": 1789668600.591625,
     "ast_hash": "5a61e147a1b8b85eb1c0e9597dac0307",
     "semantic_hash": ""
   },
   ".vercel/output/functions/_render.func/.vercel/output/server/chunks/service_SU8pz4H7.mjs": {
-    "mtime": 1789666789.1183984,
-    "seen": 1789666796.099485,
+    "mtime": 1789668577.071305,
+    "seen": 1789668600.591626,
     "ast_hash": "d719ea6991bea9cb8ca0ffbd3d5de655",
     "semantic_hash": ""
   },
   ".vercel/output/functions/_render.func/.vercel/output/server/chunks/sharp_CMfN-Awy.mjs": {
-    "mtime": 1789666789.1186683,
-    "seen": 1789666796.0994859,
+    "mtime": 1789668577.0711327,
+    "seen": 1789668600.5916271,
     "ast_hash": "56c29eafcac5b1ff3b72462fe42864ef",
     "semantic_hash": ""
   },
   ".vercel/output/functions/_render.func/.vercel/output/server/chunks/templates_BrDJGxmY.mjs": {
-    "mtime": 1789666789.1180131,
-    "seen": 1789666796.099487,
+    "mtime": 1789668577.06982,
+    "seen": 1789668600.5916271,
     "ast_hash": "5e75bc65ce0f78e13db3ed49a4c7ad56",
     "semantic_hash": ""
   },
   ".vercel/output/functions/_render.func/.vercel/output/server/chunks/vnode-children_B6vVcKTz.mjs": {
-    "mtime": 1789666789.1163719,
-    "seen": 1789666796.099487,
+    "mtime": 1789668577.0688026,
+    "seen": 1789668600.591628,
     "ast_hash": "aa2e705214e8ac0b70f7d7b2342fbcf4",
     "semantic_hash": ""
   },
   ".vercel/output/functions/_render.func/.vercel/output/server/entry.mjs": {
-    "mtime": 1789666789.1152859,
-    "seen": 1789666796.099488,
-    "ast_hash": "a74c3ff94f1e9821a5469942c15abd2c",
+    "mtime": 1789668577.067944,
+    "seen": 1789668600.591628,
+    "ast_hash": "5a724e939425c58546188e05d75145fa",
     "semantic_hash": ""
   },
   ".vercel/output/functions/_render.func/.vercel/output/server/virtual_astro_middleware.mjs": {
-    "mtime": 1789666789.1155777,
-    "seen": 1789666796.099488,
+    "mtime": 1789668577.0682583,
+    "seen": 1789668600.591629,
     "ast_hash": "8081105e82a94f2dcf260a6ee98aa617",
     "semantic_hash": ""
   },
   ".vercel/output/functions/_render.func/package.json": {
-    "mtime": 1789666789.2063627,
-    "seen": 1789666796.099489,
+    "mtime": 1789668577.2453098,
+    "seen": 1789668600.591629,
     "ast_hash": "28c63f33dbcaba7b67d5d9f7481deebc",
     "semantic_hash": ""
   },
   ".vercel/output/static/_astro/AdminLogin.C2KkQnmq.js": {
-    "mtime": 1789666789.219859,
-    "seen": 1789666796.099489,
+    "mtime": 1789668577.2603648,
+    "seen": 1789668600.59163,
     "ast_hash": "1c5af32b6db047faa3e9c0251be63e7c",
     "semantic_hash": ""
   },
-  ".vercel/output/static/_astro/AdminStudio.Cj8kxlGh.js": {
-    "mtime": 1789666789.2166655,
-    "seen": 1789666796.0994902,
-    "ast_hash": "aad90b9389a487700c50646eaecd76bf",
-    "semantic_hash": ""
-  },
-  ".vercel/output/static/_astro/AuthModal.astro_astro_type_script_index_0_lang.B06K0kgc.js": {
-    "mtime": 1789666789.2174256,
-    "seen": 1789666796.0994911,
-    "ast_hash": "55530983b493ff49fa3684caa0029177",
-    "semantic_hash": ""
-  },
-  ".vercel/output/static/_astro/Header.astro_astro_type_script_index_0_lang.isEQCvIj.js": {
-    "mtime": 1789666789.2159927,
-    "seen": 1789666796.0994911,
-    "ast_hash": "d296be811312e78dbb7bc5a80b6662a8",
-    "semantic_hash": ""
-  },
-  ".vercel/output/static/_astro/MemeMaker.XWRKuHE6.js": {
-    "mtime": 1789666789.2206178,
-    "seen": 1789666796.099492,
-    "ast_hash": "4667612062fb2096ba24b3818128b317",
-    "semantic_hash": ""
-  },
   ".vercel/output/static/_astro/adminAuth.D9cd67GR.js": {
-    "mtime": 1789666789.2181706,
-    "seen": 1789666796.099492,
+    "mtime": 1789668577.2587864,
+    "seen": 1789668600.591634,
     "ast_hash": "acfcdb191ab81a1a93ee60ae182c2a0a",
     "semantic_hash": ""
   },
   ".vercel/output/static/_astro/avatar.BfBMTXnG.js": {
-    "mtime": 1789666789.217275,
-    "seen": 1789666796.099493,
+    "mtime": 1789668577.257869,
+    "seen": 1789668600.591635,
     "ast_hash": "064817a83adf27cbf0045312e21a77a9",
     "semantic_hash": ""
   },
   ".vercel/output/static/_astro/client.B5DENJaF.js": {
-    "mtime": 1789666789.217547,
-    "seen": 1789666796.099493,
+    "mtime": 1789668577.2579937,
+    "seen": 1789668600.591636,
     "ast_hash": "818333161cadcb07933deec245fd44e2",
     "semantic_hash": ""
   },
   ".vercel/output/static/_astro/imageStore.CHDDODiy.js": {
-    "mtime": 1789666789.2179084,
-    "seen": 1789666796.099494,
+    "mtime": 1789668577.2583191,
+    "seen": 1789668600.591637,
     "ast_hash": "b66ae8431e5da73bd53b80a5405e12b6",
     "semantic_hash": ""
   },
   ".vercel/output/static/_astro/index.astro_astro_type_script_index_0_lang.2MPa_VcZ.js": {
-    "mtime": 1789666789.2168374,
-    "seen": 1789666796.099494,
+    "mtime": 1789668577.2570834,
+    "seen": 1789668600.591638,
     "ast_hash": "cce120f08f256a5a2ebfda5785bf3399",
     "semantic_hash": ""
   },
   ".vercel/output/static/_astro/preload-helper.BKYioxU4.js": {
-    "mtime": 1789666789.21587,
-    "seen": 1789666796.099495,
+    "mtime": 1789668577.2562697,
+    "seen": 1789668600.591638,
     "ast_hash": "819bcbda3f21ffa8d057553ca280b29a",
     "semantic_hash": ""
   },
   ".vercel/output/static/_astro/react-vendor.CJ_3nYWK.js": {
-    "mtime": 1789666789.2184,
-    "seen": 1789666796.099496,
+    "mtime": 1789668577.259032,
+    "seen": 1789668600.591639,
     "ast_hash": "fabaea04c654e218b2c712c8737b90f4",
     "semantic_hash": ""
   },
   ".vercel/output/static/_astro/rolldown-runtime.CXHxssQy.js": {
-    "mtime": 1789666789.2189758,
-    "seen": 1789666796.099496,
+    "mtime": 1789668577.2597597,
+    "seen": 1789668600.591639,
     "ast_hash": "2c0fe3dfb151d71190bca694e35fd903",
     "semantic_hash": ""
   },
   ".vercel/output/static/_astro/supabase-vendor.Ba9mHm9w.js": {
-    "mtime": 1789666789.2188125,
-    "seen": 1789666796.0994968,
+    "mtime": 1789668577.2596283,
+    "seen": 1789668600.59164,
     "ast_hash": "85004474e8c099da160f5319747cb9fc",
     "semantic_hash": ""
   },
   ".vercel/output/static/_astro/supabase.CZfaXzju.js": {
-    "mtime": 1789666789.2169805,
-    "seen": 1789666796.0994968,
+    "mtime": 1789668577.2573664,
+    "seen": 1789668600.5916412,
     "ast_hash": "4ee77f12fccea974fbd28acb21c7f8f6",
     "semantic_hash": ""
   },
   ".vercel/output/static/_astro/templates.astro_astro_type_script_index_0_lang.CWLzgch4.js": {
-    "mtime": 1789666789.2191398,
-    "seen": 1789666796.099498,
+    "mtime": 1789668577.2599258,
+    "seen": 1789668600.5916412,
     "ast_hash": "103b4a1debd18f258bca077b1b33cdf0",
-    "semantic_hash": ""
-  },
-  ".vercel/output/static/_astro/templatesDb.Bz58StEU.js": {
-    "mtime": 1789666789.2157416,
-    "seen": 1789666796.099498,
-    "ast_hash": "83c51fdc180882b8c27405d77f8107d1",
     "semantic_hash": ""
   },
   "vercel.json": {
@@ -2310,63 +2280,63 @@
     "semantic_hash": ""
   },
   ".vercel/output/static/404.html": {
-    "mtime": 1789666789.2146184,
-    "seen": 1789666796.103942,
-    "ast_hash": "56ea9517749a8bc0ee8640ad347959a7",
+    "mtime": 1789668577.253892,
+    "seen": 1789668600.596147,
+    "ast_hash": "11918795ebc9737abf6f207c5c1f2d75",
     "semantic_hash": ""
   },
   ".vercel/output/static/500.html": {
-    "mtime": 1789666789.21448,
-    "seen": 1789666796.1039429,
-    "ast_hash": "8e76f98bfd5d4a54c8402b799bcf1afa",
+    "mtime": 1789668577.2537482,
+    "seen": 1789668600.596148,
+    "ast_hash": "5219e29ae60e2fc12d5ac49cc613405f",
     "semantic_hash": ""
   },
   ".vercel/output/static/about/index.html": {
-    "mtime": 1789666789.214835,
-    "seen": 1789666796.1039429,
-    "ast_hash": "6f65fcd16ab7400dabda5301e6712bd8",
+    "mtime": 1789668577.2541308,
+    "seen": 1789668600.596148,
+    "ast_hash": "51814117adfb19de393de6058e5acb98",
     "semantic_hash": ""
   },
   ".vercel/output/static/contact/index.html": {
-    "mtime": 1789666789.213206,
-    "seen": 1789666796.1039438,
-    "ast_hash": "92c588340b272d44dd196b3ca5d6851e",
+    "mtime": 1789668577.252169,
+    "seen": 1789668600.596149,
+    "ast_hash": "d81da526bb472e5a42af6d628d93f6a4",
     "semantic_hash": ""
   },
   ".vercel/output/static/edit/index.html": {
-    "mtime": 1789666789.2150726,
-    "seen": 1789666796.1039438,
-    "ast_hash": "439d0519d4ad48eb336517916f4df147",
+    "mtime": 1789668577.254392,
+    "seen": 1789668600.59615,
+    "ast_hash": "fe7be211295ef048ea7b2ba9e1d40fbb",
     "semantic_hash": ""
   },
   ".vercel/output/static/index.html": {
-    "mtime": 1789666789.2135346,
-    "seen": 1789666796.103945,
-    "ast_hash": "9eacbd9d96aa26df8b521698a4a28447",
+    "mtime": 1789668577.2525263,
+    "seen": 1789668600.59615,
+    "ast_hash": "701f3f573fc83c5d1a424e7840cbf3df",
     "semantic_hash": ""
   },
   ".vercel/output/static/privacy/index.html": {
-    "mtime": 1789666789.2138765,
-    "seen": 1789666796.103946,
-    "ast_hash": "a26f900b4529782381958507e0eed5ae",
+    "mtime": 1789668577.2530642,
+    "seen": 1789668600.596151,
+    "ast_hash": "d9a5c2ceb6119ae7dd550aef7456ce33",
     "semantic_hash": ""
   },
   ".vercel/output/static/robots.txt": {
-    "mtime": 1789666789.2258797,
-    "seen": 1789666796.103946,
+    "mtime": 1789668577.2664897,
+    "seen": 1789668600.596152,
     "ast_hash": "c9ba88ad7c95afd9a98b8b999ec91b5f",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/index.html": {
-    "mtime": 1789666789.2215478,
-    "seen": 1789666796.103947,
-    "ast_hash": "2e34bab023b30031b816db31b0c9e0ee",
+    "mtime": 1789668577.261354,
+    "seen": 1789668600.596152,
+    "ast_hash": "f0ee97e07b74813acc6799c235d54757",
     "semantic_hash": ""
   },
   ".vercel/output/static/terms/index.html": {
-    "mtime": 1789666789.2143373,
-    "seen": 1789666796.103948,
-    "ast_hash": "7404cb838b8855e4fe2e38680e405510",
+    "mtime": 1789668577.2535858,
+    "seen": 1789668600.596153,
+    "ast_hash": "78659f49cc527d70a4835f131295dc63",
     "semantic_hash": ""
   },
   "DEPLOYMENT.md": {
@@ -2376,213 +2346,273 @@
     "semantic_hash": ""
   },
   ".vercel/output/static/android-chrome-192x192.png": {
-    "mtime": 1789666789.2136557,
-    "seen": 1789666796.104827,
+    "mtime": 1789668577.2528124,
+    "seen": 1789668600.597057,
     "ast_hash": "ad1672d3c7c6a53f531a067df66b38f9",
     "semantic_hash": ""
   },
   ".vercel/output/static/android-chrome-512x512.png": {
-    "mtime": 1789666789.2152348,
-    "seen": 1789666796.104828,
+    "mtime": 1789668577.2549412,
+    "seen": 1789668600.597058,
     "ast_hash": "d238dd45c029adab8aed4ca255af556d",
     "semantic_hash": ""
   },
   ".vercel/output/static/apple-touch-icon.png": {
-    "mtime": 1789666789.2140067,
-    "seen": 1789666796.104828,
+    "mtime": 1789668577.2532127,
+    "seen": 1789668600.597058,
     "ast_hash": "4e189a9a36add638c8371af532eca85e",
     "semantic_hash": ""
   },
   ".vercel/output/static/favicon-16x16.png": {
-    "mtime": 1789666789.212973,
-    "seen": 1789666796.1048288,
+    "mtime": 1789668577.2519062,
+    "seen": 1789668600.597059,
     "ast_hash": "90dd0c9156a9019433b905dee5ebb7a7",
     "semantic_hash": ""
   },
   ".vercel/output/static/favicon-32x32.png": {
-    "mtime": 1789666789.226166,
-    "seen": 1789666796.10483,
+    "mtime": 1789668577.266738,
+    "seen": 1789668600.5970602,
     "ast_hash": "eebb6b98d3f31b13b57b0046bb994c7f",
     "semantic_hash": ""
   },
   ".vercel/output/static/favicon.svg": {
-    "mtime": 1789666789.2260423,
-    "seen": 1789666796.10483,
+    "mtime": 1789668577.2666142,
+    "seen": 1789668600.5970602,
     "ast_hash": "8c13f40658976ea1dfb8ba37a8be0e8d",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/buff-doge.svg": {
-    "mtime": 1789666789.2256114,
-    "seen": 1789666796.104831,
+    "mtime": 1789668577.2661939,
+    "seen": 1789668600.5970612,
     "ast_hash": "52b98aca3331fc92c97c35d4389d0800",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/cat-at-table.svg": {
-    "mtime": 1789666789.2253697,
-    "seen": 1789666796.104832,
+    "mtime": 1789668577.2659218,
+    "seen": 1789668600.5970619,
     "ast_hash": "df2fed70201c905fd727e5a7dfdc04e7",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/cdn/1.webp": {
-    "mtime": 1789666789.2240064,
-    "seen": 1789666796.104832,
+    "mtime": 1789668577.264074,
+    "seen": 1789668600.5970619,
     "ast_hash": "66385d2c4d222d1e9c6cbf01936a4eca",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/cdn/10.webp": {
-    "mtime": 1789666789.224292,
-    "seen": 1789666796.1048331,
+    "mtime": 1789668577.2643585,
+    "seen": 1789668600.5970628,
     "ast_hash": "3b612b4783c028bbc972e55cddeee76c",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/cdn/11.webp": {
-    "mtime": 1789666789.2241476,
-    "seen": 1789666796.104834,
+    "mtime": 1789668577.2642183,
+    "seen": 1789668600.597064,
     "ast_hash": "861c55018568eb2699fa3fb5bd02084e",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/cdn/12.webp": {
-    "mtime": 1789666789.2238698,
-    "seen": 1789666796.104834,
+    "mtime": 1789668577.263924,
+    "seen": 1789668600.597064,
     "ast_hash": "24aa313da505af099baf54c11358af06",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/cdn/13.webp": {
-    "mtime": 1789666789.2234411,
-    "seen": 1789666796.104835,
+    "mtime": 1789668577.2634747,
+    "seen": 1789668600.597065,
     "ast_hash": "83d70062beb3dc48997223a5860e97df",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/cdn/14.webp": {
-    "mtime": 1789666789.2233024,
-    "seen": 1789666796.104835,
+    "mtime": 1789668577.2633305,
+    "seen": 1789668600.597066,
     "ast_hash": "e803b61a338a2ec46df019f31e51cf48",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/cdn/15.webp": {
-    "mtime": 1789666789.222309,
-    "seen": 1789666796.104836,
+    "mtime": 1789668577.2621913,
+    "seen": 1789668600.597066,
     "ast_hash": "cc86313b2baa1f8cc3740ea5d915605f",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/cdn/16.webp": {
-    "mtime": 1789666789.224852,
-    "seen": 1789666796.1048372,
+    "mtime": 1789668577.2649188,
+    "seen": 1789668600.597067,
     "ast_hash": "afdac0d8c78fcf71a0860c94703e5277",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/cdn/17.webp": {
-    "mtime": 1789666789.2245688,
-    "seen": 1789666796.1048372,
+    "mtime": 1789668577.2646391,
+    "seen": 1789668600.597068,
     "ast_hash": "a749ff43561e6ce784709778ad88f372",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/cdn/18.webp": {
-    "mtime": 1789666789.2230175,
-    "seen": 1789666796.104838,
+    "mtime": 1789668577.263013,
+    "seen": 1789668600.597069,
     "ast_hash": "17abd75bd96bf331317001152b5495fa",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/cdn/19.webp": {
-    "mtime": 1789666789.2226033,
-    "seen": 1789666796.1048388,
+    "mtime": 1789668577.2624953,
+    "seen": 1789668600.597069,
     "ast_hash": "c9da0b23abf5b20058292c5e7b08f6c6",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/cdn/2.webp": {
-    "mtime": 1789666789.2237227,
-    "seen": 1789666796.1048388,
+    "mtime": 1789668577.263776,
+    "seen": 1789668600.59707,
     "ast_hash": "f8de19b4ee2def82114cc647495cb76c",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/cdn/20.webp": {
-    "mtime": 1789666789.2247097,
-    "seen": 1789666796.10484,
+    "mtime": 1789668577.2647774,
+    "seen": 1789668600.5970712,
     "ast_hash": "8db4e6494657ad5b1a6ec75aa1500260",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/cdn/3.webp": {
-    "mtime": 1789666789.2235796,
-    "seen": 1789666796.10484,
+    "mtime": 1789668577.2636223,
+    "seen": 1789668600.5970712,
     "ast_hash": "4e3331d76416b1791bc07854e65b1849",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/cdn/4.webp": {
-    "mtime": 1789666789.223162,
-    "seen": 1789666796.104841,
+    "mtime": 1789668577.2631738,
+    "seen": 1789668600.597072,
     "ast_hash": "f0895b28770eddfb3902b00ef17b1460",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/cdn/5.webp": {
-    "mtime": 1789666789.2224638,
-    "seen": 1789666796.104842,
+    "mtime": 1789668577.2623546,
+    "seen": 1789668600.5970728,
     "ast_hash": "14bb1f636ff6431da5495d662902d02f",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/cdn/6.webp": {
-    "mtime": 1789666789.2249832,
-    "seen": 1789666796.104842,
+    "mtime": 1789668577.2650678,
+    "seen": 1789668600.597074,
     "ast_hash": "f48678927a6f73b47588f0db8b1c410b",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/cdn/7.webp": {
-    "mtime": 1789666789.2244287,
-    "seen": 1789666796.104843,
+    "mtime": 1789668577.2645006,
+    "seen": 1789668600.597074,
     "ast_hash": "feed00f9848828c61b5a043328fa4353",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/cdn/8.webp": {
-    "mtime": 1789666789.2228763,
-    "seen": 1789666796.104843,
+    "mtime": 1789668577.2628543,
+    "seen": 1789668600.597075,
     "ast_hash": "e9b5fd7be83ef52eebbc4ca7b7e3edcc",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/cdn/9.webp": {
-    "mtime": 1789666789.2227428,
-    "seen": 1789666796.104844,
+    "mtime": 1789668577.262687,
+    "seen": 1789668600.597076,
     "ast_hash": "f0d21a255e2f0bb9a176328ffbc63f94",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/change-my-mind.svg": {
-    "mtime": 1789666789.2220464,
-    "seen": 1789666796.104845,
+    "mtime": 1789668577.2618878,
+    "seen": 1789668600.597076,
     "ast_hash": "6e04bc41879d5dcbedef6b0b6564357f",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/distracted-boyfriend.svg": {
-    "mtime": 1789666789.2254913,
-    "seen": 1789666796.104845,
+    "mtime": 1789668577.266059,
+    "seen": 1789668600.597077,
     "ast_hash": "f047e18b9a56a8cbc4cc37e42af2f83d",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/doge.svg": {
-    "mtime": 1789666789.2218041,
-    "seen": 1789666796.104846,
+    "mtime": 1789668577.26163,
+    "seen": 1789668600.597078,
     "ast_hash": "691ff0b3245d190d6c6dd6f5860aa8fd",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/drake.svg": {
-    "mtime": 1789666789.2219203,
-    "seen": 1789666796.104846,
+    "mtime": 1789668577.261755,
+    "seen": 1789668600.597078,
     "ast_hash": "ae0388ab1ea2c20bbbfc156ecd30e44b",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/this-is-fine.svg": {
-    "mtime": 1789666789.2216868,
-    "seen": 1789666796.1048472,
+    "mtime": 1789668577.2615027,
+    "seen": 1789668600.597079,
     "ast_hash": "5baf69173ea41589481104e9ab51adfd",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/trollface.svg": {
-    "mtime": 1789666789.2251418,
-    "seen": 1789666796.104848,
+    "mtime": 1789668577.2656493,
+    "seen": 1789668600.59708,
     "ast_hash": "4d42e9a39bf0e4a6252194a223d8c978",
     "semantic_hash": ""
   },
   ".vercel/output/static/templates/two-buttons.svg": {
-    "mtime": 1789666789.2252584,
-    "seen": 1789666796.104848,
+    "mtime": 1789668577.2657871,
+    "seen": 1789668600.5970812,
     "ast_hash": "e121380f414abef23f3a753d04582737",
+    "semantic_hash": ""
+  },
+  ".vercel/output/static/_astro/AdminStudio.BfDAMW6K.js": {
+    "mtime": 1789668577.2572293,
+    "seen": 1789668600.5916312,
+    "ast_hash": "a4a64684a8cf7b118d7c371788ed36a5",
+    "semantic_hash": ""
+  },
+  ".vercel/output/static/_astro/AuthModal.astro_astro_type_script_index_0_lang.CadM2fk_.js": {
+    "mtime": 1789668577.2569005,
+    "seen": 1789668600.591632,
+    "ast_hash": "cd9c25b174ec52a8d9f2a5b67f610489",
+    "semantic_hash": ""
+  },
+  ".vercel/output/static/_astro/Header.astro_astro_type_script_index_0_lang.BAKKiSbh.js": {
+    "mtime": 1789668577.2591727,
+    "seen": 1789668600.5916328,
+    "ast_hash": "bfe28eac251e1ecd7ff1fef2eb1d258c",
+    "semantic_hash": ""
+  },
+  ".vercel/output/static/_astro/MemeMaker.BtCs3NkB.js": {
+    "mtime": 1789668577.257743,
+    "seen": 1789668600.5916328,
+    "ast_hash": "c5ad530f9b494dbc4fde620d09c60e46",
+    "semantic_hash": ""
+  },
+  ".vercel/output/static/_astro/authUtils.DZLjyBtm.js": {
+    "mtime": 1789668577.2557156,
+    "seen": 1789668600.591635,
+    "ast_hash": "030071fdabd1a3477fae72542c01bfc2",
+    "semantic_hash": ""
+  },
+  ".vercel/output/static/_astro/templatesDb.Bt97qFsZ.js": {
+    "mtime": 1789668577.2586274,
+    "seen": 1789668600.5916421,
+    "ast_hash": "41c7b48260fa3c43f01d60ebe3df4598",
+    "semantic_hash": ""
+  },
+  "src/lib/pagination.ts": {
+    "mtime": 1789668435.3873284,
+    "seen": 1789668600.591862,
+    "ast_hash": "697017938749208e38af4bf83b9df0f7",
+    "semantic_hash": ""
+  },
+  "src/lib/templateSearch.ts": {
+    "mtime": 1789668442.4224432,
+    "seen": 1789668600.591907,
+    "ast_hash": "f610d9b6278b03e40956415d86ec47e8",
+    "semantic_hash": ""
+  },
+  "tests/performanceTdd.test.ts": {
+    "mtime": 1789668417.02701,
+    "seen": 1789668600.592174,
+    "ast_hash": "728ec5a241d8edb1d8aab77e1b027a16",
+    "semantic_hash": ""
+  },
+  "docs/testing/performance-optimization.tdd.md": {
+    "mtime": 1789668594.0246642,
+    "seen": 1789668600.596203,
+    "ast_hash": "f2c2e7fd192f5f5312e48c86fb5b2fbb",
     "semantic_hash": ""
   }
 }

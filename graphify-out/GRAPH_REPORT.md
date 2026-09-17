@@ -1,16 +1,16 @@
 # Graph Report - MemeMaker  (2026-09-17)
 
 ## Corpus Check
-- 314 files · ~446,136 words
+- 319 files · ~447,625 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 3893 nodes · 7630 edges · 312 communities (293 shown, 12 thin omitted)
-- Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 311 edges (avg confidence: 0.85)
+- 3913 nodes · 7672 edges · 313 communities (294 shown, 12 thin omitted)
+- Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 309 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `424b514d`
+- Built from commit: `01ed929b`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -242,10 +242,10 @@
 - rules/graphify.md
 - gotchas.md
 - workflows/graphify.md
-- Gt
-- constructor
+- MemeMaker.BtCs3NkB.js
+- _challenge
 - templatesDb.ts
-- handle
+- render
 - server/chunks/server_DKvTTH34.mjs
 - gm
 - handle
@@ -253,35 +253,35 @@
 - _functions/chunks/path_s5bQmA_7.mjs
 - _functions/chunks/server_DKvTTH34.mjs
 - M
-- dv
 - a
+- t
 - constructor
 - constructor
-- join
+- handleOperation
 - _debug
 - Ll
 - e1
 - MemeMaker.tsx
 - get
-- _v
+- constructor
 - getClaims
 - render
 - match
 - _functions/chunks/Layout_PsX6-VGx.mjs
-- match
+- normalizeTheLocale
 - server/chunks/Layout_PsX6-VGx.mjs
 - callGetStaticPaths
 - renderPage
 - Header.astro
 - _functions/chunks/generic_6l7pTrPF.mjs
 - renderStreaming
-- callGetStaticPaths
+- createAssetLink
 - get
-- sa
+- Gt
 - imageStore.ts
 - getProps
 - getProps
-- signInWithEthereum
+- TDD Evidence Report: Performance Optimization Suite
 - decode
 - createAssetLink
 - renderStreaming
@@ -295,22 +295,22 @@
 - renderFrameworkComponent
 - render
 - getIslandContent
-- isRoute404
+- performanceTdd.test.ts
 - renderToStaticMarkup
 - isAstroComponentFactory
 - renderToStaticMarkup
 - _functions/chunks/errors-data_BJ4JQ9fH.mjs
 - scripts
-- createResult
+- handle
 - _functions/chunks/sharp_CMfN-Awy.mjs
 - isAstroComponentFactory
 - validateForwardedHeaders
-- finalize
+- f0
 - validateForwardedHeaders
 - package.json
 - matchPattern
 - get
-- unescapeHTML
+- De
 - get
 - parseAttributes
 - @astrojs/vercel
@@ -319,6 +319,7 @@
 - @vercel/speed-insights
 - vercel.json
 - _render.func/package.json
+- applyRewriteToState
 - sitemap.xml.ts
 
 ## God Nodes (most connected - your core abstractions)
@@ -328,7 +329,7 @@
 4. `constructor()` - 52 edges
 5. `a()` - 42 edges
 6. `dv()` - 40 edges
-7. `Gt()` - 38 edges
+7. `Gt()` - 39 edges
 8. `Pseudo-class reference` - 38 edges
 9. `e()` - 37 edges
 10. `handle()` - 34 edges
@@ -348,7 +349,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (312 total, 12 thin omitted)
+## Communities (313 total, 12 thin omitted)
 
 ### Community 0 - "AuthModal.astro"
 Cohesion: 0.13
@@ -368,7 +369,7 @@ Nodes (13): fake-indexeddb, jsdom, devDependencies, fake-indexeddb, jsdom, playw
 
 ### Community 4 - "supabase-vendor.Ba9mHm9w.js"
 Cohesion: 0.02
-Nodes (115): jt(), add(), Ae(), applyTransformOptsToQuery(), bucketLifecycleUrl(), build(), copy(), createBucket() (+107 more)
+Nodes (102): add(), Ae(), ajax(), appendParams(), batchSend(), Bn(), cloneRequestState(), close() (+94 more)
 
 ### Community 5 - "tsconfig.json"
 Cohesion: 0.15
@@ -404,7 +405,7 @@ Nodes (24): Adding base styles, Adding component classes, Adding custom utilitie
 
 ### Community 19 - "y"
 Cohesion: 0.07
-Nodes (95): _acquireLock(), _adminDeletePasskey(), _adminListPasskeys(), _approveAuthorization(), _authenticate(), _challenge(), _challengeAndVerify(), _createCustomProvider() (+87 more)
+Nodes (94): _adminDeletePasskey(), _adminListPasskeys(), _approveAuthorization(), _authenticate(), _challengeAndVerify(), _createCustomProvider(), createNewAbortSignal(), _createOAuthClient() (+86 more)
 
 ### Community 20 - "server/chunks/path_s5bQmA_7.mjs"
 Cohesion: 0.05
@@ -420,15 +421,15 @@ Nodes (20): Customizing your theme, Default theme variable reference, Default th
 
 ### Community 23 - "react-vendor.CJ_3nYWK.js"
 Cohesion: 0.04
-Nodes (75): Aa(), am(), au(), bc(), c0(), ce(), ci(), De() (+67 more)
+Nodes (81): Aa(), ai(), am(), au(), bc(), c0(), cc(), ce() (+73 more)
 
 ### Community 24 - "_functions/entry.mjs"
-Cohesion: 0.03
-Nodes (44): fileExtension(), removeLeadingForwardSlash(), slash(), decodeKey(), appendQueryParams(), [APPLY_HEADERS](), check(), compileCacheRoutes() (+36 more)
+Cohesion: 0.04
+Nodes (39): collapseDuplicateTrailingSlashes(), hasFileExtension(), isInternalPath(), trimSlashes(), decodeKey(), addRouteBase(), [APPLY_HEADERS](), callGetStaticPaths() (+31 more)
 
 ### Community 27 - "push"
 Cohesion: 0.05
-Nodes (79): _cancelPendingDisconnect(), cancelRefEvent(), cancelTimeout(), canPush(), clearHeartbeats(), connect(), connectionState(), connectWithFallback() (+71 more)
+Nodes (86): _cancelPendingDisconnect(), cancelRefEvent(), cancelTimeout(), canPush(), clearHeartbeats(), connect(), connectionState(), connectWithFallback() (+78 more)
 
 ### Community 28 - "Container queries"
 Cohesion: 0.10
@@ -1242,97 +1243,97 @@ Nodes (3): Examples, Optimizing with will change, Using a custom value
 Cohesion: 0.33
 Nodes (5): Development, DNS & Hosting Configuration, Documentation, Project Architecture & Tech Stack (MemeMaker), Project-Specific Commands & Verification Workflow
 
-### Community 234 - "Gt"
+### Community 234 - "MemeMaker.BtCs3NkB.js"
 Cohesion: 0.08
-Nodes (49): d(), l(), m(), T(), ke(), k(), L(), O() (+41 more)
+Nodes (49): l(), m(), ke(), d(), m(), S(), w(), f() (+41 more)
 
-### Community 235 - "constructor"
-Cohesion: 0.06
-Nodes (50): Bi(), Br(), c(), l(), o(), bt(), n(), catch() (+42 more)
+### Community 235 - "_challenge"
+Cohesion: 0.10
+Nodes (35): Br(), c(), l(), o(), bt(), n(), catch(), _challenge() (+27 more)
 
 ### Community 236 - "templatesDb.ts"
 Cohesion: 0.18
-Nodes (20): AdminLogin(), AdminStudio(), ResizeHandle, TransformState, adminSignIn(), adminSignOut(), AdminUser, getAdminSession() (+12 more)
+Nodes (22): AdminLogin(), AdminStudio(), ResizeHandle, TransformState, adminSignIn(), adminSignOut(), AdminUser, getAdminSession() (+14 more)
 
-### Community 237 - "handle"
-Cohesion: 0.07
-Nodes (43): renderEndpoint(), applyCacheHeaders(), callMiddleware(), createCrossOriginForbiddenResponse(), createOriginCheckMiddleware(), defineMiddleware(), defineProviderGetters(), delete() (+35 more)
+### Community 237 - "render"
+Cohesion: 0.08
+Nodes (33): attachCookiesToResponse(), computeFallbackRoute(), consume(), delete(), #ensureOutgoingMap(), error(), finalize(), finalizeAll() (+25 more)
 
 ### Community 238 - "server/chunks/server_DKvTTH34.mjs"
 Cohesion: 0.09
 Nodes (37): chunkToByteArray(), chunkToByteArrayOrString(), convertToSerializedForm(), deduplicateDirectiveValues(), deduplicateElements(), defineScriptVars(), determineIfNeedsHydrationScript(), determinesIfNeedsDirectiveScript() (+29 more)
 
 ### Community 239 - "gm"
-Cohesion: 0.10
-Nodes (39): L(), v(), a1(), be(), Bl(), bm(), Ct(), dl() (+31 more)
+Cohesion: 0.11
+Nodes (38): a1(), be(), Bl(), bm(), Ct(), dl(), e0(), Ea() (+30 more)
 
 ### Community 240 - "handle"
 Cohesion: 0.08
 Nodes (38): renderEndpoint(), applyCacheHeaders(), callMiddleware(), componentMetadata(), createAstro(), createAstroPagePartial(), createCallAction(), createCrossOriginForbiddenResponse() (+30 more)
 
 ### Community 241 - "e"
-Cohesion: 0.17
-Nodes (36): At(), b0(), a(), b(), c(), e(), f(), h() (+28 more)
+Cohesion: 0.14
+Nodes (45): d(), T(), a0(), At(), b0(), b(), c(), e() (+37 more)
 
 ### Community 242 - "_functions/chunks/path_s5bQmA_7.mjs"
 Cohesion: 0.12
 Nodes (34): calculate(), calculateByDimensions(), calculateByViewbox(), calculateExtended(), calculateImageDimension(), calculateImageWidth(), calculateLossless(), calculateLossy() (+26 more)
 
 ### Community 243 - "_functions/chunks/server_DKvTTH34.mjs"
-Cohesion: 0.10
-Nodes (31): addAttribute(), chunkToByteArray(), chunkToByteArrayOrString(), deduplicateDirectiveValues(), deduplicateElements(), defineScriptVars(), determineIfNeedsHydrationScript(), determinesIfNeedsDirectiveScript() (+23 more)
+Cohesion: 0.09
+Nodes (37): chunkToByteArray(), chunkToByteArrayOrString(), convertToSerializedForm(), deduplicateDirectiveValues(), deduplicateElements(), defineScriptVars(), determineIfNeedsHydrationScript(), determinesIfNeedsDirectiveScript() (+29 more)
 
 ### Community 244 - "M"
-Cohesion: 0.11
-Nodes (36): _1(), ad(), d0(), Df(), Ei(), Eu(), f0(), fm() (+28 more)
+Cohesion: 0.18
+Nodes (26): ad(), d0(), Eu(), fm(), ft(), Gn(), hn(), im() (+18 more)
 
-### Community 245 - "dv"
-Cohesion: 0.13
-Nodes (34): _0(), bv(), cv(), dc(), dv(), ec(), Ev(), fa() (+26 more)
+### Community 245 - "a"
+Cohesion: 0.12
+Nodes (37): _0(), bv(), cv(), dc(), dv(), ec(), Ev(), fa() (+29 more)
 
-### Community 246 - "a"
-Cohesion: 0.10
-Nodes (34): ai(), em(), _f(), Ht(), In(), j0(), je(), jf() (+26 more)
+### Community 246 - "t"
+Cohesion: 0.08
+Nodes (36): L(), v(), a(), em(), _f(), In(), j0(), jf() (+28 more)
 
 ### Community 247 - "constructor"
 Cohesion: 0.10
 Nodes (32): appendForwardSlash(), collapseDuplicateLeadingSlashes(), collapseDuplicateSlashes(), isString(), joinPaths(), prependForwardSlash(), removeLeadingForwardSlash(), removeTrailingForwardSlash() (+24 more)
 
 ### Community 248 - "constructor"
-Cohesion: 0.11
-Nodes (30): appendForwardSlash(), collapseDuplicateLeadingSlashes(), collapseDuplicateSlashes(), collapseDuplicateTrailingSlashes(), isInternalPath(), prependForwardSlash(), removeTrailingForwardSlash(), trimSlashes() (+22 more)
+Cohesion: 0.09
+Nodes (38): appendForwardSlash(), collapseDuplicateLeadingSlashes(), collapseDuplicateSlashes(), isString(), joinPaths(), prependForwardSlash(), removeLeadingForwardSlash(), removeTrailingForwardSlash() (+30 more)
 
-### Community 249 - "join"
-Cohesion: 0.08
-Nodes (30): Bn(), cloneRequestState(), containedBy(), contains(), delete(), Dn(), explain(), Fn() (+22 more)
+### Community 249 - "handleOperation"
+Cohesion: 0.06
+Nodes (52): applyTransformOptsToQuery(), bucketLifecycleUrl(), build(), copy(), createBucket(), createIndex(), createSignedUploadUrl(), createSignedUrl() (+44 more)
 
 ### Community 250 - "_debug"
-Cohesion: 0.13
-Nodes (28): _autoRefreshTokenTick(), _callRefreshToken(), _debug(), dispose(), _emitInitialSession(), Ft(), _handleProviderSignIn(), _handleVisibilityChange() (+20 more)
+Cohesion: 0.14
+Nodes (28): _acquireLock(), _autoRefreshTokenTick(), _callRefreshToken(), _debug(), dispose(), _emitInitialSession(), Ft(), _handleProviderSignIn() (+20 more)
 
 ### Community 251 - "Ll"
-Cohesion: 0.13
-Nodes (26): ae(), av(), bf(), d1(), dm(), Dt(), Fu(), Gn() (+18 more)
+Cohesion: 0.11
+Nodes (31): ae(), av(), bf(), $c(), cd(), d1(), Da(), Dt() (+23 more)
 
 ### Community 252 - "e1"
 Cohesion: 0.14
 Nodes (25): an(), b1(), c1(), cn(), Du(), e1(), ee(), fv() (+17 more)
 
 ### Community 253 - "MemeMaker.tsx"
-Cohesion: 0.16
-Nodes (19): ResizeHandle, TEMPLATE_ALIAS_MAP, TEMPLATE_NAMES, templates, TextInput, TextLayer, TransformState, AVAILABLE_MEME_FONTS (+11 more)
+Cohesion: 0.18
+Nodes (16): ResizeHandle, TEMPLATE_ALIAS_MAP, TEMPLATE_NAMES, templates, TextInput, TextLayer, TransformState, AVAILABLE_MEME_FONTS (+8 more)
 
 ### Community 254 - "get"
-Cohesion: 0.12
-Nodes (24): badRequest(), #ensureParsed(), #executeAction(), get(), getActionContext(), setActionResult(), getCallerInfo(), getContext() (+16 more)
+Cohesion: 0.10
+Nodes (27): decryptString(), badRequest(), createDefaultRoutes(), createEndpoint(), #ensureParsed(), fetch(), get(), getClientIpAddress() (+19 more)
 
-### Community 255 - "_v"
-Cohesion: 0.13
-Nodes (24): a0(), $c(), cc(), cd(), Da(), Fc(), fd(), ge() (+16 more)
+### Community 255 - "constructor"
+Cohesion: 0.10
+Nodes (25): Bi(), channel(), clone(), constructor(), en(), getChannel(), getChannels(), getSocket() (+17 more)
 
 ### Community 256 - "getClaims"
-Cohesion: 0.09
-Nodes (24): ajax(), appendParams(), batchSend(), close(), closeAndRetry(), Cn(), Di(), endpointURL() (+16 more)
+Cohesion: 0.22
+Nodes (9): fetchJwk(), _getAccessToken(), getClaims(), getSession(), _getSessionToken(), Le(), qt(), Yn() (+1 more)
 
 ### Community 257 - "render"
 Cohesion: 0.13
@@ -1343,12 +1344,12 @@ Cohesion: 0.13
 Nodes (23): computeCurrentLocale(), computeCurrentLocaleFromParams(), computePreferredLocale(), computePreferredLocaleList(), getAllCodes(), getErrorRoutePath(), getRedirectForPathname(), isLocalizedErrorRoute() (+15 more)
 
 ### Community 259 - "_functions/chunks/Layout_PsX6-VGx.mjs"
-Cohesion: 0.18
-Nodes (17): baseCreateComponent(), createComponent(), createComponentWithOptions(), validateArgs(), renderScript(), AdminLogin(), adminSignIn(), getAdminSession() (+9 more)
+Cohesion: 0.22
+Nodes (14): baseCreateComponent(), createComponent(), createComponentWithOptions(), validateArgs(), renderScript(), AdminLogin(), adminSignIn(), getAdminSession() (+6 more)
 
-### Community 260 - "match"
-Cohesion: 0.13
-Nodes (22): computeCurrentLocale(), computeCurrentLocaleFromParams(), computePreferredLocale(), computePreferredLocaleList(), getAllCodes(), getErrorRoutePath(), getRedirectForPathname(), isRouteServerIsland() (+14 more)
+### Community 260 - "normalizeTheLocale"
+Cohesion: 0.19
+Nodes (15): computeCurrentLocale(), computeCurrentLocaleFromParams(), computePreferredLocale(), computePreferredLocaleList(), getAllCodes(), getErrorRoutePath(), isRouteServerIsland(), matchPrefixAlways() (+7 more)
 
 ### Community 261 - "server/chunks/Layout_PsX6-VGx.mjs"
 Cohesion: 0.18
@@ -1363,44 +1364,44 @@ Cohesion: 0.14
 Nodes (21): bufferHeadContent(), bufferPropagatedHead(), callComponentAsTemplateResultOrResponse(), collectPropagatedHeadParts(), isHeadAndContent(), isPropagatingHint(), isRoute404(), isRoute500() (+13 more)
 
 ### Community 264 - "Header.astro"
-Cohesion: 0.14
-Nodes (16): authContainer, avatarInitial, ensureAuth(), isCreate, isTemplates, loginBtn, logoutBtn, unauthContainer (+8 more)
+Cohesion: 0.16
+Nodes (14): authContainer, avatarInitial, ensureAuth(), isCreate, isTemplates, loginBtn, logoutBtn, unauthContainer (+6 more)
 
 ### Community 265 - "_functions/chunks/generic_6l7pTrPF.mjs"
 Cohesion: 0.22
-Nodes (17): checkWeight(), createPlaceholderURL(), filterPreloads(), getConfiguredImageService(), getImage$1(), isImageMetadata(), loadImage(), peekRemoteFormatForStaticEmit() (+9 more)
+Nodes (16): checkWeight(), createPlaceholderURL(), filterPreloads(), getConfiguredImageService(), getImage$1(), isImageMetadata(), loadImage(), peekRemoteFormatForStaticEmit() (+8 more)
 
 ### Community 266 - "renderStreaming"
-Cohesion: 0.17
-Nodes (20): constructor(), createBufferedRenderer(), createThinHead(), flush(), generateCspDigest(), init(), isAstroComponentInstance(), isHTMLString() (+12 more)
+Cohesion: 0.21
+Nodes (17): constructor(), createBufferedRenderer(), flush(), isAstroComponentInstance(), isHTMLString(), isPromise(), isRenderInstance(), isRenderTemplateResult() (+9 more)
 
-### Community 267 - "callGetStaticPaths"
-Cohesion: 0.12
-Nodes (19): hasFileExtension(), addRouteBase(), callGetStaticPaths(), computeRedirectStatus(), debug(), findPathItemByKey(), generatePaginateFunction(), getParameter() (+11 more)
+### Community 267 - "createAssetLink"
+Cohesion: 0.14
+Nodes (15): fileExtension(), slash(), appendQueryParams(), consoleLogDestination(), create(), createAssetLink(), createConsoleLogger(), createModuleScriptElement() (+7 more)
 
 ### Community 268 - "get"
 Cohesion: 0.15
 Nodes (19): badRequest(), #ensureParsed(), get(), getContext(), getCsp(), getRequestData(), has(), hasContentType() (+11 more)
 
-### Community 269 - "sa"
-Cohesion: 0.20
-Nodes (19): A(), Al(), bt(), cl(), D(), El(), Et(), G() (+11 more)
+### Community 269 - "Gt"
+Cohesion: 0.13
+Nodes (28): Gt(), A(), Al(), bt(), cl(), D(), El(), Et() (+20 more)
 
 ### Community 270 - "imageStore.ts"
 Cohesion: 0.34
 Nodes (16): MemeMaker(), clearImage(), clearTemplateUrl(), CustomTemplate, deleteCustomTemplate(), getCustomTemplateById(), getCustomTemplates(), getLocalStorageTemplates() (+8 more)
 
 ### Community 271 - "getProps"
-Cohesion: 0.13
-Nodes (18): applyRewriteToState(), copyRequest(), createRequest(), execute(), getComponentByRoute(), getFallbackRoute(), getModuleForRoute(), getParams() (+10 more)
+Cohesion: 0.11
+Nodes (22): isRoute404(), debug(), findPathItemByKey(), getCustom404Route(), getDefaultStatusCode(), getFallbackRoute(), getModuleForRoute(), getParams() (+14 more)
 
 ### Community 272 - "getProps"
 Cohesion: 0.14
 Nodes (17): debug(), findPathItemByKey(), getCustom404Route(), getFallbackRoute(), getModuleForRoute(), getParams(), getProps(), loadComponentInstance() (+9 more)
 
-### Community 273 - "signInWithEthereum"
-Cohesion: 0.15
-Nodes (17): ci(), Cr(), fetchRequest(), _fetchWithTimeout(), hasReceived(), httpSend(), oi(), parseJSON() (+9 more)
+### Community 273 - "TDD Evidence Report: Performance Optimization Suite"
+Cohesion: 0.25
+Nodes (7): 1. User Journeys Covered, 2. Test Targets, 3. RED Phase, 4. GREEN Phase, 5. Refactoring & Verification, 6. Test Guarantees, TDD Evidence Report: Performance Optimization Suite
 
 ### Community 274 - "decode"
 Cohesion: 0.18
@@ -1415,16 +1416,16 @@ Cohesion: 0.21
 Nodes (15): constructor(), createBufferedRenderer(), flush(), isAstroComponentInstance(), isHTMLString(), isPromise(), isRenderInstance(), isRenderTemplateResult() (+7 more)
 
 ### Community 277 - "_functions/chunks/service_SU8pz4H7.mjs"
-Cohesion: 0.27
-Nodes (12): isRemotePath(), isString(), joinPaths(), removeQueryString(), getHTMLAttributes(), getSrcSet(), getTargetDimensions(), getURL() (+4 more)
+Cohesion: 0.33
+Nodes (10): isRemotePath(), removeQueryString(), getHTMLAttributes(), getSrcSet(), getTargetDimensions(), getURL(), inferSourceFormat(), isESMImportedImage() (+2 more)
 
 ### Community 278 - "renderPage"
 Cohesion: 0.21
-Nodes (14): bufferHeadContent(), bufferPropagatedHead(), callComponentAsTemplateResultOrResponse(), collectPropagatedHeadParts(), isHeadAndContent(), isPropagatingHint(), renderPage(), renderStreamToAsyncIterable() (+6 more)
+Nodes (14): bufferHeadContent(), bufferPropagatedHead(), callComponentAsTemplateResultOrResponse(), collectPropagatedHeadParts(), isHeadAndContent(), isRoute500(), renderPage(), renderStreamToAsyncIterable() (+6 more)
 
 ### Community 279 - "renderFrameworkComponent"
-Cohesion: 0.17
-Nodes (13): bitwise(), componentIsHTMLElement(), convertToSerializedForm(), extractDirectives(), formatList(), generateHydrateScript(), guessRenderers(), renderFrameworkComponent() (+5 more)
+Cohesion: 0.16
+Nodes (14): bitwise(), componentIsHTMLElement(), extractDirectives(), formatList(), generateHydrateScript(), getHTMLElementName(), guessRenderers(), renderFrameworkComponent() (+6 more)
 
 ### Community 280 - "renderComponent"
 Cohesion: 0.18
@@ -1435,8 +1436,8 @@ Cohesion: 0.18
 Nodes (12): chunkToString(), containsServerDirective(), isFragmentComponent(), isHTMLComponent(), nonAstroPageNeedsHeadInjection(), normalizeProps(), renderAstroComponent(), renderComponent() (+4 more)
 
 ### Community 283 - "pages/templates.astro"
-Cohesion: 0.18
-Nodes (9): allIds, categories, handleFile(), idSet, isAcceptedImage(), uploadInput, uploadZone, zoneStatus (+1 more)
+Cohesion: 0.14
+Nodes (12): supabase, supabaseAnonKey, supabaseUrl, allIds, categories, handleFile(), idSet, isAcceptedImage() (+4 more)
 
 ### Community 284 - "renderFrameworkComponent"
 Cohesion: 0.18
@@ -1447,12 +1448,12 @@ Cohesion: 0.21
 Nodes (12): createSearchParams(), createThinHead(), encryptString(), generateCspDigest(), getComponentExport(), getComponentPath(), getHostId(), getIslandContent() (+4 more)
 
 ### Community 286 - "getIslandContent"
-Cohesion: 0.18
-Nodes (11): createSearchParams(), encryptString(), getComponentExport(), getComponentPath(), getHostId(), getHTMLElementName(), getIslandContent(), isWithinURLLimit() (+3 more)
+Cohesion: 0.20
+Nodes (10): createSearchParams(), createThinHead(), encryptString(), generateCspDigest(), getComponentExport(), getComponentPath(), getHostId(), getIslandContent() (+2 more)
 
-### Community 287 - "isRoute404"
-Cohesion: 0.24
-Nodes (11): isRoute404(), isRoute500(), getCustom404Route(), getDefaultStatusCode(), isLocalizedErrorRoute(), isRoute404or500(), matchAllRoutes(), matchRoute() (+3 more)
+### Community 287 - "performanceTdd.test.ts"
+Cohesion: 0.32
+Nodes (4): hasActiveSupabaseSession(), paginateItems(), PaginationResult, matchesTemplateSearch()
 
 ### Community 288 - "renderToStaticMarkup"
 Cohesion: 0.18
@@ -1474,25 +1475,25 @@ Nodes (3): codeFrame(), normalizeLF(), setFrame()
 Cohesion: 0.22
 Nodes (9): scripts, astro, build, dev, graphify, graphify:export, preview, test (+1 more)
 
-### Community 293 - "createResult"
-Cohesion: 0.28
-Nodes (9): componentMetadata(), createAstro(), createAstroPagePartial(), createCallAction(), createGetActionResult(), createResult(), deserializeActionResult(), getActionQueryString() (+1 more)
+### Community 293 - "handle"
+Cohesion: 0.08
+Nodes (38): renderEndpoint(), applyCacheHeaders(), callMiddleware(), componentMetadata(), createAstro(), createAstroPagePartial(), createCallAction(), createCrossOriginForbiddenResponse() (+30 more)
 
 ### Community 294 - "_functions/chunks/sharp_CMfN-Awy.mjs"
-Cohesion: 0.43
-Nodes (6): detector(), parseQuality(), loadSharp(), resolveSharpEncoderOptions(), resolveSharpQuality(), transform()
+Cohesion: 0.39
+Nodes (7): detector(), parseQuality(), resolveDefaultOutputFormat(), loadSharp(), resolveSharpEncoderOptions(), resolveSharpQuality(), transform()
 
 ### Community 295 - "isAstroComponentFactory"
-Cohesion: 0.29
-Nodes (8): isAstroComponentFactory(), isVNode(), mergeSlotInstructions(), prerenderElementChildren(), renderElement(), renderJSX(), renderJSXVNode(), spreadAttributes()
+Cohesion: 0.20
+Nodes (11): addAttribute(), handleBooleanAttribute(), isAstroComponentFactory(), isCustomElement(), isVNode(), mergeSlotInstructions(), prerenderElementChildren(), renderElement() (+3 more)
 
 ### Community 296 - "validateForwardedHeaders"
 Cohesion: 0.38
 Nodes (7): #applyForwardedHeaders(), getFirstForwardedValue$1(), matchesAllowedDomains(), parseHost(), sanitizeHost(), validateForwardedHeaders(), validateHost()
 
-### Community 297 - "finalize"
-Cohesion: 0.29
-Nodes (7): attachCookiesToResponse(), computeFallbackRoute(), consume(), finalize(), finalizeAll(), getPathByLocale(), headers()
+### Community 297 - "f0"
+Cohesion: 0.40
+Nodes (6): _1(), Ei(), f0(), si(), um(), We()
 
 ### Community 298 - "validateForwardedHeaders"
 Cohesion: 0.38
@@ -1507,12 +1508,12 @@ Cohesion: 0.33
 Nodes (6): matchHostname(), matchPathname(), matchPattern(), matchPort(), matchProtocol(), validateForwardedHost()
 
 ### Community 301 - "get"
-Cohesion: 0.33
-Nodes (6): createAstroComponentInstance(), get(), getDirectiveScriptText(), getPrescripts(), registerIfPropagating(), validateComponentProps()
+Cohesion: 0.29
+Nodes (7): createAstroComponentInstance(), get(), getDirectiveScriptText(), getPrescripts(), isPropagatingHint(), registerIfPropagating(), validateComponentProps()
 
-### Community 302 - "unescapeHTML"
-Cohesion: 0.40
-Nodes (6): hasGetReader(), markHTMLBytes(), streamAsyncIterator(), unescapeChunks(), unescapeChunksAsync(), unescapeHTML()
+### Community 302 - "De"
+Cohesion: 0.47
+Nodes (6): De(), onJoinPayload(), onLeavePayload(), transformState(), Ts(), Tt()
 
 ### Community 303 - "get"
 Cohesion: 0.33
@@ -1522,25 +1523,29 @@ Nodes (6): createAstroComponentInstance(), get(), getDirectiveScriptText(), getP
 Cohesion: 1.00
 Nodes (3): parseAttributes(), parseLength(), parseViewbox()
 
+### Community 311 - "applyRewriteToState"
+Cohesion: 0.50
+Nodes (4): applyRewriteToState(), copyRequest(), createRequest(), invalidateContexts()
+
 ## Knowledge Gaps
-- **1256 isolated node(s):** `colors`, `type`, `$schema`, `style`, `rsc` (+1251 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1626 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **1263 isolated node(s):** `colors`, `type`, `$schema`, `style`, `rsc` (+1258 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1634 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **12 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `state()` connect `handle` to `render`, `supabase-vendor.Ba9mHm9w.js`?**
-  _High betweenness centrality (0.090) - this node is a cross-community bridge._
-- **Why does `encode()` connect `decode` to `supabase-vendor.Ba9mHm9w.js`, `get`, `y`, `join`, `push`, `get`?**
-  _High betweenness centrality (0.062) - this node is a cross-community bridge._
-- **Why does `render()` connect `handle` to `constructor`, `renderComponent`, `isAstroComponentFactory`, `finalize`, `callGetStaticPaths`, `_functions/chunks/server_DKvTTH34.mjs`, `get`, `_functions/entry.mjs`, `getIslandContent`?**
-  _High betweenness centrality (0.056) - this node is a cross-community bridge._
+- **Why does `state()` connect `render` to `render`, `supabase-vendor.Ba9mHm9w.js`?**
+  _High betweenness centrality (0.091) - this node is a cross-community bridge._
+- **Why does `encode()` connect `decode` to `supabase-vendor.Ba9mHm9w.js`, `get`, `y`, `push`, `get`?**
+  _High betweenness centrality (0.065) - this node is a cross-community bridge._
+- **Why does `render()` connect `render` to `constructor`, `renderComponent`, `handle`, `isAstroComponentFactory`, `_functions/chunks/server_DKvTTH34.mjs`, `renderFrameworkComponent`, `_functions/entry.mjs`, `get`?**
+  _High betweenness centrality (0.057) - this node is a cross-community bridge._
 - **Are the 3 inferred relationships involving `constructor()` (e.g. with `Ei()` and `Oe()`) actually correct?**
   _`constructor()` has 3 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 22 inferred relationships involving `a()` (e.g. with `bf()` and `bv()`) actually correct?**
   _`a()` has 22 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `colors`, `type`, `$schema` to the rest of the system?**
-  _1256 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _1263 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `AuthModal.astro` be split into smaller, more focused modules?**
   _Cohesion score 0.1341991341991342 - nodes in this community are weakly interconnected._
