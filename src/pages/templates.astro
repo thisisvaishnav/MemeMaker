@@ -82,10 +82,13 @@ const categories = [
                     >
                         <img
                             data-tpl-img
+                            src={`/templates/cdn/${id}.webp`}
                             class="block h-auto w-full transition-[filter] duration-300 group-hover:blur-[3px]"
                             alt={`Meme template ${id}`}
                             loading="lazy"
                             decoding="async"
+                            width="300"
+                            height="300"
                         />
                         <span class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/60 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100" aria-hidden="true">
                             <span class="user-count rounded-full bg-white/15 px-2.5 py-1 text-[10px] font-medium text-white backdrop-blur-sm"></span>
@@ -110,7 +113,6 @@ const categories = [
         deleteCustomTemplate,
         type CustomTemplate,
     } from "../lib/imageStore";
-    import { supabase } from "../lib/supabase";
 
     const templateBase = "/templates/cdn";
 
@@ -127,7 +129,9 @@ const categories = [
         const tplUrl = `${templateBase}/${id}.webp`;
 
         if (img && id) {
-            img.src = tplUrl;
+            if (img.getAttribute("src") !== tplUrl) {
+                img.src = tplUrl;
+            }
         }
         if (count) {
             const n = Math.floor(Math.random() * 49000) + 1000;
@@ -314,15 +318,26 @@ const categories = [
 
     // ── Supabase Auth Integration ───────────────────────────────────
     try {
-        supabase.auth.getSession().then((res: { data: { session: { user: { id: string } } | null } }) => {
-            currentUserId = res.data.session?.user?.id;
-            loadAndRenderCustomTemplates();
-        });
+        const hasSession = Object.keys(localStorage).some(
+            (k) => k.startsWith("sb-") && k.endsWith("-auth-token")
+        );
+        if (hasSession) {
+            import("../lib/supabase").then(({ supabase }) => {
+                supabase.auth.getSession().then((res: { data: { session: { user: { id: string } } | null } }) => {
+                    currentUserId = res.data.session?.user?.id;
+                    loadAndRenderCustomTemplates();
+                });
 
-        supabase.auth.onAuthStateChange((_evt: string, session: { user: { id: string } } | null) => {
-            currentUserId = session?.user?.id;
+                supabase.auth.onAuthStateChange((_evt: string, session: { user: { id: string } } | null) => {
+                    currentUserId = session?.user?.id;
+                    loadAndRenderCustomTemplates();
+                });
+            }).catch(() => {
+                loadAndRenderCustomTemplates();
+            });
+        } else {
             loadAndRenderCustomTemplates();
-        });
+        }
     } catch {
         loadAndRenderCustomTemplates();
     }
@@ -384,11 +399,25 @@ const categories = [
         const reader = new FileReader();
         reader.onload = async () => {
             const dataUrl = reader.result as string;
+            let userId = currentUserId;
+            if (!userId) {
+                try {
+                    const hasSession = Object.keys(localStorage).some(
+                        (k) => k.startsWith("sb-") && k.endsWith("-auth-token")
+                    );
+                    if (hasSession) {
+                        const { supabase } = await import("../lib/supabase");
+                        const res = await supabase.auth.getSession();
+                        userId = res.data.session?.user?.id;
+                    }
+                } catch {}
+            }
+
             const newTemplate: CustomTemplate = {
                 id: "custom_" + Date.now() + "_" + Math.random().toString(36).substring(2, 7),
                 name: file.name.replace(/\.[^/.]+$/, ""),
                 dataUrl: dataUrl,
-                userId: currentUserId || undefined,
+                userId,
                 createdAt: Date.now(),
             };
 

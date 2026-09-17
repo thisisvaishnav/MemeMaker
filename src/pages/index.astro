@@ -32,10 +32,13 @@ const templateSlots = Array.from({ length: 20 });
                         >
                             <img
                                 data-template-image
+                                src={`/templates/cdn/${index + 1}.webp`}
                                 class="block h-full w-full aspect-4/3 object-cover"
-                                alt=""
+                                alt={`Meme template ${index + 1}`}
                                 loading={index < 4 ? "eager" : "lazy"}
                                 decoding="async"
+                                width="400"
+                                height="300"
                             />
                             <span
                                 class="template-action absolute inset-0 flex items-end bg-linear-to-t from-black via-black/25 to-transparent p-3 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
@@ -145,10 +148,13 @@ const templateSlots = Array.from({ length: 20 });
                 >
                     <img
                         data-trending-img
+                        src={`/templates/cdn/${i + 1}.webp`}
                         class="block h-auto w-full transition-[filter] duration-300 group-hover:blur-[3px]"
-                        alt=""
+                        alt={`Trending meme template ${i + 1}`}
                         loading="lazy"
                         decoding="async"
+                        width="300"
+                        height="300"
                     />
                     <!-- hover overlay -->
                     <span class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/60 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100" aria-hidden="true">
@@ -481,17 +487,6 @@ const templateSlots = Array.from({ length: 20 });
         saveCustomTemplate,
         type CustomTemplate,
     } from "../lib/imageStore";
-    import { supabase } from "../lib/supabase";
-
-    let currentUserId: string | undefined = undefined;
-    try {
-        supabase.auth.getSession().then((res: { data: { session: { user: { id: string } } | null } }) => {
-            currentUserId = res.data.session?.user?.id;
-        });
-        supabase.auth.onAuthStateChange((_evt: string, session: { user: { id: string } } | null) => {
-            currentUserId = session?.user?.id;
-        });
-    } catch {}
 
     const templateBaseUrl = "/templates/cdn";
     const cards = Array.from(
@@ -517,7 +512,10 @@ const templateSlots = Array.from({ length: 20 });
         );
 
         if (image) {
-            image.src = `${templateBaseUrl}/${templateId}.webp`;
+            const targetSrc = `${templateBaseUrl}/${templateId}.webp`;
+            if (image.getAttribute("src") !== targetSrc) {
+                image.src = targetSrc;
+            }
             image.alt = `Meme template ${templateId}`;
         }
         card.setAttribute("aria-label", `Preview meme template ${templateId}`);
@@ -603,12 +601,23 @@ const templateSlots = Array.from({ length: 20 });
             const dataUrl = reader.result as string;
             uploadStatus.textContent = "Redirecting to editor...";
 
-            const customId = "custom_" + Date.now() + "_" + Math.random().toString(36).substring(2, 7);
+            let userId: string | undefined = undefined;
+            try {
+                const hasSession = Object.keys(localStorage).some(
+                    (k) => k.startsWith("sb-") && k.endsWith("-auth-token")
+                );
+                if (hasSession) {
+                    const { supabase } = await import("../lib/supabase");
+                    const res = await supabase.auth.getSession();
+                    userId = res.data.session?.user?.id;
+                }
+            } catch {}
+
             const newTemplate: CustomTemplate = {
                 id: customId,
                 name: file.name.replace(/\.[^/.]+$/, ""),
                 dataUrl: dataUrl,
-                userId: currentUserId || undefined,
+                userId,
                 createdAt: Date.now(),
             };
 
@@ -689,7 +698,10 @@ const templateSlots = Array.from({ length: 20 });
 
         const img = card.querySelector<HTMLImageElement>("[data-trending-img]");
         if (img) {
-            img.src = `${trendingBase}/${id}.webp`;
+            const targetSrc = `${trendingBase}/${id}.webp`;
+            if (img.getAttribute("src") !== targetSrc) {
+                img.src = targetSrc;
+            }
             img.alt = `Meme template ${id}`;
         }
 

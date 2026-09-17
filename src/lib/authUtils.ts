@@ -129,3 +129,23 @@ export function getOAuthErrorMessage(
 
   return `Authentication error (${error}). Please try again.`;
 }
+
+/**
+ * Checks whether an active Supabase session token exists in Web Storage without importing the Supabase client
+ */
+export function hasActiveSupabaseSession(
+  storage: Storage = typeof window !== "undefined" ? localStorage : ({} as Storage)
+): boolean {
+  try {
+    if (!storage || typeof storage.length !== "number") return false;
+    for (let i = 0; i < storage.length; i++) {
+      const key = storage.key(i);
+      if (key && key.startsWith("sb-") && key.endsWith("-auth-token")) {
+        return true;
+      }
+    }
+    return false;
+  } catch {
+    return false;
+  }
+}

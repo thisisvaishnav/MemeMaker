@@ -38,7 +38,7 @@ Consult these guides before working on related tasks:
 
 | Record | Type | Value | Managed In |
 |--------|------|-------|-----------|
-| `@` (root) | `A` | `76.76.21.21` | GoDaddy |
+| `@` (root) | `A` | `216.198.79.1` | GoDaddy |
 | `www` | `CNAME` | `cname.vercel-dns.com` | GoDaddy |
 
 - **Registrar**: GoDaddy (`ns59.domaincontrol.com`, `ns60.domaincontrol.com`)

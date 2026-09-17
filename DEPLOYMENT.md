@@ -17,11 +17,11 @@ Nameservers: `ns59.domaincontrol.com` / `ns60.domaincontrol.com`
 
 | Name | Type | Value | TTL |
 |------|------|-------|-----|
-| `@` | `A` | `76.76.21.21` | 1 Hour |
-| `www` | `CNAME` | `cname.vercel-dns.com` | 1 Hour |
+| `@` | `A` | `216.198.79.1` | 600 sec |
+| `www` | `CNAME` | `ba09899e1eb8f243.vercel-dns-017.com.` | 1 Hour |
 
-> **Note:** `76.76.21.21` is Vercel's Anycast IP. It handles routing, SSL termination, and CDN for the root domain.
-> The `www` CNAME (`ba09899e1eb8f243.vercel-dns-017.com`) is auto-assigned by Vercel and may be project-specific — always confirm in Vercel Dashboard → Settings → Domains.
+> **Note:** `216.198.79.1` is Vercel's new recommended Anycast IP (expanded IP range, recommended over the old `76.76.21.21`).
+> The `www` CNAME (`ba09899e1eb8f243.vercel-dns-017.com`) is project-specific — always confirm in Vercel Dashboard → Settings → Domains.
 
 ---
 
@@ -56,7 +56,7 @@ This enables HSTS for 2 years. **Do not remove or weaken this header** — it is
 ```bash
 # Check what IP the domain resolves to locally
 dig realmememaker.com +short
-# Must return: 76.76.21.21
+# Must return: 216.198.79.1
 
 # Check SSL cert
 curl -sv https://realmememaker.com 2>&1 | grep -E "(subject|CN=|issuer)"
@@ -66,12 +66,12 @@ curl -sv https://realmememaker.com 2>&1 | grep -E "(subject|CN=|issuer)"
 **Fix (5 min in GoDaddy):**
 1. Log in to [godaddy.com](https://godaddy.com) → My Products → `realmememaker.com` → **Manage DNS**
 2. Find the `A` record where **Name = `@`**
-3. Edit → set **Value = `76.76.21.21`** → Save
+3. Edit → set **Value = `216.198.79.1`** → Save
 4. Wait 15–30 min for DNS propagation
 
 **Verify:**
 ```bash
-dig realmememaker.com +short          # → 76.76.21.21
+dig realmememaker.com +short          # → 216.198.79.1
 curl -I https://realmememaker.com     # → HTTP/2 200
 ```
 
@@ -97,7 +97,7 @@ If the domain is added to Vercel but SSL shows "Pending":
 
 ## Deployment Checklist (before going live)
 
-- [ ] `A` record for `@` = `76.76.21.21` in GoDaddy
+- [ ] `A` record for `@` = `216.198.79.1` in GoDaddy
 - [ ] `CNAME` for `www` = `cname.vercel-dns.com` in GoDaddy
 - [ ] Domain shows ✅ Valid in Vercel Dashboard → Settings → Domains
 - [ ] `curl -I https://realmememaker.com` returns `HTTP/2 200`
