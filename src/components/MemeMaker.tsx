@@ -26,6 +26,7 @@ import {
   type DbTemplate,
 } from "../lib/templatesDb";
 import { getAdminSession } from "../lib/adminAuth";
+import { matchesTemplateSearch } from "../lib/templateSearch";
 
 export {
   TEMPLATE_BOXES,
@@ -209,6 +210,7 @@ export default function MemeMaker() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const loadedImageRef = useRef<{ src: string; img: HTMLImageElement } | null>(null);
   const rafIdRef = useRef<number | null>(null);
+  const pointerEventRef = useRef<{ clientX: number; clientY: number } | null>(null);
   const pendingDragCoordsRef = useRef<{
     id: string | number;
     isLayer: boolean;
@@ -249,6 +251,15 @@ export default function MemeMaker() {
   const [showOptions, setShowOptions] = useState(false);
 
   const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 150);
+    return () => clearTimeout(timer);
+  }, [search]);
+
   const [focusedBoxId, setFocusedBoxId] = useState<string | null>(null);
   const [hoveredBoxId, setHoveredBoxId] = useState<string | null>(null);
 
@@ -551,24 +562,11 @@ export default function MemeMaker() {
     });
   }, []);
 
+  // Only redraw canvas background when image source or watermark changes
+  // Text layers are rendered via hardware-accelerated DOM overlay during editing
   useEffect(() => {
     drawMeme();
-  }, [
-    image,
-    selectedTemplateId,
-    dbTemplates,
-    boxPositions,
-    boxTexts,
-    boxColors,
-    boxPlainOverrides,
-    globalFontStyle,
-    topText,
-    bottomText,
-    textColor,
-    fontSize,
-    watermark,
-    layers,
-  ]);
+  }, [image, watermark]);
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -924,120 +922,127 @@ export default function MemeMaker() {
   const handlePointerMove = (e: React.PointerEvent) => {
     if (!transformState) return;
 
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    pointerEventRef.current = { clientX: e.clientX, clientY: e.clientY };
+    if (rafIdRef.current !== null) return;
 
-    const canvasRect = canvas.getBoundingClientRect();
-    if (!canvasRect.width || !canvasRect.height) return;
+    rafIdRef.current = requestAnimationFrame(() => {
+      rafIdRef.current = null;
+      const coords = pointerEventRef.current;
+      if (!coords || !transformState) return;
 
-    if (transformState.mode === "drag") {
-      const deltaX = e.clientX - transformState.startX;
-      const deltaY = e.clientY - transformState.startY;
+      const canvas = canvasRef.current;
+      if (!canvas) return;
 
-      const clampedX = calculateClampedCoordinate(
-        transformState.initialX,
-        deltaX,
-        canvasRect.width
-      );
-      const clampedY = calculateClampedCoordinate(
-        transformState.initialY,
-        deltaY,
-        canvasRect.height
-      );
+      const canvasRect = canvas.getBoundingClientRect();
+      if (!canvasRect.width || !canvasRect.height) return;
 
-      if (transformState.isLayer) {
-        setLayers((current) =>
-          current.map((layer) =>
-            layer.id === transformState.id ? { ...layer, x: clampedX, y: clampedY } : layer
-          )
+      if (transformState.mode === "drag") {
+        const deltaX = coords.clientX - transformState.startX;
+        const deltaY = coords.clientY - transformState.startY;
+
+        const clampedX = calculateClampedCoordinate(
+          transformState.initialX,
+          deltaX,
+          canvasRect.width
         );
-      } else {
-        setBoxPositions((prev) => ({
-          ...prev,
-          [transformState.id]: { x: clampedX, y: clampedY },
-        }));
-      }
-    } else if (transformState.mode === "rotate") {
-      const currentAngle =
-        Math.atan2(e.clientY - transformState.centerY, e.clientX - transformState.centerX) *
-        (180 / Math.PI);
-      const diff = currentAngle - transformState.startAngle;
-      let angle = Math.round((transformState.initialRotation + diff) % 360);
-      if (angle < 0) angle += 360;
-
-      // Snap assist within ±4 degrees of cardinal angles
-      if (Math.abs(angle) < 4 || Math.abs(angle - 360) < 4) angle = 0;
-      else if (Math.abs(angle - 90) < 4) angle = 90;
-      else if (Math.abs(angle - 180) < 4) angle = 180;
-      else if (Math.abs(angle - 270) < 4) angle = 270;
-
-      if (transformState.isLayer) {
-        setLayers((current) =>
-          current.map((layer) =>
-            layer.id === transformState.id ? { ...layer, rotation: angle } : layer
-          )
+        const clampedY = calculateClampedCoordinate(
+          transformState.initialY,
+          deltaY,
+          canvasRect.height
         );
-      } else {
-        setBoxRotations((prev) => ({
-          ...prev,
-          [transformState.id]: angle,
-        }));
-      }
-    } else if (transformState.mode === "resize") {
-      const { handle, centerX, centerY, initialWidth, initialFontSize } = transformState;
-      const displayWidth = canvasRect.width;
 
-      if (handle === "e" || handle === "w") {
-        const distX = Math.abs(e.clientX - centerX);
-        const newWidth = Math.max(60, Math.min(displayWidth * 0.95, Math.round(distX * 2)));
         if (transformState.isLayer) {
           setLayers((current) =>
-            current.map((l) => (l.id === transformState.id ? { ...l, width: newWidth } : l))
-          );
-        } else {
-          setBoxWidths((prev) => ({ ...prev, [transformState.id]: newWidth }));
-        }
-      } else if (handle === "n" || handle === "s") {
-        const distY = Math.abs(e.clientY - centerY);
-        const ratio = distY / Math.max(15, initialFontSize * 0.65);
-        const newFontSize = Math.max(14, Math.min(130, Math.round(initialFontSize * ratio)));
-        if (transformState.isLayer) {
-          const canvas = canvasRef.current;
-          const canvasWidth = canvas?.width ?? 1000;
-          const canvasExportScale = displayWidth > 0 ? canvasWidth / displayWidth : 1;
-          const canvasLayerFontSize = Math.round(newFontSize * canvasExportScale);
-          setLayers((current) =>
-            current.map((l) => (l.id === transformState.id ? { ...l, fontSize: canvasLayerFontSize } : l))
-          );
-        } else {
-          setBoxFontSizes((prev) => ({ ...prev, [transformState.id]: newFontSize }));
-        }
-      } else {
-        const dist = Math.hypot(e.clientX - centerX, e.clientY - centerY);
-        const initialDist = Math.hypot(
-          transformState.startX - centerX,
-          transformState.startY - centerY
-        );
-        const ratio = dist / Math.max(10, initialDist);
-        const newWidth = Math.max(60, Math.min(displayWidth * 0.95, Math.round(initialWidth * ratio)));
-        const newFontSize = Math.max(14, Math.min(130, Math.round(initialFontSize * ratio)));
-
-        if (transformState.isLayer) {
-          const canvas = canvasRef.current;
-          const canvasWidth = canvas?.width ?? 1000;
-          const canvasExportScale = displayWidth > 0 ? canvasWidth / displayWidth : 1;
-          const canvasLayerFontSize = Math.round(newFontSize * canvasExportScale);
-          setLayers((current) =>
-            current.map((l) =>
-              l.id === transformState.id ? { ...l, width: newWidth, fontSize: canvasLayerFontSize } : l
+            current.map((layer) =>
+              layer.id === transformState.id ? { ...layer, x: clampedX, y: clampedY } : layer
             )
           );
         } else {
-          setBoxWidths((prev) => ({ ...prev, [transformState.id]: newWidth }));
-          setBoxFontSizes((prev) => ({ ...prev, [transformState.id]: newFontSize }));
+          setBoxPositions((prev) => ({
+            ...prev,
+            [transformState.id]: { x: clampedX, y: clampedY },
+          }));
+        }
+      } else if (transformState.mode === "rotate") {
+        const currentAngle =
+          Math.atan2(coords.clientY - transformState.centerY, coords.clientX - transformState.centerX) *
+          (180 / Math.PI);
+        const diff = currentAngle - transformState.startAngle;
+        let angle = Math.round((transformState.initialRotation + diff) % 360);
+        if (angle < 0) angle += 360;
+
+        // Snap assist within ±4 degrees of cardinal angles
+        if (Math.abs(angle) < 4 || Math.abs(angle - 360) < 4) angle = 0;
+        else if (Math.abs(angle - 90) < 4) angle = 90;
+        else if (Math.abs(angle - 180) < 4) angle = 180;
+        else if (Math.abs(angle - 270) < 4) angle = 270;
+
+        if (transformState.isLayer) {
+          setLayers((current) =>
+            current.map((layer) =>
+              layer.id === transformState.id ? { ...layer, rotation: angle } : layer
+            )
+          );
+        } else {
+          setBoxRotations((prev) => ({
+            ...prev,
+            [transformState.id]: angle,
+          }));
+        }
+      } else if (transformState.mode === "resize") {
+        const { handle, centerX, centerY, initialWidth, initialFontSize } = transformState;
+        const displayWidth = canvasRect.width;
+
+        if (handle === "e" || handle === "w") {
+          const distX = Math.abs(coords.clientX - centerX);
+          const newWidth = Math.max(60, Math.min(displayWidth * 0.95, Math.round(distX * 2)));
+          if (transformState.isLayer) {
+            setLayers((current) =>
+              current.map((l) => (l.id === transformState.id ? { ...l, width: newWidth } : l))
+            );
+          } else {
+            setBoxWidths((prev) => ({ ...prev, [transformState.id]: newWidth }));
+          }
+        } else if (handle === "n" || handle === "s") {
+          const distY = Math.abs(coords.clientY - centerY);
+          const ratio = distY / Math.max(15, initialFontSize * 0.65);
+          const newFontSize = Math.max(14, Math.min(130, Math.round(initialFontSize * ratio)));
+          if (transformState.isLayer) {
+            const canvasWidth = canvas?.width ?? 1000;
+            const canvasExportScale = displayWidth > 0 ? canvasWidth / displayWidth : 1;
+            const canvasLayerFontSize = Math.round(newFontSize * canvasExportScale);
+            setLayers((current) =>
+              current.map((l) => (l.id === transformState.id ? { ...l, fontSize: canvasLayerFontSize } : l))
+            );
+          } else {
+            setBoxFontSizes((prev) => ({ ...prev, [transformState.id]: newFontSize }));
+          }
+        } else {
+          const dist = Math.hypot(coords.clientX - centerX, coords.clientY - centerY);
+          const initialDist = Math.hypot(
+            transformState.startX - centerX,
+            transformState.startY - centerY
+          );
+          const ratio = dist / Math.max(10, initialDist);
+          const newWidth = Math.max(60, Math.min(displayWidth * 0.95, Math.round(initialWidth * ratio)));
+          const newFontSize = Math.max(14, Math.min(130, Math.round(initialFontSize * ratio)));
+
+          if (transformState.isLayer) {
+            const canvasWidth = canvas?.width ?? 1000;
+            const canvasExportScale = displayWidth > 0 ? canvasWidth / displayWidth : 1;
+            const canvasLayerFontSize = Math.round(newFontSize * canvasExportScale);
+            setLayers((current) =>
+              current.map((l) =>
+                l.id === transformState.id ? { ...l, width: newWidth, fontSize: canvasLayerFontSize } : l
+              )
+            );
+          } else {
+            setBoxWidths((prev) => ({ ...prev, [transformState.id]: newWidth }));
+            setBoxFontSizes((prev) => ({ ...prev, [transformState.id]: newFontSize }));
+          }
         }
       }
-    }
+    });
   };
 
   const handlePointerUp = () => {
@@ -1045,19 +1050,12 @@ export default function MemeMaker() {
       cancelAnimationFrame(rafIdRef.current);
       rafIdRef.current = null;
     }
+    pointerEventRef.current = null;
     setTransformState(null);
   };
 
-  const searchLower = search.trim().toLowerCase();
-  const matchesSearch = (id: number) => {
-    if (!searchLower) return true;
-    if (String(id).includes(searchLower)) return true;
-    const name = TEMPLATE_NAMES[id]?.toLowerCase() || "";
-    if (name.includes(searchLower)) return true;
-    return Object.entries(TEMPLATE_ALIAS_MAP).some(
-      ([alias, aliasId]) => aliasId === id && alias.includes(searchLower)
-    );
-  };
+  const matchesSearch = (id: number) =>
+    matchesTemplateSearch(id, debouncedSearch, TEMPLATE_NAMES, TEMPLATE_ALIAS_MAP);
 
   return (
     <div className="meme-app">
@@ -1517,6 +1515,10 @@ export default function MemeMaker() {
                     <img
                       src={template.image_url}
                       alt={template.name}
+                      loading="lazy"
+                      decoding="async"
+                      width="50"
+                      height="50"
                     />
                   </button>
                 ))}
@@ -1769,7 +1771,7 @@ export default function MemeMaker() {
 
 /* TEXT INPUT COMPONENT */
 
-function TextInput({
+const TextInput = React.memo(function TextInput({
   id,
   label,
   placeholder,
@@ -1837,4 +1839,4 @@ function TextInput({
       </div>
     </div>
   );
-}
+});

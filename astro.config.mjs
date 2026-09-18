@@ -12,8 +12,24 @@ export default defineConfig({
   adapter: vercel(),
 
   vite: {
-      plugins: [tailwindcss()],
-	},
+    plugins: [tailwindcss()],
+    build: {
+      minify: 'esbuild',
+      cssMinify: true,
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules/@supabase/')) {
+              return 'supabase-vendor';
+            }
+            if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) {
+              return 'react-vendor';
+            }
+          },
+        },
+      },
+    },
+  },
 
   integrations: [react(), sitemap()],
 });

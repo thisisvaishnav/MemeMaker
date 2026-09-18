@@ -114,10 +114,41 @@ function applyLocalOverrides(templates: DbTemplate[]): DbTemplate[] {
   });
 }
 
+let templateCache: { data: DbTemplate[]; timestamp: number } | null = null;
+const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
+const SESSION_CACHE_KEY = "mememaker_db_templates_cache";
+
+export function clearTemplateCache(): void {
+  templateCache = null;
+  if (typeof window !== "undefined") {
+    try {
+      sessionStorage.removeItem(SESSION_CACHE_KEY);
+    } catch {}
+  }
+}
+
 /**
- * Fetches all active templates from Supabase, falling back to local defaults if DB not initialized
+ * Fetches all active templates from Supabase, with in-memory + sessionStorage caching
  */
-export async function fetchTemplates(): Promise<DbTemplate[]> {
+export async function fetchTemplates(forceRefresh = false): Promise<DbTemplate[]> {
+  const now = Date.now();
+  if (!forceRefresh && templateCache && now - templateCache.timestamp < CACHE_TTL_MS) {
+    return applyLocalOverrides(templateCache.data);
+  }
+
+  if (!forceRefresh && typeof window !== "undefined") {
+    try {
+      const raw = sessionStorage.getItem(SESSION_CACHE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (now - parsed.timestamp < CACHE_TTL_MS && Array.isArray(parsed.data)) {
+          templateCache = parsed;
+          return applyLocalOverrides(parsed.data);
+        }
+      }
+    } catch {}
+  }
+
   const baseList = await queryWithTimeout(async () => {
     const { data, error } = await supabase
       .from("templates")
@@ -131,6 +162,13 @@ export async function fetchTemplates(): Promise<DbTemplate[]> {
 
     return data as DbTemplate[];
   }, FALLBACK_TEMPLATES);
+
+  templateCache = { data: baseList, timestamp: now };
+  if (typeof window !== "undefined") {
+    try {
+      sessionStorage.setItem(SESSION_CACHE_KEY, JSON.stringify(templateCache));
+    } catch {}
+  }
 
   return applyLocalOverrides(baseList);
 }
@@ -161,6 +199,7 @@ export async function fetchAllAdminTemplates(): Promise<DbTemplate[]> {
 export async function saveTemplate(
   template: Partial<DbTemplate> & { id: number }
 ): Promise<{ success: boolean; savedLocally?: boolean; error?: string }> {
+  clearTemplateCache();
   // Always save to browser localStorage first so changes work immediately
   saveLocalOverride(template);
 
@@ -198,7 +237,22 @@ export async function saveTemplate(
 export async function createTemplate(
   newTemplate: Omit<DbTemplate, "id"> & { id?: number }
 ): Promise<{ success: boolean; template?: DbTemplate; error?: string }> {
+  clearTemplateCache();
   try {
+    const isPlaceholder = (supabase as any).supabaseUrl?.includes("placeholder");
+    if (isPlaceholder) {
+      const mockCreated: DbTemplate = {
+        id: newTemplate.id || 999,
+        slug: newTemplate.slug || `template-${newTemplate.id || 999}`,
+        name: newTemplate.name,
+        image_url: newTemplate.image_url,
+        boxes: newTemplate.boxes || DEFAULT_BOXES,
+        is_active: newTemplate.is_active ?? true,
+        display_order: newTemplate.display_order ?? (newTemplate.id || 999),
+      };
+      return { success: true, template: mockCreated };
+    }
+
     // Generate next ID if not provided
     let nextId = newTemplate.id;
     if (!nextId) {

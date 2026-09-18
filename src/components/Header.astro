@@ -132,8 +132,7 @@ const isCreate    = pathname.startsWith("/edit");
 <AuthModal />
 
 <script>
-    import { supabase } from "../lib/supabase";
-    import { getUserAvatarUrl } from "../lib/avatar";
+    import { hasActiveSupabaseSession } from "../lib/authUtils";
 
     type AuthUser = {
         email?: string | null;
@@ -151,14 +150,17 @@ const isCreate    = pathname.startsWith("/edit");
     ) as HTMLImageElement | null;
     const avatarInitial = document.getElementById("user-avatar-initial");
 
-    loginBtn?.addEventListener("click", () => window.openAuthModal?.("signup"));
+    loginBtn?.addEventListener("click", () => {
+        ensureAuth().then(() => window.openAuthModal?.("signup"));
+    });
 
     logoutBtn?.addEventListener("click", async () => {
+        const { supabase } = await import("../lib/supabase");
         const { error } = await supabase.auth.signOut();
         if (error) console.error("Error signing out:", error);
     });
 
-    function updateUserUI(user: AuthUser | null) {
+    function updateUserUI(user: AuthUser | null, avatarUrl?: string | null) {
         if (!user) {
             unauthContainer?.classList.remove("hidden");
             authContainer?.classList.add("hidden");
@@ -172,8 +174,6 @@ const isCreate    = pathname.startsWith("/edit");
             metadata.name ||
             metadata.user_name ||
             (user.email ? user.email.split("@")[0] : "Account");
-
-        const avatarUrl = getUserAvatarUrl(user);
 
         if (userNameSpan) userNameSpan.textContent = name;
 
@@ -195,15 +195,40 @@ const isCreate    = pathname.startsWith("/edit");
         authContainer?.classList.add("flex");
     }
 
-    supabase.auth
-        .getSession()
-        .then((result: { data: { session: AuthSession | null } }) => {
-            updateUserUI(result.data.session?.user || null);
-        });
+    let authInitPromise: Promise<void> | null = null;
+    function ensureAuth(): Promise<void> {
+        if (authInitPromise) return authInitPromise;
+        authInitPromise = (async () => {
+            try {
+                const [{ supabase }, { getUserAvatarUrl }] = await Promise.all([
+                    import("../lib/supabase"),
+                    import("../lib/avatar"),
+                ]);
 
-    supabase.auth.onAuthStateChange(
-        (_event: string, session: AuthSession | null) => {
-            updateUserUI(session?.user || null);
-        },
-    );
+                supabase.auth
+                    .getSession()
+                    .then((result: { data: { session: AuthSession | null } }) => {
+                        const user = result.data.session?.user || null;
+                        updateUserUI(user, user ? getUserAvatarUrl(user) : null);
+                    });
+
+                supabase.auth.onAuthStateChange(
+                    (_event: string, session: AuthSession | null) => {
+                        const user = session?.user || null;
+                        updateUserUI(user, user ? getUserAvatarUrl(user) : null);
+                    },
+                );
+            } catch (err) {
+                console.warn("Could not load auth module:", err);
+            }
+        })();
+        return authInitPromise;
+    }
+
+    // Check if user has an active Supabase session in localStorage
+    if (hasActiveSupabaseSession()) {
+        ensureAuth();
+    } else {
+        loginBtn?.addEventListener("pointerenter", () => ensureAuth(), { once: true });
+    }
 </script>

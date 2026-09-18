@@ -1,6 +1,8 @@
-# MemeMaker (Astro)
+# MemeMaker
 
-Astro project scaffolded with React, Tailwind CSS v4, and shadcn/ui.
+Free, browser-based meme creator — live at **[realmememaker.com](https://realmememaker.com)**.
+
+Built with Astro 7, React 19, Tailwind CSS v4, and Supabase. Deployed on Vercel.
 
 ## 🚀 Project Structure
 
@@ -88,8 +90,19 @@ All commands are run from the root of the project, from a terminal:
 
 See `AGENTS.md` for development workflow notes (e.g. running the dev server in background mode).
 
+## 🌐 Deployment & DNS
+
+The site is deployed on **Vercel** and served at `realmememaker.com`.
+
+| Record | Type | Value | Purpose |
+|--------|------|-------|---------|
+| `@` | `A` | `76.76.21.21` | Root domain → Vercel |
+| `www` | `CNAME` | `cname.vercel-dns.com` | www subdomain → Vercel |
+
+**DNS is managed in GoDaddy** (nameservers: `ns59.domaincontrol.com` / `ns60.domaincontrol.com`).
+
+> ⚠️ If you ever see `ERR_CERT_COMMON_NAME_INVALID` on the site, the most likely cause is the GoDaddy `A` record for `@` being changed to the wrong IP. Reset it to `76.76.21.21`. See [`DEPLOYMENT.md`](./DEPLOYMENT.md) for the full runbook.
+
 ## 👀 Want to learn more?
 
 Feel free to check [the Astro documentation](https://docs.astro.build) or jump into their [Discord server](https://astro.build/chat).
-
-
