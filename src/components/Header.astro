@@ -1,5 +1,9 @@
 ---
-import AuthModal from "./AuthModal.astro";
+import {
+    Show,
+    UserButton,
+    SignInButton,
+} from "@clerk/astro/components";
 
 const pathname = Astro.url.pathname;
 const isDiscover  = pathname === "/";
@@ -69,166 +73,24 @@ const isCreate    = pathname.startsWith("/edit");
             Make memes, not meetings.
         </p>
 
-        <div class="relative z-10 flex shrink-0 items-center">
-            <div id="auth-unauthenticated" class="flex items-center">
-                <button
-                    type="button"
-                    id="btn-header-login"
-                    class="inline-flex h-8 sm:h-9 items-center rounded-full bg-[#ededed] px-3 sm:px-4 text-xs font-semibold text-black outline-none transition-colors hover:bg-white focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#1b1b1b] whitespace-nowrap"
-                >
-                    Sign up
-                </button>
-            </div>
+        <div class="relative z-10 flex shrink-0 items-center gap-2">
+            <Show when="signed-out">
+                <SignInButton mode="modal" asChild>
+                    <button
+                        type="button"
+                        id="btn-header-login"
+                        class="inline-flex h-8 sm:h-9 items-center rounded-full bg-[#ededed] px-3 sm:px-4 text-xs font-semibold text-black outline-none transition-colors hover:bg-white focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#1b1b1b] whitespace-nowrap cursor-pointer"
+                    >
+                        Sign in
+                    </button>
+                </SignInButton>
+            </Show>
 
-            <div id="auth-authenticated" class="hidden items-center gap-1 sm:gap-1.5">
-                <div
-                    class="flex h-8 sm:h-9 min-w-0 items-center gap-1.5 sm:gap-2 rounded-full bg-[#ededed] py-0.5 sm:py-1 pl-1 pr-2.5 sm:pr-3 text-black"
-                >
-                    <div
-                        id="user-avatar-container"
-                        class="flex h-6 w-6 sm:h-7 sm:w-7 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#333] text-[10px] font-bold text-white"
-                    >
-                        <span id="user-avatar-initial">?</span>
-                        <img
-                            id="user-avatar-img"
-                            src=""
-                            alt=""
-                            class="hidden h-full w-full object-cover"
-                            onerror="this.classList.add('hidden'); document.getElementById('user-avatar-initial')?.classList.remove('hidden')"
-                        />
-                    </div>
-                    <span
-                        id="user-display-name"
-                        class="hidden max-w-20 truncate text-xs font-semibold min-[420px]:inline sm:max-w-36"
-                    >
-                        User
-                    </span>
+            <Show when="signed-in">
+                <div class="flex items-center">
+                    <UserButton />
                 </div>
-                <button
-                    type="button"
-                    id="btn-header-logout"
-                    class="rounded-full p-1.5 sm:p-2 text-[#999] outline-none transition-colors hover:bg-white/10 hover:text-white focus-visible:ring-2 focus-visible:ring-white"
-                    aria-label="Sign out"
-                    title="Sign out"
-                >
-                    <svg
-                        class="h-4 w-4"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        aria-hidden="true"
-                    >
-                        <path
-                            d="M10 17l5-5-5-5M15 12H3M14 3h5a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-5"
-                        ></path>
-                    </svg>
-                </button>
-            </div>
+            </Show>
         </div>
     </div>
 </header>
-
-<AuthModal />
-
-<script>
-    import { hasActiveSupabaseSession } from "../lib/authUtils";
-
-    type AuthUser = {
-        email?: string | null;
-        user_metadata?: Record<string, string | undefined>;
-    };
-    type AuthSession = { user: AuthUser };
-
-    const unauthContainer = document.getElementById("auth-unauthenticated");
-    const authContainer = document.getElementById("auth-authenticated");
-    const loginBtn = document.getElementById("btn-header-login");
-    const logoutBtn = document.getElementById("btn-header-logout");
-    const userNameSpan = document.getElementById("user-display-name");
-    const avatarImg = document.getElementById(
-        "user-avatar-img",
-    ) as HTMLImageElement | null;
-    const avatarInitial = document.getElementById("user-avatar-initial");
-
-    loginBtn?.addEventListener("click", () => {
-        ensureAuth().then(() => window.openAuthModal?.("signup"));
-    });
-
-    logoutBtn?.addEventListener("click", async () => {
-        const { supabase } = await import("../lib/supabase");
-        const { error } = await supabase.auth.signOut();
-        if (error) console.error("Error signing out:", error);
-    });
-
-    function updateUserUI(user: AuthUser | null, avatarUrl?: string | null) {
-        if (!user) {
-            unauthContainer?.classList.remove("hidden");
-            authContainer?.classList.add("hidden");
-            authContainer?.classList.remove("flex");
-            return;
-        }
-
-        const metadata = user.user_metadata || {};
-        const name =
-            metadata.full_name ||
-            metadata.name ||
-            metadata.user_name ||
-            (user.email ? user.email.split("@")[0] : "Account");
-
-        if (userNameSpan) userNameSpan.textContent = name;
-
-        if (avatarImg && avatarInitial) {
-            if (avatarUrl) {
-                avatarImg.src = avatarUrl;
-                avatarImg.classList.remove("hidden");
-                avatarInitial.classList.add("hidden");
-            } else {
-                avatarInitial.textContent = (name[0] || "U").toUpperCase();
-                avatarInitial.classList.remove("hidden");
-                avatarImg.classList.add("hidden");
-                avatarImg.removeAttribute("src");
-            }
-        }
-
-        unauthContainer?.classList.add("hidden");
-        authContainer?.classList.remove("hidden");
-        authContainer?.classList.add("flex");
-    }
-
-    let authInitPromise: Promise<void> | null = null;
-    function ensureAuth(): Promise<void> {
-        if (authInitPromise) return authInitPromise;
-        authInitPromise = (async () => {
-            try {
-                const [{ supabase }, { getUserAvatarUrl }] = await Promise.all([
-                    import("../lib/supabase"),
-                    import("../lib/avatar"),
-                ]);
-
-                supabase.auth
-                    .getSession()
-                    .then((result: { data: { session: AuthSession | null } }) => {
-                        const user = result.data.session?.user || null;
-                        updateUserUI(user, user ? getUserAvatarUrl(user) : null);
-                    });
-
-                supabase.auth.onAuthStateChange(
-                    (_event: string, session: AuthSession | null) => {
-                        const user = session?.user || null;
-                        updateUserUI(user, user ? getUserAvatarUrl(user) : null);
-                    },
-                );
-            } catch (err) {
-                console.warn("Could not load auth module:", err);
-            }
-        })();
-        return authInitPromise;
-    }
-
-    // Check if user has an active Supabase session in localStorage
-    if (hasActiveSupabaseSession()) {
-        ensureAuth();
-    } else {
-        loginBtn?.addEventListener("pointerenter", () => ensureAuth(), { once: true });
-    }
-</script>

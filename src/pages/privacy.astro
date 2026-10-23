@@ -34,7 +34,7 @@ const lastUpdated = "September 6, 2026";
                 </p>
                 <ul class="mt-3 list-disc pl-5 space-y-2 text-[#a8a8b2]">
                     <li>
-                        <strong class="text-ink">Account Data (Optional):</strong> If you choose to authenticate via Google, GitHub, or Magic Link to save personal custom templates across devices, your email address, display name, and avatar URL are securely managed via Supabase Auth.
+                        <strong class="text-ink">Account Data (Optional):</strong> If you choose to authenticate via Google, GitHub, or Magic Link to save personal custom templates across devices, your email address, display name, and avatar URL are securely managed via Clerk.
                     </li>
                     <li>
                         <strong class="text-ink">Local Storage Data:</strong> We store layout states, cached template selections, and offline drafts directly in your browser's <code class="rounded bg-white/10 px-1 py-0.5 text-xs text-ink">localStorage</code> and <code class="rounded bg-white/10 px-1 py-0.5 text-xs text-ink">IndexedDB</code>.
@@ -65,7 +65,8 @@ const lastUpdated = "September 6, 2026";
                 </p>
                 <ul class="mt-3 list-disc pl-5 space-y-2 text-[#a8a8b2]">
                     <li><strong>Google Analytics:</strong> Collects anonymous session metrics to help us optimize performance.</li>
-                    <li><strong>Supabase:</strong> Provides optional secure user authentication and cloud database services.</li>
+                    <li><strong>Clerk:</strong> Provides optional secure user authentication and identity management services.</li>
+                    <li><strong>Supabase:</strong> Provides cloud database and storage services.</li>
                 </ul>
                 <p class="mt-3">
                     You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent.
