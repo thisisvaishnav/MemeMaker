@@ -112,10 +112,33 @@ const columns: FooterColumn[] = [
 </footer>
 
 <script>
+	import { $clerkStore } from "@clerk/astro/client";
+
 	const authBtn = document.getElementById("footer-btn-auth");
 	authBtn?.addEventListener("click", () => {
-		if (typeof window.openAuthModal === "function") {
-			window.openAuthModal("signup");
+		const clerk = $clerkStore.get();
+		if (clerk) {
+			if (clerk.user) {
+				clerk.openUserProfile();
+			} else {
+				clerk.openSignIn();
+			}
+		} else {
+			window.location.href = "/sign-in";
 		}
 	});
+
+	// Global helper if called anywhere else
+	(window as any).openAuthModal = (mode?: "signin" | "signup") => {
+		const clerk = $clerkStore.get();
+		if (clerk) {
+			if (mode === "signup") {
+				clerk.openSignUp();
+			} else {
+				clerk.openSignIn();
+			}
+		} else {
+			window.location.href = mode === "signup" ? "/sign-up" : "/sign-in";
+		}
+	};
 </script>

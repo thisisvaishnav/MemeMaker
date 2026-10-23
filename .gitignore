@@ -30,3 +30,6 @@ graphify-out/[0-9]*/
 # agents
 .agents/
 
+
+# vercel build outputs
+.vercel/

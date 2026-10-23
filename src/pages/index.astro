@@ -603,14 +603,8 @@ const templateSlots = Array.from({ length: 20 });
 
             let userId: string | undefined = undefined;
             try {
-                const hasSession = Object.keys(localStorage).some(
-                    (k) => k.startsWith("sb-") && k.endsWith("-auth-token")
-                );
-                if (hasSession) {
-                    const { supabase } = await import("../lib/supabase");
-                    const res = await supabase.auth.getSession();
-                    userId = res.data.session?.user?.id;
-                }
+                const { $authStore } = await import("@clerk/astro/client");
+                userId = $authStore.get()?.userId ?? undefined;
             } catch {}
 
             const newTemplate: CustomTemplate = {

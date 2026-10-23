@@ -316,28 +316,16 @@ const categories = [
     tabs.forEach((btn) => btn.addEventListener("click", () => activateTab(btn)));
     if (tabs[0]) activateTab(tabs[0]);
 
-    // ── Supabase Auth Integration ───────────────────────────────────
+    // ── Clerk Auth Integration ───────────────────────────────────
     try {
-        const hasSession = Object.keys(localStorage).some(
-            (k) => k.startsWith("sb-") && k.endsWith("-auth-token")
-        );
-        if (hasSession) {
-            import("../lib/supabase").then(({ supabase }) => {
-                supabase.auth.getSession().then((res: { data: { session: { user: { id: string } } | null } }) => {
-                    currentUserId = res.data.session?.user?.id;
-                    loadAndRenderCustomTemplates();
-                });
-
-                supabase.auth.onAuthStateChange((_evt: string, session: { user: { id: string } } | null) => {
-                    currentUserId = session?.user?.id;
-                    loadAndRenderCustomTemplates();
-                });
-            }).catch(() => {
+        import("@clerk/astro/client").then(({ $authStore }) => {
+            $authStore.subscribe((auth) => {
+                currentUserId = auth?.userId ?? undefined;
                 loadAndRenderCustomTemplates();
             });
-        } else {
+        }).catch(() => {
             loadAndRenderCustomTemplates();
-        }
+        });
     } catch {
         loadAndRenderCustomTemplates();
     }
@@ -402,14 +390,8 @@ const categories = [
             let userId = currentUserId;
             if (!userId) {
                 try {
-                    const hasSession = Object.keys(localStorage).some(
-                        (k) => k.startsWith("sb-") && k.endsWith("-auth-token")
-                    );
-                    if (hasSession) {
-                        const { supabase } = await import("../lib/supabase");
-                        const res = await supabase.auth.getSession();
-                        userId = res.data.session?.user?.id;
-                    }
+                    const { $authStore } = await import("@clerk/astro/client");
+                    userId = $authStore.get()?.userId ?? undefined;
                 } catch {}
             }
 
